@@ -30,3 +30,5 @@ fix 했습니다
 # 네이버 스마트스토어에 팝시다
 
 # 여러분 열심히 해봐요.. 화이팅
+
+# fixfixfixfxifxifxfixxx
