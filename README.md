@@ -30,3 +30,4 @@ fix 했습니다
 # fixfixfixfxifxifxfixxx
 
 # 배고파요 점심 뭐 먹지
+# 쉬고싶다
