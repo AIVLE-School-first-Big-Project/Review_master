@@ -56,6 +56,7 @@ def Gensim_summary(Product_Name, custom_weight_value = 300):
     return summary
 
 
+
 if __name__=="__main__":
     start = time.time()
 
