@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block content %}
+    <h1> 마이페이지 > <strong>회원탈퇴</strong></h1>
+    <p><strong>{{ user.nickname }}</strong> 회원님의 계정이 삭제되었습니다. <br>
+
+    <div class="suggestion">
+        <button type="button">
+            <a href="{% url 'homeapp:home' %}">홈으로 돌아가기</a>
+        </button>
+    </div>
+{%endblock content%}
