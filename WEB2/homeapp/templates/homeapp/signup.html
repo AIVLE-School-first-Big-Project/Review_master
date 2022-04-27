@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block content %}
+<div class="s004">
+    <div class="user-loginout">
+        <h1> 회원가입 </h1>
+            <form method="POST" action="{% url 'homeapp:signup' %}">
+                {% csrf_token %}
+                {% include 'homeapp/form_errors.html' %}
+                <div class="user-info">
+                    <label for="username">아이디</label>
+                    <br />
+                    <input type="text" class="form-control" name="username" id="username">
+                </div>
+                <div class="user-info">
+                    <label for="password1">비밀번호</label>
+                    <br/>
+                    <input type="password" class="form-control" name="password1" id="password1">
+                </div>
+                <div class="user-info">
+                    <label for="password2">비밀번호 확인</label>
+                    <br/>
+                    <input type="password" class="form-control" name="password2" id="password2">
+                </div>
+                <div class="user-info">
+                    <label for="email">이메일</label>
+                    <br/>
+                    <input type="text" class="form-control" name="email" id="email">
+                </div>
+                <div class="user-info">
+                    <label for="nickname">닉네임</label>
+                    <br/>
+                    <input type="text" class="form-control" name="nickname" id="nickname">
+                </div>
+                <div class="user-info">
+                    <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">언어선택</label>
+                    <select class="form-select" required aria-label="select example" style="font-family:NanumSquareR;" name="user_class">
+                        <option value=0>일반회원</option>
+                        <option value=1>구독</option>
+                    </select>
+                </div> 
+                <button type="submit" class="btn btn-primary">회원가입</button>
+            </form>
+            <span>
+                이미 계정이 있으신가요?
+                <button type="button">
+                    <a href="{% url 'homeapp:login' %}">로그인</a>
+                </button>
+            </span>
+    </div> 
+</div>
+{%endblock content%}
