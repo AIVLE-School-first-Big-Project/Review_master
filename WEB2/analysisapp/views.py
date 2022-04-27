@@ -14,6 +14,9 @@ def home(request):
 
     return render(request, 'analysisapp/home.html')
 
+def serach(request):
+
+    return render(request, 'analysisapp/serach.html')
 # #
 # def search_main(request):
 #     if request.method == "POST":

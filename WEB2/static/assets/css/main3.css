@@ -7,6 +7,120 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+#logo_img{
+	height: 1rem;
+}
+.search_form{
+	align-content: center;
+	display: flex;
+}
+.input1{
+	width: 20%;
+	border-radius: 30px 0px 0px 30px;
+	color: white;
+}
+.input2{
+	width: 50%;
+
+}
+.input3{
+	font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	width: 5%;
+	height: 3.1rem;
+	border-radius: 0px 30px 30px 0px;
+}
+.search_div{
+	align-content: center;
+	display: flex;
+	width: 90%;
+}
+
+
+.serchtable{
+	border:none;
+	display: flex;
+	justify-content: center;
+	color:black;
+}
+.buytable{
+	width: 100%;
+	color:black;
+}
+* {
+	margin: 0;
+	padding: 0;
+  }
+  .head_li {
+	list-style-type: none;
+	float: left;
+  }
+  
+  .hbody {
+	margin-top: 2rem;
+	background-color: white;
+	width: 100%;
+	height: 80px;
+	opacity: 0.6;
+  }
+  
+  .head_nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 50px;
+	color: black;
+  }
+  
+  .head_title {
+	font-size: 3em;
+  }
+  
+  .head_title > a {
+	color: #0D6C6C;
+  }
+
+  @media screen and (min-width: 625px) {
+
+	#head_menu {
+	  display: flex;
+	}
+  
+	#head_menu > li {
+	  padding: 20px 30px;
+	  font-size: 20px;
+	}
+
+  
+	.fab {
+	  font-size: 35px;
+	  color: #1DA1F2;
+	}
+  
+	.fas {
+	  display: none;
+	}
+  }
+
+
+  @media screen and (max-width: 625px) {
+
+	.head_nav {
+	  padding: 30px 40px;
+	}
+  
+	#menu {
+	  display: none;
+	}
+  
+	.fab {
+	  display : none;
+	}
+  
+	.fas {
+	  font-size: 2em;
+	}
+  } 
+
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -99,11 +213,11 @@ input, select, textarea {
 	}
 
 	body {
-		background-color: #935d8c;
-		background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+		background-color: #B0D4D4;
+		background-image: url("images/overlay.png"), -moz-linear-gradient(70deg, #d9d9d9 30%, #37cccc 70%);
+		background-image: url("images/overlay.png"), -webkit-linear-gradient(70deg, #d9d9d9 30%, #37cccc 70%);
+		background-image: url("images/overlay.png"), -ms-linear-gradient(70deg, #d9d9d9 30%, #37cccc 70%);
+		background-image: url("images/overlay.png"), linear-gradient(70deg, #d9d9d9 30%, #37cccc 70%);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -120,7 +234,7 @@ input, select, textarea {
 /* Type */
 
 	body {
-		background-color: #935d8c;
+		background-color: #d9d9d9;
 		color: rgba(255, 255, 255, 0.65);
 	}
 
@@ -1998,8 +2112,7 @@ input, select, textarea {
 		font-weight: 400;
 		margin: 0 0 1em 0;
 	}
-
-	input[type="text"],
+/*sssssssssssss*/
 	input[type="password"],
 	input[type="email"],
 	select,
@@ -3783,3 +3896,72 @@ input, select, textarea {
 			}
 
 		}
+.box1{
+	padding-top: 0.43rem;
+	text-align: center;	
+	display: flex-wrap;
+	font-size: 1rem;
+}
+
+.box2{
+	padding-top: 0.43rem;
+	text-align: center;	
+	background-color:#FCEFCC; 
+	border-radius: 20px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	color: black;
+	margin: 0.5rem;
+	
+}
+.box3{
+	padding-top: 0.43rem;
+	text-align: center;	
+	background-color:#FFE3C9; 
+	border-radius: 20px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	color: black;
+	margin: 0.5rem;
+}
+.box4{
+	padding-top: 0.43rem;
+	text-align: center;	
+	background-color:#E6E2EE; 
+	border-radius: 20px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	color: black;
+	margin: 0.5rem;
+}
+.box5{
+	padding-top: 0.43rem;
+	text-align: center;	
+	background-color:#E1EAEE; 
+	border-radius: 20px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	color: black;
+	margin: 0.5rem;
+}
+.box6{
+	padding-top: 0.43rem;
+	text-align: center;	
+	background-color:#CCECED; 
+	border-radius: 20px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	color: black;
+	margin: 0.5rem;
+}
+
+.box12{
+	padding-top: 0.43rem;
+	text-align: center;
+	width: 135px;
+    height: 40px;
+	background-color:#17A6A6; 
+	color: white;
+	border-radius: 20px;
+
+}
