@@ -9,10 +9,9 @@
 >
 
 ## 2. UI
-![대문](https://user-images.githubusercontent.com/98193218/165303225-1822fb49-67cd-49f7-a671-56d65156b299.png)
+
 
 ### 2.1 UI 셜계서
-![added](https://user-images.githubusercontent.com/98193218/165251878-60258b42-0da2-4448-9c96-7b7d6b6acd53.png)
 
 ## 3. 문제 정의
 ### 3.1 시장 조사
