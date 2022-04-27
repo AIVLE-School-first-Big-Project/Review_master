@@ -5,9 +5,18 @@ from django.contrib.auth import views as auth_views
 app_name = 'analysisapp'
 
 urlpatterns = [
-    path('show/', views.show, name='show'),
-    path('index/', views.index, name='index'), 
-    path('exa1/', views.exa1, name='exa1'), 
+
+    # show -> X?
+    # index -> X
+    # exa1 -> O -> home
+
+    # path('show/', views.show, name='show'),
+    # path('index/', views.index, name='index'),
+    path('home/', views.home, name='home'),
+
+
+
+
+
     #path('index/search_main/', views.search_main,name='search_main'),
 ]
-
