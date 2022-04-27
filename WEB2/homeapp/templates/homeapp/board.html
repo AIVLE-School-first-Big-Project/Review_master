@@ -1,0 +1,64 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <!-- 배경사진 -->
+        <!-- 검색창  -->
+    </header>
+    <nav>
+        <h1>
+            <!-- 네비게이션 -->
+        </h1>
+    </nav>
+    <section>
+        <h1>문의게시판 <span>영업일 기준 1일 이내 답변됩니다!</span></h1>
+        <button type="button">
+            문의글쓰기
+            <img src="#" alt="write-qna" /> 
+        </button>
+        <div class="container">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">답변유무</th>
+                        <th scope="col">분류</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for board in boards %}
+                    <tr class="text-center">
+                        <th scope="row">
+                            <span>{{ board.id }}</span>
+                        </th>
+                        <td>
+                            {% comment %} <span>답변유무</span> {% endcomment %}
+                        </td>
+                        <td>
+                            <span>{{ board.category }}</span>
+                        </td>
+                        <td>
+                            <span>{{ board.title }}</span>
+                        </td>
+                        <td>
+                            <span>{{ board.author }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

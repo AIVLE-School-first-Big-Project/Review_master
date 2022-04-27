@@ -1,0 +1,47 @@
+{% load static %}
+
+<!-- partial:./partials/_navbar.html -->
+<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
+    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <span class="mdi mdi-menu"></span>
+      </button>
+      <div class="navbar-brand-wrapper">
+        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      </div>
+      <ul class="navbar-nav navbar-nav-right">
+        <li class="nav-item dropdown mr-1">
+          길동님 <br> 
+          logout
+        </li>
+        <li class="nav-item dropdown mr-2">
+          <img src="{% static 'assets/images/프로필사진.png'%}" alt="image" class='profile'/>
+        </li>
+      </ul>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="mdi mdi-menu"></span>
+      </button>
+    </div>
+
+    <form method="POST" action="{% url 'analysisapp:index' %}" id='search_name' >
+      {% csrf_token %}
+      <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <input id='search_name' name="search_name" type="text" class="form-control" placeholder="다른 상품을 분석하려면 여기에 입력하세요" aria-label="search_name" aria-describedby="search" required>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item">
+            <a type="submit" method="POST" class="nav-link icon-link" onclick="document.getElementById('search_name').submit();">
+              <i class="mdi mdi-magnify"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </form>
+</nav>
+  
