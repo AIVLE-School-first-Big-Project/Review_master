@@ -1,0 +1,27 @@
+.board h1 span {
+    font-size: 0.5em;
+    color: #AE2223;
+}
+
+button {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+}
+
+tr,
+td,
+th {
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+tr:nth-child(2n) {
+    background-color: #E7FCF9C4;
+}
