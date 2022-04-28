@@ -5,9 +5,10 @@ read feature
 
 git checkout -b $feature develop
 git add .
-echo "commit 메세지는 AUTO 라고 보냅니다. "
 
-git commit -m "AUTO Version"
+read -p "Commit 메서지를 입력해주세요 : " commit_message
+
+git commit -m "$commit_message"
 
 git checkout develop
 
