@@ -1,71 +1,94 @@
 from django.db import models
-from django.db.models.fields import CharField, IntegerField
+from django.db.models.fields import CharField, IntegerField, TextField, DateField
 
 # from review import analysisapp
 
-label_name='analysisapp'
+label_name = 'analysisapp'
+
+
+class Member(models.Model):
+
+    # primary key, 유저의 아이디
+    user_id = models.CharField(primary_key=True, max_length=30)
+
+    # 유저 패스워드
+    user_pw = models.CharField(max_length=30)
+
+    # 유저 별명
+
+    class Meta:
+        db_table = 'Member'
+        app_label = label_name
+        managed = False
+
 
 # 검색 물품 기록
 class ArticleInfo(models.Model):
     # primary key
-    article_code= models.IntegerField(primary_key=True)
-    #검색된 게시물 이름
-    search_name=models.CharField(max_length=30)
+    article_code = models.IntegerField(primary_key=True)
+    # 검색된 게시물 이름
+    search_name = models.CharField(max_length=30)
     # 리뷰 게시물 개수
-    article_review_cnt= models.IntegerField()
-    #순수 리뷰 게시물 개수
-    article_pure_review_cnt= models.IntegerField()
-    #검색 카운트
-    search_cnt= models.IntegerField()
+    article_review_cnt = models.IntegerField()
+    # 순수 리뷰 게시물 개수
+    article_pure_review_cnt = models.IntegerField()
+    # 검색 카운트
+    search_cnt = models.IntegerField()
+
     class Meta:
         db_table = 'ArticleInfo'
         app_label = label_name
         managed = False
 
-
-
  # 리뷰 데이터 크롤링
+
+
 class ReviewData(models.Model):
-     # 블로그 게시글 고유코드 primary_key
-    blog_code = models.IntegerField(primary_key=True,max_length=11)
+    # 블로그 게시글 고유코드 primary_key
+    blog_code = models.IntegerField(primary_key=True, max_length=11)
     # 검색물품의 코드
-    article_code=models.ForeignKey(ArticleInfo,on_delete=models.CASCADE,db_column='article_code')
+    article_code = models.ForeignKey(
+        ArticleInfo, on_delete=models.CASCADE, db_column='article_code')
     # 글작성자
     writer = models.CharField(max_length=30)
-     # 글내용
+    # 글내용
     content = models.TextField()
     # 글 쓴 날짜
     content_date = models.DateField()
     # 처음이미지
     first_img_url = models.CharField(max_length=255)
-     # 마지막 이미지
+    # 마지막 이미지
     last_img_url = models.CharField(max_length=255)
+
     class Meta:
         db_table = 'ReviewData'
         app_label = label_name
         managed = False
 
-
  # 리뷰 데이터 분석결과
+
+
 class ReviewAnalysis(models.Model):
-     # primary key
+    # primary key
     id = models.IntegerField(primary_key=True)
-     # 블로그 게시글 고유 코드
-    blog_code=models.ForeignKey("ReviewData",on_delete=models.CASCADE,db_column='blog_code')
-     #광고 분류
-    check_advertise=models.IntegerField()
-    #글요약
-    content_summary=models.TextField()
-     #긍정적인글
-    content_positive=models.TextField()
-     #부정적인글
-    content_negative=models.TextField()
+    # 블로그 게시글 고유 코드
+    blog_code = models.ForeignKey(
+        "ReviewData", on_delete=models.CASCADE, db_column='blog_code')
+    # 광고 분류
+    check_advertise = models.IntegerField()
+    # 글요약
+    content_summary = models.TextField()
+    # 긍정적인글
+    content_positive = models.TextField()
+    # 부정적인글
+    content_negative = models.TextField()
+
     class Meta:
         db_table = 'ReviewAnalysis'
         app_label = label_name
         managed = False
 
-        
+
 # # 구매 데이터 크롤링
 # class BuyList(models.Model):
 #     # primary_key
