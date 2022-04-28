@@ -1,0 +1,59 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="board">
+        <h1>문의게시판 <span> | 영업일 기준 1일 이내 답변됩니다!</span></h1>
+        <button type="button">
+            <a href="{% url 'board:write' %}">
+                문의글쓰기 >
+            </a>
+        </button>
+        <section class="qna_list">
+            <table class="table" style="table-layout:auto">
+                <thead class="thead-light" display="none">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">답변유무</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                    </tr>
+                </thead>
+                <div class="container">
+                    <tbody>
+                        {% for list in postlist reversed %}
+                        <tr class="text-center">
+                            <th scope="row" width=10%>
+                                <span>{{ list.id }}</span>
+                            </th>
+                            <td width=20%>
+                                {% if list.answer_title %}
+                                    <img src="/static/assets/images/게시판_답변완료.png" />
+                                {% else %}
+                                    <img src="/static/assets/images/게시판_미답변.png" />
+                                {% endif %}
+                            </td>
+                            <td width=60%>
+                                <span>{{ list.title }}</span>
+                            </td>
+                            <td width=10%>
+                                <span>{{ list.user_id }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

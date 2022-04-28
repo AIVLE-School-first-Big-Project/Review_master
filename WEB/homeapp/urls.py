@@ -7,10 +7,9 @@ app_name = 'homeapp'
 urlpatterns = [
     path('home/', views.home, name="home"),
     path('login/',views.login, name="login"),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', views.logout, name='logout'),
     path('signup/', views.signup, name='signup'),
-    path('board/', views.board),
     path('mypage/', views.mypage, name="mypage"),
+    path('user_update/', views.user_update, name="user_update"),
     path('user_delete/', views.user_delete, name="user_delete"),
-    path('user_update/<int:pk>/', views.update, name='user_update'),
 ]

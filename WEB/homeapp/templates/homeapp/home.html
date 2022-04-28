@@ -3,6 +3,30 @@
 
 {% block content %}
     <div class="s004">
+        <div class="suggestion">
+          {% comment %} {% if request.session.user_id %}
+            {{ request.session.user_nickname }} 님 반갑습니다.
+          {% else %}
+            <p> 현재 상태: guest</p>
+          {% endif %} {% endcomment %}
+          {% if request.session.user_id %}
+            <button type="button">
+              <a href="{% url 'homeapp:logout' %}">logout</a>
+            </button>
+            |
+            <button type="button">
+              <a href="{% url 'homeapp:mypage' %}">mypage</a>
+            </button>
+          {% else %}
+            <button type="button">
+              <a href="{% url 'homeapp:login' %}">login</a>
+            </button>
+            |
+            <button type="button">
+              <a href="{% url 'homeapp:signup' %}">sign up</a>
+            </button>
+          {% endif %}
+        </div>
         <form method="POST" action="{% url 'analysisapp:index' %}">
           {% csrf_token %}
           <fieldset>
@@ -19,25 +43,7 @@
               </div>
           </fieldset>
         </form>
-        <div class="suggestion">
-          {% if user.is_anonymous %}
-            로그아웃중임~
-            <button type="button">
-              <a href="{% url 'homeapp:login' %}">login</a>
-            </button>
-            |
-            <button type="button">
-              <a href="{% url 'homeapp:signup' %}">sign up</a>
-          {% else %}
-            로그인햇음~
-            <button type="button">
-              <a href="{% url 'homeapp:logout' %}">logout</a>
-            </button>
-            |
-            <button type="button">
-              <a href="{% url 'homeapp:mypage' %}">mypage</a>
-            </button>
-          {% endif %}
-        </div>
     </div>
+
+    
 {%endblock content%}

@@ -29,7 +29,10 @@ legend {
 }
 
 .suggestion {
-    padding: 0 15px;
+    padding: 1em 1em;
+    position: fixed;
+    top: 0;
+    right: 0;
 }
 
 .suggestion span {
@@ -42,13 +45,6 @@ legend {
     border-radius: 16px;
     margin-right: 10px;
     margin-bottom: 10px;
-}
-
-.suggestion {
-    position: absolute;
-    top: 20;
-    right: 20;
-    /* color: #fff; */
 }
 
 .suggestion button {
@@ -121,7 +117,8 @@ fieldset {
     padding-bottom: 1em;
 }
 
-.user-loginout input {
+.user-loginout input,
+.user-loginout select {
     background-color: #fff;
     border: none;
     outline: 0;
@@ -130,6 +127,7 @@ fieldset {
     width: 200%;
     height: 3em;
     margin-bottom: 1em;
+    padding: 0 1em;
 }
 
 #check-loginout {
@@ -138,8 +136,30 @@ fieldset {
     background-color: #1CEED1;
     color: #fff;
     font-weight: bold;
+    margin-bottom: 1em;
+    border-radius: 6px;
 }
 
-.login-addons button {
-    text-align: center;
+#user-addons,
+#user-addons button a {
+    padding: auto 50%;
+    text-decoration: none;
+}
+
+
+/* mypage -> user_update에서 쓰이는 항목들  */
+
+#userform_mypage {
+    position: relative;
+    margin: 0;
+}
+
+#userform_mypage input {
+    background-color: #1CEED11C;
+}
+
+#update {
+    font-weight: bold;
+    position: absolute;
+    left: 0;
 }

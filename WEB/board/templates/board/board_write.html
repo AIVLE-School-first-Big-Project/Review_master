@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="board">
+        <h1>문의게시판 <span> | 영업일 기준 1일 이내 답변됩니다!</span></h1>
+        <form method="POST" action="{% url 'board:write' %}">
+            {% csrf_token %}
+            <div>
+                <label for="title">제목</label><br>
+                <input type="text" name="title" id="title">
+            </div>
+            <div>
+                <label for="content">내용</label><br>
+                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            </div>
+            <input type="submit" value="저장하기" />
+        </form>
