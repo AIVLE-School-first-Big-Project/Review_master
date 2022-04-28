@@ -1,9 +1,17 @@
 <!DOCTYPE html>
  <html lang="ko">
-    {% include 'home_head.html' %}
-    <body>
-        {% block content %} 
-        {% endblock %} 
-        {% include 'home_footer.html' %}
+    {% include 'base_head.html' %}
+    <body class="is-preload">
+        <!-- base_headerBar -->
+        {% include 'base_headerBar.html' %}
+        <!-- Wrapper -->
+	    <div id="wrapper">
+            <!-- Main -> 무엇이든 재사용 가능할 틀로 수정-->
+            {% block content %} 
+            {% endblock %}
+            <!-- Footer -->
+            {% include 'base_footer.html' %}
+        </div>
+        {% include 'base_Scripts.html' %}
     </body>
 </html>
