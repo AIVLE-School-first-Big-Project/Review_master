@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+{% load static %} 
+
+{% block content %}
+    {% include 'base_search_form.html' %}
+    <!-- Nav navigator-->
+    {% include 'base_navigator.html' %}
+    <!-- Main -->
+    <div id="main">
+        <!-- Introduction homeapp contents.html -->
+        {% block contents %} 
+        {% endblock %}
+    </div>
+{%endblock content %}

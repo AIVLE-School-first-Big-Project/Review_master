@@ -1,0 +1,18 @@
+{% load static %}
+<section class="hbody">
+    <article class="head_nav">
+        <div class="head_title">
+            <a href="base.html">REVIEWMASTER</a>
+        </div>
+        <ul id="head_menu">
+            <li class='head_li' href="{% url 'homeapp:home' %}">Home</li>
+            <li class='head_li' href="{% url 'homeapp:home' %}">요금제</li>
+            <li class='head_li' href="{% url 'homeapp:home' %}">질문게시판</li>
+            <li class='head_li' href="{% url 'accountapp:AAAA' %}">마이페이지</li>
+        </ul>
+        <ul id="head_menu">
+            <li class='head_li' href="{% url 'accountapp:login' %}">login</li>
+            <li class='head_li' href="{% url 'accountapp:signup' %}">sign up</li>
+        </ul>
+    </article>
+</section>

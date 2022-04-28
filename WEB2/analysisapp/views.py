@@ -11,12 +11,11 @@ from analysisapp.models import ArticleInfo, ReviewData, ReviewAnalysis, BuyList
 
 # 메인페이지
 def home(request):
-
     return render(request, 'analysisapp/home.html')
 
 def serach(request):
-
     return render(request, 'analysisapp/serach.html')
+
 # #
 # def search_main(request):
 #     if request.method == "POST":
@@ -118,7 +117,6 @@ def get_search_name(search_name):
         ------------
         return:
             list : 리뷰건수, 리뷰요약, 구매리스트
-
     """
     # 검색 된 단어가 아티클인포에 있는지 확인
 
@@ -130,8 +128,6 @@ def get_search_name(search_name):
 
 # 리뷰건수
 # 리뷰건수를 반환하는 함수
-
-
 def review_num(article_code):
     row = ReviewData.objects.filter(article_code=article_code)
     return row

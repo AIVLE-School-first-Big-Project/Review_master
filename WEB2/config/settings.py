@@ -50,6 +50,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'homeapp',
     'analysisapp',
+    'accountapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -108,6 +109,7 @@ DATABASES = {
 }
 DATABASE_ROUTERS = [
     'homeapp.router.DBRouter',
+    'accountapp.router.DBRouter',
     'analysisapp.router.DBRouter',
 ]
 
