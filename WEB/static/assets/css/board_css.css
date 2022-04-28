@@ -25,3 +25,7 @@ section {
 tr:nth-child(2n) {
     background-color: #E7FCF9C4;
 }
+
+.text-center:hover {
+    cursor: pointer;
+}

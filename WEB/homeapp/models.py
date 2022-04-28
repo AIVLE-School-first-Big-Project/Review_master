@@ -30,7 +30,7 @@ class QABoard(models.Model):
     answer_content = TextField()
     create_time = DateTimeField(auto_now_add=True)
     update_time = DateTimeField(auto_now=True)
-    answer_time = DateTimeField(auto_now_add=True)
+    # answer_time = DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
