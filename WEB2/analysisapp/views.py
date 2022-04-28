@@ -53,7 +53,7 @@ def home(request):
 
 
 @csrf_exempt
-def search(request):
+def result(request):
     if request.method == "POST":
         print(request.session["user"])
 
