@@ -77,7 +77,7 @@ def signup(request):
             m.save()
             return HttpResponseRedirect(reverse('accountapp:login'))   
     else:
-        return render(request,'accountapp/signup.html')  
+        return render(request,'accountapp/signup.html')
 
 def test(request):
     if request.method == "POST":
