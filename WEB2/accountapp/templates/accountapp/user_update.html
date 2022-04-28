@@ -2,15 +2,61 @@
 {% load static %} 
 
 {% block content %}
-    <h1> 마이페이지 > <strong>개인정보수정</strong> </h1>
-    <form method="POST" action="{% url 'homeapp:user_update' pk=user.pk %}">
-        <span> 
-            프로필 사진 등록 -> 추후 수정하겟습니다..
-            <input type="file" accept=".jpg, .png" />
-            <strong> 파일형식은 .jpg, .png이며 크기는 350kb 미만이어야 합니다. </strong>
-        </span>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">저장하기</button>
-    </form>
+<div style='height:10rem;'>
+    <br>
+  </div>
+<div id="main">
+    <h1> 마이페이지 > <strong style="color: #03B59D">개인정보수정</strong> </h1>
+    <div class="user-loginout" id="userform_mypage">
+            <form method="POST" action="{% url 'accountapp:user_update' %}">
+                {% csrf_token %}
+                <div class="user-info">
+                    <span id="update">비밀번호 변경</span> 
+                    <label for="password1">비밀번호</label>
+                    <br/>
+                    <input type="password" class="form-control" name="password1" placeholder="비밀번호를 입력해주세요">
+                </div>
+                <div class="user-info">
+                    <label for="password1">비밀번호 확인</label>
+                    <br/>
+                    <input type="password" class="form-control" name="password2" placeholder="비밀번호를 다시 입력해주세요">
+                </div>
+                <div class="user-info">
+                    <span id="update">닉네임 변경</span> 
+                    <label for="nickname">닉네임</label>
+                    <br/>
+                    <input type="text" class="form-control" name="nickname" value={{ request.session.user_nickname }}>
+                </div>
+                <div class="user-info">
+                    <label for="user_birth">생년월일 변경</label>
+                    <input type="date" class="form-control" name="user_birth" min="1930-01-01" max="2022-12-31" value={{ request.session.user_birth }}>
+                </div> 
+                <div class="user-info">
+                    <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">성별 변경</label>
+                    <select class="form-select" required aria-label="select example" style="font-family:NanumSquareR;" name="user_sex" value={{ request.ession.user_sex }}>
+                        <option value=0>여</option>
+                        <option value=1>남</option>
+                    </select>
+                </div> 
+
+
+                <div class="user-info">
+                    <span id="update">이메일 변경</span> 
+                    <label for="email">이메일</label>
+                    <br/>
+                    <input type="text" class="form-control" name="email" value={{ request.session.user_email }}>
+                </div>
+
+                {% comment %} <div class="user-info">
+                    <span id="update">구독여부 변경</span> 
+                    <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">구독여부</label>
+                    <select class="form-select" required aria-label="select example" style="font-family:NanumSquareR;" name="user_class">
+                        <option value=0>일반회원</option>
+                        <option value=1>구독</option>
+                    </select>
+                </div>  {% endcomment %}
+                <button type="submit" id="check-loginout">저장하기</button>
+            </form>
+    </div> 
+</div>
 {%endblock content%}

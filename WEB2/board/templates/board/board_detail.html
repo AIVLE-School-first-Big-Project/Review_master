@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block content %}
+<div style='height:10rem;'>
+    <br>
+  </div>
+<div id="main">
+    <button type="button">
+        <a href="#">
+            삭제 >
+        </a>
+    </button>
+    제목: {{ post.title }} <br/>
+    내용: {{ post.content }}
+</div>
+{% endblock content %}

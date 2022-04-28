@@ -112,6 +112,7 @@ DATABASE_ROUTERS = [
     'homeapp.router.DBRouter',
     'accountapp.router.DBRouter',
     'analysisapp.router.DBRouter',
+    'board.router.DBRouter',
 ]
 
 # Password validation
