@@ -22,7 +22,7 @@
             <table class="table" style="table-layout:auto">
                 <thead class="thead-light" display="none">
                     <tr class="text-center">
-                        <th scope="col">#</th>
+                        <th scope="col"></th>
                         <th scope="col">답변유무</th>
                         <th scope="col">제목</th>
                         <th scope="col">작성자</th>
@@ -43,9 +43,7 @@
                                 {% endif %}
                             </td>
                             <td width=60%>
-                                <a href="{% url 'board:detail' id=list.id %}">
                                 <span>{{ list.title }}</span>
-                                </a>
                             </td>
                             <td width=10%>
                                 <span>{{ list.user_id }}</span>

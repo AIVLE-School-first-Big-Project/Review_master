@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.db.models.fields import CharField, IntegerField, TextField
+from django.db.models.fields import CharField, IntegerField, TextField, DateTimeField
 
 CHOICE_CLASS = (('subscribed', 'subscribed'), ('unsubscribed', 'unsubscribed'))
 
@@ -23,5 +22,25 @@ class Member(models.Model):
 
     class Meta:
         db_table = 'User'
+        app_label = label_name
+        managed = False
+
+class QABoard(models.Model):
+    id = IntegerField(primary_key=True)
+    user = models.ForeignKey('Member', on_delete=models.CASCADE)
+    # answer_user = models.ForeignKey('Member', on_delete=models.CASCADE)
+    title = TextField()
+    content = TextField()
+    answer_title = TextField()
+    answer_content = TextField()
+    create_time = DateTimeField(auto_now_add=True)
+    update_time = DateTimeField(auto_now=True)
+    # answer_time = DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'QABoard'
         app_label = label_name
         managed = False

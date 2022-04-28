@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from homeapp.models import QABoard, Member
+from homeapp.models import Member, QABoard
 
 
 def board_list(request):
@@ -12,14 +12,12 @@ def board_list(request):
 
 def board_write(request):
     if(request.method == "POST"):
-        post_num = len(QABoard.objects.all())
+        m = QABoard.objects.get(user_id=request.session['user_id'])
         title = request.POST.get('title')
         content = request.POST.get('content')
-        new_list = QABoard(id=post_num+1, user_id=request.session['user_id'], title=title, content=content)
-        new_list.save()
+        # new_list = QABoard(user_id=request.session['user-id'], title=title, content=content, )
+        m.title = title
+        m.content = content
+        m.save()
         return redirect('/board/')
     return render(request, "board/board_write.html")
-
-def board_detail(request, id):
-    post = QABoard.objects.get(id = id)
-    return render(request, 'board/board_detail.html', {'post': post})
