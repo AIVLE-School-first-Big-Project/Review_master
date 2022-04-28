@@ -1,16 +1,11 @@
-{% load static %}
-<html>
+]{% extends "base.html" %}
+{% load static %} 
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css" />
-    <title>Document</title>
-</head>
-
-<body>
+{% block content %}
+<div style='height:10rem;'>
+    <br>
+  </div>
+<div id="main">
     <div class="board">
         <h1>문의게시판 <span> | 영업일 기준 1일 이내 답변됩니다!</span></h1>
         <form method="POST" action="{% url 'board:write' %}">
@@ -25,3 +20,6 @@
             </div>
             <input type="submit" value="저장하기" />
         </form>
+    </div>
+</div>
+{% endblock content %}

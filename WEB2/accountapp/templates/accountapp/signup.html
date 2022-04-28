@@ -8,51 +8,71 @@
 <div id="main">
     <div class="s004">
         <div class="user-loginout">
-            <h1>회원가입</h1>
+            <h1> 회원가입 </h1>
                 <form method="POST" action="{% url 'accountapp:signup' %}">
                     {% csrf_token %}
                     {% include 'accountapp/form_errors.html' %}
                     <div class="user-info">
                         <label for="username">아이디</label>
                         <br />
-                        <input type="text" class="form-control" name="username" id="username">
+                        <input type="text" class="form-control" name="username" placeholder="아이디를 입력해주세요">
                     </div>
                     <div class="user-info">
                         <label for="password1">비밀번호</label>
                         <br/>
-                        <input type="password" class="form-control" name="password1" id="password1">
+                        <input type="password" class="form-control" name="password1" placeholder="비밀번호를 입력해주세요">
                     </div>
                     <div class="user-info">
                         <label for="password2">비밀번호 확인</label>
                         <br/>
-                        <input type="password" class="form-control" name="password2" id="password2">
-                    </div>
-                    <div class="user-info">
-                        <label for="email">이메일</label>
-                        <br/>
-                        <input type="text" class="form-control" name="email" id="email">
+                        <input type="password" class="form-control" name="password2" placeholder="비밀번호를 다시 입력해주세요">
                     </div>
                     <div class="user-info">
                         <label for="nickname">닉네임</label>
                         <br/>
-                        <input type="text" class="form-control" name="nickname" id="nickname">
+                        <input type="text" class="form-control" name="nickname" placeholder="별명을 입력해주세요">
                     </div>
-                    <div class="user-info">
-                        <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">언어선택</label>
+                    <div class="user-info" style="display:none">
+                        <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">구독하시겠어요?</label>
                         <select class="form-select" required aria-label="select example" style="font-family:NanumSquareR;" name="user_class">
                             <option value=0>일반회원</option>
                             <option value=1>구독</option>
                         </select>
                     </div> 
-                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <div class="user-info" style="display:none">
+                        <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">유저 상태</label>
+                        <select class="form-select" required aria-label="select example" style="font-family:NanumSquareR;" name="user_status">
+                            <option value=0>로그아웃중</option>
+                            <option value=1>로그인중</option>
+                        </select>
+                    </div> 
+                    <div class="user-info">
+                        <label for="user_birth">생년월일</label>
+                        <input type="date" class="form-control" name="user_birth" min="1930-01-01" max="2022-12-31">
+                    </div> 
+                    <div class="user-info">
+                        <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">성별</label>
+                        <select class="form-select" required aria-label="select example" style="font-family:NanumSquareR;" name="user_sex">
+                            <option value=0>여</option>
+                            <option value=1>남</option>
+                        </select>
+                    </div> 
+                    <div class="user-info">
+                        <label for="email">이메일</label>
+                        <br/>
+                        <input type="text" class="form-control" name="email" placeholder="이메일을 입력해주세요">
+                    </div>
+                    <button type="submit" id="check-loginout">회원가입</button>
                 </form>
-                <span>
+                <span id="user-addons">
                     이미 계정이 있으신가요?
                     <button type="button">
-                        <a href="{% url 'accountapp:login' %}">로그인</a>
+                        <a href="{% url 'accountapp:login' %}" style="text-decoration:none; color:#03B59D; font-weight:bold">로그인 | </a>
+                        
+                        <a href="{% url 'homeapp:home' %}" style="text-decoration:none; color:#03B59D; font-weight:bold">홈으로 이동</a>
                     </button>
                 </span>
-        </div>
-    </div> 
+        </div> 
+    </div>
 </div>
 {%endblock content%}
