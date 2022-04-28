@@ -41,8 +41,7 @@ def home(request):
                     search_name=article_name)
                 print(article_code.article_id)
                 article_id = article_code.article_id
-                review = ReviewData.objects.filter(
-                    article_id=article_id)
+                review = ReviewData.objects.filter(article_id=article_id)
 
                 for re in review:
                     print(re.content)
@@ -95,6 +94,8 @@ def get_search_name(search_name):
 
 # 리뷰건수
 # 리뷰건수를 반환하는 함수
+
+
 def review_num(article_code):
     row = ReviewData.objects.filter(article_code=article_code)
     return row
