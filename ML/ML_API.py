@@ -16,17 +16,19 @@ cursor = con.connect_DB()
 # API
 @app.post('/summary')
 async def Text_Summary(artice_code:int): 
+    print("상품 코드 : ",artice_code)
     summary = Gensim_summary(cursor,artice_code=artice_code)
 
     result = {
         'Decs' : summary
     }
+
     return result
     
-@app.post('/filtering')
-async def Blog_filter(Blog_Name :List[int]): 
 
-    print(Blog_Name)
+@app.post('/filtering')
+async def Blog_filter(Blog_Name :List[int]):
+    print("입력 후 받은 데이터 : ",Blog_Name)
     model = Never0Classifier()
     pred = model.predict(Blog_Name)
     result = {
@@ -34,8 +36,8 @@ async def Blog_filter(Blog_Name :List[int]):
     }
     return result
 
+
 #-------------------------------------------------------------------------------------------------------#
 if __name__ == '__main__':
     print("start API Service")
     uvicorn.run(app, host="0.0.0.0", port=1415)
-    
