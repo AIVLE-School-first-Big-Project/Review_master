@@ -39,7 +39,7 @@ def Gensim_summary(cursor,artice_code):
     sql = f'''select writer, content_date, content from ReviewData where article_id ={artice_code} order by content_date DESC limit 10;'''
     cursor.execute(sql)
     rows = cursor.fetchall()
-    
+    print("DB 접근완료")
     df = pd.DataFrame(rows,columns= ['writer', 'content_date', 'content'])
     if df.shape[0] != 0:
         # content에 널값이 없는 것에 대해서 추출
@@ -49,12 +49,14 @@ def Gensim_summary(cursor,artice_code):
         
         # 여러 블로그 글에 대해서 모두 한개의 문서로 변환
         review = "\n".join(all_text)
-
+        print("데이터 처리 ")
         pp = preprocessing(review)  # 기본적인 텍스트 전처리(띄어쓰기 교정)
-
+        print("데이터 처리 완료 ")
         summary = summarize(pp, word_count = 300)
         summary = re.sub('\n', ' ',summary)
-        
+        print("데이터 요약 완료 ")
+        print("----------------")
+        print()
         return summary
     else:
         return "없는 상품 입니다. 웹사이트를 통해서 입력해주세요."
