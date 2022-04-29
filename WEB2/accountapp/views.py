@@ -40,7 +40,7 @@ def login(request):
         if m!="":
             request.session['user_id'] = m.user_id
             request.session['user_nickname'] = m.user_nickname
-            request.session['user_email'] = m.user_email
+            request.session['user_class'] = m.user_class
             return redirect('/app/home')
         else:
             return render(request, 'accountapp/login.html', {'error': 'username or password is incorrect'})
@@ -125,7 +125,7 @@ def user_delete(request):
         m.delete()
         
         logout(request)
-        return redirect('/app/analysis/home')
+        return redirect('/app/home')
     return render(request, 'accountapp/user_delete.html')
 
 def user_qna(request):
