@@ -3,16 +3,20 @@ from fastapi import FastAPI
 import uvicorn
 from Text_summarization.Gensim import Gensim_summary
 from Filtering.Filtering import Never0Classifier
-    
+import secret_key as sk
+
 #-------------------------------------------------------------------------------------------------------#
 # creating FastAPI APP
-app = FastAPI()    
-    
+app = FastAPI() 
+
+con = sk.config()
+cursor = con.connect_DB()
+
 #-------------------------------------------------------------------------------------------------------#
 # API
 @app.post('/summary')
-async def Text_Summary(Product_Name:str, custom_weight_value:int): 
-    summary = Gensim_summary(Product_Name=Product_Name,custom_weight_value=custom_weight_value)
+async def Text_Summary(artice_code:int): 
+    summary = Gensim_summary(cursor,artice_code=artice_code)
 
     result = {
         'Decs' : summary
