@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields import CharField, IntegerField, TextField, DateTimeField
 from accountapp.models import Member
+from datetime import datetime
 
 # Create your models here.
 label_name = 'board'

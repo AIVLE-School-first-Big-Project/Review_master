@@ -23,3 +23,9 @@ def board_write(request):
 def board_detail(request, id):
     post = QABoard.objects.get(id = id)
     return render(request, 'board/board_detail.html', {'post': post})
+
+def board_delete(request, id):
+    del_post = QABoard.objects.get(id = id)
+    print(del_post)
+    del_post.delete()
+    return redirect('board:board_list')
