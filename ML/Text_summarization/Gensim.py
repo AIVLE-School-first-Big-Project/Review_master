@@ -11,7 +11,7 @@ import secret_key as sk
 def preprocessing(review):
     # 한국어 형태소 분석 라이브러리    
     kkma = Kkma()
-    
+    print("꼬꼬마 호출")
     total_review = ''
     #하나의 리뷰에서 문장 단위로 자르기
     for sentence in kkma.sentences(review):
@@ -25,6 +25,8 @@ def preprocessing(review):
             sentence = spelled_sent.checked
         sentence += '. '
         total_review += sentence
+        print("문장 횟수 loop")
+    print("처리 완료")
     return total_review
 
 def Gensim_summary(cursor,artice_code):
@@ -39,8 +41,8 @@ def Gensim_summary(cursor,artice_code):
     sql = f'''select writer, content_date, content from ReviewData where article_id ={artice_code} order by content_date DESC limit 10;'''
     cursor.execute(sql)
     rows = cursor.fetchall()
-    print("DB 접근완료")
     df = pd.DataFrame(rows,columns= ['writer', 'content_date', 'content'])
+    print("DB 접근완료", df.shape[0])
     if df.shape[0] != 0:
         # content에 널값이 없는 것에 대해서 추출
         df = df[df['content'].notnull()]
