@@ -363,3 +363,22 @@ def service_start(company, word):
     df = df[df["content_cnt"] != 0].reset_index(drop=True)
     print("종료되었습니다.")
     return df
+
+
+def service_img(company, word):
+    client_id = "GvNa2sBgFDA6v7ujnaz0"
+    client_secret = "Yo0jOskXlZ"
+    encText = urllib.parse.quote(f"{company} {word}")
+    url = "https://openapi.naver.com/v1/search/image?query=" + encText  # json 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if(rescode == 200):
+        response_body = response.read()
+        print(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+
+    return json.loads(response_body.decode('utf-8'))["items"][0]["link"]

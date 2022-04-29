@@ -59,6 +59,7 @@ def result(request):
                 m_article_code = ArticleCode()
                 m_article_code.search_company = search_company
                 m_article_code.search_name = search_name
+
                 m_article_code.save()
 
                 # primary key를 받아올 때 회사명과 제품명이 함께 되어있는 경우를 찾는다.
@@ -76,6 +77,8 @@ def result(request):
                 m_article_info = ArticleInfo()
                 m_article_info.article_id = article_id
                 m_article_info.search_cnt = 1
+                m_article_info.img_url = crawling_function.service_img(
+                    search_company, search_name)
                 m_article_info.save()
 
             else:
@@ -113,14 +116,78 @@ def result(request):
                     m_review_data.last_img_url = last_img_url[i]
                     m_review_data.url = url[i]
                     m_review_data.description = description[i]
+                    m_review_data.advertise = 0
                     m_review_data.save()
 
+            # 분석 api로 데이터 보내기
+            m_review_analysis = ReviewAnalysis.objects.filter(
+                article_id=article_id)
+
+            if len(m_review_analysis) == 0:
+
+                # api로 데이터 보내기
+
+                # 여기는 더미값 넣는 값이다.
+                m_review_analysis = ReviewAnalysis()
+                m_review_analysis.article_id = article_id
+                m_review_analysis.summary = "요약이 들어갈 장소입니다. 여기는 지금 테스트값이 들어가있습니다."
+                m_review_analysis.emotion_url = "https://t1.daumcdn.net/cfile/tistory/99C9FA335DC91AB810"
+                m_review_analysis.associate_url = "https://some.co.kr/renewal_resources/images/association_guide_img.png"
+                m_review_analysis.save()
+
             # reuslt값에 모든 데이터 작성해서 보내주기
-            review_data_list = []
+
+            m_article_info = ArticleInfo.objects.get(article_id=article_id)
+
+            data_info = {}
+            data_info["company"] = search_company
+            data_info["name"] = search_name
+            data_info["review_cnt"] = m_article_info.article_review_cnt
+            data_info["img_url"] = m_article_info.img_url
+
+            review_list = []
+            m_review_data = ReviewData.objects.filter(article_id=article_id)
+
+            pure_cnt = int(data_info["review_cnt"])
+
+            for review in m_review_data:
+                review_dict = {
+                    "writer": [],
+                    "content": [],
+                    "content_date": [],
+                    "first_img_url": [],
+                    "last_img_url": [],
+                    "url": [],
+                    "description": [],
+                    "advertise": []
+                }
+
+                review_dict["writer"] = review.writer
+                review_dict["content"] = review.content
+                review_dict["content_date"] = review.content_date
+                review_dict["first_img_url"] = review.first_img_url
+                review_dict["last_img_url"] = review.last_img_url
+                review_dict["url"] = review.url
+                review_dict["description"] = review.description
+                review_dict["advertise"] = review.advertise
+                pure_cnt -= review.advertise
+                review_list.append(review_dict)
+
+            data_info["pure_cnt"] = pure_cnt
+
+            analysis_list = {}
+            m_review_analysis = ReviewAnalysis.objects.get(
+                article_id=article_id)
+
+            analysis_list["summary"] = m_review_analysis.summary
+            analysis_list["emotion_url"] = m_review_analysis.emotion_url
+            analysis_list["associate_url"] = m_review_analysis.associate_url
 
             return render(request, 'analysisapp/result.html', {
                 "select_num": 1,
-                "result": result
+                "data_info": data_info,
+                "review_list": review_list,
+                "analysis_list": analysis_list
             })
 
     return HttpResponseRedirect(reverse('homeapp:home'))

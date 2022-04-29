@@ -8,11 +8,11 @@
 		<div class="spotlight">
 			<table>
 				<tr>
-					<td rowspan="2"><img src="{% static 'assets/images/analysis/y1.png'%}" alt="image" id="review_img"/></td>
-					<td>[코닥레트로3]를 검색한 결과 총 440개의 리뷰에서 50개의 순수리뷰를 분석하였습니다.</td>
+					<td rowspan="2"><img src="{{data_info.img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
+					<td>[{{data_info.company}} {{data_info.name}}]를 검색한 결과 총 {{data_info.review_cnt}}개의 리뷰에서 {{data_info.pure_cnt}}개의 순수리뷰를 분석하였습니다.</td>
 				</tr>
 				<tr>
-					<td>이곳은 요약내용을 쓰는 칸입니다.</td>
+					<td>{{analysis_list.summary}}</td>
 				</tr>
 			</table>
 		</div>
@@ -24,9 +24,22 @@
 			<h2>순수 리뷰 목록</h2>
 		</header>
 		<ul class="statistics">
-			<li>
-				<img src="{% static 'assets/images/analysis/y1.png'%}">
+			<li >
+				<table class='serchtable'>
+
+					{% for review in review_list %}
+
+					<tr>
+						<td rowspan="2"><img src="{{review.first_img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
+						<td>{{review.url}}</td>
+					</tr>
+					<tr>
+						<td>{{review.description}}</td>
+					</tr>
+					{% endfor %}
+				</table>
 			</li>
+		
 		</ul>
 	</section>
 	<!-- 연관어분석 끝 -->
@@ -37,7 +50,7 @@
 		</header>
 		<ul class="statistics">
 			<li >
-				<img src="{% static 'assets/images/analysis/k1.png'%}">
+				<img src="{{analysis_list.associate_url}}">
 			</li>
 		</ul>
 		
@@ -51,39 +64,10 @@
 		</header>
 		<ul class="statistics">
 			<li >
-				<table class='serchtable'>
-					<tr>
-						<td rowspan="2"><img src="{% static 'assets/images/analysis/y1.png'%}" alt="image" id="review_img"/></td>
-						<td>https://xd.adobe.com/view/23bccd5f-6fb5-4c42-b151-57b4ca045661-76ef/screen/9db61b5e-79ac-4d04-8d6f-99b9f052b8e6/specs/</td>
-					</tr>
-					<tr>
-						<td>스탠바이미 너무 사용하기 편하고 좋습니다!</td>
-					</tr>
-					<tr>
-						<td rowspan="2"><img src="{% static 'assets/images/analysis/y1.png'%}" alt="image" id="review_img"/></td>
-						<td>https://xd.adobe.com/view/23bccd5f-6fb5-4c42-b151-57b4ca045661-76ef/screen/9db61b5e-79ac-4d04-8d6f-99b9f052b8e6/specs/</td>
-					</tr>
-					<tr>
-						<td>스탠바이미 너무 사용하기 편하고 좋습니다!</td>
-					</tr>
-					<tr>
-						<td rowspan="2"><img src="{% static 'assets/images/analysis/y1.png'%}" alt="image" id="review_img"/></td>
-						<td>https://xd.adobe.com/view/23bccd5f-6fb5-4c42-b151-57b4ca045661-76ef/screen/9db61b5e-79ac-4d04-8d6f-99b9f052b8e6/specs/</td>
-					</tr>
-					<tr>
-						<td>스탠바이미 너무 사용하기 편하고 좋습니다!</td>
-					</tr>
-					<tr>
-						<td rowspan="2"><img src="{% static 'assets/images/analysis/y1.png'%}" alt="image" id="review_img"/></td>
-						<td>https://xd.adobe.com/view/23bccd5f-6fb5-4c42-b151-57b4ca045661-76ef/screen/9db61b5e-79ac-4d04-8d6f-99b9f052b8e6/specs/</td>
-					</tr>
-					<tr>
-						<td>스탠바이미 너무 사용하기 편하고 좋습니다!</td>
-					</tr>
-				</table>
+				<img src="{{analysis_list.emotion_url}}">
 			</li>
-		
 		</ul>
+		
 	</section>
 	<!-- 순수리뷰목록끝 -->
 	<!-- 구매링크 시작 -->

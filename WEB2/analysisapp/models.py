@@ -78,6 +78,8 @@ class ArticleInfo(models.Model):
     # 검색 카운트
     search_cnt = IntegerField()
 
+    img_url = TextField()
+
     class Meta:
         db_table = 'ArticleInfo'
         app_label = label_name
@@ -124,6 +126,8 @@ class ReviewData(models.Model):
     last_img_url = TextField()
 
     url = TextField()
+    # 광고 분류
+    advertise = IntegerField()
 
     description = TextField()
 
@@ -139,15 +143,11 @@ class ReviewAnalysis(models.Model):
     # primary key
     id = IntegerField(primary_key=True, auto_created=True)
     # 블로그 게시글 고유 코드
-    review_id = IntegerField()
-    # 광고 분류
-    advertise = IntegerField()
+    article_id = IntegerField()
     # 글요약
     summary = TextField()
-    # 긍정적인글
-    positive = TextField()
-    # 부정적인글
-    negative = TextField()
+    # 감정어 url
+    emotion_url = TextField()
     # URL 주소
     associate_url = TextField()
 
