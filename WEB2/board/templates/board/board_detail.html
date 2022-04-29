@@ -4,14 +4,26 @@
 {% block content %}
 <div style='height:10rem;'>
     <br>
-  </div>
+</div>
 <div id="main">
     <button type="button">
-        <a href="#">
+        <a href="{% url 'board:delete' del_id=post.id %}">
             삭제 >
+        </a>
+    </button>
+    <button type="button">
+        <a href="{% url 'board:update' up_id=post.id %}">
+            수정 >
         </a>
     </button>
     제목: {{ post.title }} <br/>
     내용: {{ post.content }}
+    {% comment %} {% if post.user_id=request.session['user_id'] %}
+    <button type="button">
+        <a href="{% url 'board:update' up_id = post.id %}">
+            수정하기
+        </a>
+    </button>
+    {% endif %} {% endcomment %}
 </div>
 {% endblock content %}

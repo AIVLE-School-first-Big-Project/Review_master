@@ -9,38 +9,33 @@
   <div class="s004">
     <div class="user-loginout">
       <h1>로그인</h1>
-      {% comment %} <div class="suggestion">
-        <button type="button">
-          <a href="{% url 'homeapp:home' %}">home</a>
-        </button>
-        |
-        <button type="button">
-          <a href="{% url 'accountapp:signup' %}">sign up</a>
-        </button>
-      </div> {% endcomment %}
-      <form method="post" action="{% url 'accountapp:login' %}" class="login">
-          {% csrf_token %}
-          {% include 'accountapp/form_errors.html' %}
-          <div>
-            <label>아이디</label>
-            <br/>
-            <input type="text" name="username" placeholder="아이디를 입력해 주세요" />
-          </div>
-          <div>
-            <label>비밀번호</label>
-            <br />
-            <input type="password" name="password" placeholder="비밀번호를 입력해 주세요">
-          </div>
+      {% if request.session.user_id %}
+        이미 로그인한 회원이에요!
+      {% else %}
+        <form method="post" action="{% url 'accountapp:login' %}" class="login">
+            {% csrf_token %}
+            {% include 'accountapp/form_errors.html' %}
+            <div>
+              <label>아이디</label>
+              <br/>
+              <input type="text" name="username" placeholder="아이디를 입력해 주세요" />
+            </div>
+            <div>
+              <label>비밀번호</label>
+              <br />
+              <input type="password" name="password" placeholder="비밀번호를 입력해 주세요">
+            </div>
 
-          <button type="submit" id="check-loginout" name="login_button">로그인</button>
-      </form>
-      <span id="user-addons">
-            아직 계정이 없으신가요?
-          <button type="button">
-              <a href="{% url 'accountapp:signup' %}" style="text-decoration:none; color:#03B59D; font-weight:bold">회원가입</a>
-          </button>
-      </span>     
-    </div>
+            <button type="submit" id="check-loginout" name="login_button">로그인</button>
+        </form>
+        <span id="user-addons">
+              아직 계정이 없으신가요?
+            <button type="button">
+                <a href="{% url 'accountapp:signup' %}" style="text-decoration:none; color:#03B59D; font-weight:bold">회원가입</a>
+            </button>
+        </span>     
+      </div>
+      {% endif %}
   </div>
 </div>
 {%endblock content%}

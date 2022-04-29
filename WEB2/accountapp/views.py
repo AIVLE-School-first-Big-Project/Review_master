@@ -8,6 +8,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
+from board.models import QABoard
+from analysisapp.models import MemberLog
 
 from accountapp.models import Member
 from datetime import datetime
@@ -108,13 +110,29 @@ def user_update(request):
             m.user_birth = user_birth
             m.update_time = datetime.now().strftime('%Y-%m-%d')
             m.save()
-            return redirect('/app/mypage')
+            return redirect('/app/account/mypage')
     return render(request, 'accountapp/user_update.html')
 
 def user_delete(request):
     if request.method == 'POST':
-        m = Member(user_id=request.session['user_id'])
+        b = QABoard.objects.filter(user_id=request.session['user_id'])
+        b.delete()
+
+        l = MemberLog.objects.filter(user_id=request.session['user_id'])
+        l.delete()
+
+        m = Member.objects.get(user_id=request.session['user_id'])
         m.delete()
+        
         logout(request)
-        return redirect('homeapp:home')
+        return redirect('/app/analysis/home')
     return render(request, 'accountapp/user_delete.html')
+
+def user_qna(request):
+    postlist = QABoard.objects.filter(user_id=request.session['user_id'])
+    return render(request, 'accountapp/user_qna.html', {'postlist': postlist})
+
+def user_log(request):
+    logs = MemberLog.objects.filter(user_id=request.session['user_id'])
+    return render(request, 'accountapp/user_log.html', {'logs': logs})
+    

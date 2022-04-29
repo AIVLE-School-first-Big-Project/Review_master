@@ -4,7 +4,7 @@
 {% block content %}
 <div style='height:10rem;'>
     <br>
-  </div>
+</div>
 <div id="main">
     <h1> 마이페이지 > <strong style="color: #03B59D">개인정보수정</strong> </h1>
     <div class="user-loginout" id="userform_mypage">
@@ -41,7 +41,7 @@
 
 
                 <div class="user-info">
-                    <span id="update">이메일 변경</span> 
+                    {% comment %} <span id="update">이메일 변경</span>  {% endcomment %}
                     <label for="email">이메일</label>
                     <br/>
                     <input type="text" class="form-control" name="email" value={{ request.session.user_email }}>

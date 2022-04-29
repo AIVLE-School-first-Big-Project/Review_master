@@ -13,10 +13,10 @@
                 <a href="{% url 'accountapp:user_update' %}">
                     <img src="{% static 'assets/images/메인페이지-개인정보수정.png' %}">
                 </a>
-                <a href="#">
+                <a href="{% url 'accountapp:user_log' %}">
                     <img src="{% static 'assets/images/메인페이지-검색기록.png' %}">
                 </a>
-                <a href="#">
+                <a href="{% url 'accountapp:user_qna' %}">
                     <img src="{% static 'assets/images/메인페이지-나의문의.png' %}">
                 </a>
                 <a href="{% url 'accountapp:user_delete' %}" id="userdelete">

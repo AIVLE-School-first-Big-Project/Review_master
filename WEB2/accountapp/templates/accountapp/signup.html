@@ -9,6 +9,12 @@
     <div class="s004">
         <div class="user-loginout">
             <h1> 회원가입 </h1>
+            {% if request.session.user_id %}
+                이미 로그인 해 있어요!
+                <button type="button">
+                    <a href="{% url 'accountapp:logout' %}">로그아웃</a>
+                </button>
+            {% else %}
                 <form method="POST" action="{% url 'accountapp:signup' %}">
                     {% csrf_token %}
                     {% include 'accountapp/form_errors.html' %}
@@ -73,6 +79,7 @@
                     </button>
                 </span>
         </div> 
+        {% endif %}
     </div>
 </div>
 {%endblock content%}

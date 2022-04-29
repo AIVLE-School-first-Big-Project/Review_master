@@ -18,9 +18,9 @@ legend {
     -ms-flex-align: center;
     align-items: flex-start;
     font-family: 'Poppins', sans-serif;
-    background: url("../images/대문배경.png");
-    background-size: cover;
-    background-position: center center;
+    /* background: url("../images/대문배경.png"); */
+    /* background-size: cover; */
+    /* background-position: center center; */
     padding-left: 128px;
 }
 

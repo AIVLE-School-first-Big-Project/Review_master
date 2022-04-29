@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.db.models.fields import CharField, IntegerField, TextField,DateTimeField
 
 label_name = 'accountapp'
