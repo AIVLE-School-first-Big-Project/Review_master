@@ -72,7 +72,7 @@ if __name__=="__main__":
     con = sk.config()
     cursor = con.connect_DB()
 
-    summary_review = Gensim_summary(cursor,artice_code=15)
+    summary_review = Gensim_summary(cursor,artice_code=22)
     print("요약글 : ")
     print("----"*10)
     print(summary_review)
