@@ -11,7 +11,6 @@
             <form method="POST" action="{% url 'accountapp:user_update' %}">
                 {% csrf_token %}
                 <div class="user-info">
-                    <span id="update">비밀번호 변경</span> 
                     <label for="password1">비밀번호</label>
                     <br/>
                     <input type="password" class="form-control" name="password1" placeholder="비밀번호를 입력해주세요">
@@ -22,14 +21,13 @@
                     <input type="password" class="form-control" name="password2" placeholder="비밀번호를 다시 입력해주세요">
                 </div>
                 <div class="user-info">
-                    <span id="update">닉네임 변경</span> 
                     <label for="nickname">닉네임</label>
                     <br/>
                     <input type="text" class="form-control" name="nickname" value={{ request.session.user_nickname }}>
                 </div>
                 <div class="user-info">
-                    <label for="user_birth">생년월일 변경</label>
-                    <input type="date" class="form-control" name="user_birth" min="1930-01-01" max="2022-12-31" value={{ request.session.user_birth }}>
+                    <label for="user_birth">생년월일</label>
+                    <input type="date" class="form-control" name="user_birth" min="1930-01-01" max="2022-12-31" value={{ request.session.user_birth|date:'Y-m-d' }}>
                 </div> 
                 <div class="user-info">
                     <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">성별 변경</label>
@@ -39,6 +37,9 @@
                     </select>
                 </div> 
 
+                {{ request.session.user_class }}
+                {{ request.session.user_birth }}
+                {{ request.session.user_sex }}
 
                 <div class="user-info">
                     {% comment %} <span id="update">이메일 변경</span>  {% endcomment %}
