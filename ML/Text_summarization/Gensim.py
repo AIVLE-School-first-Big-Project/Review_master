@@ -1,7 +1,7 @@
 from gensim.summarization.summarizer import summarize
 import pandas as pd
 
-from konlpy.tag import Kkma
+from konlpy.tag import Mecab
 from hanspell import spell_checker
 import re, time, os,sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -10,11 +10,11 @@ import secret_key as sk
 
 def preprocessing(review):
     # 한국어 형태소 분석 라이브러리    
-    kkma = Kkma()
+    mca = Mecab()
     print("꼬꼬마 호출")
     total_review = ''
     #하나의 리뷰에서 문장 단위로 자르기
-    for sentence in kkma.sentences(review):
+    for sentence in mca.sentences(review):
         sentence = re.sub('([a-zA-Z])','',sentence)
         sentence = re.sub('[ㄱ-ㅎㅏ-ㅣ]+','',sentence)
         sentence = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','',sentence)
