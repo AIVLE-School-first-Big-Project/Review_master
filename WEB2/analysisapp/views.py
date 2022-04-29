@@ -3,106 +3,124 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from analysisapp.models import ArticleCode, ArticleInfo, BuyList, ReviewData, ReviewAnalysis, MemberLog, Member
 from django.views.decorators.csrf import csrf_exempt
-
-
-@csrf_exempt
-def home(request):
-    if request.method == "POST":
-        login_id = request.session['user']
-
-        print(f"현재 로그인한 사람 {login_id}")
-        company_name = request.POST.get("company", 0)
-        article_name = request.POST.get("article_name", 0)
-
-        # 만약 회사명과 제품명이 아무것도 안들어오고 검색된 경우
-        if company_name == "" and article_name == "":
-
-            # user = Member.objects.get(user_id=request.session['user'])
-
-            # user.user_pw = "바꾼거"
-            # user.save()
-            print("검색 다시 하게 만들어야함")
-
-        # 회사명만 안적고 검색한 경우
-        elif request.POST.get("company", 0) == "":
-            print("제품명과 비슷한 DB가 있으면 보여준다.")
-
-        # 모두 다 잘들어왔다.
-        else:
-            print("모두다 잘 들어온경우")
-            print(company_name)
-            print(article_name)
-
-            # 검색 기록 남기기
-            MemberLog(user_id=login_id, search_name=article_name,
-                      search_company=company_name).save()
-            try:
-                article_code = ArticleCode.objects.get(
-                    search_name=article_name)
-                print(article_code.article_id)
-                article_id = article_code.article_id
-                review = ReviewData.objects.filter(article_id=article_id)
-
-                for re in review:
-                    print(re.content)
-            except:
-                print("결과가 없습니다.")
-
-    return render(request, 'analysisapp/home.html')
+from django.db.models import Q
+from .crawling import crawling_function
+from django.urls import reverse
+import pandas as pd
 
 
 @csrf_exempt
 def result(request):
     if request.method == "POST":
-        print(request.session["user"])
 
-        company_name = request.POST.get("company", 0)
-        article_name = request.POST.get("article_name", 0)
+        crawling_check = False
+        login_id = request.session.get('user_id', "nonuser")
+
+        print(f"현재 로그인한 사람 {login_id}")
+
+        # 사용자가 검색한 경우
+
+        search_company = request.POST.get("company", 0)
+        search_name = request.POST.get("article_name", 0)
+
+        # 검색 결과 로그 출력
+        print(search_company)
+        print(search_name)
 
         # 만약 회사명과 제품명이 아무것도 안들어오고 검색된 경우
-        if company_name == "" and article_name == "":
+        if search_company == "" and search_name == "":
+
             print("검색 다시 하게 만들어야함")
 
         # 회사명만 안적고 검색한 경우
-        elif request.POST.get("company", 0) == "":
+        elif search_company == "" or search_name == "":
             print("제품명과 비슷한 DB가 있으면 보여준다.")
 
         # 모두 다 잘들어왔다.
         else:
+
             print("모두다 잘 들어온경우")
 
-    # 예비 로그인 상태로 만들기
-    request.session['user'] = 'jang'
-    return render(request, 'analysisapp/search.html')
+            # 검색 기록 남기기
+            MemberLog(user_id=login_id, search_name=search_name,
+                      search_company=search_company).save()
 
+            # Article Code에 있는 데이터인지 확인을 하자. + 추가
 
-def get_search_name(search_name):
-    """
-        params:
-            search_name : 페이지에서 검색한 이름
-        ------------
-        return:
-            list : 리뷰건수, 리뷰요약, 구매리스트
-    """
-    # 검색 된 단어가 아티클인포에 있는지 확인
+            m_article_info = ArticleCode.objects.filter(
+                Q(search_company=search_company) & Q(search_name=search_name))
 
-    # 없으면 아티클인포에 해당 단어를 추가 저장 -> 아티클인포에서 아티클코드 + 서치네임 0 0 0
+            # 0인 경우 : 처음 검색된 경우이다. 이 경우는 크롤링을 진행해주어야 한다.
+            if len(m_article_info) == 0:
 
-    list = get_object_or_404(
-        ArticleInfo, search_name=search_name)  # 리뷰건수, 리뷰요약, 구매리스트
-    return list
+                crawling_check = True
 
-# 리뷰건수
-# 리뷰건수를 반환하는 함수
+                # 데이터 코드를 저장시켜준다.
+                m_article_code = ArticleCode()
+                m_article_code.search_company = search_company
+                m_article_code.search_name = search_name
+                m_article_code.save()
 
+                # primary key를 받아올 때 회사명과 제품명이 함께 되어있는 경우를 찾는다.
+                m_article_info = ArticleCode.objects.filter(
+                    Q(search_company=search_company) & Q(search_name=search_name))
 
-def review_num(article_code):
-    row = ReviewData.objects.filter(article_code=article_code)
-    return row
+            # 제품명과 회사명이 같은 경우 무조건 한가지의 값이 나오므로 첫번째 값의 id를 받아오면 된다.
+            article_id = m_article_info[0].article_id
 
+            # ArticleInfo에서 id와 search_cnt를 1 증가시켜주자. article reviewcnt도 가져올 수 있으니 해당 자료도 가져다 주자.
 
-def show(request):
-    if request.method == "POST":
-        search_name = request.POST.get('search-item')
-        time = datetime.now()
-    return HttpResponse((search_name, time))
+            # crawling check가 True이면 이전에 없던 데이터였으므로 info안에도 추가시켜주어야한다.
+            if crawling_check:
+                print("해당 코드가 아직 저장이 안되어있음")
+                m_article_info = ArticleInfo()
+                m_article_info.article_id = article_id
+                m_article_info.search_cnt = 1
+                m_article_info.save()
+
+            else:
+                m_article_info = ArticleInfo.objects.get(article_id=article_id)
+                m_article_info.search_cnt += 1
+                m_article_info.save()
+
+            # 크롤링 진행 혹은 리뷰 데이터 가져오기
+
+            review = ReviewData.objects.filter(
+                article_id=article_id)
+
+            # 데이터가 하나도 없는 경우 이거나 위에서 크롤링해야한다고 한 경우 크롤링을 진행한다.
+            if len(review) == 0 or crawling_check:
+                df = crawling_function.service_start(
+                    search_company, search_name)
+
+                # Review Data에 데이터를 추가시켜주자. writer, content, description, content_date, first_img_url, last_img_url, url을 넣어준다.
+                url, title, post_date, description, writer, content, first_img_url, last_img_url = df["url"], df[
+                    "title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]
+                blog_cnt = len(df)
+
+                # 리뷰 데이터가 얼마나 있는지 확인하고 저장
+                m_article_info = ArticleInfo.objects.get(article_id=article_id)
+                m_article_info.article_review_cnt = blog_cnt
+                m_article_info.save()
+
+                for i in range(len(df)):
+                    m_review_data = ReviewData()
+                    m_review_data.article_id = article_id
+                    m_review_data.writer = writer[i]
+                    m_review_data.content = content[i]
+                    m_review_data.content_date = post_date[i]
+                    m_review_data.first_img_url = first_img_url[i]
+                    m_review_data.last_img_url = last_img_url[i]
+                    m_review_data.url = url[i]
+                    m_review_data.description = description[i]
+                    m_review_data.save()
+
+            # reuslt값에 모든 데이터 작성해서 보내주기
+            review_data_list = []
+
+            return render(request, 'analysisapp/result.html', {
+                "select_num": 1,
+                "result": result
+            })
+
+    return HttpResponseRedirect(reverse('homeapp:home'))
