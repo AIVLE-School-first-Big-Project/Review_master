@@ -11,7 +11,7 @@ import pandas as pd
 import requests, os,sys,json
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import secret_key as sk
-
+from django.db import connections
 
 
 con = sk.config()
@@ -122,8 +122,7 @@ def result(request):
                     m_review_data.description = description[i]
                     m_review_data.advertise = 0
                     m_review_data.save()
-
-
+            
             # 광고 필터링 API 보내기.
             """"
                 1. 글 데이터 특징 추출
@@ -158,7 +157,8 @@ def result(request):
                     print("요약 결과")
                     summary_data = response.json()["Decs"]
                     print(summary_data)
-
+                else:
+                    summary_data = "실패"
             # if len(m_review_analysis) == 0:
                 # api로 데이터 보내기
 
