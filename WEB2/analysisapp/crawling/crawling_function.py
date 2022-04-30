@@ -381,4 +381,6 @@ def service_img(company, word):
     else:
         print("Error Code:" + rescode)
 
+    # json.loads(response_body.decode('utf-8'))["items"][0]["link"]
+
     return json.loads(response_body.decode('utf-8'))["items"][0]["link"]
