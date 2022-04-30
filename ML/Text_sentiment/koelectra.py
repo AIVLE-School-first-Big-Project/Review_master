@@ -63,7 +63,7 @@ def Text_sentiment_inferense(cursor,artice_code):
             _ , predicted = torch.max(y_pred, 1)
             result_pred += predicted.tolist()
         contents["pred"] = result_pred
-        contents['blog_id'] = review_id
+        contents['review_id'] = review_id
         total_blog = pd.concat([total_blog,contents])
     total_blog['artice_code'] = artice_code
     file_name = f"./Data/{artice_code}_neg_pos.csv"
