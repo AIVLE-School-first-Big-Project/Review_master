@@ -1,0 +1,43 @@
+{%load static%}
+<!DOCTYPE html>
+ <html lang="ko">
+    {% include 'base_head.html' %}
+    <body class="is-preload">
+        <!-- base_headerBar -->
+        {% include 'base_headerBar.html' %}
+        <!-- Wrapper -->
+	    <div id="wrapper">
+            <!-- Main -> 무엇이든 재사용 가능할 틀로 수정-->
+            {% block content %} 
+		<div id='main'>	
+			<section id="paysec" class="main special">
+				<header class="major">
+					<h2>요금제</h2>
+				</header>
+				<ul class="statistics">
+					<li>
+						<div class="buydiv">
+							<div id='buydiv3'><h2 style='display:inline;color:#0D6C6C;'>무료</h2></div>
+							<div id='buydiv2'>
+								<img src="{% static 'assets/css/images/free.png'%}" alt="image" id="payimg"/>
+							</div>
+							
+					</li>
+					<li>
+						<div class="buydiv">
+							<div id="buydiv3"><h2 style='display:inline;color:#0D6C6C;'>990원</h2>/달</div>
+							<div id='buydiv2'>
+								<img src="{% static 'assets/css/images/990.png'%}" alt="image" id="payimg"/>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</section>
+		</div>
+            {% endblock %}
+            <!-- Footer -->
+            {% include 'base_footer.html' %}
+        </div>
+        {% include 'base_Scripts.html' %}
+    </body>
+</html>

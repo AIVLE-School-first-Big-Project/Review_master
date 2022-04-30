@@ -382,3 +382,37 @@ def service_img(company, word):
         print("Error Code:" + rescode)
 
     return json.loads(response_body.decode('utf-8'))["items"][0]["link"]
+
+
+def service_buy(company, word):
+    client_id = "GvNa2sBgFDA6v7ujnaz0"
+    client_secret = "Yo0jOskXlZ"
+    encText = urllib.parse.quote(f"{company} {word}")
+    url = "https://openapi.naver.com/v1/search/shop?query=" + encText  # json 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if(rescode == 200):
+        response_body = response.read()
+        print(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+
+    data = json.loads(response_body.decode('utf-8'))["items"]
+
+    title = []
+    link = []
+    image = []
+    lprice = []
+    mall_name = []
+
+    for d in data:
+        title.append(tag_remove(d["title"]))
+        link.append(d["link"])
+        image.append(d["image"])
+        lprice.append(int(d["lprice"]))
+        mall_name.append(d["mallName"])
+
+    return title, link, image, lprice, mall_name

@@ -78,31 +78,23 @@
 		</header>
 		<ul class="statistics">
 			<li >
-				<table class='buytable'>									
+				<table class='buytable'>	
+					{% for buy in buy_list %}
 					<tr>
-						<td><img id='logo_img' src="{% static 'assets/images/11번가.png'%}"></td>
-						<td>https://www.11st.co.kr/main</td>
-					</tr>										
-					<tr>
-						<td><img id='logo_img' src="{% static 'assets/images/11번가.png'%}"></td>
-						<td>https://www.11st.co.kr/main</td>
+						<td>
+							<a href = "{{buy.url}}">
+								<img id='logo_img' src="{{buy.image_url}}" width="200px" height="200px">
+							</a>
+						</td>
+						<td>
+							제목 : {{buy.title}}
+						</td>
+						<td>
+							{{buy.price}}원
+						</td>
 					</tr>	
-					<tr>
-						<td><img id='logo_img' src="{% static 'assets/images/11번가.png'%}"></td>
-						<td>https://www.11st.co.kr/main</td>
-					</tr>	
-					<tr>
-						<td><img id='logo_img' src="{% static 'assets/images/11번가.png'%}"></td>
-						<td>https://www.11st.co.kr/main</td>
-					</tr>	
-					<tr>
-						<td><img id='logo_img' src="{% static 'assets/images/11번가.png'%}"></td>
-						<td>https://www.11st.co.kr/main</td>
-					</tr>	
-					<tr>
-						<td><img id='logo_img' src="{% static 'assets/images/11번가.png'%}"></td>
-						<td>https://www.11st.co.kr/main</td>
-					</tr>	
+					{% endfor %}									
+					
 				</table>
 			</li>
 		</ul>

@@ -80,6 +80,18 @@ class ArticleInfo(models.Model):
 
     img_url = TextField()
 
+    twenty_male_cnt = IntegerField()
+    twenty_female_cnt = IntegerField()
+
+    thirty_male_cnt = IntegerField()
+    thirty_female_cnt = IntegerField()
+
+    fourty_male_cnt = IntegerField()
+    fourty_female_cnt = IntegerField()
+
+    fifty_male_cnt = IntegerField()
+    fifty_female_cnt = IntegerField()
+
     class Meta:
         db_table = 'ArticleInfo'
         app_label = label_name
@@ -95,11 +107,13 @@ class BuyList(models.Model):
     # 구매링크
     url = TextField()
     # 구매 가격
+    title = TextField()
+
     price = IntegerField()
     # 구매 장소
-    market_name = CharField(max_length=30)
-    # 크롤링한 시간
-    create_time = DateField()
+    mall_name = CharField(max_length=30)
+
+    image_url = TextField()
 
     class Meta:
         db_table = 'BuyList'
