@@ -1,3 +1,4 @@
+import secret_key as sk
 from datetime import datetime
 from urllib import response
 from django.shortcuts import get_object_or_404, render
@@ -8,15 +9,19 @@ from django.db.models import Q
 from .crawling import crawling_function
 from django.urls import reverse
 import pandas as pd
-import requests, os,sys,json
+import requests
+import os
+import sys
+import json
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-import secret_key as sk
-
 
 
 con = sk.config()
-Backend_filtering = "http://"+con.get_secret("HOST") +":"+ con.get_secret("API_PORT") +"/filtering/"
-Backend_summary = "http://"+con.get_secret("HOST") +":"+ con.get_secret("API_PORT") +"/summary/"
+Backend_filtering = "http://" + \
+    con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/filtering/"
+Backend_summary = "http://" + \
+    con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/summary/"
+
 
 @csrf_exempt
 def result(request):
@@ -86,13 +91,14 @@ def result(request):
                 m_article_info.save()
 
             else:
-                ## 상품 등록을 시켜주는 역할.
+                # 상품 등록을 시켜주는 역할.
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
                 m_article_info.search_cnt += 1
                 m_article_info.save()
 
             # 크롤링 진행 혹은 리뷰 데이터 가져오기
-            review = ReviewData.objects.filter(article_id=article_id)   # 리뷰 테이블에서 데이터 가져오기.
+            # 리뷰 테이블에서 데이터 가져오기.
+            review = ReviewData.objects.filter(article_id=article_id)
 
             # 데이터가 하나도 없는 경우 이거나 위에서 크롤링해야한다고 한 경우 크롤링을 진행한다.
             if len(review) == 0 or crawling_check:
@@ -110,7 +116,9 @@ def result(request):
                 m_article_info.article_review_cnt = blog_cnt
                 m_article_info.save()
                 print("데이터 저장")
+
                 for i in range(len(df)):
+
                     m_review_data = ReviewData()
                     m_review_data.article_id = article_id
                     m_review_data.writer = writer[i]
@@ -123,15 +131,15 @@ def result(request):
                     m_review_data.advertise = 0
                     m_review_data.save()
 
-
+                m_review_data = ReviewData()
             # 광고 필터링 API 보내기.
             """"
                 1. 글 데이터 특징 추출
                 2. 이미지 데이터 특징 추출
             """
             # 보낼 데이터 양식
-            item1 = [1,2,3,4,5]
-            response = requests.post(Backend_filtering, data =json.dumps(item1))
+            item1 = [1, 2, 3, 4, 5]
+            response = requests.post(Backend_filtering, data=json.dumps(item1))
             print(Backend_filtering)
             print(response.status_code)
             if response.status_code == 200:
@@ -140,7 +148,7 @@ def result(request):
                 print(filter_data)
 
             m_review_analysis = ReviewAnalysis.objects.filter(
-                    article_id=article_id)
+                article_id=article_id)
             if len(m_review_analysis) == 0:
                 # 분석 api로 데이터 보내기
                 """"
@@ -153,12 +161,13 @@ def result(request):
                 item2 = {
                     'artice_code': article_id
                 }
-                response = requests.post(Backend_summary, params = item2)
+                response = requests.post(Backend_summary, params=item2)
                 if response.status_code == 200:
                     print("요약 결과")
                     summary_data = response.json()["Decs"]
                     print(summary_data)
-
+                else:
+                    summary_data = "실패"
             # if len(m_review_analysis) == 0:
                 # api로 데이터 보내기
 
