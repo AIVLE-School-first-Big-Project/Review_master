@@ -19,7 +19,5 @@ urlpatterns = [
 
 
 
-
-
     #path('index/search_main/', views.search_main,name='search_main'),
 ]

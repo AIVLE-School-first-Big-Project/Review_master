@@ -1,3 +1,4 @@
+import secret_key as sk
 from django.db import connections
 from datetime import datetime
 from urllib import response
@@ -9,15 +10,36 @@ from django.db.models import Q
 from .crawling import crawling_function
 from django.urls import reverse
 import pandas as pd
-import requests, os,sys,json
+import requests
+import os
+import sys
+import json
+from datetime import date
+from dateutil.relativedelta import relativedelta
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-import secret_key as sk
-
 
 
 con = sk.config()
-Backend_filtering = "http://"+con.get_secret("HOST") +":"+ con.get_secret("API_PORT") +"/filtering/"
-Backend_summary = "http://"+con.get_secret("HOST") +":"+ con.get_secret("API_PORT") +"/summary/"
+Backend_filtering = "http://" + \
+    con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/filtering/"
+Backend_summary = "http://" + \
+    con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/summary/"
+
+
+def age_group_check(birth_date):
+
+    birth = date.fromisoformat(str(birth_date))
+    age = relativedelta(date.today(), birth)
+
+    if age.years < 30:
+        return 0
+    elif age.years < 40:
+        return 1
+    elif age.years < 50:
+        return 2
+    else:
+        return 3
+
 
 @csrf_exempt
 def result(request):
@@ -47,7 +69,6 @@ def result(request):
         else:
             print("모두다 잘 들어온경우")
 
-            # 검색 기록 남기기
             MemberLog(user_id=login_id, search_name=search_name,
                       search_company=search_company).save()
 
@@ -77,24 +98,56 @@ def result(request):
             # ArticleInfo에서 id와 search_cnt를 1 증가시켜주자. article reviewcnt도 가져올 수 있으니 해당 자료도 가져다 주자.
 
             # crawling check가 True이면 이전에 없던 데이터였으므로 info안에도 추가시켜주어야한다.
-            if crawling_check:
+            m_article_info = ArticleInfo.objects.filter(article_id=article_id)
+            if len(m_article_info) == 0:
                 print("해당 코드가 아직 저장이 안되어있음")
                 m_article_info = ArticleInfo()
                 m_article_info.article_id = article_id
-                m_article_info.search_cnt = 1
+                m_article_info.search_cnt = 0
                 m_article_info.img_url = crawling_function.service_img(
                     search_company, search_name)
+                m_article_info.twenty_male_cnt = 0
+                m_article_info.twenty_female_cnt = 0
+                m_article_info.thirty_male_cnt = 0
+                m_article_info.thirty_female_cnt = 0
+                m_article_info.fourty_male_cnt = 0
+                m_article_info.fourty_female_cnt = 0
+                m_article_info.fifty_male_cnt = 0
+                m_article_info.fifty_female_cnt = 0
                 m_article_info.save()
 
-            else:
-                ## 상품 등록을 시켜주는 역할.
-                m_article_info = ArticleInfo.objects.get(article_id=article_id)
-                m_article_info.search_cnt += 1
-                m_article_info.save()
+            m_member = Member.objects.get(user_id=login_id)
+            age_group = age_group_check(m_member.user_birth)
+            sex = m_member.user_sex
+
+            m_article_info = ArticleInfo.objects.get(article_id=article_id)
+            if sex == 0 or sex == 2:
+                if age_group == 0:
+                    m_article_info.twenty_female_cnt += 1
+                elif age_group == 1:
+                    m_article_info.thirty_female_cnt += 1
+                elif age_group == 2:
+                    m_article_info.fourty_female_cnt += 1
+                elif age_group == 3:
+                    m_article_info.fifty_female_cnt += 1
+
+            if sex == 1 or sex == 2:
+                if age_group == 0:
+                    m_article_info.twenty_male_cnt += 1
+                elif age_group == 1:
+                    m_article_info.thirty_male_cnt += 1
+                elif age_group == 2:
+                    m_article_info.fourty_male_cnt += 1
+                elif age_group == 3:
+                    m_article_info.fifty_male_cnt += 1
+
+            m_article_info.search_cnt += 1
+            m_article_info.save()
 
             # 크롤링 진행 혹은 리뷰 데이터 가져오기
-            review = ReviewData.objects.filter(article_id=article_id)   # 리뷰 테이블에서 데이터 가져오기.
-
+            # 리뷰 테이블에서 데이터 가져오기.
+            review = ReviewData.objects.filter(article_id=article_id)
+            review_cnt = len(review)
             # 데이터가 하나도 없는 경우 이거나 위에서 크롤링해야한다고 한 경우 크롤링을 진행한다.
             if len(review) == 0 or crawling_check:
                 df = crawling_function.service_start(
@@ -104,11 +157,11 @@ def result(request):
                 url, title, post_date, description, writer, content, first_img_url, last_img_url = df["url"], df[
                     "title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]
                 # blog_cnt = len(df)
-                blog_cnt = df.shape[0]
+                review_cnt = df.shape[0]
 
                 # 리뷰 데이터가 얼마나 있는지 확인하고 저장
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
-                m_article_info.article_review_cnt = blog_cnt
+                m_article_info.article_review_cnt = review_cnt
                 m_article_info.save()
                 print("데이터 저장")
                 for i in range(len(df)):
@@ -121,27 +174,49 @@ def result(request):
                     m_review_data.last_img_url = last_img_url[i]
                     m_review_data.url = url[i]
                     m_review_data.description = description[i]
+                    # 광고 필터링 API 보내기.
+                    """"
+                        1. 글 데이터 특징 추출
+                        2. 이미지 데이터 특징 추출
+                    """
+                    # 보낼 데이터 양식
+                    item1 = [1]
+                    response = requests.post(
+                        Backend_filtering, data=json.dumps(item1))
+                    if response.status_code == 200:
+                        filter_data = response.json()["pred"]
+
+                    # m_review_data.advertise = filter_data
                     m_review_data.advertise = 0
+
                     m_review_data.save()
 
+            # buylist 추가하기
 
-            # 광고 필터링 API 보내기.
-            """"
-                1. 글 데이터 특징 추출
-                2. 이미지 데이터 특징 추출
-            """
-            # 보낼 데이터 양식
-            item1 = [1,2,3,4,5]
-            response = requests.post(Backend_filtering, data =json.dumps(item1))
-            print(Backend_filtering)
-            print(response.status_code)
-            if response.status_code == 200:
-                print("필터링 결과")
-                filter_data = response.json()["pred"]
-                print(filter_data)
+            m_buy_list = BuyList.objects.filter(article_id=article_id)
+
+            if len(m_buy_list) == 0:  # 아무것도 없는 경우
+                title, url, image_url, price, mall_name = crawling_function.service_buy(
+                    search_company, search_name)
+
+                # 만약 가격차이가 너무 나는 경우는 원하는 값이 아닐수도 있다.
+
+                average_price = sum(price) / len(price)
+
+                for i in range(len(title)):
+
+                    if average_price * 0.7 <= price[i] <= average_price * 1.3:
+                        m_buy_list = BuyList()
+                        m_buy_list.article_id = article_id
+                        m_buy_list.url = url[i]
+                        m_buy_list.title = title[i]
+                        m_buy_list.price = price[i]
+                        m_buy_list.mall_name = mall_name[i]
+                        m_buy_list.image_url = image_url[i]
+                        m_buy_list.save()
 
             m_review_analysis = ReviewAnalysis.objects.filter(
-                    article_id=article_id)
+                article_id=article_id)
             if len(m_review_analysis) == 0:
                 # 분석 api로 데이터 보내기
                 """"
@@ -154,7 +229,7 @@ def result(request):
                 item2 = {
                     'artice_code': article_id
                 }
-                response = requests.post(Backend_summary, params = item2)
+                response = requests.post(Backend_summary, params=item2)
                 if response.status_code == 200:
                     print("요약 결과")
                     summary_data = response.json()["Decs"]
@@ -184,8 +259,6 @@ def result(request):
             review_list = []
             m_review_data = ReviewData.objects.filter(article_id=article_id)
 
-            pure_cnt = int(data_info["review_cnt"])
-
             for review in m_review_data:
                 review_dict = {
                     "writer": [],
@@ -206,10 +279,10 @@ def result(request):
                 review_dict["url"] = review.url
                 review_dict["description"] = review.description
                 review_dict["advertise"] = review.advertise
-                pure_cnt -= review.advertise
+                review_cnt -= review.advertise
                 review_list.append(review_dict)
 
-            data_info["pure_cnt"] = pure_cnt
+            data_info["pure_cnt"] = review_cnt
 
             analysis_list = {}
             m_review_analysis = ReviewAnalysis.objects.get(
@@ -219,14 +292,35 @@ def result(request):
             analysis_list["emotion_url"] = m_review_analysis.emotion_url
             analysis_list["associate_url"] = m_review_analysis.associate_url
 
+            buy_list = []
+            m_buy_list = BuyList.objects.filter(article_id=article_id)
+
+            for b in m_buy_list:
+                m_buy_dict = {
+                    "url": [],
+                    "title": [],
+                    "price": [],
+                    "mall_name": [],
+                    "image_url": [],
+                }
+                m_buy_dict["url"] = b.url
+                m_buy_dict["title"] = b.title
+                m_buy_dict["price"] = b.price
+                m_buy_dict["mall_name"] = b.mall_name
+                m_buy_dict["image_url"] = b.image_url
+                buy_list.append(m_buy_dict)
+
             return render(request, 'analysisapp/result.html', {
                 "select_num": 1,
                 "data_info": data_info,
                 "review_list": review_list,
-                "analysis_list": analysis_list
+                "analysis_list": analysis_list,
+                "buy_list": buy_list
             })
 
     return HttpResponseRedirect(reverse('homeapp:home'))
 
+
 def choose(request):
+
     return render(request, 'analysisapp/choose.html')
