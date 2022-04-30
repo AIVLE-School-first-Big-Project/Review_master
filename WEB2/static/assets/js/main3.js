@@ -5,8 +5,6 @@
 */
 
 (function($) {
-	var IMP = window.IMP; // 생략 가능
-    IMP.init("{가맹점 식별코드}");
 
 	var	$window = $(window),
 		$body = $('body'),
@@ -121,7 +119,22 @@
 		$('.scrolly').scrolly({
 			speed: 1000
 		});
-
+		$('.spotlight').slick({
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			autoplay: true,
+			autoplaySpeed: 2000,
+			nextArrow:$('.next'),
+			prevArrow:$('.prev'),
+		  });
 })(jQuery);
 
 
+$('.spotlight').slick({
+	slidesToShow: 3,
+	slidesToScroll: 1,
+	autoplay: true,
+	autoplaySpeed: 2000,
+	nextArrow:$('.next'),
+	prevArrow:$('.prev'),
+  });
