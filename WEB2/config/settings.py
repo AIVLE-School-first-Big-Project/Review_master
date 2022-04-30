@@ -48,6 +48,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'board',
     'homeapp',
     'analysisapp',
     'accountapp',
@@ -111,6 +112,7 @@ DATABASE_ROUTERS = [
     'homeapp.router.DBRouter',
     'accountapp.router.DBRouter',
     'analysisapp.router.DBRouter',
+    'board.router.DBRouter',
 ]
 
 # Password validation
@@ -141,7 +143,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

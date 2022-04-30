@@ -2,12 +2,15 @@
 {% load static %} 
 
 {% block content %}
+<div style='height:10rem;'>
+    <br>
+</div>
+<div id="main">
     <h1> 마이페이지 > <strong>회원탈퇴</strong></h1>
-    <p><strong>{{ user.nickname }}</strong> 회원님의 계정이 삭제되었습니다. <br>
-
-    <div class="suggestion">
-        <button type="button">
-            <a href="{% url 'homeapp:home' %}">홈으로 돌아가기</a>
-        </button>
-    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <p>정말로 탈퇴하시겠습니까?</p>
+        <input type="submit" value="탈퇴"/>
+    </form>
+</div>
 {%endblock content%}

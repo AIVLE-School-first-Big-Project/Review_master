@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block content %}
+    <div style='height:10rem;'>
+        <br>
+    </div>
+    <div id="main">
+        제목: {{ post.title }} <br/>
+        내용: {{ post.content }}
+        {% comment %} 자기 글일때만 수정, 삭제 가능  {% endcomment %}
+        {% ifequal request.session.user_id post.user_id %}
+            <button type="button">
+                <a href="{% url 'board:update' up_id=post.id %}">
+                    수정 >
+                </a>
+            </button>
+            <button type="button">
+                <a href="{% url 'board:delete' del_id=post.id %}">
+                    삭제 >
+                </a>
+            </button>
+        {% endifequal %}
+
+        {% if post.answer_title %}
+        <hr>
+        답변제목: {{ post.answer_title }} <br/>
+        답변내용: {{ post.answer_content }} 
+        {% endif %}
+        {% comment %} 관리자일 경우(user_class=99) 답변이 아직 없을 시 답변 form을, 답변이 완료된 건에는 내용물을 보여줌 {% endcomment %}
+        {% ifequal request.session.user_class 99 %}
+            <button type="button">
+                <a href="{% url 'board:update' up_id=post.id %}">
+                    수정 >
+                </a>
+            </button>
+            <button type="button">
+                <a href="{% url 'board:delete' del_id=post.id %}">
+                    삭제 >
+                </a>
+            </button>
+            {% if not post.answer_title %}
+                <h2>관리자기능:답글달기</h2>
+                <form method="POST" action="{% url 'board:write' %}">
+                    {% csrf_token %}
+                    {% comment %} display:none으로 질문 글의 id를 받아와서 objects를 찾을 수 있게 함 {% endcomment %}
+                    <input type="text" name="question_id" value={{ post.id }} style="display:none">
+                    <div>
+                        <label for="title">제목</label><br>
+                        <input type="text" name="answer_title" id="answer_title">
+                    </div>
+                    <div>
+                        <label for="content">내용</label><br>
+                        <textarea name="answer_content" id="content" cols="30" rows="10"></textarea>
+                    </div>
+                    <input type="submit" value="답글달기" />
+                </form>
+            {% endif %}
+        {% endifequal %}
+    </div>
+{% endblock content %}

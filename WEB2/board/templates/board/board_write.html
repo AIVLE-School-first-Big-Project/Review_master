@@ -1,0 +1,25 @@
+]{% extends "base.html" %}
+{% load static %} 
+
+{% block content %}
+<div style='height:10rem;'>
+    <br>
+</div>
+<div id="main">
+    <div class="board">
+        <h1>문의게시판 <span> | 영업일 기준 1일 이내 답변됩니다!</span></h1>
+        <form method="POST" action="{% url 'board:write' %}">
+            {% csrf_token %}
+            <div>
+                <label for="title">제목</label><br>
+                <input type="text" name="title" id="title">
+            </div>
+            <div>
+                <label for="content">내용</label><br>
+                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            </div>
+            <input type="submit" value="저장하기" />
+        </form>
+    </div>
+</div>
+{% endblock content %}
