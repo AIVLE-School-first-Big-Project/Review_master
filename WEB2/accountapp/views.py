@@ -17,6 +17,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+# from argon2 import PasswordHasher
+
 app_name = 'accountapp'
 
 
@@ -25,19 +27,21 @@ def test1(request):
     return render(request, "accountapp/test.html")
     # return HttpResponseRedirect(reverse('homeapp:home'))
 
+
 def board(request):
     return render(request, "accountapp/board.html")
+
 
 def login(request):
     if request.method == "POST":
         user_id = request.POST.get('username')
         user_pw = request.POST.get('password')
         try:
-            m = Member.objects.get(user_id = user_id, user_pw = user_pw)
+            m = Member.objects.get(user_id=user_id, user_pw=user_pw)
         except:
             m = ""
             messages.warning(request, '잘못 입력하셨거나 존재하지 않는 사용자 정보입니다.')
-        if m!="":
+        if m != "":
             request.session['user_id'] = m.user_id
             request.session['user_nickname'] = m.user_nickname
             request.session['user_class'] = m.user_class
@@ -46,7 +50,8 @@ def login(request):
             return render(request, 'accountapp/login.html', {'error': 'username or password is incorrect'})
     else:
         return render(request, 'accountapp/login.html')
-    
+
+
 def logout(request):
     try:
         del request.session['user_id']
@@ -55,12 +60,13 @@ def logout(request):
         pass
     return redirect('/app/home')
 
+
 def signup(request):
     if request.method == 'POST':
 
         user_id = request.POST.get('username')
-        user_pw =  request.POST.get('password1')
-        user_pw_check =request.POST.get('password2')
+        user_pw = request.POST.get('password1')
+        user_pw_check = request.POST.get('password2')
         user_email = request.POST.get('email')
         user_nickname = request.POST.get('nickname')
         user_class = request.POST.get('user_class')
@@ -70,31 +76,34 @@ def signup(request):
 
         if user_pw_check != user_pw:
             messages.info(request, '비밀번호가 일치하지 않습니다.')
-            return HttpResponseRedirect(reverse('accountapp:signup'))   
+            return HttpResponseRedirect(reverse('accountapp:signup'))
         try:
-            user = Member.objects.get(user_id = user_id)
+            user = Member.objects.get(user_id=user_id)
 
             messages.info(request, '사용중인 아이디입니다.')
-            return HttpResponseRedirect(reverse('accountapp:signup'))   
+            return HttpResponseRedirect(reverse('accountapp:signup'))
         except Member.DoesNotExist as e:
-            m = Member(user_id=user_id, user_pw=user_pw, user_nickname=user_nickname, user_email=user_email,user_class=user_class,user_sex=user_sex, user_status=user_status, user_birth=user_birth)
+            m = Member(user_id=user_id, user_pw=user_pw, user_nickname=user_nickname, user_email=user_email,
+                       user_class=user_class, user_sex=user_sex, user_status=user_status, user_birth=user_birth)
             m.save()
-            return HttpResponseRedirect(reverse('accountapp:login'))   
+            return HttpResponseRedirect(reverse('accountapp:login'))
     else:
-        return render(request,'accountapp/signup.html')  
+        return render(request, 'accountapp/signup.html')
+
 
 def mypage(request):
     return render(request, 'accountapp/mypage.html')
 
+
 def user_update(request):
     if request.method == "GET":
         m = Member.objects.get(user_id=request.session['user_id'])
-        return render(request, 'accountapp/user_update.html', {'m':m})
-    
+        return render(request, 'accountapp/user_update.html', {'m': m})
+
     elif request.method == "POST":
         m = Member.objects.get(user_id=request.session['user_id'])
-        user_pw =  request.POST.get('password1')
-        user_pw_check =request.POST.get('password2')
+        user_pw = request.POST.get('password1')
+        user_pw_check = request.POST.get('password2')
         user_email = request.POST.get('email')
         user_nickname = request.POST.get('nickname')
         user_sex = request.POST.get('user_sex')
@@ -113,6 +122,7 @@ def user_update(request):
             return redirect('/app/account/mypage')
     return render(request, 'accountapp/user_update.html')
 
+
 def user_delete(request):
     if request.method == 'POST':
         b = QABoard.objects.filter(user_id=request.session['user_id'])
@@ -123,18 +133,21 @@ def user_delete(request):
 
         m = Member.objects.get(user_id=request.session['user_id'])
         m.delete()
-        
+
         logout(request)
         return redirect('/app/home')
     return render(request, 'accountapp/user_delete.html')
+
 
 def user_qna(request):
     postlist = QABoard.objects.filter(user_id=request.session['user_id'])
     return render(request, 'accountapp/user_qna.html', {'postlist': postlist})
 
+
 def user_log(request):
     logs = MemberLog.objects.filter(user_id=request.session['user_id'])
     return render(request, 'accountapp/user_log.html', {'logs': logs})
+
 
 def pay(request):
     return render(request, 'accountapp/pay.html')
