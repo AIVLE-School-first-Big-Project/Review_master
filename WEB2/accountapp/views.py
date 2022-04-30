@@ -88,11 +88,11 @@ def mypage(request):
 
 def user_update(request):
     if request.method == "GET":
-        return render(request, 'accountapp/user_update.html')
+        m = Member.objects.get(user_id=request.session['user_id'])
+        return render(request, 'accountapp/user_update.html', {'m':m})
     
     elif request.method == "POST":
         m = Member.objects.get(user_id=request.session['user_id'])
-
         user_pw =  request.POST.get('password1')
         user_pw_check =request.POST.get('password2')
         user_email = request.POST.get('email')
