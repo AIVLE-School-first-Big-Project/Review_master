@@ -13,4 +13,5 @@ urlpatterns = [
     path('mypage/', views.mypage, name="mypage"),
     path('user_delete/', views.user_delete, name="user_delete"),
     path('user_update/<int:pk>/', views.update, name='user_update'),
+    path('pay/', views.pay, name="pay"),
 ]

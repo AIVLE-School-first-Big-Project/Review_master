@@ -116,3 +116,5 @@ def update(request, pk):
 #     model = Member
 #     form_class = update
 #     success_url = reverse_lazy('homeapp:user_update.html')
+def pay(request):
+     return render(request, 'accountapp/pay.html')
