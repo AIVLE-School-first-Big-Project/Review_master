@@ -7,27 +7,6 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-#choose_li{
-	color: #083A3A;
-	text-align: left;
-}
-#paysec{
-	margin-top: 4rem;
-}
-#payimg{
-	margin-left: 2rem;
-	margin-top: 2rem;
-	align-items: center;
-}
-#choimg{
-	margin-right: 1rem;
-	margin-left: 1rem;
-	align-items: center;
-}
-#chodiv{
-	align-items: center;
-	text-align: center;
-}
 #logo_img{
 	height: 1rem;
 }
@@ -62,31 +41,11 @@
 	display: flex;
 	justify-content: center;
 	color:black;
-	background-color: white;
-	text-align: center;
 }
-
-.buydiv{
+.buytable{
+	width: 100%;
 	color:black;
-	background-color: white;
-	border:1px solid #707070;
-	border-radius: 0.5rem;
-	height: 20rem;
 }
-.buydiv2{
-	color:black;
-	background-color: white;
-	text-align: left;
-}
-
-#buydiv3{
-	margin-top: 2rem;
-	background-color: white;
-	text-align: center;
-	color: #0D6C6C;
-}
-
-
 * {
 	margin: 0;
 	padding: 0;
@@ -254,7 +213,7 @@ input, select, textarea {
 	}
 
 	body {
-		background-color: #C5D6D6;
+		background-color: #B0D4D4;
 		background-image: url("images/overlay.png"), -moz-linear-gradient(70deg, #d9d9d9 30%, #37cccc 70%);
 		background-image: url("images/overlay.png"), -webkit-linear-gradient(70deg, #d9d9d9 30%, #37cccc 70%);
 		background-image: url("images/overlay.png"), -ms-linear-gradient(70deg, #d9d9d9 30%, #37cccc 70%);
@@ -351,7 +310,7 @@ input, select, textarea {
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 300;
 		line-height: 1.5;
-		margin: 0 0 0 0;
+		margin: 0 0 0.7em 0;
 		letter-spacing: -0.025em;
 	}
 

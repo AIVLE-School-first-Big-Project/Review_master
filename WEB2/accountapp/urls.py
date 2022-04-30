@@ -13,7 +13,6 @@ urlpatterns = [
     path('mypage/', views.mypage, name="mypage"),
     path('user_update/', views.user_update, name="user_update"),
     path('user_delete/', views.user_delete, name="user_delete"),
-    path('pay/', views.pay, name="pay"),
     path('user_qna/', views.user_qna, name="user_qna"),
     path('user_log/', views.user_log, name="user_log"),
 ]

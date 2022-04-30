@@ -5,8 +5,6 @@
 */
 
 (function($) {
-	var IMP = window.IMP; // 생략 가능
-    IMP.init("{가맹점 식별코드}");
 
 	var	$window = $(window),
 		$body = $('body'),
@@ -123,5 +121,3 @@
 		});
 
 })(jQuery);
-
-
