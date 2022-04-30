@@ -7,6 +7,18 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+
+.reviewtd{
+	height: 1%;
+	width: 1%;
+}
+#reviewimg{
+	width:8rem;
+	height: 15rem;
+	vertical-align: bottom; 
+	margin:  0 0 0 0;
+
+}
 #choose_li{
 	color: #083A3A;
 	text-align: left;
@@ -45,9 +57,7 @@
 
 }
 .input3{
-	font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	width: 5%;
-	height: 3.1rem;
+
 	border-radius: 0px 30px 30px 0px;
 }
 .search_div{
@@ -65,6 +75,7 @@
 	color:black;
 	background-color: white;
 	text-align: center;
+	
 }
 
 .buydiv{
@@ -2535,9 +2546,9 @@ input, select, textarea {
 			max-width: 40%;
 		}
 
-			.image.left img, .image.right img {
+			/* .image.left img, .image.right img {
 				width: 100%;
-			}
+			} */
 
 		.image.left {
 			float: left;
@@ -2551,7 +2562,7 @@ input, select, textarea {
 			top: 0.25em;
 		}
 
-		.image.fit {
+		/* .image.fit {
 			display: block;
 			margin: 0 0 2em 0;
 			width: 100%;
@@ -2569,7 +2580,7 @@ input, select, textarea {
 
 			.image.main img {
 				width: 100%;
-			}
+			} */
 
 /* List */
 
@@ -2874,12 +2885,6 @@ input, select, textarea {
 		width: 100%;
 	}
 
-		table tbody tr {
-			border: solid 1px;
-			border-left: 0;
-			border-right: 0;
-		}
-
 		table td {
 			padding: 0.75em 0.75em;
 		}
@@ -2929,9 +2934,9 @@ input, select, textarea {
 		border-color: rgba(255, 255, 255, 0.35);
 	}
 
-		table tbody tr:nth-child(2n + 1) {
+		/* table tbody tr:nth-child(2n + 1) {
 			background-color: rgba(255, 255, 255, 0.075);
-		}
+		} */
 
 	table th {
 		color: #ffffff;
@@ -3216,9 +3221,9 @@ input, select, textarea {
 				padding: 0.35em;
 			}
 
-				.spotlight .image img {
+				/* .spotlight .image img {
 					width: 12em;
-				}
+				} */
 
 		}
 
@@ -3509,7 +3514,7 @@ input, select, textarea {
 		}
 
 		#main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {
-			color: #636363;
+			color: #000000;
 		}
 
 		#main blockquote {
@@ -3713,9 +3718,9 @@ input, select, textarea {
 			border-color: #dddddd;
 		}
 
-			#main table tbody tr:nth-child(2n + 1) {
+			/* #main table tbody tr:nth-child(2n + 1) {
 				background-color: rgba(222, 222, 222, 0.25);
-			}
+			} */
 
 		#main table th {
 			color: #636363;
@@ -4000,12 +4005,14 @@ input, select, textarea {
 }
 
 .box12{
+	margin-left: 1.4rem;
 	padding-top: 0.43rem;
 	text-align: center;
-	width: 135px;
-    height: 40px;
+	width: 6rem;
+    height: 2.2rem;
 	background-color:#17A6A6; 
 	color: white;
+	font-size: 1rem;
 	border-radius: 20px;
-
+	align-items: center;
 }
