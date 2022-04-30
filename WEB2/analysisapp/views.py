@@ -235,3 +235,7 @@ def result(request):
             })
 
     return HttpResponseRedirect(reverse('homeapp:home'))
+
+
+def choose(request):
+    return HttpResponseRedirect(reverse('homeapp:home'))
