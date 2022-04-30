@@ -227,3 +227,6 @@ def result(request):
             })
 
     return HttpResponseRedirect(reverse('homeapp:home'))
+
+def choose(request):
+    return render(request, 'analysisapp/choose.html')

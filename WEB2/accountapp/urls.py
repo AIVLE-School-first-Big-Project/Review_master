@@ -15,4 +15,5 @@ urlpatterns = [
     path('user_delete/', views.user_delete, name="user_delete"),
     path('user_qna/', views.user_qna, name="user_qna"),
     path('user_log/', views.user_log, name="user_log"),
+    path('pay/', views.pay, name="pay"),
 ]

@@ -135,4 +135,6 @@ def user_qna(request):
 def user_log(request):
     logs = MemberLog.objects.filter(user_id=request.session['user_id'])
     return render(request, 'accountapp/user_log.html', {'logs': logs})
-    
+
+def pay(request):
+    return render(request, 'accountapp/pay.html')
