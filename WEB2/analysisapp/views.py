@@ -28,8 +28,8 @@ Backend_summary = "http://" + \
 
 def age_group_check(birth_date):
 
-    birth = date.fromisoformat(str(birth_date))
-    age = relativedelta(date.today(), birth)
+    age = relativedelta(
+        date.today(), datetime.strptime(str(birth_date), "%Y-%m-%d"))
 
     if age.years < 30:
         return 0
