@@ -1,3 +1,4 @@
+from django.db import connections
 import secret_key as sk
 from datetime import datetime
 from urllib import response
@@ -131,7 +132,6 @@ def result(request):
                     m_review_data.advertise = 0
                     m_review_data.save()
 
-                m_review_data = ReviewData()
             # 광고 필터링 API 보내기.
             """"
                 1. 글 데이터 특징 추출

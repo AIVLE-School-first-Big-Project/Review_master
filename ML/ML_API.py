@@ -10,12 +10,13 @@ import secret_key as sk
 app = FastAPI() 
 
 con = sk.config()
-cursor = con.connect_DB()
 
 #-------------------------------------------------------------------------------------------------------#
 # API
 @app.post('/summary')
 async def Text_Summary(artice_code:int): 
+    cursor = con.connect_DB()
+
     print("상품 코드 : ",artice_code)
     summary = Gensim_summary(cursor,artice_code=artice_code)
 
