@@ -17,7 +17,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-# from argon2 import PasswordHasher
+import bcrypt
 
 app_name = 'accountapp'
 
@@ -37,10 +37,15 @@ def login(request):
         user_id = request.POST.get('username')
         user_pw = request.POST.get('password')
         try:
-            m = Member.objects.get(user_id=user_id, user_pw=user_pw)
+            m = Member.objects.get(user_id=user_id)
+
+            if not bcrypt.checkpw(user_pw.encode('utf-8'), m.user_pw.encode('utf-8')):
+                m = ""
+
         except:
             m = ""
             messages.warning(request, '잘못 입력하셨거나 존재하지 않는 사용자 정보입니다.')
+
         if m != "":
             request.session['user_id'] = m.user_id
             request.session['user_nickname'] = m.user_nickname
@@ -83,7 +88,11 @@ def signup(request):
             messages.info(request, '사용중인 아이디입니다.')
             return HttpResponseRedirect(reverse('accountapp:signup'))
         except Member.DoesNotExist as e:
-            m = Member(user_id=user_id, user_pw=user_pw, user_nickname=user_nickname, user_email=user_email,
+
+            hased_pw = bcrypt.hashpw(user_pw.encode('utf-8'), bcrypt.gensalt())
+            decoded_hashed_pw = hased_pw.decode('utf-8')
+
+            m = Member(user_id=user_id, user_pw=decoded_hashed_pw, user_nickname=user_nickname, user_email=user_email,
                        user_class=user_class, user_sex=user_sex, user_status=user_status, user_birth=user_birth)
             m.save()
             return HttpResponseRedirect(reverse('accountapp:login'))
