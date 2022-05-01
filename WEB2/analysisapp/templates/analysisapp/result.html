@@ -1,19 +1,13 @@
 {% extends "double_base_bone.html" %}
 {% load static %} 
-{% block styles %}
-
-    <link rel="stylesheet" href="{% static 'assets/css/result.css' %}" type="text/css"/>
-
-{% endblock %}
-
 {% block contents %}
 	<!-- 리뷰요약시작 -->
-	<section id="description" class="main">
-		<div class="spotlight">
+	<section id="description" class="main" style="color:black;">
+		<div id="resulttable" class="spotlight">
 			<table border="2">
 				<tr>
-					<td rowspan="2" class="reviewtd"><img id="reviewimg" src="{{data_info.img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
-					<td >[{{data_info.company}} {{data_info.name}}]를 검색한 결과 총 {{data_info.review_cnt}}개의 리뷰에서 {{data_info.pure_cnt}}개의 순수리뷰를 분석하였습니다.</td>
+					<td rowspan="2" class="reviewtd" style="vertical-align: middle; "><img id="reviewimg" src="{{data_info.img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
+					<td <span style="font-weight: bolder;">[ <span style="color:#188585;">{{data_info.company}} {{data_info.name}}</span> ]를 검색한 결과 총 {{data_info.review_cnt}}개의 리뷰에서 <span style="color:#E710C3;">{{data_info.pure_cnt}}개의 순수리뷰</span>를 분석하였습니다.</td>
 				</tr>
 				<tr>
 					<td>{{analysis_list.summary}}</td>
@@ -30,7 +24,7 @@
 		</header>
 		<ul class="statistics">
 			<li >
-				<img src="{{analysis_list.associate_url}}">
+				<img class="associate_img" src="{{analysis_list.associate_url}}">
 			</li>
 		</ul>
 		
@@ -44,7 +38,7 @@
 		</header>
 		<ul class="statistics">
 			<li >
-				<img src="{{analysis_list.emotion_url}}">
+				<img class="emotion_img" src="{{analysis_list.emotion_url}}">
 			</li>
 		</ul>
 		
@@ -52,52 +46,61 @@
 	<!-- 감성어분석끝 -->
 
 	<!-- 순수리뷰목록 시작 -->
-	<section id="review" class="main special">
+	<section id="review" class="main special" style="color:black;">
 		<header class="major">
 			<h2>순수 리뷰 목록</h2>
 		</header>
-		<ul class="statistics">
+		<ul>
 			<li >
-				<table class='serchtable'>
 
+			<div>
+				<table class='resulttable'>
 					{% for review in review_list %}
-
 					<tr>
-						<td rowspan="2"><img width="50em" height="50em" src="{{review.first_img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
-						<td>{{review.url}}</td>
-						<td id="soonsu_td">순수도 <img width="70em" height="13em" id="soosu_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 10%</td>
+						<td rowspan="3" style="vertical-align: bottom; ">
+							<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
+						</td>	
+						<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
+							<img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 
+							<span style="color:#0A9383;">10%</span>
+						</td>
 					</tr>
-					<tr>
+					<tr class="review_url" style="text-align: justify;">
+						<td>{{review.url}}</td>				
+					</tr>
+					<tr style="text-align: justify;">
 						<td colspan="2">{{review.description}}</td>
 					</tr>
 					{% endfor %}
 				</table>
+			</div>
 			</li>
 		
-		</ul>
+		</ul> 
 	</section>
+
 	<!-- 순수리뷰목록 끝 -->
 
 	<!-- 구매링크 시작 -->
-	<section id="purchase" class="main special">
+	<section id="purchase" class="main special" style="color:black;">
 		<header class="major">
 			<h2>구매 링크 목록</h2>
 			
 		</header>
 		<ul class="statistics2">
-			<li id='buyli'>
-				<table styles="color=black">	
+			<li >
+				<table class="buy_table" id="buy_table" styles="color=black">	
 					{% for buy in buy_list %}
 					<tr styles="color=black">
 						<td styles="color=black">
 							<a href = "{{buy.url}}">
-								<img width="30rem" height="30rem" id='logo_img' src="{{buy.image_url}}">
+								<div><img class="buy_img" src="{{buy.image_url}}"></div>
 							</a>
 						</td>
-						<td class='buytd'>
+						<td class="buy_title">
 							제목 : {{buy.title}}
 						</td>
-						<td class='buytd'>
+						<td>
 							{{buy.price}}원
 						</td>
 					</tr>	
@@ -108,3 +111,5 @@
 		</ul>
 	</section>
 {% endblock contents %}
+
+

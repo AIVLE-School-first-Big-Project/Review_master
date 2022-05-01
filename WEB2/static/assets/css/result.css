@@ -1,31 +1,207 @@
-
-/* 구매링크 목록 css*/
-#main{
-    color: black;
+/* 순수리뷰 */
+ul{
+    list-style:none;
 }
-#buyli{
-    color: black;
+resulttable{
+    text-align: right;
 }
-.buytd{
-    color: black;
-}
-tr:nth-child(2n) {
-    background-color: #E7FCF9C4;
-}
-#logo_img{
-    width: 5rem;
-    height: 5rem;
-    vertical-align: bottom; 
+.soonsudo_img{
+    width: 3rem;
+    height: 1rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
 }
 
-/*순수리뷰목록*/
-#soosu_img{
-    display: inline-block;
-    width: 2rem;
+.soonsudo_td{
+    text-align: right;
+   
+}
+
+.first_img{
+    width: 9rem;
+    height: 7rem;
+    
+}
+
+.review_url{
+    color:#31BEAD
+}
+/*구매목록*/
+.buy_img{
+    width: 3rem;
     height: 1rem;
 }
 
-#soonsu_td{
-    display: inline-block;
-    vertical-align: bottom;
+.buy_title{
+    text-align: left;
+}
+
+.buy_table tr:nth-child(2n) {
+    background-color: #D6E9E9;
+}
+
+/* 리뷰요약 */
+
+#reviewimg{
+	width:7rem;
+	height: 12rem;
+	margin:  0 0 0 0;
+
+}
+/* 연관어 분석 */
+.associate_img{
+    text-align: center;
+    width: 30rem;
+    height: 30rem; 
+}
+
+@media screen and (max-width: 1100px) {
+
+	.associate_img{
+        text-align: center;
+        width: 30rem;
+        height: 30rem; 
+	}
+
+}
+
+@media screen and (max-width: 740px) {
+
+	.associate_img{
+        text-align: center;
+        width: 25rem;
+        height: 25rem; 
+	}
+
+}
+
+@media screen and (max-width: 650px) {
+
+	.associate_img{
+        text-align: center;
+        width: 20rem;
+        height: 20rem; 
+	}
+
+}
+
+@media screen and (max-width: 580px) {
+
+	.associate_img{
+        text-align: center;
+        width: 15rem;
+        height: 15rem; 
+	}
+
+}
+
+
+
+
+
+/* 감성어 분석 */
+.emotion_img{
+    text-align: center;
+    width: 30rem;
+    height: 30rem; 
+}
+
+@media screen and (max-width: 1100px) {
+
+	.emotion_img{
+        text-align: center;
+        width: 30rem;
+        height: 30rem; 
+	}
+
+}
+
+@media screen and (max-width: 740px) {
+
+	.emotion_img{
+        text-align: center;
+        width: 25rem;
+        height: 25rem; 
+	}
+
+}
+
+@media screen and (max-width: 650px) {
+
+	.emotion_img{
+        text-align: center;
+        width: 20rem;
+        height: 20rem; 
+	}
+
+}
+
+@media screen and (max-width: 580px) {
+
+	.emotion_img{
+        text-align: center;
+        width: 15rem;
+        height: 15rem; 
+	}
+
+}
+
+/* 글자 사이즈 */
+
+@media screen and (max-width: 1100px) {
+
+	td{
+        font-size: 1rem;
+	}
+
+}
+
+
+@media screen and (max-width: 710px) {
+
+	td{
+        font-size: 0.85rem;
+	}
+    .first_img{
+        width: 7rem;
+        height: 7rem;
+        
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+	td{
+        font-size: 0.8rem;
+	}
+    .first_img{
+        width: 6rem;
+        height: 6rem;
+        
+    }
+}
+
+
+@media screen and (max-width: 630px) {
+
+	td{
+        font-size: 0.8rem;
+	}
+    .first_img{
+        width: 5rem;
+        height: 5rem;
+        
+    }
+}
+
+@media screen and (max-width: 540px) {
+
+	td{
+        font-size: 0.65rem;
+	}
+    .first_img{
+        width: 3.5rem;
+        height: 3.5rem;
+        
+    }
 }
