@@ -1,0 +1,31 @@
+
+/* 구매링크 목록 css*/
+#main{
+    color: black;
+}
+#buyli{
+    color: black;
+}
+.buytd{
+    color: black;
+}
+tr:nth-child(2n) {
+    background-color: #E7FCF9C4;
+}
+#logo_img{
+    width: 5rem;
+    height: 5rem;
+    vertical-align: bottom; 
+}
+
+/*순수리뷰목록*/
+#soosu_img{
+    display: inline-block;
+    width: 2rem;
+    height: 1rem;
+}
+
+#soonsu_td{
+    display: inline-block;
+    vertical-align: bottom;
+}
