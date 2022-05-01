@@ -12,13 +12,7 @@
 	height: 1%;
 	width: 1%;
 }
-#reviewimg{
-	width:8rem;
-	height: 15rem;
-	vertical-align: bottom; 
-	margin:  0 0 0 0;
 
-}
 #choose_li{
 	color: #083A3A;
 	text-align: left;
@@ -29,9 +23,14 @@
 #payimg{
 	margin-left: 2rem;
 	margin-top: 2rem;
+	width: 13rem;
+	height: 10rem;
 	align-items: center;
 }
+
 #choimg{
+	width: 11rem;
+	height: 11rem;
 	margin-right: 1rem;
 	margin-left: 1rem;
 	align-items: center;
@@ -40,6 +39,9 @@
 	align-items: center;
 	text-align: center;
 }
+/* #logo_img{
+	height: 1rem;
+} */
 .search_form{
 	align-content: center;
 	display: flex;
@@ -3233,9 +3235,9 @@ input, select, textarea {
 				padding: 0.35em;
 			}
 
-				/* .spotlight .image img {
+				 .spotlight .image img {
 					width: 12em;
-				} */
+				} 
 
 		}
 
