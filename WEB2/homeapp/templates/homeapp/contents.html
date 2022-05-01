@@ -4,111 +4,186 @@
 {% block contents %}
 <section id="intro" class="main">
     <div class="spotlight">
+
+        
         <div class="box1">
-            <div class="box2">LG 디오스냉장고</div>
-            <div class="box2">삼성 디스포크 냉장고</div>
+            {% if check_box.first == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.0}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.0}}" hidden="True">
+                        <button class="box2" type="submit">{{recommand_list.company.0}} {{recommand_list.name.0}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
+            {% if check_box.sixth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.5}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.5}}" hidden="True">
+                        <button class="box2" type="submit">{{recommand_list.company.5}} {{recommand_list.name.5}}</button>
+
+                    </form>
+                </div>
+        {% endif %}
         </div>
 
         <div class='box1'>
-            <div class="box3">LG 스탠바이미</div>
-            <div class="box3">삼성 더프리스타일</div>
+            {% if check_box.second == 1 %}
+            <div>
+                <form action="{% url 'analysisapp:result' %}" method = "POST">
+                    <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                    <input type="text" name="company" value = "{{recommand_list.company.1}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.1}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.1}} {{recommand_list.name.1}}</button>
+
+                </form>
+            </div>
+            {% endif %}
+            {% if check_box.seventh == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.6}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.6}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.6}} {{recommand_list.name.6}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
         </div>	
         <div class='box1'>
-            <div class="box4">위닉스 제습기</div>
-            <div class="box4">루메나 선풍기</div>
+            {% if check_box.third == 1 %}
+            <div>
+                <form action="{% url 'analysisapp:result' %}" method = "POST">
+                    <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                    <input type="text" name="company" value = "{{recommand_list.company.2}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.2}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.2}} {{recommand_list.name.2}}</button>
+
+                </form>
+            </div>
+            {% endif %}
+            {% if check_box.eighth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.7}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.7}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.7}} {{recommand_list.name.7}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
         </div>
         <div class='box1'>
-            <div class="box5">애플 에어팟프로</div>
-            <div class="box5">다이슨에어랩스타일러</div>
+            {% if check_box.fourth == 1 %}
+            <div>
+                <form action="{% url 'analysisapp:result' %}" method = "POST">
+                    <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                    <input type="text" name="company" value = "{{recommand_list.company.3}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.3}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.3}} {{recommand_list.name.3}}</button>
+
+                </form>
+            </div>
+            {% endif %}
+            {% if check_box.ninth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.8}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.8}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.8}} {{recommand_list.name.8}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
 
         </div>	
         <div class='box1'>
-            <div class="box6">다이슨 에어랩스타일러</div>
-            <div class="box6">삼성큐커</div>
+            {% if check_box.fifth == 1 %}
+            <div>
+                <form action="{% url 'analysisapp:result' %}" method = "POST">
+                    <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                    <input type="text" name="company" value = "{{recommand_list.company.4}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.4}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.4}} {{recommand_list.name.4}}</button>
+
+                </form>
+            </div>
+            {% endif %}
+            {% if check_box.tenth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.9}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.9}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.9}} {{recommand_list.name.9}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
         </div>
+
     </div>
 </section>
 
-<!-- 20대 인기검색어 시작 -->
-<section id="20year" class="main special">
+<!-- 전체 핫키워드 -->
+<section id="allhot" class="main special">
     <header class="major">
-        <h2>20대 이하 인기검색어</h2>
+        <h2>전체 핫 키워드</h2>
     </header>
     <ul class="statistics">
         <li>
             <table class='serchtable'>
-                <th colspan='2'><div class="box12">남자</div></th>
                 <tr>
                     <td>1.</td>
                     <td>LG 스타일러</td>
+                    <td>201</td>
                 </tr>
                 <tr>
                     <td>2.</td>
                     <td>LG 스타일러</td>
+                    <td>201</td>
                 </tr>
                 <tr>
                     <td>3.</td>
                     <td>LG 스타일러</td>
+                    <td>201</td>
                 </tr>
                 <tr>
                     <td>4.</td>
                     <td>LG 스타일러</td>
+                    <td>201</td>
                 </tr>
                 <tr>
                     <td>5.</td>
                     <td>LG 스타일러</td>
+                    <td>201</td>
                 </tr>
                 <tr>
                     <td>6.</td>
                     <td>LG 스타일러</td>
+                    <td>201</td>
                 </tr>
                 <tr>
                     <td>7.</td>
                     <td>LG 스타일러</td>
+                    <td>201</td>
                 </tr>
 
             </table>
         </li>
-        <li>
-            <table class='serchtable'>
-                <th colspan='2'><div class='box12'>여자</div></th>
-                <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-            </table>
-        </li>
-    </ul>
 </section>
-<!-- 20대 인기검색어 끝 -->
-<!-- 30대 인기검색어 시작 -->
-<section id="30year" class="main special">
+<!-- 전체 핫키워드 끝 -->
+<!-- 2030 인기검색어 시작 -->
+<section id="2030year" class="main special">
     <header class="major">
-        <h2>30대 인기검색어</h2>
+        <h2>2030 인기검색어</h2>
     </header>
     <ul class="statistics">
         <li >
@@ -183,12 +258,12 @@
     </ul>
     
 </section>
-<!-- 30대 인기검색어끝 -->
+<!-- 2030 인기검색어끝 -->
 
-<!-- 40대 인기검색어시작 -->
-<section id="40year" class="main special">
+<!-- 4050 인기검색어시작 -->
+<section id="4050year" class="main special">
     <header class="major">
-        <h2>40대 인기검색어</h2>
+        <h2>4050 인기검색어</h2>
         
     </header>
     <ul class="statistics">
@@ -198,30 +273,37 @@
                 <tr>
                     <td>1.</td>
                     <td>LG 스타일러</td>
+                  
                 </tr>
                 <tr>
                     <td>2.</td>
                     <td>LG 스타일러</td>
+                    
                 </tr>
                 <tr>
                     <td>3.</td>
                     <td>LG 스타일러</td>
+                    
                 </tr>
                 <tr>
                     <td>4.</td>
                     <td>LG 스타일러</td>
+                   
                 </tr>
                 <tr>
                     <td>5.</td>
                     <td>LG 스타일러</td>
+                   
                 </tr>
                 <tr>
                     <td>6.</td>
                     <td>LG 스타일러</td>
+                   
                 </tr>
                 <tr>
                     <td>7.</td>
                     <td>LG 스타일러</td>
+                 
                 </tr>
 
             </table>
@@ -263,83 +345,33 @@
         
     </ul>
 </section>
-<!-- 40대 인기검색어끝 -->
-<!-- 50대 인기검색어시작 -->
-<section id="50year" class="main special">
+<!-- 4050 인기검색어끝 -->
+
+<section id="About US" class="main special">
     <header class="major">
-        <h2>50대 이상 인기검색어</h2>
+        <h2>About US</h2>
         
     </header>
     <ul class="statistics">
         <li >
             <table class='serchtable'>
-                <th colspan='2'><div class="box12">남자</div></th>
                 <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
+                    <td><a href="https://github.com/JONWON2"><img class="proimg" src="{% static 'assets/images/jongwon.png'%}" alt="image" /></a></td>
+                    <td><a href="https://github.com/corgiccori97"><img class="proimg" src="{% static 'assets/images/sanghe.png'%}" alt="image" /></a></td>
+                    <td><a href="https://github.com/soohyun97"><img class="proimg" src="{% static 'assets/images/soohyun.png'%}" alt="image" /></a></td>
+                    <td><a href="https://github.com/dbswl2324"><img class="proimg" src="{% static 'assets/images/yunji.png'%}" alt="image" /></a></td>
+                    <td><a href="https://github.com/CastleRain"><img class="proimg" src="{% static 'assets/images/seongwo.png'%}" alt="image" /></a></td>
                 </tr>
                 <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
+                    <td><a href="https://github.com/JONWON2">JONWON</a></td>
+                    <td><a href="https://github.com/corgiccori97">corgiccori97</a></td>
+                    <td><a href="https://github.com/soohyun97">soohyun97</a></td>
+                    <td><a href="https://github.com/dbswl2324">dbswl2324</a></td>
+                    <td><a href="https://github.com/CastleRain">CastleRain</a></td>
                 </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-
             </table>
         </li>
-        <li >
-            <table class='serchtable'>
-                <th colspan='2'><div class="box12">여자</div></th>
-                <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-
-            </table>
-        </li>
-        
     </ul>
+
 </section>
 {%endblock contents %}
