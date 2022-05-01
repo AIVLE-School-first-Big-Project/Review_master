@@ -1,0 +1,20 @@
+.next{
+    min-width:2rem;
+    border-radius: 30rem;
+    padding: 0;
+}
+
+.prev{
+    min-width:2rem;
+    border-radius: 30rem;
+    padding: 0;
+    margin-right: 1rem;
+
+}
+.next_img{
+    width: 2rem;
+}
+
+.prev_img{
+    width: 2rem;
+}
