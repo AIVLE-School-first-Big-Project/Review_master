@@ -218,7 +218,7 @@ def search_word(word):
     result = []
     append_data = ["후기", "리뷰"]
     for data in append_data:
-        result.append(word + " " + data)
+        result.append(str(word) + " " + data)
 
     return result
 

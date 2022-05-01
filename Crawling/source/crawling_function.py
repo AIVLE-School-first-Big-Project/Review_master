@@ -139,7 +139,10 @@ def item_parsing(company, search_word, start, display, repeat_num):
             # 블로그 요약 추가
             blog_description.append(description)
             # 블로그 작성 시간 추가
-            blog_date.append(blog["postdate"])
+            post_date = str(blog["postdate"])
+            post_date = post_date[0:4] + "-" + \
+                post_date[4:6] + "-" + post_date[6:8]
+            blog_date.append(post_date)
 
             # 본문 크롤링을 위한 URL주소 추가
             blog_result.append(
@@ -172,6 +175,7 @@ def blog_content_parsing(url):
 
     quote_cnt = 0
     img_cnt = 0
+    coupang_check = 0
     blog_text, content, first_img, last_img = "", "", "", ""
     try:
         # 현재 여기서 안되는것은 스마트에디터 3로 작성된 경우이다.
@@ -191,6 +195,19 @@ def blog_content_parsing(url):
                     ".se-module-image-link > img")["src"]
                 last_img = img_craw[img_cnt -
                                     1].select_one(".se-module-image-link > img")["src"]
+
+        # 쿠팡 크롤링
+        coupang_craw = blog_bs.select(".se-oglink-url")
+        coupang_check = 0
+        if len(coupang_craw) != 0:
+
+            for i in range(len(coupang_craw)):
+                try:
+                    if "coupa.ng" in coupang_craw[i].text:
+                        coupang_check = 1
+                except:
+                    pass
+
         # 글 내용 크롤링
         blog_text = blog_bs.select(".se-text")
         for i in blog_text:
@@ -204,9 +221,9 @@ def blog_content_parsing(url):
             quote.append(i.text)
             quote_cnt += 1
     except:
-        return False, content, len(content), len(blog_text), quote, quote_cnt,  first_img, last_img,  img_cnt
+        return False, content, len(content), len(blog_text), quote, quote_cnt,  first_img, last_img,  img_cnt, coupang_check
 
-    return True, content, len(content), len(blog_text), quote, quote_cnt, first_img, last_img,  img_cnt
+    return True, content, len(content), len(blog_text), quote, quote_cnt, first_img, last_img,  img_cnt, coupang_check
 
 # 검색되는 데이터 확인
 
@@ -215,7 +232,7 @@ def search_word(word):
     result = []
     append_data = ["후기", "리뷰"]
     for data in append_data:
-        result.append(word + " " + data)
+        result.append(str(word) + " " + data)
 
     return result
 
@@ -309,7 +326,7 @@ def service_start(company, word):
     print(f"검색어 : {company} {word}")
     print("검색을 시작합니다.")
     df = pd.DataFrame()
-    url, title, post_date = [], [], []
+    url, title, post_date, description, writer = [], [], [], [], []
     words = search_word(word)
 
     for word in words:
@@ -318,20 +335,24 @@ def service_start(company, word):
         url += blog_result
         title += blog_title
         post_date += blog_date
+        description += blog_description
+        writer += blog_writer
 
     df["url"] = url
     df["title"] = title
     df["post_date"] = post_date
     df["검색어"] = word
     df["브랜드 명"] = company
+    df["description"] = description
+    df["writer"] = writer
 
     # # 중복 url삭제
     df = df.drop_duplicates(["url"]).reset_index(drop=True)
 
-    content_list, content_cnt_list, content_line_list, quote_list, quote_cnt_list, first_img_list, last_img_list, img_cnt_list = [
-    ], [], [], [], [], [], [], []
+    content_list, content_cnt_list, content_line_list, quote_list, quote_cnt_list, first_img_list, last_img_list, img_cnt_list, coupang_list = [
+    ], [], [], [], [], [], [], [], []
     for i in tqdm(range(len(df))):
-        _, content, content_cnt, content_line, quote, quote_cnt, first_img, last_img, img_cnt = blog_content_parsing(
+        _, content, content_cnt, content_line, quote, quote_cnt, first_img, last_img, img_cnt, coupang = blog_content_parsing(
             df.loc[i, "url"])
 
         content_list.append(content)
@@ -342,6 +363,7 @@ def service_start(company, word):
         first_img_list.append(first_img)
         last_img_list.append(last_img)
         img_cnt_list.append(img_cnt)
+        coupang_list.append(coupang)
 
     df["content"] = content_list
     df["content_cnt"] = content_cnt_list
@@ -351,8 +373,62 @@ def service_start(company, word):
     df["first_img"] = first_img_list
     df["last_img"] = last_img_list
     df["img_cnt"] = img_cnt_list
+    df["coupa.ng 키워드"] = coupang_list
     df_keyword_contains(df)
     df_check_ad(df)
-
+    df = df[df["content_cnt"] != 0].reset_index(drop=True)
     print("종료되었습니다.")
     return df
+
+
+def service_img(company, word):
+    client_id = "GvNa2sBgFDA6v7ujnaz0"
+    client_secret = "Yo0jOskXlZ"
+    encText = urllib.parse.quote(f"{company} {word}")
+    url = "https://openapi.naver.com/v1/search/image?query=" + encText  # json 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if(rescode == 200):
+        response_body = response.read()
+        print(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+
+    return json.loads(response_body.decode('utf-8'))["items"][0]["link"]
+
+
+def service_buy(company, word):
+    client_id = "GvNa2sBgFDA6v7ujnaz0"
+    client_secret = "Yo0jOskXlZ"
+    encText = urllib.parse.quote(f"{company} {word}")
+    url = "https://openapi.naver.com/v1/search/shop?query=" + encText  # json 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if(rescode == 200):
+        response_body = response.read()
+        print(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+
+    data = json.loads(response_body.decode('utf-8'))["items"]
+
+    title = []
+    link = []
+    image = []
+    lprice = []
+    mall_name = []
+
+    for d in data:
+        title.append(tag_remove(d["title"]))
+        link.append(d["link"])
+        image.append(d["image"])
+        lprice.append(int(d["lprice"]))
+        mall_name.append(d["mallName"])
+
+    return title, link, image, lprice, mall_name

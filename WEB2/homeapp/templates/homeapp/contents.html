@@ -4,8 +4,18 @@
 {% block contents %}
 <section id="intro" class="main">
     <div class="spotlight">
+
+        
         <div class="box1">
-            <div class="box2">LG 디오스냉장고</div>
+            {% if check_box.first == 1 %}
+                <form action="{% url 'analysisapp:result' %}" method = "POST">
+                    <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                    <input type="text" name="company" value = "아이뮤즈" hidden="True">
+                    <input type="text" name="article_name" value = "뮤패드L10" hidden="True">
+                    <button class="box2" type="submit">{{recommand_list.company.0}} {{recommand_list.name.0}}</button>
+
+                </form>
+            {% endif %}
             <div class="box2">삼성 디스포크 냉장고</div>
         </div>
 
@@ -26,6 +36,7 @@
             <div class="box6">다이슨 에어랩스타일러</div>
             <div class="box6">삼성큐커</div>
         </div>
+
     </div>
 </section>
 

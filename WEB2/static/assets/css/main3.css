@@ -40,9 +40,6 @@
 	align-items: center;
 	text-align: center;
 }
-#logo_img{
-	height: 1rem;
-}
 .search_form{
 	align-content: center;
 	display: flex;
