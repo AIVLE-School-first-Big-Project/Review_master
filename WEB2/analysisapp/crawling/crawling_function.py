@@ -175,6 +175,7 @@ def blog_content_parsing(url):
 
     quote_cnt = 0
     img_cnt = 0
+    coupang_check = 0
     blog_text, content, first_img, last_img = "", "", "", ""
     try:
         # 현재 여기서 안되는것은 스마트에디터 3로 작성된 경우이다.
@@ -194,6 +195,20 @@ def blog_content_parsing(url):
                     ".se-module-image-link > img")["src"]
                 last_img = img_craw[img_cnt -
                                     1].select_one(".se-module-image-link > img")["src"]
+
+        # 쿠팡 크롤링
+        coupang_craw = blog_bs.select(".se-oglink-url")
+        coupang_check = 0
+        if len(coupang_craw) != 0:
+
+            for i in range(len(coupang_craw)):
+                try:
+                    if "coupa" in coupang_craw[i].text:
+                        coupang_check = 1
+
+                except:
+                    pass
+
         # 글 내용 크롤링
         blog_text = blog_bs.select(".se-text")
         for i in blog_text:
@@ -207,9 +222,9 @@ def blog_content_parsing(url):
             quote.append(i.text)
             quote_cnt += 1
     except:
-        return False, content, len(content), len(blog_text), quote, quote_cnt,  first_img, last_img,  img_cnt
+        return False, content, len(content), len(blog_text), quote, quote_cnt,  first_img, last_img,  img_cnt, coupang_check
 
-    return True, content, len(content), len(blog_text), quote, quote_cnt, first_img, last_img,  img_cnt
+    return True, content, len(content), len(blog_text), quote, quote_cnt, first_img, last_img,  img_cnt, coupang_check
 
 # 검색되는 데이터 확인
 
@@ -228,13 +243,14 @@ def search_word(word):
 def df_keyword_contains(df):
 
     keyword_contains = ["허락", "내돈내산", "리얼후기", "협찬",
-                        "체험단", "coupa.ng", "<", ">", "♡", "♥", "구매후기"]
+                        "체험단", "<", ">", "♡", "♥", "구매후기"]
 
     keyword_contains_many = [["한달", "한 달", "1달", "1개월"], [
         "두달", "두 달", "2달", "2개월"], ["세달", "세 달", "3달", "3개월"]]
     keyword_cnt = ["솔직", "비교", "ㅋ", "ㅋㅋ", "ㅋㅋㅋ", "ㅋㅋㅋㅋ", "...",
                    "....", "ㅜ", "ㅜㅜ", "ㅜㅜㅜ", "ㅜㅜㅜㅜ", "ㅠ", "ㅠㅠ", "ㅠㅠㅠ", "ㅠㅠㅠㅠ", "장점", "단점"]
     keyword_badword = ["개좋다", "개좋음", "개멋짐", "개빠름", "개큼", "존나", "걍", "씹창"]
+    keyword_coupang = ["coupa.ng", "쿠팡 파트너스"]
 
     for key in keyword_cnt:
         df[key + " 빈도 수"] = 0
@@ -263,6 +279,10 @@ def df_keyword_contains(df):
             for bad in keyword_badword:
                 if bad in cont:
                     df.loc[i, "비속어 빈도 수"] += 1
+
+        for key in keyword_coupang:
+            if key in content:
+                df.loc[i, "coupa.ng 키워드"] = 1
     return df
 
 
@@ -335,10 +355,10 @@ def service_start(company, word):
     # # 중복 url삭제
     df = df.drop_duplicates(["url"]).reset_index(drop=True)
 
-    content_list, content_cnt_list, content_line_list, quote_list, quote_cnt_list, first_img_list, last_img_list, img_cnt_list = [
-    ], [], [], [], [], [], [], []
+    content_list, content_cnt_list, content_line_list, quote_list, quote_cnt_list, first_img_list, last_img_list, img_cnt_list, coupang_list = [
+    ], [], [], [], [], [], [], [], []
     for i in tqdm(range(len(df))):
-        _, content, content_cnt, content_line, quote, quote_cnt, first_img, last_img, img_cnt = blog_content_parsing(
+        _, content, content_cnt, content_line, quote, quote_cnt, first_img, last_img, img_cnt, coupang = blog_content_parsing(
             df.loc[i, "url"])
 
         content_list.append(content)
@@ -349,6 +369,7 @@ def service_start(company, word):
         first_img_list.append(first_img)
         last_img_list.append(last_img)
         img_cnt_list.append(img_cnt)
+        coupang_list.append(coupang)
 
     df["content"] = content_list
     df["content_cnt"] = content_cnt_list
@@ -358,6 +379,7 @@ def service_start(company, word):
     df["first_img"] = first_img_list
     df["last_img"] = last_img_list
     df["img_cnt"] = img_cnt_list
+    df["coupa.ng 키워드"] = coupang_list
     df_keyword_contains(df)
     df_check_ad(df)
     df = df[df["content_cnt"] != 0].reset_index(drop=True)
