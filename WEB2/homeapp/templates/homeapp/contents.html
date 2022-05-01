@@ -63,35 +63,124 @@
     <div class="spotlight" style=" align-text: center;">
         <div class="box1">
             {% if check_box.first == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.0}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.0}}" hidden="True">
+                        <button class="box2" type="submit">{{recommand_list.company.0}} {{recommand_list.name.0}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
+            {% if check_box.sixth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.5}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.5}}" hidden="True">
+                        <button class="box2" type="submit">{{recommand_list.company.5}} {{recommand_list.name.5}}</button>
+
+                    </form>
+                </div>
+        {% endif %}
+        </div>
+
+        <div class='box1'>
+            {% if check_box.second == 1 %}
+            <div>
                 <form action="{% url 'analysisapp:result' %}" method = "POST">
                     <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
-                    <input type="text" name="company" value = "아이뮤즈" hidden="True">
-                    <input type="text" name="article_name" value = "뮤패드L10" hidden="True">
-                    <button class="box2" type="submit">{{recommand_list.company.0}} {{recommand_list.name.0}}</button>
+                    <input type="text" name="company" value = "{{recommand_list.company.1}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.1}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.1}} {{recommand_list.name.1}}</button>
 
                 </form>
+            </div>
+            {% endif %}
+            {% if check_box.seventh == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.6}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.6}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.6}} {{recommand_list.name.6}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
+        </div>	
+        <div class='box1'>
+            {% if check_box.third == 1 %}
+            <div>
+                <form action="{% url 'analysisapp:result' %}" method = "POST">
+                    <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                    <input type="text" name="company" value = "{{recommand_list.company.2}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.2}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.2}} {{recommand_list.name.2}}</button>
+
+                </form>
+            </div>
+            {% endif %}
+            {% if check_box.eighth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.7}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.7}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.7}} {{recommand_list.name.7}}</button>
+
+                    </form>
+                </div>
             {% endif %}
         </div>
-        <div class="box1">
-            {% if check_box.first == 1 %}
+        <div class='box1'>
+            {% if check_box.fourth == 1 %}
+            <div>
                 <form action="{% url 'analysisapp:result' %}" method = "POST">
                     <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
-                    <input type="text" name="company" value = "아이뮤즈" hidden="True">
-                    <input type="text" name="article_name" value = "뮤패드L10" hidden="True">
-                    <button class="box2" type="submit">{{recommand_list.company.0}} {{recommand_list.name.0}}</button>
+                    <input type="text" name="company" value = "{{recommand_list.company.3}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.3}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.3}} {{recommand_list.name.3}}</button>
 
                 </form>
+            </div>
             {% endif %}
-        </div>
-        <div class="box1">
-            {% if check_box.first == 1 %}
+            {% if check_box.ninth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.8}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.8}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.8}} {{recommand_list.name.8}}</button>
+
+                    </form>
+                </div>
+            {% endif %}
+
+        </div>	
+        <div class='box1'>
+            {% if check_box.fifth == 1 %}
+            <div>
                 <form action="{% url 'analysisapp:result' %}" method = "POST">
                     <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
-                    <input type="text" name="company" value = "아이뮤즈" hidden="True">
-                    <input type="text" name="article_name" value = "뮤패드L10" hidden="True">
-                    <button class="box2" type="submit">{{recommand_list.company.0}} {{recommand_list.name.0}}</button>
+                    <input type="text" name="company" value = "{{recommand_list.company.4}}" hidden="True">
+                    <input type="text" name="article_name" value = "{{recommand_list.name.4}}" hidden="True">
+                    <button class="box3" type="submit">{{recommand_list.company.4}} {{recommand_list.name.4}}</button>
 
                 </form>
+            </div>
+            {% endif %}
+            {% if check_box.tenth == 1 %}
+                <div>
+                    <form action="{% url 'analysisapp:result' %}" method = "POST">
+                        <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
+                        <input type="text" name="company" value = "{{recommand_list.company.9}}" hidden="True">
+                        <input type="text" name="article_name" value = "{{recommand_list.name.9}}" hidden="True">
+                        <button class="box3" type="submit">{{recommand_list.company.9}} {{recommand_list.name.9}}</button>
+
+                    </form>
+                </div>
             {% endif %}
         </div>
         <div class="box1">

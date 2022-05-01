@@ -203,8 +203,9 @@ def blog_content_parsing(url):
 
             for i in range(len(coupang_craw)):
                 try:
-                    if "coupa.ng" in coupang_craw[i].text:
+                    if "coupa" in coupang_craw[i].text:
                         coupang_check = 1
+
                 except:
                     pass
 
@@ -242,13 +243,14 @@ def search_word(word):
 def df_keyword_contains(df):
 
     keyword_contains = ["허락", "내돈내산", "리얼후기", "협찬",
-                        "체험단", "coupa.ng", "<", ">", "♡", "♥", "구매후기"]
+                        "체험단", "<", ">", "♡", "♥", "구매후기"]
 
     keyword_contains_many = [["한달", "한 달", "1달", "1개월"], [
         "두달", "두 달", "2달", "2개월"], ["세달", "세 달", "3달", "3개월"]]
     keyword_cnt = ["솔직", "비교", "ㅋ", "ㅋㅋ", "ㅋㅋㅋ", "ㅋㅋㅋㅋ", "...",
                    "....", "ㅜ", "ㅜㅜ", "ㅜㅜㅜ", "ㅜㅜㅜㅜ", "ㅠ", "ㅠㅠ", "ㅠㅠㅠ", "ㅠㅠㅠㅠ", "장점", "단점"]
     keyword_badword = ["개좋다", "개좋음", "개멋짐", "개빠름", "개큼", "존나", "걍", "씹창"]
+    keyword_coupang = ["coupa.ng", "쿠팡 파트너스"]
 
     for key in keyword_cnt:
         df[key + " 빈도 수"] = 0
@@ -277,6 +279,10 @@ def df_keyword_contains(df):
             for bad in keyword_badword:
                 if bad in cont:
                     df.loc[i, "비속어 빈도 수"] += 1
+
+        for key in keyword_coupang:
+            if key in content:
+                df.loc[i, "coupa.ng 키워드"] = 1
     return df
 
 

@@ -38,7 +38,7 @@ def home(request):
     check_box = {
         "first": 0,
         "second": 0,
-        "thrid": 0,
+        "third": 0,
         "fourth": 0,
         "fifth": 0,
         "sixth": 0,
@@ -50,7 +50,8 @@ def home(request):
     count_col = ["first", "second", "third", "fourth", "fifth",
                  "sixth", "seventh", "eighth", "ninth", "tenth"]
 
-    for i in range(len(recommand_list)):
+    for i in range(len(recommand_list["company"])):
+
         check_box[count_col[i]] = 1
 
     # # 연령대별 인기 검색어 가져오기
@@ -58,6 +59,7 @@ def home(request):
     # age_group = age_group_check(member.user_birth)
     # sex = member.user_sex
     print(recommand_list)
+    print(check_box)
 
     return render(request, "homeapp/contents.html",
                   {

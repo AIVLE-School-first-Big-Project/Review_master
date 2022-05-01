@@ -1,8 +1,11 @@
 {% load static %}
-<section class="hbody">
+
+<div class="hbody">
     <article class="head_nav">
         <div class="head_title">
-            <a href="{% url 'homeapp:home' %}">REVIEWMASTER</a>
+            <a href="{% url 'homeapp:home' %}">
+                REVIEWMASTER
+            </a>
         </div>
         {% if request.session.user_id %}
         <ul id="head_menu">
@@ -26,5 +29,17 @@
             <li class='head_li' id="nickname"><a href="{% url 'accountapp:signup' %}">sign up</a></li>
         </ul>
         {% endif %}
+        <div class="hamburger">
+            <img src={% static '/assets/images/hamburger.svg' %} />
+        </div>
     </article>
-</section>
+</div>
+
+{% block scripts %}
+    <script src="{% static 'assets/js/main2.js' %}"></script>
+    {% comment %} const hamburger = document.querySelector('.head_nav.hamburger img');
+    hamburger.addEventListener("click", () => {
+        console.log('hamburger');
+    }) {% endcomment %}
+{% endblock %}
+
