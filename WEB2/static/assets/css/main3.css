@@ -2008,6 +2008,11 @@ form {
     margin: 0 0 2em 0;
 }
 
+form.today {
+    margin: 0 0 0 0;
+	display: inline-block;
+}
+
 label {
     display: block;
     font-size: 0.9em;
@@ -2978,7 +2983,6 @@ table.alt tbody tr td {
     -webkit-align-items: center;
     -ms-align-items: center;
     align-items: center;
-    margin: 0 0 2em 0;
 }
 
 .spotlight .content {
@@ -3061,9 +3065,14 @@ table.alt tbody tr td {
 
 .spotlight .box1 {
     width: auto;
+	display: inline-block;
 }
 
-
+div#spot.spotlight{
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
 /* Header */
 
 #header {
@@ -3751,6 +3760,7 @@ body.is-preload #header.alt .logo {
     text-align: center;
     display: flex;
     font-size: 1rem;
+	display: inline-block;
 }
 
 .box2 {
@@ -3758,21 +3768,26 @@ body.is-preload #header.alt .logo {
     max-width: 300px;
     flex-flow: flex-start;
     width: auto;
-    padding-top: 0.43rem;
-    padding-bottom: 2.5rem;
+    padding-top: 0.4rem;
+    padding-bottom: 2.3rem;
     text-align: center;
     background-color: #FCEFCC;
     border-radius: 20px;
     padding-left: 1rem;
     padding-right: 1rem;
-    color: black;
+    color: #2F3434;
     margin: 0.5rem;
 }
 
 .box3 {
-    padding-top: 0.43rem;
+    flex: auto;
+    max-width: 300px;
+    flex-flow: flex-start;
+    width: auto;
+    padding-top: 0.4rem;
+    padding-bottom: 2.3rem;
     text-align: center;
-    background-color: #FFE3C9;
+    background-color: #FCEFCC;
     border-radius: 20px;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -3814,7 +3829,6 @@ body.is-preload #header.alt .logo {
 }
 
 .box12 {
-    margin-left: 1.4rem;
     padding-top: 0.43rem;
     text-align: center;
     width: 6rem;
@@ -3865,4 +3879,21 @@ body.is-preload #header.alt .logo {
 .footimg {
     width: 13rem;
     height: 3rem;
+}
+
+.contents_th{
+
+	text-align: center;
+}
+
+th.contents_th{
+    width: 100%;
+    text-align: center;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+div.box12{
+    display: inline-block;
 }
