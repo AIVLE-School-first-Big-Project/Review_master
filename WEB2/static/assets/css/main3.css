@@ -3244,7 +3244,9 @@ input, select, textarea {
 	.spotlight .image {
 		border-color: rgba(255, 255, 255, 0.35);
 	}
-
+	.spotlight .box1{
+		width: auto;
+	}
 /* Header */
 
 	#header {
@@ -3960,14 +3962,19 @@ input, select, textarea {
 
 		}
 .box1{
-	padding-top: 0.43rem;
+	padding: 0rem;
 	text-align: center;	
-	display: flex-wrap;
+	display: flex;
 	font-size: 1rem;
 }
 
 .box2{
+	flex: auto;
+	max-width: 300px;
+	flex-flow: flex-start;
+	width: auto;
 	padding-top: 0.43rem;
+	padding-bottom: 2.5rem;
 	text-align: center;	
 	background-color:#FCEFCC; 
 	border-radius: 20px;
