@@ -1,30 +1,50 @@
-.board h1 span {
-    font-size: 0.5em;
+* {
+    box-sizing: border-box;
+}
+
+.board h2 span {
+    font-size: 0.6em;
     color: #AE2223;
 }
 
-button {
+
+/* button {
     border: none;
     background: transparent;
     font-weight: bold;
-}
+} */
 
 tr,
 td,
 th {
-    padding: 0.5em 1em;
+    /* padding: 0.5em 1em; */
     text-align: left;
 }
 
-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+.board {
+    padding: 2rem;
 }
 
-/* tr:nth-child(2n) {
+.board-title {
+    display: inline;
+}
+
+.board#write-button {
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+}
+
+.qna_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+tr:nth-child(2n) {
     background-color: #E7FCF9C4;
-} */
+}
 
 .text-center:hover {
     cursor: pointer;
