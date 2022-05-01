@@ -55,7 +55,7 @@ def Gensim_summary(cursor,artice_code):
         # 여러 블로그 글에 대해서 모두 한개의 문서로 변환
         review = "\n".join(all_text)
         pp = preprocessing(review)  # 기본적인 텍스트 전처리(띄어쓰기 교정)
-        summary = summarize(pp, word_count = 100)
+        summary = summarize(pp, word_count = 150)
         summary = re.sub('\n', ' ',summary)
         return summary
     else:
