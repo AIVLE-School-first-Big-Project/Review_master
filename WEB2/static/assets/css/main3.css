@@ -12,13 +12,7 @@
 	height: 1%;
 	width: 1%;
 }
-#reviewimg{
-	width:8rem;
-	height: 15rem;
-	vertical-align: bottom; 
-	margin:  0 0 0 0;
 
-}
 #choose_li{
 	color: #083A3A;
 	text-align: left;
@@ -40,9 +34,9 @@
 	align-items: center;
 	text-align: center;
 }
-#logo_img{
+/* #logo_img{
 	height: 1rem;
-}
+} */
 .search_form{
 	align-content: center;
 	display: flex;
@@ -52,13 +46,11 @@
 	width: 20%;
 	border-radius: 30px 0px 0px 30px;
 	color: #000000;
-	font-family: 'NanumSquareBold';
 }
 .input2{
 	padding-left: 1.3rem;
 	width: 50%;
 	color: #000000;
-	font-family: 'NanumSquareBold';
 
 }
 .input3{
@@ -68,7 +60,6 @@
 	background-color: white;
 	padding-right: 0rem;
 	padding-top: 0.3rem;
-	font-family: 'NanumSquareBold';
 }
 .input3:hover{
 	height: 100%;
@@ -92,7 +83,6 @@
 	color:black;
 	background-color: white;
 	text-align: center;
-	display: inline-block;
 	
 }
 
@@ -3240,9 +3230,9 @@ input, select, textarea {
 				padding: 0.35em;
 			}
 
-				/* .spotlight .image img {
+				 .spotlight .image img {
 					width: 12em;
-				} */
+				} 
 
 		}
 
