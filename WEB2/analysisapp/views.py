@@ -156,6 +156,7 @@ def result(request):
                     m_review_data.content_date = post_date[i]
                     m_review_data.first_img_url = first_img_url[i]
                     m_review_data.last_img_url = last_img_url[i]
+                    m_review_data.title = title[i]
                     m_review_data.url = url[i]
                     m_review_data.description = description[i]
                     # 광고 필터링 API 보내기.
@@ -252,7 +253,8 @@ def result(request):
                     "last_img_url": [],
                     "url": [],
                     "description": [],
-                    "advertise": []
+                    "advertise": [],
+                    "title": []
                 }
 
                 review_dict["writer"] = review.writer
@@ -263,6 +265,7 @@ def result(request):
                 review_dict["url"] = review.url
                 review_dict["description"] = review.description
                 review_dict["advertise"] = review.advertise
+                review_dict["title"] = review.title
                 review_cnt -= review.advertise
                 review_list.append(review_dict)
 
