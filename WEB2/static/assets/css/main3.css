@@ -23,9 +23,14 @@
 #payimg{
 	margin-left: 2rem;
 	margin-top: 2rem;
+	width: 13rem;
+	height: 10rem;
 	align-items: center;
 }
+
 #choimg{
+	width: 11rem;
+	height: 11rem;
 	margin-right: 1rem;
 	margin-left: 1rem;
 	align-items: center;
