@@ -83,14 +83,8 @@ class ArticleInfo(models.Model):
     twenty_male_cnt = IntegerField()
     twenty_female_cnt = IntegerField()
 
-    thirty_male_cnt = IntegerField()
-    thirty_female_cnt = IntegerField()
-
     fourty_male_cnt = IntegerField()
     fourty_female_cnt = IntegerField()
-
-    fifty_male_cnt = IntegerField()
-    fifty_female_cnt = IntegerField()
 
     class Meta:
         db_table = 'ArticleInfo'

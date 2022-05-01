@@ -31,14 +31,10 @@ def age_group_check(birth_date):
     age = relativedelta(
         date.today(), datetime.strptime(str(birth_date), "%Y-%m-%d"))
 
-    if age.years < 30:
+    if age.years < 40:
         return 0
-    elif age.years < 40:
-        return 1
-    elif age.years < 50:
-        return 2
     else:
-        return 3
+        return 1
 
 
 @csrf_exempt
@@ -108,12 +104,8 @@ def result(request):
                     search_company, search_name)
                 m_article_info.twenty_male_cnt = 0
                 m_article_info.twenty_female_cnt = 0
-                m_article_info.thirty_male_cnt = 0
-                m_article_info.thirty_female_cnt = 0
                 m_article_info.fourty_male_cnt = 0
                 m_article_info.fourty_female_cnt = 0
-                m_article_info.fifty_male_cnt = 0
-                m_article_info.fifty_female_cnt = 0
                 m_article_info.save()
 
             m_member = Member.objects.get(user_id=login_id)
@@ -125,21 +117,13 @@ def result(request):
                 if age_group == 0:
                     m_article_info.twenty_female_cnt += 1
                 elif age_group == 1:
-                    m_article_info.thirty_female_cnt += 1
-                elif age_group == 2:
                     m_article_info.fourty_female_cnt += 1
-                elif age_group == 3:
-                    m_article_info.fifty_female_cnt += 1
 
             if sex == 1 or sex == 2:
                 if age_group == 0:
                     m_article_info.twenty_male_cnt += 1
                 elif age_group == 1:
-                    m_article_info.thirty_male_cnt += 1
-                elif age_group == 2:
                     m_article_info.fourty_male_cnt += 1
-                elif age_group == 3:
-                    m_article_info.fifty_male_cnt += 1
 
             m_article_info.search_cnt += 1
             m_article_info.save()

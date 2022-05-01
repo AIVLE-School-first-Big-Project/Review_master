@@ -141,41 +141,25 @@
         <li>
             <table class='serchtable'>
                 <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
-                    <td>201</td>
+                    <td>순위</td>
+                    <td>제품명</td>
+                    <td>조회수</td>
                 </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
-                    <td>201</td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                    <td>201</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                    <td>201</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                    <td>201</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                    <td>201</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                    <td>201</td>
-                </tr>
-
+                {% for keyword in hot_keyword %}
+                    <tr>
+                        <td>{{keyword.0}}</td>
+                        <!-- <td>
+                            <form action="{% url 'analysisapp:result' %}" method = "POST">
+                                <input type="text" name="company" value = "{{keyword.1}}" hidden="True">
+                                <input type="text" name="article_name" value = "{{keyword.2}}" hidden="True">
+                                <button type="submit">{{keyword.1}} {{keyword2}}</button>
+        
+                            </form>
+                        </td> -->
+                        <td>{{keyword.1}} {{keyword.2}}</td>
+                        <td>{{keyword.3}}</td>
+                    </tr>
+                {% endfor %}
             </table>
         </li>
 </section>
@@ -190,33 +174,18 @@
             <table class='serchtable'>
                 <th colspan='2'><div class="box12">남자</div></th>
                 <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
+                    <td>순위</td>
+                    <td>제품명</td>
+                    <td>조회수</td>
                 </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                </tr>
+                {% for key in twenty_male %}
+                    <tr>
+                        <td>{{key.0}}</td>
+                        <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
+                    </tr>
+                {% endfor %}
+
 
             </table>
         </li>
@@ -224,33 +193,17 @@
             <table class='serchtable'>
                 <th colspan='2'><div class="box12">여자</div></th>
                 <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
+                    <td>순위</td>
+                    <td>제품명</td>
+                    <td>조회수</td>
                 </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                </tr>
+                {% for key in twenty_female %}
+                    <tr>
+                        <td>{{key.0}}</td>
+                        <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
+                    </tr>
+                {% endfor %}
 
             </table>
         </li>
@@ -271,40 +224,17 @@
             <table class='serchtable'>
                 <th colspan='2'><div class="box12">남자</div></th>
                 <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
-                  
+                    <td>순위</td>
+                    <td>제품명</td>
+                    <td>조회수</td>
                 </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
-                    
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                    
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                   
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                   
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                   
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                 
-                </tr>
+                {% for key in fourty_male %}
+                    <tr>
+                        <td>{{key.0}}</td>
+                        <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
+                    </tr>
+                {% endfor %}
 
             </table>
         </li>
@@ -312,33 +242,17 @@
             <table class='serchtable'>
                 <th colspan='2'><div class="box12">여자</div></th>
                 <tr>
-                    <td>1.</td>
-                    <td>LG 스타일러</td>
+                    <td>순위</td>
+                    <td>제품명</td>
+                    <td>조회수</td>
                 </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>LG 스타일러</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>LG 스타일러</td>
-                </tr>
+                {% for key in fourty_female %}
+                    <tr>
+                        <td>{{key.0}}</td>
+                        <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
+                    </tr>
+                {% endfor %}
 
             </table>
         </li>

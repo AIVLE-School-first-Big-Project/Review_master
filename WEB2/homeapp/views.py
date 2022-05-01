@@ -54,15 +54,74 @@ def home(request):
 
         check_box[count_col[i]] = 1
 
-    # # 연령대별 인기 검색어 가져오기
+    # 전체 인기 검색어 진행
+    m_hot_keyword = ArticleInfo.objects.order_by('-search_cnt')[:10]
+    hot_keyword = []
+
+    for idx, info in enumerate(m_hot_keyword):
+
+        m_article_code = ArticleCode.objects.get(article_id=info.article_id)
+
+        hot_keyword.append([idx+1, m_article_code.search_company,
+                           m_article_code.search_name, info.search_cnt])
+
+    # # 연령대별 인기 검색어 가져오기 - 남성 2030
+    m_twenty_male = ArticleInfo.objects.order_by('-twenty_male_cnt')[:10]
+    twenty_male = []
+
+    for idx, info in enumerate(m_twenty_male):
+
+        m_article_code = ArticleCode.objects.get(article_id=info.article_id)
+
+        twenty_male.append([idx+1, m_article_code.search_company,
+                           m_article_code.search_name, info.twenty_male_cnt])
+
+    # # 연령대별 인기 검색어 가져오기 - 여성 2030
+    m_twenty_female = ArticleInfo.objects.order_by('-twenty_female_cnt')[:10]
+    twenty_female = []
+
+    for idx, info in enumerate(m_twenty_female):
+
+        m_article_code = ArticleCode.objects.get(article_id=info.article_id)
+
+        twenty_female.append([idx+1, m_article_code.search_company,
+                              m_article_code.search_name, info.twenty_female_cnt])
+
+    # # 연령대별 인기 검색어 가져오기 - 남성 4050
+    m_fourty_male = ArticleInfo.objects.order_by('-fourty_male_cnt')[:10]
+    fourty_male = []
+
+    for idx, info in enumerate(m_fourty_male):
+
+        m_article_code = ArticleCode.objects.get(article_id=info.article_id)
+
+        fourty_male.append([idx+1, m_article_code.search_company,
+                           m_article_code.search_name, info.fourty_male_cnt])
+
+    # # 연령대별 인기 검색어 가져오기 - 여성 4050
+    m_fourty_female = ArticleInfo.objects.order_by('-fourty_female_cnt')[:10]
+    fourty_female = []
+
+    for idx, info in enumerate(m_fourty_female):
+
+        m_article_code = ArticleCode.objects.get(article_id=info.article_id)
+
+        fourty_female.append([idx+1, m_article_code.search_company,
+                              m_article_code.search_name, info.fourty_female_cnt])
+
     # member = Member.objects.get(user_id=login_id)
     # age_group = age_group_check(member.user_birth)
     # sex = member.user_sex
-    print(recommand_list)
-    print(check_box)
 
     return render(request, "homeapp/contents.html",
                   {
                       "recommand_list": recommand_list,
-                      "check_box": check_box
+                      "check_box": check_box,
+                      "hot_keyword": hot_keyword,
+                      "twenty_male": twenty_male,
+                      "twenty_female": twenty_female,
+                      "fourty_male": fourty_male,
+                      "fourty_female": fourty_female
+
+
                   })
