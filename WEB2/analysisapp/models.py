@@ -138,6 +138,7 @@ class ReviewData(models.Model):
     advertise = IntegerField()
 
     description = TextField()
+    title = TextField()
 
     class Meta:
         db_table = 'ReviewData'

@@ -2,13 +2,30 @@ from datetime import datetime
 from django.shortcuts import render
 from analysisapp.models import ArticleCode, ArticleInfo, BuyList, ReviewData, ReviewAnalysis, MemberLog, Member
 import random
+from django.views.decorators.csrf import csrf_exempt
 app_name = 'homeapp'
 
 
+@csrf_exempt
 def home(request):
     # login_id = request.session.get('user_id', "nonuser")
     # 추천 검색어 가져오기
     # 랜덤으로 10개 가져온다.
+
+    if request.method == "POST":
+
+        login_id = request.session.get('user_id', "nonuser")
+
+        pay = request.POST.get("pay", 0)
+
+        if pay == "pay_0" and login_id != "nonuser":
+            m_member = Member.objects.get(user_id=login_id)
+            m_member.user_class = 0
+            m_member.save()
+        elif pay == "pay_990" and login_id != "nonuser":
+            m_member = Member.objects.get(user_id=login_id)
+            m_member.user_class = 1
+            m_member.save()
 
     m_article_code = ArticleCode.objects.all()
     recommand_list = {}
@@ -35,6 +52,7 @@ def home(request):
             name.append(m_article_code[i].search_name)
         recommand_list["company"] = company
         recommand_list["name"] = name
+
     check_box = {
         "first": 0,
         "second": 0,
