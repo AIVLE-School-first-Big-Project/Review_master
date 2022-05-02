@@ -3,6 +3,9 @@
 {% load static %} 
 
 {% block contents %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/result.css' %}?after" type="text/css"/> 
+{% endblock %}
 	<!-- 리뷰요약시작 -->
 	<section id="description" class="main" style="color:black;">
 		<div id="resulttable" class="spotlight">
@@ -24,11 +27,46 @@
 		<header class="major">
 			<h2>연관어 분석</h2>
 		</header>
-		<ul class="statistics">
+		<div class="container">
+
+			<div class="my-slider">
+				<div>
+					<div>
+						<img class="associate_img" src="{{analysis_list.associate_url}}"/>
+					</div>
+					<div>
+						1번사진
+					</div>
+				</div>
+				<div>
+					<div>
+						<img class="associate_img" src="{{analysis_list.associate_url}}"/>
+					</div>
+					<div>
+						2번사진
+					</div>
+				</div>
+				<div>
+					<div>
+						<img class="associate_img" src="{{analysis_list.associate_url}}"/>
+					</div>
+					<div>
+							3번사진
+					</div>
+				</div>   
+			</div>	  
+		</div>
+		<div class="my-controls" aria-label="Carousel Navigation" tabindex="0">
+			<button  class="prev" data-controls="prev" tabindex="-1" aria-controls="controls">
+				<img src= "{% static 'assets/images/left.svg'%}" alt="왼쪽" class="prev_img"></button>
+			<button class="next" data-controls="next" tabindex="-1" aria-controls="controls" >
+				<img src= "{% static 'assets/images/right.svg'%}" alt="오른쪽" class="next_img"></button>
+		</div>  
+		{% comment %} <ul class="statistics">
 			<li >
 				<img class="associate_img" src="{{analysis_list.associate_url}}">
 			</li>
-		</ul>
+		</ul> {% endcomment %}
 		
 	</section>
 	<!-- 연관어분석끝 -->
@@ -112,6 +150,13 @@
 			</li>
 		</ul>
 	</section>
+{% block js %}
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+	<script type="module" src="{% static 'assets/js/con_slider.js'%}"></script>
+	<script src="{% static 'assets/js/con_slider2.js'%}"></script>
+{% endblock %}
 {% endblock contents %}
 
 
