@@ -38,7 +38,7 @@ def Gensim_summary(cursor,artice_code):
 
     sql =   f'''
                 select writer, content_date, content from ReviewData 
-                where article_id ={artice_code} 
+                where article_id ={artice_code} and advertise = 0
                 order by content_date DESC limit 10;
         
             '''

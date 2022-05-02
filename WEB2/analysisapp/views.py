@@ -173,39 +173,34 @@ def result(request):
                     # 1 -> pred
 
                     data = {
-                        "last_img": last_img_url[i],
-                        "content": content[i],
-                        "content_cnt": content_cnt[i],
-                        "content_line": content_line[i],
-                        "내돈내산 키워드": ndns[i],
-                        "img_cnt": img_cnt[i],
-                        "quote_cnt": quote_cnt[i],
-                        "ㅋㅋㅋㅋ 빈도 수": zzzz[i],
-                        "... 빈도 수": dot[i],
-                        "coupan.ng 키워드": coupang[i],
-                        "단점 빈도 수": dj[i],
-                        "솔직 빈도 수": sj[i],
-                        "비교 빈도 수": bg[i],
-                        "ㅋ 빈도 수": z[i],
-                        "ㅠㅠ 빈도 수": bb[i],
-                        "ㅋㅋㅋ 빈도 수": zzz[i]
+                        "last_img": [str(last_img_url[i])],
+                        "content": [str(content[i])],
+                        "content_cnt": [int(content_cnt[i])],
+                        "content_line": [int(content_line[i])],
+                        "내돈내산 키워드": [int(ndns[i])],
+                        "img_cnt": [int(img_cnt[i])],
+                        "quote_cnt": [int(quote_cnt[i])],
+                        "ㅋㅋㅋㅋ 빈도 수": [int(zzzz[i])],
+                        "... 빈도 수": [int(dot[i])],
+                        "coupan.ng 키워드": [int(coupang[i])],
+                        "단점 빈도 수": [int(dj[i])],
+                        "솔직 빈도 수": [int(sj[i])],
+                        "비교 빈도 수": [int(bg[i])],
+                        "ㅋ 빈도 수": [int(z[i])],
+                        "ㅠㅠ 빈도 수": [int(bb[i])],
+                        "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
                     }
-
-                    # response = requests.post(
-                    #     Backend_filtering, data=(data))
-                    # if response.status_code == 200:
-                    #     filter_data = response.json()["pred"]
-                    # filter_percent = response.json()["pro"]
-
-                    # m_review_data.advertise = filter_data
-                    # m_review_data.advertise_percent = filter_percent
-                    m_review_data.advertise = 0
-                    # m_review_data.advertise_percent = 0
-
+                    
+                    print("필터링 시작합니다.")
+                    response = requests.post(Backend_filtering, json=data)
+                    if response.status_code == 200:
+                        filter_data = response.json()["pred"]
+                        filter_percent = response.json()["pro"]
+                    m_review_data.advertise = int(filter_data)
+                    # m_review_data.advertise_percent = float(filter_percent)  # 확률 처리
                     m_review_data.save()
 
             # buylist 추가하기
-
             m_buy_list = BuyList.objects.filter(article_id=article_id)
 
             if len(m_buy_list) == 0:  # 아무것도 없는 경우
