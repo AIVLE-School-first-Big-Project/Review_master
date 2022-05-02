@@ -15,10 +15,10 @@
             <img src="{% static 'assets/css/images/form_bar.png' %}" class="bar" />
             {% if request.session.user_id %}
                 이미 로그인 해 있어요!
-                <button type="button">
-                    <a href="{% url 'accountapp:logout' %}">로그아웃</a>
+                <button>
+                    <a href="{% url 'accountapp:logout' %}" style="font-weight:bold;">로그아웃</a>
                 </button>
-            {% else %}
+                    {% else %}
                 <form method="POST" action="{% url 'accountapp:signup' %}">
                     {% csrf_token %}
                     {% include 'accountapp/form_errors.html' %}

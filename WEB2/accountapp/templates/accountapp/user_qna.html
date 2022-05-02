@@ -2,49 +2,61 @@
 {% load static %} 
 
 {% block content %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css"/> 
+{% endblock %}
 <div style='height:10rem;'>
     <br>
 </div>
 <div id="main">
-    <h1> 마이페이지 > <strong style="color: #DEA742">나의 문의</strong> </h1>
-    <section class="qna_list">
-        <table class="table" style="table-layout:auto">
-            <thead class="thead-light" display="none">
-                <tr class="text-center">
-                    <th scope="col">#</th>
-                    <th scope="col">답변유무</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">작성자</th>
-                </tr>
-            </thead>
-            <div class="container">
-                <tbody>
-                    {% for list in postlist reversed %}
+    <div class="board">
+        <h1> 마이페이지 > <strong style="color: #DEA742">나의 문의</strong>         
+            <button type="button" id="write-button">
+                <a href="{% url 'board:write' %}">
+                    문의글쓰기 >
+                </a>
+            </button>
+        </h1>
+        <section class="qna_list">
+            <table class="table" style="table-layout:auto">
+                <thead class="thead-light" style="display:none">
                     <tr class="text-center">
-                        <th scope="row" width=10%>
-                            <span>{{ list.id }}</span>
-                        </th>
-                        <td width=20%>
-                            {% if list.answer_title %}
-                                <img src="{% static 'assets/images/게시판_답변완료.png' %}" />
-                            {% else %}
-                                <img  src="{% static 'assets/images/게시판_미답변.png' %}" />
-                            {% endif %}
-                        </td>
-                        <td width=60%>
-                            <a href="{% url 'board:detail' id=list.id %}">
-                            <span>{{ list.title }}</span>
-                            </a>
-                        </td>
-                        <td width=10%>
-                            <span>{{ list.user_id }}</span>
-                        </td>
+                        <th scope="col">#</th>
+                        <th scope="col">답변유무</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
                     </tr>
-                    {% endfor %}
-                </tbody>
-        </table>
-        </div>
-    </section>
+                </thead>
+                <div class="container">
+                    <tbody>
+                        {% for list in postlist reversed %}
+                        <tr class="text-center">
+                            <th scope="row" width=10%>
+                                <span>{{ list.id }}</span>
+                            </th>
+                            <td width=20%>
+                                {% if list.answer_title %}
+                                    <img src="{% static 'assets/images/게시판_답변완료.png' %}" />
+                                {% else %}
+                                    <img  src="{% static 'assets/images/게시판_미답변.png' %}" />
+                                {% endif %}
+                            </td>
+                            <td width=60%>
+                                <a href="{% url 'board:detail' id=list.id %}">
+                                <span>{{ list.title }}</span>
+                                </a>
+                            </td>
+                            <td width=10%>
+                                <span>{{ list.user_id }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+            </div>
+        </section>
+    </div>
+
 
 </div>
 {% endblock %}

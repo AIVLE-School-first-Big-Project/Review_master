@@ -2,39 +2,45 @@
 {% load static %} 
 
 {% block content %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css"/> 
+{% endblock %}
 <div style='height:10rem;'>
     <br>
 </div>
 <div id="main">
-    <h1> 마이페이지 > <strong style="color: #E78125">나의 검색기록</strong> </h1>
-    <section class="qna_list">
-        <table class="table" style="table-layout:auto">
-            <thead class="thead-light" display="none">
-                <tr class="text-center">
-                    <th scope="col">시간</th>
-                    <th scope="col">회사명</th>
-                    <th scope="col">제품명</th>
-                </tr>
-            </thead>
-            <div class="container">
-                <tbody>
-                    {% for log in logs reversed %}
+    <div class="mypage">
+        <h1> 마이페이지 > <strong style="color: #E78125">나의 검색기록</strong> </h1>
+        <section class="qna_list">
+            <table class="table" style="table-layout:auto">
+                <thead class="thead-light" style="display:none">
                     <tr class="text-center">
-                        <th scope="row" width=10%>
-                            <span>{{ log.search_date }}</span>
-                        </th>
-                        <td>
-                            <span>{{ log.search_company }}</span>
-                        </td>
-                        <td width=10%>
-                            <span>{{ log.search_name }}</span>
-                        </td>
+                        <th scope="col">시간</th>
+                        <th scope="col">회사명</th>
+                        <th scope="col">제품명</th>
                     </tr>
-                    {% endfor %}
-                </tbody>
-        </table>
-        </div>
-    </section>
+                </thead>
+                <div class="container">
+                    <tbody>
+                        {% for log in logs reversed %}
+                        <tr class="text-center">
+                            <th scope="row" width=20%>
+                                <span>{{ log.search_date }}</span>
+                            </th>
+                            <td width=20%>
+                                <span>{{ log.search_company }}</span>
+                            </td>
+                            <td width=60%>
+                                <span>{{ log.search_name }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+            </div>
+        </section>
+    </div>
+
 
 </div>
 {% endblock %}
