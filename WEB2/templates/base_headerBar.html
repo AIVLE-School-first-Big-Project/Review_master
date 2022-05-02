@@ -8,26 +8,42 @@
             </a>
         </div>
         {% if request.session.user_id %}
-        <ul id="head_menu">
-            <li class='head_li'><a href="{% url 'homeapp:home' %}">Home</a></li>
-            <li class='head_li'><a href="{% url 'accountapp:pay' %}">요금제</a></li>
-            <li class='head_li'><a href="{% url 'board:board_list' %}">질문게시판</a></li>
-            <li class='head_li'><a href="{% url 'accountapp:mypage' %}">마이페이지</a></li>
-        </ul>
-        <ul id="head_menu">
-            <li class='head_li'><a href="{% url 'accountapp:logout' %}">logout</a></li>
-            <li class='head_li'><a href="{% url 'accountapp:mypage' %}" style="font-weight:bold">{{ request.session.user_nickname }}</a></li>
-        </ul>
+        <div class="head_content">
+            <ul id="head_menu">
+                <li class='head_li'><a href="{% url 'homeapp:home' %}">Home</a></li>
+                <div class='head_li bar'>|</div>
+                <li class='head_li'><a href="{% url 'accountapp:pay' %}">요금제</a></li>
+                <li class='head_li bar'>|</li>
+                <li class='head_li'><a href="{% url 'board:board_list' %}">질문게시판</a></li>
+                <li class='head_li bar'>|</li>
+                <li class='head_li'><a href="{% url 'accountapp:mypage' %}">마이페이지</a></li>
+            </ul>
+        </div>
+        <div class="head_user">
+            <ul id="head_menu">
+                <li class='head_li'><a href="{% url 'accountapp:logout' %}">logout</a></li>
+                <div class='head_li bar'>|</div>
+                <li class='head_li'><a href="{% url 'accountapp:mypage' %}" style="font-weight:bold">{{ request.session.user_nickname }}</a></li>
+            </ul>
+        </div>
+
         {% else %}
-        <ul id="head_menu">
-            <li class='head_li'><a href="{% url 'homeapp:home' %}">Home</a></li>
-            <li class='head_li'><a href="{% url 'accountapp:pay' %}">요금제</a></li>
-            <li class='head_li'><a href="{% url 'board:board_list' %}">질문게시판</a></li>
-        </ul>
-        <ul id="head_menu">
-            <li class='head_li'><a href="{% url 'accountapp:login' %}">login</a></li>
-            <li class='head_li' id="nickname"><a href="{% url 'accountapp:signup' %}">sign up</a></li>
-        </ul>
+        <div class="head_content">
+            <ul id="head_menu">
+                <li class='head_li'><a href="{% url 'homeapp:home' %}">Home</a></li>
+                <div class='head_li bar'>|</div>
+                <li class='head_li'><a href="{% url 'accountapp:pay' %}">요금제</a></li>
+                <div class='head_li bar'>|</div>
+                <li class='head_li'><a href="{% url 'board:board_list' %}">질문게시판</a></li>
+            </ul>
+        </div>
+        <div class="head_user">
+            <ul id="head_menu">
+                <li class='head_li'><a href="{% url 'accountapp:login' %}">login</a></li>
+                <div class='head_li bar'>|</div>
+                <li class='head_li' id="nickname"><a href="{% url 'accountapp:signup' %}">sign up</a></li>
+            </ul>
+        </div>
         {% endif %}
         <div class="hamburger">
             <img src={% static '/assets/images/hamburger.svg' %} />
@@ -37,9 +53,5 @@
 
 {% block scripts %}
     <script src="{% static 'assets/js/main2.js' %}"></script>
-    {% comment %} const hamburger = document.querySelector('.head_nav.hamburger img');
-    hamburger.addEventListener("click", () => {
-        console.log('hamburger');
-    }) {% endcomment %}
 {% endblock %}
 
