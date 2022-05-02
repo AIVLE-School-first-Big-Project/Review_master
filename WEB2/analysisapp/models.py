@@ -120,25 +120,18 @@ class BuyList(models.Model):
 class ReviewData(models.Model):
 
     review_id = IntegerField(primary_key=True, auto_created=True)
-    # 검색물품의 코드
     article_id = IntegerField()
-    # 글작성자
-    writer = CharField(max_length=30)
-    # 글내용
-    content = TextField()
-    # 글 쓴 날짜
-    content_date = DateField()
-    # 처음이미지
-    first_img_url = TextField()
-    # 마지막 이미지
-    last_img_url = TextField()
 
-    url = TextField()
-    # 광고 분류
     advertise = IntegerField()
 
-    description = TextField()
+    url = TextField()
     title = TextField()
+    writer = CharField(max_length=50)
+    content = TextField()
+    description = TextField()
+    first_img_url = TextField()
+    last_img = TextField()
+    content_date = DateField()
 
     class Meta:
         db_table = 'ReviewData'

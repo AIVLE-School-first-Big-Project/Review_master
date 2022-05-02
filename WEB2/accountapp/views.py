@@ -121,7 +121,11 @@ def user_update(request):
         if user_pw != user_pw_check:
             messages.warning(request, '비밀번호가 일치하지 않습니다. 다시 시도하세요!')
         else:
-            m.user_pw = user_pw
+
+            hased_pw = bcrypt.hashpw(user_pw.encode('utf-8'), bcrypt.gensalt())
+            decoded_hashed_pw = hased_pw.decode('utf-8')
+
+            m.user_pw = decoded_hashed_pw
             m.user_email = user_email
             m.user_nickname = user_nickname
             m.user_sex = user_sex
