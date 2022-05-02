@@ -7,12 +7,10 @@
     color: #AE2223;
 }
 
-
-/* button {
-    border: none;
-    background: transparent;
-    font-weight: bold;
-} */
+.mypage h1,
+.board h1 {
+    margin-bottom: 2rem;
+}
 
 tr,
 td,
@@ -21,8 +19,9 @@ th {
     text-align: left;
 }
 
-.board {
-    padding: 2rem;
+.board,
+.mypage {
+    padding: 3rem;
 }
 
 .board-title {
@@ -48,4 +47,73 @@ tr:nth-child(2n) {
 
 .text-center:hover {
     cursor: pointer;
+}
+
+.user-loginout {
+    margin: 5%;
+    width: 30em;
+    align-self: center;
+    font-weight: bold;
+}
+
+.mypage h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#main>div>img {
+    display: block;
+    margin: 0 auto 4rem auto;
+    align-self: center;
+}
+
+.user-modify {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+}
+
+.user-modify img {
+    max-width: 85%;
+    height: auto;
+}
+
+.user-info input {
+    padding-left: 1rem;
+}
+
+#userform_mypage>form>div:nth-child(2)>input,
+#userform_mypage>form>div:nth-child(3)>input,
+#userform_mypage>form>div:nth-child(4)>input,
+#userform_mypage>form>div:nth-child(7)>input,
+#userform_mypage>form>div>input,
+#userform_mypage>form>div>select {
+    width: 150%;
+    background-color: #1CEED11C;
+    height: 3em;
+    padding: 0 1rem;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+}
+
+#userform_mypage>form>div>label {
+    display: contents;
+    color: #31BEAD;
+}
+
+#check-loginout {
+    margin: 0 60%;
+}
+
+#write-button {
+    float: right;
+    box-shadow: none;
+}
+
+#write-button a {
+    font-weight: bold;
 }
