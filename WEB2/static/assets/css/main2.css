@@ -9,7 +9,6 @@ legend {
 }
 
 .s004 {
-    min-height: 100vh;
     display: -ms-flexbox;
     display: flex;
     flex-direction: column;
@@ -17,47 +16,10 @@ legend {
     justify-content: center;
     -ms-flex-align: center;
     align-items: flex-start;
-    font-family: 'Poppins', sans-serif;
-    /* background: url("../images/대문배경.png"); */
-    /* background-size: cover; */
-    /* background-position: center center; */
-    padding-left: 128px;
 }
 
 .s004 form {
     max-width: 50%;
-}
-
-.suggestion {
-    padding: 0 15px;
-}
-
-.suggestion span {
-    font-size: 20px;
-    font-family: 'Helvetica', sans-serif;
-    display: inline-block;
-    padding: 0 15px;
-    line-height: 32px;
-    color: #fff;
-    border-radius: 16px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.suggestion {
-    position: absolute;
-    top: 20;
-    right: 20;
-    /* color: #fff; */
-}
-
-.suggestion button {
-    font-size: 20px;
-}
-
-.suggestion button a {
-    text-decoration-line: none;
-    color: inherit;
 }
 
 button {
@@ -109,19 +71,29 @@ fieldset {
 .user-loginout {
     margin: 10%;
     width: 20em;
+    align-self: center;
+    font-weight: bold;
 }
 
-.user-loginout h1 {
+.user-loginout img {
+    display: block;
+    margin: 0 auto 3rem auto;
+    align-self: center;
+}
+
+.user-loginout h2 {
+    margin-bottom: 2rem;
+    font-weight: bold;
     text-align: center;
 }
 
-.user-loginout label {
+#main>div>div>form>div>label {
     color: #03B59D;
     font-weight: bold;
-    padding-bottom: 1em;
 }
 
-.user-loginout input {
+.user-loginout input[type="text"],
+.user-loginout input[type="password"] {
     background-color: #fff;
     border: none;
     outline: 0;
@@ -132,14 +104,36 @@ fieldset {
     margin-bottom: 1em;
 }
 
-#check-loginout {
+#main>div>div>form>button {
     width: 200%;
     height: 3em;
-    background-color: #1CEED1;
+    background-color: #6DCECE;
     color: #fff;
     font-weight: bold;
 }
 
-.login-addons button {
+#user-addons {
     text-align: center;
+    margin: 0 2.5rem;
+}
+
+#user-addons2 {
+    text-align: center;
+}
+
+#main>div>div>form>div>label {
+    margin: 0;
+}
+
+.user-info input {
+    padding-left: 1rem;
+}
+
+.user-info input[type="date"],
+.user-info select {
+    width: 200%;
+    background-color: rgba(222, 222, 222, 0.25);
+    height: 3em;
+    color: lightgray;
+    padding-left: 1rem;
 }
