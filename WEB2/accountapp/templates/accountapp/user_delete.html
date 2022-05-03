@@ -3,19 +3,23 @@
 
 {% block content %}
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'assets/css/user.css' %}?after" type="text/css"/> 
+    {% comment %} <link rel="stylesheet" href="{% static 'assets/css/user.css' %}?after" type="text/css"/>  {% endcomment %}
+    <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css"/> 
 {% endblock %}
 <div style='height:4rem;'>
     <br>
 </div>
 <div id="main">
-    <div class="delete_my" style="text-align: left;">
-        <h1> 마이페이지 > <strong style="color:#D64925;">회원탈퇴</strong></h1>
+    <div class="mypage">
+        <div class="delete_my">
+            <h1> 마이페이지 > <strong style="color:#D64925;">회원탈퇴</strong></h1>
+        </div>
+        <form method="POST" class="form_delete">
+            {% csrf_token %}
+            <p>정말로 탈퇴하시겠습니까?</p>
+            <input type="submit" value="탈퇴"/>
+        </form>
     </div>
-    <form method="POST" class="form_delete">
-        {% csrf_token %}
-        <p>정말로 탈퇴하시겠습니까?</p>
-        <input type="submit" value="탈퇴"/>
-    </form>
+
 </div>
 {%endblock content%}
