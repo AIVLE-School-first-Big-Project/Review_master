@@ -295,7 +295,7 @@ def result(request):
                 review_dict["advertise_percent"] = float(
                     review.advertise_percent) * 100
                 review_cnt -= review.advertise
-                if review.advertise_percent <= 0.5:
+                if review.advertise_percent <= 0.9:
                     continue
                 review_list.append(review_dict)
 
