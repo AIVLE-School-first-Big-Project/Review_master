@@ -13,11 +13,11 @@
             <h2>
                 문의게시판 
                 <span> | 영업일 기준 1일 이내 답변됩니다!
-                    <button type="button" id="write-button">
-                        <a href="{% url 'board:write' %}">
-                            문의글쓰기 >
-                        </a>
-                    </button>
+                    {% if request.session.user_id %}
+                            <a href="{% url 'board:write' %}" id="write-button">
+                                문의글쓰기 >
+                            </a>
+                    {% endif %}
                 </span>
             </h2>
         <br/>
