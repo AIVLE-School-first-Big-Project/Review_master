@@ -144,8 +144,8 @@
 
 @media screen and (min-width: 780px) {
     body>div.hbody>article>div.head_title>a>img {
-        height: 5rem;
-        top: 0;
+        height: 3rem;
+        margin-top: 1rem;
     }
     .head_nav {
         display: flex;
@@ -174,7 +174,7 @@
         padding: 1rem;
     }
     .logo {
-        width: 6rem;
+        width: 10rem;
     }
     .head_content,
     .head_user {

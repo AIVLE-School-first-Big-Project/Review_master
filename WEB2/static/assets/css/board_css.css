@@ -7,6 +7,14 @@
     color: #AE2223;
 }
 
+.board h2 a {
+    font-weight: bold;
+    font-size: 0.6em;
+    float: right;
+    padding-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
 .mypage h1,
 .board h1 {
     margin-bottom: 2rem;
@@ -28,7 +36,9 @@ th {
     display: inline;
 }
 
-.board#write-button {
+#write-button {
+    font-size: 0.9rem;
+    color: black;
     box-shadow: none;
     background-color: transparent;
     border: none;
