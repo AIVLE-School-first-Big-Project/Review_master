@@ -23,7 +23,7 @@
 
 #payimg {
     margin-left: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: 13rem;
     height: 10rem;
     align-items: center;
@@ -101,7 +101,7 @@
     background-color: white;
     border: 1px solid #707070;
     border-radius: 0.5rem;
-    height: 20rem;
+    height: 21rem;
 }
 
 .buydiv2 {
