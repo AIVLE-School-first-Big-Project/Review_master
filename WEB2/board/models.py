@@ -6,9 +6,10 @@ from datetime import datetime
 # Create your models here.
 label_name = 'board'
 
+
 class QABoard(models.Model):
     id = IntegerField(primary_key=True, auto_created=True)
-    user_id = CharField(max_length = 150)
+    user_id = CharField(max_length=150)
     # answer_user = models.ForeignKey('Member', on_delete=models.CASCADE)
     title = TextField()
     content = TextField()

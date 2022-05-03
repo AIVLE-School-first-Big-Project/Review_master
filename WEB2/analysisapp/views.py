@@ -138,8 +138,12 @@ def result(request):
                     search_company, search_name)
 
                 # Review Data에 데이터를 추가시켜주자. writer, content, description, content_date, first_img_url, last_img_url, url을 넣어준다.
-                url, title, post_date, description, writer, content, first_img_url, last_img_url = df["url"], df[
-                    "title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]
+                url, title, post_date, description, writer, content, first_img_url, last_img_url \
+                    = df["url"], df["title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]
+
+                content_cnt, content_line, quote_cnt, img_cnt, coupang, ndns, dj, sj, bg, dot, bb, z, zzz, zzzz \
+                    = df["content_cnt"], df["content_line"], df["quote_cnt"], df["img_cnt"], df["coupa.ng 키워드"], df["내돈내산 키워드"], df["단점 빈도 수"], \
+                    df["솔직 빈도 수"],  df["비교 빈도 수"], df["... 빈도 수"], df["ㅠㅠ 빈도 수"], df["ㅋ 빈도 수"], df["ㅋㅋㅋ 빈도 수"], df["ㅋㅋㅋㅋ 빈도 수"]
                 # blog_cnt = len(df)
                 review_cnt = df.shape[0]
 
@@ -147,7 +151,6 @@ def result(request):
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
                 m_article_info.article_review_cnt = review_cnt
                 m_article_info.save()
-                print("데이터 저장")
                 for i in range(len(df)):
                     m_review_data = ReviewData()
                     m_review_data.article_id = article_id
@@ -155,29 +158,49 @@ def result(request):
                     m_review_data.content = content[i]
                     m_review_data.content_date = post_date[i]
                     m_review_data.first_img_url = first_img_url[i]
-                    m_review_data.last_img_url = last_img_url[i]
+                    m_review_data.last_img = last_img_url[i]
                     m_review_data.title = title[i]
                     m_review_data.url = url[i]
                     m_review_data.description = description[i]
+
                     # 광고 필터링 API 보내기.
                     """"
                         1. 글 데이터 특징 추출
                         2. 이미지 데이터 특징 추출
                     """
                     # 보낼 데이터 양식
-                    item1 = [1]
-                    response = requests.post(
-                        Backend_filtering, data=json.dumps(item1))
+                    # 51 -> pro
+                    # 1 -> pred
+
+                    data = {
+                        "last_img": [str(last_img_url[i])],
+                        "content": [str(content[i])],
+                        "content_cnt": [int(content_cnt[i])],
+                        "content_line": [int(content_line[i])],
+                        "내돈내산 키워드": [int(ndns[i])],
+                        "img_cnt": [int(img_cnt[i])],
+                        "quote_cnt": [int(quote_cnt[i])],
+                        "ㅋㅋㅋㅋ 빈도 수": [int(zzzz[i])],
+                        "... 빈도 수": [int(dot[i])],
+                        "coupan.ng 키워드": [int(coupang[i])],
+                        "단점 빈도 수": [int(dj[i])],
+                        "솔직 빈도 수": [int(sj[i])],
+                        "비교 빈도 수": [int(bg[i])],
+                        "ㅋ 빈도 수": [int(z[i])],
+                        "ㅠㅠ 빈도 수": [int(bb[i])],
+                        "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
+                    }
+                    
+                    print("필터링 시작합니다.")
+                    response = requests.post(Backend_filtering, json=data)
                     if response.status_code == 200:
                         filter_data = response.json()["pred"]
-
-                    # m_review_data.advertise = filter_data
-                    m_review_data.advertise = 0
-
+                        filter_percent = response.json()["pro"]
+                    m_review_data.advertise = int(filter_data)
+                    # m_review_data.advertise_percent = float(filter_percent)  # 확률 처리
                     m_review_data.save()
 
             # buylist 추가하기
-
             m_buy_list = BuyList.objects.filter(article_id=article_id)
 
             if len(m_buy_list) == 0:  # 아무것도 없는 경우
@@ -250,7 +273,7 @@ def result(request):
                     "content": [],
                     "content_date": [],
                     "first_img_url": [],
-                    "last_img_url": [],
+                    "last_img": [],
                     "url": [],
                     "description": [],
                     "advertise": [],
@@ -261,7 +284,7 @@ def result(request):
                 review_dict["content"] = review.content
                 review_dict["content_date"] = review.content_date
                 review_dict["first_img_url"] = review.first_img_url
-                review_dict["last_img_url"] = review.last_img_url
+                review_dict["last_img"] = review.last_img
                 review_dict["url"] = review.url
                 review_dict["description"] = review.description
                 review_dict["advertise"] = review.advertise
@@ -280,7 +303,8 @@ def result(request):
             analysis_list["associate_url"] = m_review_analysis.associate_url
 
             buy_list = []
-            m_buy_list = BuyList.objects.filter(article_id=article_id)
+            m_buy_list = BuyList.objects.filter(
+                article_id=article_id).order_by("price")
 
             for b in m_buy_list:
                 m_buy_dict = {

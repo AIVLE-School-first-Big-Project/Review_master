@@ -36,13 +36,6 @@ def board_write(request):
             m_QABoard.content = request.POST.get('content')
             m_QABoard.save()
 
-            # max_id_post = QABoard.objects.aggregate(id=Max('id'))
-            # post_num = max_id_post['id']
-            # # post_num = len(QABoard.objects.all())
-            # title = request.POST.get('title')
-            # content = request.POST.get('content')
-            # new_list = QABoard(id=post_num+1, user_id=request.session['user_id'], title=title, content=content)
-            # new_list.save()
             return redirect('/app/board/')
 
     return render(request, "board/board_write.html")

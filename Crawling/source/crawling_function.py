@@ -253,72 +253,72 @@ def df_keyword_contains(df):
     keyword_coupang = ["coupa.ng", "쿠팡 파트너스"]
 
     for key in keyword_cnt:
-        df[key + " 빈도 수"] = 0
-    df["비속어 빈도 수"] = 0
+        df[key + "_빈도수"] = 0
+    df["비속어_빈도수"] = 0
 
     for i in range(len(df)):
         content = df.loc[i, "content"]
         for key in keyword_contains:
             if key in content:
-                df.loc[i, key+" 키워드"] = "1"
+                df.loc[i, key+"_키워드"] = "1"
 
             else:
-                df.loc[i, key+" 키워드"] = "0"
+                df.loc[i, key+"_키워드"] = "0"
         for key in keyword_contains_many:
             for k in key:
-                df.loc[i, key[0] + " 키워드"] = "0"
+                df.loc[i, key[0] + "_키워드"] = "0"
                 if k in content:
-                    df.loc[i, key[0]+" 키워드"] = "1"
+                    df.loc[i, key[0]+"_키워드"] = "1"
                     break
 
         for cont in content.split():
             for key in keyword_cnt:
                 if key in cont:
-                    df.loc[i, key + " 빈도 수"] += 1
+                    df.loc[i, key + "_빈도수"] += 1
 
             for bad in keyword_badword:
                 if bad in cont:
-                    df.loc[i, "비속어 빈도 수"] += 1
+                    df.loc[i, "비속어_빈도수"] += 1
 
         for key in keyword_coupang:
             if key in content:
-                df.loc[i, "coupa.ng 키워드"] = 1
+                df.loc[i, "coupan.ng_키워드"] = 1
     return df
 
 
-def df_check_ad(df):
-    df["광고 분류1"] = 9
-    df["광고 분류2"] = 9
+# def df_check_ad(df):
+#     df["광고 분류1"] = 9
+#     df["광고 분류2"] = 9
 
-    pure_review = ["허락 키워드", "내돈내산 키워드", "리얼후기 키워드", "솔직 빈도 수", "비교 빈도 수"]
-    reward_review = ["coupa.ng 키워드"]
-    advertise_review = ["협찬 키워드", "체험단 키워드"]
-    items = [pure_review, reward_review, advertise_review]
+#     pure_review = ["허락_키워드", "내돈내산_키워드", "리얼후기_키워드", "솔직_빈도수", "비교_빈도수"]
+#     reward_review = ["coupa.ng_키워드"]
+#     advertise_review = ["협찬_키워드", "체험단_키워드"]
+#     items = [pure_review, reward_review, advertise_review]
 
-    for i in range(len(df)):
+#     for i in range(len(df)):
 
-        for idx,  item in enumerate(items):
+#         for idx,  item in enumerate(items):
 
-            if idx == 0:
-                for it in item:
-                    if str(df.loc[i, it]) != "0":
-                        df.loc[i, "광고 분류1"] = 0
-                        df.loc[i, "광고 분류2"] = 0
-                        break
+#             if idx == 0:
+#                 for it in item:
+#                     if str(df.loc[i, it]) != "0":
+#                         df.loc[i, "광고 분류1"] = 0
+#                         df.loc[i, "광고 분류2"] = 0
+#                         break
 
-            elif idx == 1:
-                for it in item:
-                    if df.loc[i, it] != "0":
-                        df.loc[i, "광고 분류1"] = 1
-                        df.loc[i, "광고 분류2"] = 1
-                        break
+#             elif idx == 1:
+#                 for it in item:
+#                     if df.loc[i, it] != "0":
+#                         df.loc[i, "광고 분류1"] = 1
+#                         df.loc[i, "광고 분류2"] = 1
+#                         break
 
-            elif idx == 2:
-                for it in item:
-                    if df.loc[i, it] != "0":
-                        df.loc[i, "광고 분류1"] = 1
-                        df.loc[i, "광고 분류2"] = 2
-                        break
+#             elif idx == 2:
+#                 for it in item:
+#                     if df.loc[i, it] != "0":
+#                         df.loc[i, "광고 분류1"] = 1
+#                         df.loc[i, "광고 분류2"] = 2
+#                         break
 
 
 # def column_sort(df):
@@ -346,11 +346,11 @@ def service_start(company, word):
 
     df["url"] = url
     df["title"] = title
-    df["post_date"] = post_date
     df["검색어"] = word
     df["브랜드 명"] = company
     df["description"] = description
     df["writer"] = writer
+    df["post_date"] = post_date
 
     # # 중복 url삭제
     df = df.drop_duplicates(["url"]).reset_index(drop=True)
@@ -379,9 +379,9 @@ def service_start(company, word):
     df["first_img"] = first_img_list
     df["last_img"] = last_img_list
     df["img_cnt"] = img_cnt_list
-    df["coupa.ng 키워드"] = coupang_list
+    df["coupan.ng_키워드"] = coupang_list
     df_keyword_contains(df)
-    df_check_ad(df)
+    # df_check_ad(df)
     df = df[df["content_cnt"] != 0].reset_index(drop=True)
     print("종료되었습니다.")
     return df

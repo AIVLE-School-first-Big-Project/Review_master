@@ -11,7 +11,11 @@
 		<div id="resulttable" class="spotlight">
 			<table border="2" class="con">
 				<tr>
-					<td rowspan="2" class="reviewtd" style="vertical-align: middle; "><img id="reviewimg" src="{{data_info.img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
+					{% if data_info.img_url == "" %}
+						<td rowspan="2" class="reviewtd" style="vertical-align: middle; "><img id="reviewimg" src="{% static 'assets/images/no_article_img.png' %}" alt="image" id="review_img" width = "200" height="200"/></td>
+					{% else %}
+						<td rowspan="2" class="reviewtd" style="vertical-align: middle; "><img id="reviewimg" src="{{data_info.img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
+					{% endif %}
 					<td <span style="font-weight: bolder;">[ <span style="color:#188585;">{{data_info.company}} {{data_info.name}}</span> ]를 검색한 결과 총 {{data_info.review_cnt}}개의 리뷰에서 <span style="color:#E710C3;">{{data_info.pure_cnt}}개의 순수리뷰</span>를 분석하였습니다.</td>
 				</tr>
 				<tr class=review_tr>
@@ -102,13 +106,14 @@
 						<td rowspan="3" style="vertical-align: bottom; ">
 							<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
 						</td>	
+						
+					</tr>
+					<tr class="review_url" style="text-align: justify;">
+						<td>{{review.title}}</td>	
 						<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
 							<img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 
 							<span style="color:#0A9383;">10%</span>
-						</td>
-					</tr>
-					<tr class="review_url" style="text-align: justify;">
-						<td>{{review.url}}</td>				
+						</td>			
 					</tr>
 					<tr style="text-align: justify;">
 						<td colspan="2">{{review.description}}</td>
