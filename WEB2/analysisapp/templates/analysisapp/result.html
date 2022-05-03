@@ -9,13 +9,15 @@
 	<!-- 리뷰요약시작 -->
 	<section id="description" class="main" style="color:black;">
 		<div id="resulttable" class="spotlight">
-			<table border="2">
+			<table border="2" class="con">
 				<tr>
 					<td rowspan="2" class="reviewtd" style="vertical-align: middle; "><img id="reviewimg" src="{{data_info.img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
 					<td <span style="font-weight: bolder;">[ <span style="color:#188585;">{{data_info.company}} {{data_info.name}}</span> ]를 검색한 결과 총 {{data_info.review_cnt}}개의 리뷰에서 <span style="color:#E710C3;">{{data_info.pure_cnt}}개의 순수리뷰</span>를 분석하였습니다.</td>
 				</tr>
-				<tr>
-					<td>{{analysis_list.summary}}</td>
+				<tr class=review_tr>
+					<td class="content">{{analysis_list.summary}}</td>
+				</tr>
+				<tr class="review_bth">
 				</tr>
 			</table>
 		</div>
@@ -150,12 +152,14 @@
 			</li>
 		</ul>
 	</section>
+	
 {% block js %}
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
 	<script type="text/javascript" src="/js/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
 	<script type="module" src="{% static 'assets/js/con_slider.js'%}"></script>
 	<script src="{% static 'assets/js/con_slider2.js'%}"></script>
+	<script src="{% static 'assets/js/result.js'%}"></script>
 {% endblock %}
 {% endblock contents %}
 
