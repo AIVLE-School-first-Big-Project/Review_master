@@ -5,84 +5,79 @@
 {% block styles %}
     <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css"/> 
 {% endblock %}
-<div style='height:10rem;'>
+<div style='height:4rem;'>
     <br>
 </div>
-    <div id="main">
-        <div class="board">
-            <h2>
-                문의게시판
-                <span> | 영업일 기준 1일 이내 답변됩니다!</span>
-            
-                {% comment %} 자기 글일때만 수정, 삭제 가능  {% endcomment %}
-                {% ifequal request.session.user_id post.user_id %}
-
-                    <a href="{% url 'board:delete' del_id=post.id %}">
-                        삭제 >
-                    </a>
-                    <a href="{% url 'board:update' up_id=post.id %}">
-                        수정 >
-                    </a>
-
-
+<div id="main">
+    <div class="board">
+        <h2>
+            문의게시판
+            <span> | 영업일 기준 1일 이내 답변됩니다!</span>
+        
+            {% comment %} 자기 글이거나 관리자일 때 수정, 삭제 가능  {% endcomment %}
+            {% ifequal request.session.user_id post.user_id %}
+                <a href="{% url 'board:delete' del_id=post.id %}">
+                    삭제 >
+                </a>
+                <a href="{% url 'board:update' up_id=post.id %}">
+                    수정 >
+                </a>
+            {% endifequal %}
+            {% ifequal request.session.user_class 99 %}
+                <a href="{% url 'board:delete' del_id=post.id %}">
+                    삭제 >
+                </a>
+                <a href="{% url 'board:update' up_id=post.id %}">
+                    수정 >
+                </a>
             {% endifequal %}
         </h2>
-            <section class="qna_list">
-                <table class="table" style="table-layout:auto">
-                        <tr class="text-center">
-                            <th scope="col" width=20% style="font-weight:bold">제목</th>
-                            <td width=80%>{{ post.title }}</td>
-                        </tr>
-                        <tr class="text-center">
-                            <th scope="col">내용</th>
-                            <td>{{ post.content }}</td>
-                        </tr>
-                        <hr>
-                        {% if post.answer_title %}
-                        <tr class="text-center">
-                            <th scope="col">답변제목</th>
-                            <td>{{ post.answer_title }}</td>
-                        </tr>
-                        <tr class="text-center">
-                            <th scope="col">답변내용</th>
-                            <td>{{ post.answer_content }}</td>
-                        </tr>
-                        {% endif %}
-                </table>
-            </section>
+        <section class="qna_list">
+            <table class="table" style="table-layout:auto">
+                    <tr class="text-center">
+                        <th scope="col" width=20% style="font-weight:bold">제목</th>
+                        <td width=80%>{{ post.title }}</td>
+                    </tr>
+                    <tr class="text-center">
+                        <th scope="col">내용</th>
+                        <td>{{ post.content }}</td>
+                    </tr>
+                    <hr>
+                    {% if post.answer_title %}
+                    <tr class="text-center">
+                        <th scope="col">답변제목</th>
+                        <td>{{ post.answer_title }}</td>
+                    </tr>
+                    <tr class="text-center">
+                        <th scope="col">답변내용</th>
+                        <td>{{ post.answer_content }}</td>
+                    </tr>
+                    {% endif %}
+            </table>
+        </section>
 
 
-            {% comment %} 관리자일 경우(user_class=99) 답변이 아직 없을 시 답변 form을, 답변이 완료된 건에는 내용물을 보여줌 {% endcomment %}
-            {% ifequal request.session.user_class 99 %}
-                <button type="button">
-                    <a href="{% url 'board:update' up_id=post.id %}">
-                        수정 >
-                    </a>
-                </button>
-                <button type="button">
-                    <a href="{% url 'board:delete' del_id=post.id %}">
-                        삭제 >
-                    </a>
-                </button>
-                {% if not post.answer_title %}
-                    <h2>관리자기능:답글달기</h2>
-                    <form method="POST" action="{% url 'board:write' %}">
-                        {% csrf_token %}
-                        {% comment %} display:none으로 질문 글의 id를 받아와서 objects를 찾을 수 있게 함 {% endcomment %}
-                        <input type="text" name="question_id" value={{ post.id }} style="display:none">
-                        <div>
-                            <label for="title">제목</label><br>
-                            <input type="text" name="answer_title" id="answer_title">
-                        </div>
-                        <div>
-                            <label for="content">내용</label><br>
-                            <textarea name="answer_content" id="content" cols="30" rows="10"></textarea>
-                        </div>
-                        <input type="submit" value="답글달기" />
-                    </form>
-                {% endif %}
-            {% endifequal %}
-        </div>
-
+        {% comment %} 관리자일 경우(user_class=99) 답변이 아직 없을 시 답변 form을, 답변이 완료된 건에는 내용물을 보여줌 {% endcomment %}
+        {% ifequal request.session.user_class 99 %}
+            {% if not post.answer_title %}
+            <hr>
+                <h2>관리자기능 : 답글달기</h2>
+                <form method="POST" action="{% url 'board:write' %}">
+                    {% csrf_token %}
+                    {% comment %} display:none으로 질문 글의 id를 받아와서 objects를 찾을 수 있게 함 {% endcomment %}
+                    <input type="text" name="question_id" value={{ post.id }} style="display:none">
+                    <div>
+                        <label for="answer_title">제목</label><br>
+                        <input type="text" name="answer_title" id="answer_title">
+                    </div>
+                    <div>
+                        <label for="answer_content">내용</label><br>
+                        <textarea name="answer_content" id="answer_content" cols="30" rows="10"></textarea>
+                    </div>
+                    <input type="submit" value="답글달기" />
+                </form>
+            {% endif %}
+        {% endifequal %}
     </div>
+</div>
 {% endblock content %}

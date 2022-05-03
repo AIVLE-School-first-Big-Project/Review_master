@@ -5,7 +5,7 @@
 {% block styles %}
     <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css"/> 
 {% endblock %}
-<div style='height:10rem'>
+<div style='height:4rem'>
     <br>
 </div>
 <div id="main">
@@ -13,11 +13,16 @@
             <h2>
                 문의게시판 
                 <span> | 영업일 기준 1일 이내 답변됩니다!
-                    {% if request.session.user_id %}
+                    {% ifnotequal request.session.user_class 99 %}
                             <a href="{% url 'board:write' %}" id="write-button">
                                 문의글쓰기 >
                             </a>
-                    {% endif %}
+                    {% endifnotequal %}
+                    {% comment %} {% ifequal request.session.user_class 1 %}
+                            <a href="{% url 'board:write' %}" id="write-button">
+                                문의글쓰기 >
+                            </a>
+                    {% endifequal %} {% endcomment %}
                 </span>
             </h2>
         <br/>
