@@ -190,14 +190,15 @@ def result(request):
                         "ㅠㅠ 빈도 수": [int(bb[i])],
                         "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
                     }
-                    
+
                     print("필터링 시작합니다.")
                     response = requests.post(Backend_filtering, json=data)
                     if response.status_code == 200:
                         filter_data = response.json()["pred"]
                         filter_percent = response.json()["pro"]
                     m_review_data.advertise = int(filter_data)
-                    # m_review_data.advertise_percent = float(filter_percent)  # 확률 처리
+                    m_review_data.advertise_percent = float(
+                        filter_percent)  # 확률 처리
                     m_review_data.save()
 
             # buylist 추가하기
@@ -265,7 +266,8 @@ def result(request):
             data_info["img_url"] = m_article_info.img_url
 
             review_list = []
-            m_review_data = ReviewData.objects.filter(article_id=article_id)
+            m_review_data = ReviewData.objects.filter(
+                article_id=article_id).order_by("-advertise_percent")
 
             for review in m_review_data:
                 review_dict = {
@@ -277,7 +279,8 @@ def result(request):
                     "url": [],
                     "description": [],
                     "advertise": [],
-                    "title": []
+                    "title": [],
+                    "advertise_percent": []
                 }
 
                 review_dict["writer"] = review.writer
@@ -289,7 +292,11 @@ def result(request):
                 review_dict["description"] = review.description
                 review_dict["advertise"] = review.advertise
                 review_dict["title"] = review.title
+                review_dict["advertise_percent"] = float(
+                    review.advertise_percent) * 100
                 review_cnt -= review.advertise
+                if review.advertise_percent <= 0.5:
+                    continue
                 review_list.append(review_dict)
 
             data_info["pure_cnt"] = review_cnt
@@ -320,7 +327,7 @@ def result(request):
                 m_buy_dict["mall_name"] = b.mall_name
                 m_buy_dict["image_url"] = b.image_url
                 buy_list.append(m_buy_dict)
-
+            # print(review_list)
             return render(request, 'analysisapp/result.html', {
                 "select_num": 1,
                 "data_info": data_info,
