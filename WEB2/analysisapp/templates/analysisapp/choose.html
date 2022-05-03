@@ -1,86 +1,72 @@
-{%load static%}
-<!DOCTYPE html>
- <html lang="ko">
-    {% include 'base_head.html' %}
-    <body class="is-preload">
-        <!-- base_headerBar -->
-        {% include 'base_headerBar.html' %}
-        
-        <!-- Wrapper -->
-	    <div id="wrapper">
-            {% include 'base_search_form.html' %}
-            <!-- Main -> 무엇이든 재사용 가능할 틀로 수정-->
-            {% block content %} 
+{% extends "base.html" %}
+{% load static %} 
 
-            <div id='main'>	
-                <nav id="nav">
-                        <div id="choose_li">찾으시는상품이 여기에 있나요?</div>                  
-                </nav>
-                <section id="paysec" class="main special">
-                    <div class="container">
+{% block content %}
 
-                        <div class="my-slider">
-                            <div>
-                                <div>
-                                <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
-                                </div>
-                                <div>
-                                    1번사진
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
-                                    </div>
-                                    <div>
-                                        2번사진
-                                    </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
-                                    </div>
-                                    <div>
-                                        3번사진
-                                    </div>
-                            </div>   
-                            <div>
-                                <div>
-                                    <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
-                                    </div>
-                                    <div>
-                                        4번사진
-                                    </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <img id="choimg" src="{% static 'assets/images/상품등록.png'%}" alt="image" />
-                                    </div>
-                                    <div>
-                                        상품이 없을때 마지막
-                                    </div>
-                                    
-                            </div>    
-                
+<div id='main'>	
+    <nav id="nav">
+            <div id="choose_li">찾으시는상품이 여기에 있나요?</div>                  
+    </nav>
+    <section id="paysec" class="main special">
+        <div class="container">
+
+            <div class="my-slider">
+                <div>
+                    <div>
+                    <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
                     </div>
-                    <div class="my-controls" aria-label="Carousel Navigation" tabindex="0">
-                        <button  class="prev" data-controls="prev" tabindex="-1" aria-controls="controls">
-                            <img src= "{% static 'assets/images/left.svg'%}" alt="왼쪽" class="prev_img"></button>
-                        <button class="next" data-controls="next" tabindex="-1" aria-controls="controls" >
-                            <img src= "{% static 'assets/images/right.svg'%}" alt="오른쪽" class="next_img"></button>
-                    </div>     
-                </section>
-            </div>
-            {% endblock %}
-            <!-- Footer -->
-            {% include 'base_footer.html' %}
+                    <div>
+                        1번사진
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
+                        </div>
+                        <div>
+                            2번사진
+                        </div>
+                </div>
+                <div>
+                    <div>
+                        <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
+                        </div>
+                        <div>
+                            3번사진
+                        </div>
+                </div>   
+                <div>
+                    <div>
+                        <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
+                        </div>
+                        <div>
+                            4번사진
+                        </div>
+                </div>
+                <div>
+                    <div>
+                        <img id="choimg" src="{% static 'assets/images/상품등록.png'%}" alt="image" />
+                        </div>
+                        <div>
+                            상품이 없을때 마지막
+                        </div>
+                        
+                </div>    
+    
         </div>
-        {% include 'base_Scripts.html' %}
-        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
-        <script type="text/javascript" src="/js/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
-        <script type="module" src="{% static 'assets/js/slider.js'%}"></script>
-        <script src="{% static 'assets/js/slider2.js'%}"></script>
-		
-    </body>
-</html>
+        <div class="my-controls" aria-label="Carousel Navigation" tabindex="0">
+            <button  class="prev" data-controls="prev" tabindex="-1" aria-controls="controls">
+                <img src= "{% static 'assets/images/left.svg'%}" alt="왼쪽" class="prev_img"></button>
+            <button class="next" data-controls="next" tabindex="-1" aria-controls="controls" >
+                <img src= "{% static 'assets/images/right.svg'%}" alt="오른쪽" class="next_img"></button>
+        </div>     
+    </section>
+</div>
+{% block js %}
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <script type="module" src="{% static 'assets/js/slider.js'%}"></script>
+    <script src="{% static 'assets/js/slider2.js'%}"></script>
+{% endblock %}
+{%endblock content%}
