@@ -172,3 +172,12 @@ tr:nth-child(2n) {
     height: 2rem;
     font-size: 0.8rem;
 }
+
+.form_delete {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+#main>div>form>p {
+    text-align: center;
+}
