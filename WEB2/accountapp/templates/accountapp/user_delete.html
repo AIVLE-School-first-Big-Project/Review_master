@@ -2,12 +2,15 @@
 {% load static %} 
 
 {% block content %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/user.css' %}?after" type="text/css"/> 
+{% endblock %}
 <div style='height:10rem;'>
     <br>
 </div>
 <div id="main">
     <h1> 마이페이지 > <strong>회원탈퇴</strong></h1>
-    <form method="POST">
+    <form method="POST" class="form_delete">
         {% csrf_token %}
         <p>정말로 탈퇴하시겠습니까?</p>
         <input type="submit" value="탈퇴"/>
