@@ -1,12 +1,41 @@
-<form method="POST" action="{% url 'board:update' up_id=post_update.id %}">
-    {% csrf_token %}
-    <div>
-        <label for="title">제목</label><br>
-        <input type="text" name="title" value={{ post_update.title }} />
+{% extends "base.html" %}
+{% load static %} 
+
+{% block content %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/board_css.css' %}?after" type="text/css"/> 
+{% endblock %}
+<div style='height:4rem;'>
+    <br>
+</div>
+<div id="main">
+    <div class="board">
+        <form method="POST" action="{% url 'board:update' up_id=post_update.id %}" class="post-write">
+            {% csrf_token %}
+            <div>
+                <label for="title">제목</label><br>
+                <input type="text" name="title" id="title" value={{ post_update.title }} />
+            </div>
+            <div>
+                <label for="content">내용</label><br>
+                <textarea type="text" name="content" id="content" rows="5">{{ post_update.content }}</textarea>
+            </div>
+
+            {% comment %} 관리자일 경우 수정 버튼 누르면 답변 수정/삭제할 수 있음  {% endcomment %}
+            {% ifequal request.session.user_class 99 %}
+            <hr>
+            <div>
+                <label for="answer_title">답변제목</label><br>
+                <input type="text" name="answer_title" id="answer_title" value={{ post_update.answer_title }}>
+            </div>
+            <div>
+                <label for="answer_content">답변내용</label><br>
+                <textarea type="text" name="answer_content" id="answer_content" cols="30" rows="10">{{ post_update.answer_content }}</textarea>
+            </div>
+            {% endifequal%}
+            <input type="submit" value="수정하기" />
+        </form>
     </div>
-    <div>
-        <label for="content">내용</label><br>
-        <textarea type="text" name="content" cols="30" rows="10">{{ post_update.content }}</textarea>
-    </div>
-    <input type="submit" value="수정하기" />
-</form>
+</div>
+
+{% endblock content %}

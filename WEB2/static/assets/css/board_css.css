@@ -16,7 +16,8 @@
 }
 
 .mypage h1,
-.board h1 {
+.board h1,
+.board h2 {
     margin-bottom: 2rem;
 }
 
@@ -126,4 +127,48 @@ tr:nth-child(2n) {
 
 #write-button a {
     font-weight: bold;
+}
+
+#main>div>form>div {
+    display: flex;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 6px;
+}
+
+#main>div>form>div>label {
+    width: 15%;
+    text-align: center;
+}
+
+.post-write.div {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 6px;
+}
+
+#title,
+#content,
+#answer_title,
+#answer_content {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 6px;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#content {
+    background-color: #E7FCF9C4;
+}
+
+#main>div>form>input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    height: 2rem;
+    font-size: 0.8rem;
 }
