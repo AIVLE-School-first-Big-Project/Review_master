@@ -1,6 +1,6 @@
 from typing import Text
 from django.db import models
-from django.db.models.fields import CharField, IntegerField, TextField, DateField, DateTimeField
+from django.db.models.fields import CharField, IntegerField, TextField, DateField, DateTimeField, FloatField
 
 
 # from review import analysisapp
@@ -122,6 +122,7 @@ class ReviewData(models.Model):
     article_id = IntegerField()
 
     advertise = IntegerField()
+    advertise_percent = FloatField()
 
     url = TextField()
     title = TextField()

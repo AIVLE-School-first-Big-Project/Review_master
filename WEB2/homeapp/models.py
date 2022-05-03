@@ -1,6 +1,6 @@
 from typing import Text
 from django.db import models
-from django.db.models.fields import CharField, IntegerField, TextField, DateField, DateTimeField
+from django.db.models.fields import CharField, IntegerField, TextField, DateField, DateTimeField, FloatField
 
 
 # from review import analysisapp
@@ -73,7 +73,7 @@ class ArticleInfo(models.Model):
     article_id = IntegerField()
     # 리뷰 게시물 개수
     article_review_cnt = IntegerField()
-
+    advertise_percent = FloatField()
     # 검색 카운트
     search_cnt = IntegerField()
 

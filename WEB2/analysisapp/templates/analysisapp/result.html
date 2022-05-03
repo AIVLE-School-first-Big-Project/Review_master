@@ -104,15 +104,22 @@
 					{% for review in review_list %}
 					<tr>
 						<td rowspan="3" style="vertical-align: bottom; ">
-							<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
-						</td>	
-						
-					</tr>
+							<a href = "{{review.url}}">
+								<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
+							</a>
+							</td>	
+							
+						</tr>
 					<tr class="review_url" style="text-align: justify;">
-						<td>{{review.title}}</td>	
+
+						<td>
+							<a href = "{{review.url}}">
+								{{review.title}}
+							</a>
+						</td>	
 						<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
-							<img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 
-							<span style="color:#0A9383;">10%</span>
+							<!-- <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" />  -->
+							<span style="color:#0A9383;">{{review.advertise_percent}}%</span>
 						</td>			
 					</tr>
 					<tr style="text-align: justify;">
