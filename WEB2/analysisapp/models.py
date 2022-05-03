@@ -73,8 +73,7 @@ class ArticleInfo(models.Model):
     article_id = IntegerField()
     # 리뷰 게시물 개수
     article_review_cnt = IntegerField()
-    # 순수 리뷰 게시물 개수
-    article_pure_review_cnt = IntegerField()
+
     # 검색 카운트
     search_cnt = IntegerField()
 
