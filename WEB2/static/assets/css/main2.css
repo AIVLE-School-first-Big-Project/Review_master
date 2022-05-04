@@ -132,8 +132,8 @@ fieldset {
 .user-info input[type="date"],
 .user-info select {
     width: 200%;
-    background-color: rgba(222, 222, 222, 0.25);
     height: 3em;
-    color: lightgray;
-    padding-left: 1rem;
+    padding: 0 1rem;
+    border: none;
+    border-radius: 6px;
 }
