@@ -35,8 +35,8 @@
                         <input type="date" class="form-control" name="user_birth" min="1930-01-01" max="2022-12-31" value={{ m.user_birth|date:'Y-m-d' }}>
                     </div> 
                     <div class="user-info">
-                        <label for="validationTextarea" class="form-label" style="font-family:NanumSquareR;">성별 변경</label>
-                        <select class="form-select" required aria-label="select example" style="font-family:NanumSquareR;" name="user_sex" selected={{ m.user_sex }}>
+                        <label for="validationTextarea" class="form-label">성별 변경</label>
+                        <select class="form-select" required aria-label="select example"  name="user_sex" selected={{ m.user_sex }}>
                             {% ifequal m.user_sex 0 %}
                             <option value=0 selected>여</option>
                             <option value=1>남</option>
@@ -48,12 +48,11 @@
                     </div> 
     
                     <div class="user-info">
-                        {% comment %} <span id="update">이메일 변경</span>  {% endcomment %}
                         <label for="email">이메일</label>
                         <br/>
                         <input type="text" class="form-control" name="email" value={{ m.user_email }}>
                     </div>
-                    <button type="submit" id="check-loginout">저장하기</button>
+                    <button type="submit" id="check-loginout" >저장하기</button>
                 </form>
         </div> 
     </div>

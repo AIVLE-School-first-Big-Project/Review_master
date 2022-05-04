@@ -61,8 +61,7 @@ tr:nth-child(2n) {
 }
 
 .user-loginout {
-    margin: 5%;
-    width: 30em;
+    margin: 0;
     align-self: center;
     font-weight: bold;
 }
@@ -101,7 +100,7 @@ tr:nth-child(2n) {
 #userform_mypage>form>div:nth-child(7)>input,
 #userform_mypage>form>div>input,
 #userform_mypage>form>div>select {
-    width: 150%;
+    width: 100%;
     background-color: #1CEED11C;
     height: 3em;
     padding: 0 1rem;
@@ -117,7 +116,8 @@ tr:nth-child(2n) {
 }
 
 #check-loginout {
-    margin: 0 60%;
+    display: block;
+    margin: 0 auto;
 }
 
 #write-button {
@@ -180,4 +180,8 @@ tr:nth-child(2n) {
 
 #main>div>form>p {
     text-align: center;
+}
+
+#main>div>section>table>tbody>tr {
+    vertical-align: middle;
 }

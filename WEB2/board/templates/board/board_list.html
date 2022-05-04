@@ -13,11 +13,13 @@
             <h2>
                 문의게시판 
                 <span> | 영업일 기준 1일 이내 답변됩니다!
-                    {% ifnotequal request.session.user_class 99 %}
+                    {% if request.session.user_id %}
+                        {% ifnotequal request.session.user_class 99 %}
                             <a href="{% url 'board:write' %}" id="write-button">
                                 문의글쓰기 >
                             </a>
-                    {% endifnotequal %}
+                        {% endifnotequal %}
+                    {% endif %}
                     {% comment %} {% ifequal request.session.user_class 1 %}
                             <a href="{% url 'board:write' %}" id="write-button">
                                 문의글쓰기 >
@@ -27,7 +29,7 @@
             </h2>
         <br/>
         <section class="qna_list">
-            <table class="table" style="table-layout:auto">
+            <table class="table" style="table-layout:auto;cellspacing:0;cellpadding:0">
                 <thead class="thead-light" style="display:none">
                     <tr class="text-center">
                         <th scope="col">#</th>
@@ -43,9 +45,9 @@
                             <th scope="row" width=5%>
                                 <span>{{ list.id }}</span>
                             </th>
-                            <td width=10% style="padding-bottom:0">
+                            <td width=10%>
                                 {% if list.answer_title %}
-                                    <img src="{% static 'assets/images/게시판_답변완료.png' %}""/>
+                                    <img src="{% static 'assets/images/게시판_답변완료.png' %}" />
                                 {% else %}
                                     <img  src="{% static 'assets/images/게시판_미답변.png' %}" />
                                 {% endif %}
