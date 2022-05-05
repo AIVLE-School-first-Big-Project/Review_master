@@ -119,7 +119,7 @@ def Text_association_inferense(cursor, artice_code):
         'font_size':10,
         # 'node_shape':"o",
     }
-    img_save_folder_path = os.path.join(BASE_DIR,"figImage")
+    img_save_folder_path = os.path.join(BASE_DIR,f"figImage/{artice_code}")
     img_pathes = []
     os.makedirs(img_save_folder_path,exist_ok=True)
     for idx in tqdm(range(3)):
@@ -156,7 +156,7 @@ def Text_association_inferense(cursor, artice_code):
         nx.draw(G, node_size=sizes, pos=nx.spring_layout(G, k=30, iterations=1000), **options, font_family=font_name)  # font_family로 폰트 등록
         ax = plt.gca()
         ax.collections[0].set_edgecolor("#0B8B8B")
-        save_img_name = f"figImage/fig_{artice_code}_{idx}.jpg"
+        save_img_name = f"figImage/{artice_code}/fig_{idx}.jpg"
         save_img_path = os.path.join(BASE_DIR,save_img_name)
         img_pathes.append(save_img_path)
         plt.savefig(save_img_path)
