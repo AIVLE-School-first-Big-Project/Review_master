@@ -26,7 +26,52 @@
 			</table>
 		</div>
 	</section>
+	<!-- 순수리뷰목록 시작 -->
+	<section id="review" class="main special" style="color:black;">
+		<header class="major">
+			<h2>순수 리뷰 목록</h2>
+		</header>
+		<ul>
+			<li >
 
+			<div>
+				<table class='resulttable'>
+					{% for review in review_list %}
+					<tr>
+						<td rowspan="3" style="vertical-align: bottom; ">
+							<a href = "{{review.url}}">
+								<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
+							</a>
+							</td>	
+							
+						</tr>
+					<tr class="review_url" style="text-align: justify;">
+
+						<td class="review_td" style="font-weight: bolder;">
+							<a href = "{{review.url}}">
+								{{review.title}}
+							</a>
+						</td>	
+						<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
+							<!-- <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" />  -->
+							<span style="color:#0A9383;">{{review.advertise_percent}}%</span>
+						</td>			
+					</tr>
+					<tr style="text-align: justify;">
+						<td colspan="2" class="description_td">{{review.description}}</td>
+					</tr>
+					{% endfor %}
+					<tr style="text-align: right;font-size:1rem">
+						<td colspan="3" class="description_td"> AI분석을 통해서 광고성을 제외하고 여러분에게 추천드립니다!</td>
+					</tr>
+				</table>
+			</div>
+			</li>
+		
+		</ul> 
+	</section>
+
+	<!-- 순수리뷰목록 끝 -->
 	
 	<!-- 연관어분석 시작 -->
 	<section id="associate" class="main special">
@@ -78,7 +123,7 @@
 	<!-- 연관어분석끝 -->
 
 	<!-- 감성어분석 시작 -->
-	<section id="emotion" class="main special">
+	<!-- <section id="emotion" class="main special">
 		<header class="major">
 			<h2>감성어 분석</h2>
 		</header>
@@ -88,61 +133,16 @@
 			</li>
 		</ul>
 		
-	</section>
+	</section> -->
 	<!-- 감성어분석끝 -->
 
-	<!-- 순수리뷰목록 시작 -->
-	<section id="review" class="main special" style="color:black;">
-		<header class="major">
-			<h2>순수 리뷰 목록</h2>
-		</header>
-		<ul>
-			<li >
 
-			<div>
-				<table class='resulttable'>
-					{% for review in review_list %}
-					<tr>
-						<td rowspan="3" style="vertical-align: bottom; ">
-							<a href = "{{review.url}}">
-								<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
-							</a>
-							</td>	
-							
-						</tr>
-					<tr class="review_url" style="text-align: justify;">
-
-						<td class="review_td" style="font-weight: bolder;">
-							<a href = "{{review.url}}">
-								{{review.title}}
-							</a>
-						</td>	
-						<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
-							<!-- <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" />  -->
-							<span style="color:#0A9383;">{{review.advertise_percent}}%</span>
-						</td>			
-					</tr>
-					<tr style="text-align: justify;">
-						<td colspan="2" class="description_td">{{review.description}}</td>
-					</tr>
-					{% endfor %}
-					<tr style="text-align: right;font-size:1rem">
-						<td colspan="3" class="description_td"> AI분석을 통해서 광고성을 제외하고 여러분에게 추천드립니다!</td>
-					</tr>
-				</table>
-			</div>
-			</li>
-		
-		</ul> 
-	</section>
-
-	<!-- 순수리뷰목록 끝 -->
 
 	<!-- 구매링크 시작 -->
 	<section id="purchase" class="main special" style="color:black;">
 		<header class="major">
 			<h2>구매 링크 목록(네이버 쇼핑)</h2>
-			
+			네이버 쇼핑 정보를 가져왔습니다.
 		</header>
 		<ul class="statistics2">
 			<li >
