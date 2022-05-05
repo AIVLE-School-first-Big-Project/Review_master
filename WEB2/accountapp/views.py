@@ -164,3 +164,15 @@ def user_log(request):
 
 def pay(request):
     return render(request, 'accountapp/pay.html')
+
+def agreement(request):
+    if request.method=="POST":
+        if request.POST.get('agreement1', False) and request.POST.get('agreement2', False):
+            request.session['agreement']=True
+            return redirect('/app/account/signup')
+        else:
+            messages.info(request, "약관에 모두 동의해주세요.")
+            return render(request, 'accountapp/agreement.html')
+    else:
+        request.session['agreement'] = False
+        return render(request, 'accountapp/agreement.html')

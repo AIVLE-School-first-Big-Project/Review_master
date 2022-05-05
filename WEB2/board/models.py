@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.fields import CharField, IntegerField, TextField, DateTimeField
+from django.db.models.fields import CharField, IntegerField, TextField, DateTimeField;
 from accountapp.models import Member
 from datetime import datetime
 
@@ -17,8 +17,7 @@ class QABoard(models.Model):
     answer_content = TextField()
     create_time = DateTimeField(auto_now_add=True)
     update_time = DateTimeField(auto_now=True)
-    # answer_time = DateTimeField(auto_now_add=True)
-
+    file_name = models.ImageField(upload_to="Board/images", blank=True, null=True)
     def __str__(self):
         return self.title
 

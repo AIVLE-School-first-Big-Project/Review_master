@@ -11,3 +11,13 @@ hamburger.addEventListener("click", () => {
     content.classList.toggle('active');
     user.classList.toggle('active');
 })
+
+document.getElementById('input-file').addEventListener('change', function() {
+    var filename = document.getElementById('filepath');
+    if (this.files[0] == undefined) {
+        console.log('no');
+        filename.innerText = '선택된 파일 없음';
+        return;
+    }
+    filename.innerText = this.files[0].name;
+});

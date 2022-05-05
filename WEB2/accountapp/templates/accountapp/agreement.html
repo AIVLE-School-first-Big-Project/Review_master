@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/main2.css' %}?after" type="text/css"/> 
+{% endblock %}
+<div style='height:4rem;'>
+    <br>
+</div>
+<div id="main">
+    <div class="s004">
+        <div class="user-loginout">
+            <h2> 회원 약관 동의 </h2>
+            <form action="{% url 'accountapp:agreement' %}", method="POST">
+                {% csrf_token %}
+                <div>
+                    <label>
+                        {% comment %} <input type="checkbox" name="agreement1" class="agreement" style="display: inline-block;height: 1rem;border: 1px solid gray;opacity: 1;margin: 1rem;"> {% endcomment %}
+                        <input type="checkbox" name="agreement1" class="agreement"  style="display: inline-block;"/>
+                        <span>이용약관에 동의합니다.</span>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" name="agreement2" class="agreement"  style="display: inline-block;"/>
+                        <span>개인정보 수집 및 이용에 동의합니다.</span>
+                    </label>
+                </div>
+                <input type="submit" value="제출하기" />
+                {{ request.session.agreement }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
