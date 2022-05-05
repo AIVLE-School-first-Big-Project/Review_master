@@ -136,7 +136,7 @@ def result(request):
             if len(review) == 0 or crawling_check:
                 df = crawling_function.service_start(
                     search_company, search_name)
-
+                df
                 # Review Data에 데이터를 추가시켜주자. writer, content, description, content_date, first_img_url, last_img_url, url을 넣어준다.
                 url, title, post_date, description, writer, content, first_img_url, last_img_url \
                     = df["url"], df["title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]

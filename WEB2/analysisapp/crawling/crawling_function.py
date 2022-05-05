@@ -283,7 +283,6 @@ def df_keyword_contains(df):
         for key in keyword_coupang:
             if key in content:
                 df.loc[i, "coupa.ng 키워드"] = 1
-    return df
 
 
 def df_check_ad(df):
@@ -384,6 +383,7 @@ def service_start(company, word):
     df_check_ad(df)
     df = df[df["content_cnt"] != 0].reset_index(drop=True)
     print("종료되었습니다.")
+    # print(df.columns)
     return df
 
 
@@ -403,6 +403,8 @@ def service_img(company, word):
     else:
         print("Error Code:" + rescode)
 
+    if len(json.loads(response_body.decode('utf-8'))["items"]) == 0:
+        return
     return json.loads(response_body.decode('utf-8'))["items"][0]["link"]
 
 

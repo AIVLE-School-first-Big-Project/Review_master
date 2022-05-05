@@ -168,11 +168,13 @@
                 <tr>
                     <td>순위</td>
                     <td>제품명</td>
+                    <td>조회수</td>
                 </tr>
                 {% for key in twenty_male %}
                     <tr>
                         <td>{{key.0}}</td>
                         <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
                     </tr>
                 {% endfor %}
 
@@ -185,12 +187,16 @@
                  class="contents_th"><div class="box12">여자</div></th>
                 <tr>
                     <td>순위</td>
-                    <td>제품명</td>             
+                    <td>제품명</td>  
+                    <td>조회수</td>
+
                 </tr>
                 {% for key in twenty_female %}
                     <tr>
                         <td>{{key.0}}</td>
                         <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
+
                     </tr>
                 {% endfor %}
 
@@ -215,11 +221,15 @@
                 <tr>
                     <td>순위</td>
                     <td>제품명</td>
+                    <td>조회수</td>
+
                 </tr>
                 {% for key in fourty_male %}
                     <tr>
                         <td>{{key.0}}</td>
                         <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
+
                     </tr>
                 {% endfor %}
 
@@ -231,11 +241,15 @@
                 <tr>
                     <td>순위</td>
                     <td>제품명</td>
+                    <td>조회수</td>
+
                 </tr>
                 {% for key in fourty_female %}
                     <tr>
                         <td>{{key.0}}</td>
                         <td>{{key.1}} {{key.2}}</td>
+                        <td>{{key.3}}</td>
+
                     </tr>
                 {% endfor %}
 
