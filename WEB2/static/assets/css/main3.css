@@ -6,13 +6,15 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-h2.result{
-    display: inline-block; 
-    border-right: none; 
-    padding-right: 2px; 
-    box-sizing: border-box; 
+
+h2.result {
+    display: inline-block;
+    border-right: none;
+    padding-right: 2px;
+    box-sizing: border-box;
     animation: cursor 0.4s infinite;
 }
+
 .reviewtd {
     height: 1%;
     width: 1%;
@@ -34,6 +36,7 @@ h2.result{
     height: 10rem;
     align-items: center;
 }
+
 @media screen and (max-width: 450px) {
     #payimg {
         margin-left: 2rem;
@@ -43,7 +46,6 @@ h2.result{
         align-items: center;
     }
 }
-
 
 #chodiv {
     align-items: center;
@@ -65,10 +67,10 @@ h2.result{
     width: 20%;
     background-color: white;
     border-radius: 30px 0px 0px 30px;
-    border-bottom:none;
-    border-left:none;
-    border-top:none;
-    border-right:thick solid black;
+    border-bottom: none;
+    border-left: none;
+    border-top: none;
+    border-right: thick solid black;
     color: #000000;
 }
 
@@ -76,7 +78,7 @@ h2.result{
     background-color: white;
     padding-left: 1.3rem;
     width: 50%;
-    border:none;
+    border: none;
     color: #000000;
 }
 
@@ -85,7 +87,7 @@ h2.result{
     border-radius: 0px 30px 30px 0px;
     color: #000000;
     background-color: white;
-    border:none;
+    border: none;
     padding-right: 0rem;
     padding-top: 0.3rem;
 }
@@ -95,25 +97,23 @@ h2.result{
         align-content: center;
         display: flex;
     }
-    
     .input1 {
         padding-left: 1.3rem;
         width: 20%;
         background-color: white;
         border-radius: 30px 0px 0px 30px;
-        border-bottom:none;
-        border-left:none;
-        border-top:none;
-        border-right:thick solid black;
+        border-bottom: none;
+        border-left: none;
+        border-top: none;
+        border-right: thick solid black;
         color: #000000;
         font-size: 0.8rem;
     }
-    
     .input2 {
         background-color: white;
         padding-left: 1.3rem;
         width: 50%;
-        border:none;
+        border: none;
         color: #000000;
         font-size: 0.8rem;
     }
@@ -122,7 +122,7 @@ h2.result{
         border-radius: 0px 30px 30px 0px;
         color: #000000;
         background-color: white;
-        border:none;
+        border: none;
         padding-right: 0rem;
         padding-top: 0.3rem;
     }
@@ -206,6 +206,7 @@ h2.result{
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
+        justify-content: space-evenly;
     }
     #head_menu>li,
     #head_user>li {
@@ -217,10 +218,6 @@ h2.result{
     .head_content>ul,
     .head_user>ul {
         display: flex;
-    }
-    .head_title {
-        width: 25%;
-        margin-left: 4.5rem;
     }
 }
 
@@ -361,7 +358,8 @@ mark,
 audio,
 video,
 input,
-select {
+select,
+textarea {
     margin: 0;
     padding: 0;
     border: 0;
@@ -3866,7 +3864,7 @@ body.is-preload #header.alt .logo {
 }
 
 button.box3 {
-    border:none;
+    border: none;
     flex: auto;
     max-width: 300px;
     flex-flow: flex-start;
@@ -3874,7 +3872,7 @@ button.box3 {
     padding-top: 0.4rem;
     padding-bottom: 2.3rem;
     text-align: center;
-    background-color: #FCEFCC;   
+    background-color: #FCEFCC;
     border-radius: 20px;
     padding-left: 1rem;
     padding-right: 1rem;

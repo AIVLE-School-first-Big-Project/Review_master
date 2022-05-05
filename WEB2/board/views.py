@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from sqlalchemy import null
 from accountapp.models import Member
 from board.models import QABoard
 from django.db.models import Max
@@ -34,6 +35,7 @@ def board_write(request):
             m_QABoard.user_id = request.session["user_id"]
             m_QABoard.title = request.POST.get("title")
             m_QABoard.content = request.POST.get('content')
+            m_QABoard.file_name = request.FILES.get('file_name')
             m_QABoard.save()
 
             return redirect('/app/board/')
