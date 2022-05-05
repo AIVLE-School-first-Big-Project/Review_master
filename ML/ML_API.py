@@ -4,7 +4,7 @@ import uvicorn
 from Text_summarization.Gensim import Gensim_summary
 from Filtering.Filtering import Adblock_filter
 import secret_key as sk
-from Text_sentiment.koelectra import Text_sentiment_inferense
+from Text_sentiment.koelectra import Text_sentiment_inferense_review
 import urllib.request
 import time, requests, json,os
 import pandas as pd
@@ -67,16 +67,21 @@ async def Text_Summary(artice_code:int):
     
 
 @app.post('/sentiment')
-async def Blog_filter(artice_code:int):
+async def Blog_filter(artice_code:int, review_id:int):
     cursor = con.connect_DB()
     print("상품 코드 : ",artice_code)
-    pos_neg_result = Text_sentiment_inferense(cursor,artice_code=artice_code)
+    context_result , pos_neg_result = Text_sentiment_inferense_review(cursor, artice_code = artice_code, review_id= review_id)
     
     postive = int(sum(pos_neg_result))
     negtive = int(len(pos_neg_result) - postive)
+
+    pos_neg_result = [int(val) for val in (pos_neg_result)]
+    context_result = [str(text) for text in (context_result)]
+    blog_result = dict(zip(context_result,pos_neg_result))
     result = {
         'postive' : postive,
         'negtive' : negtive,
+        'blog_result':blog_result
     }
     return result
 
@@ -95,6 +100,25 @@ async def Blog_filter(data: dict  = Body(...)):
         'pro' :  str(round(float(y_prod[0][0]),2))
     }
     return result
+
+
+
+@app.post('/association/')
+# async def Blog_filter(Blog_Name :List[str]):
+async def Blog_filter(data: dict  = Body(...)):
+    # print("키 정보 : ",data.keys())
+    data = pd.DataFrame(data)
+    data["context_img"] = dowload_last_img(data['last_img'].values[0])
+    # print(data.columns)
+    y_pred, y_prod =  Adblock_filter(data_frame = data)
+    print("예측 결과 : ",int(y_pred))
+    result = {
+        'pred' : str(int(y_pred)),
+        'pro' :  str(round(float(y_prod[0][0]),2))
+    }
+    return result
+
+
 #-------------------------------------------------------------------------------------------------------#
 if __name__ == '__main__':
     print("start API Service")
