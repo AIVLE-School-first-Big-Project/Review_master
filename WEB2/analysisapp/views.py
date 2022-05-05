@@ -4,7 +4,7 @@ from datetime import datetime
 from urllib import response
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
-from analysisapp.models import ArticleCode, ArticleInfo, BuyList, ReviewData, ReviewAnalysis, MemberLog, Member
+from analysisapp.models import ArticleCode, ArticleInfo, BuyList, ReviewData, ReviewAnalysis, MemberLog, Member, ReviewSentiment, ReviewSentimentDetail
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from .crawling import crawling_function
@@ -18,6 +18,7 @@ import json
 from datetime import date
 from io import BytesIO
 from pathlib import Path
+import random
 
 from dateutil.relativedelta import relativedelta
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -32,6 +33,8 @@ Backend_summary = "http://" + \
     con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/summary/"
 Backend_association = "http://" + \
     con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/association/"
+Backend_sentiment = "http://" + \
+    con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/sentiment/"
 
 
 def age_group_check(birth_date):
@@ -142,6 +145,7 @@ def result(request):
             review_cnt = len(review)
             # 데이터가 하나도 없는 경우 이거나 위에서 크롤링해야한다고 한 경우 크롤링을 진행한다.
             if len(review) == 0 or crawling_check:
+                crawling_check = True
                 df = crawling_function.service_start(
                     search_company, search_name)
 
@@ -218,10 +222,67 @@ def result(request):
                     if response.status_code == 200:
                         filter_data = response.json()["pred"]
                         filter_percent = response.json()["pro"]
+
                     m_review_data.advertise = int(filter_data)
                     m_review_data.advertise_percent = float(
                         filter_percent)  # 확률 처리
                     m_review_data.save()
+
+                    if float(filter_percent) >= 0.8:  # 순수다
+                        m_article_info = ReviewData.objects.get(
+                            article_id=article_id, writer=writer[i], first_img_url=first_img_url[i])
+                        review_id = m_article_info.review_id
+
+                        m_review_sentiment = ReviewSentiment()
+                        m_review_sentiment.review_id = review_id
+                        m_review_sentiment.article_id = article_id
+
+                        print(review_id)
+                        print(article_id)
+
+                        data = {
+                            "artice_code": int(article_id),
+                            "review_id": int(review_id)
+                        }
+                        response = requests.post(Backend_sentiment, params=data, headers={
+                                                 'accept': 'application/json'})
+
+                        negative = response.json()["negative"]
+                        positive = response.json()["positive"]
+
+                        result = response.json()["blog_result"]
+
+                        m_review_sentiment.positive = positive
+                        m_review_sentiment.negative = negative
+
+                        m_review_sentiment.save()
+
+                        m_reivew_sentiment = ReviewSentiment.objects.filter(
+                            review_id=review_id, article_id=article_id, positive=positive, negative=negative)
+                        try:
+                            sentiment_id = m_reivew_sentiment[0].sentiment_id
+                        except:
+                            pass
+                        # num = random.sample([i for i in range(len(result))], 5)
+                        positive_len = 0
+                        negative_len = 0
+                        for i in range(len(result)):
+                            m_review_sentiment_detail = ReviewSentimentDetail()
+                            m_review_sentiment_detail.sentiment_id = sentiment_id
+                            m_review_sentiment_detail.content = str(
+                                result[i][0])
+                            m_review_sentiment_detail.sentiment = result[i][1]
+
+                            if result[i][1] == 1:
+                                if positive_len > 10:
+                                    continue
+                                positive_len += 1
+                            else:
+                                if negative_len > 10:
+                                    continue
+                                negative_len += 1
+
+                            m_review_sentiment_detail.save()
 
             # buylist 추가하기
             m_buy_list = BuyList.objects.filter(article_id=article_id)
@@ -310,7 +371,9 @@ def result(request):
                     "description": [],
                     "advertise": [],
                     "title": [],
-                    "advertise_percent": []
+                    "advertise_percent": [],
+                    "positive": [],
+                    "negative": []
                 }
 
                 review_dict["writer"] = review.writer
@@ -324,9 +387,16 @@ def result(request):
                 review_dict["title"] = review.title
                 review_dict["advertise_percent"] = float(
                     review.advertise_percent) * 100
-                review_cnt -= review.advertise
-                if review.advertise_percent <= 0.9:
+
+                if review.advertise_percent <= 0.8:
+                    review_cnt -= 1
                     continue
+
+                m_review_sentiment = ReviewSentiment.objects.get(
+                    review_id=review.review_id, article_id=review.article_id)
+
+                review_dict["positive"] = m_review_sentiment.positive
+                review_dict["negative"] = m_review_sentiment.negative
                 review_list.append(review_dict)
 
             data_info["pure_cnt"] = review_cnt
@@ -374,3 +444,8 @@ def result(request):
 def choose(request):
 
     return render(request, 'analysisapp/choose.html')
+
+
+def detail(request):
+
+    return render(request, 'analysisapp/detail.html')
