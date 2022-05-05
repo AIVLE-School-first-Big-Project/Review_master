@@ -26,6 +26,20 @@ resulttable{
 .review_url{
     color:#31BEAD
 }
+
+.review_tr{
+    padding-bottom: 0;
+}
+.reviewtd{
+    padding-bottom: 0;
+}
+
+section#description2.main{
+    padding-top: 0rem;
+}
+
+
+
 /*구매목록*/
 .buy_img{
     width: 6.75rem;
@@ -33,7 +47,7 @@ resulttable{
 }
 
 .buy_title{
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
 }
 .buy_price{
@@ -127,6 +141,7 @@ resulttable{
         text-align: center;
         width: 25rem;
         height: 25rem; 
+        
 	}
 
 }
@@ -228,4 +243,21 @@ resulttable{
 }
 .more{
     text-align: right;
+}
+td.content2{
+    padding-top: 0.75em;
+    padding-bottom: 0.01rem;
+    height: 35px;
+}
+td.content{
+    padding: 0;
+
+}
+td.description_td{
+    padding-top: 0px;
+}
+td.review_td{
+    padding-top:30px;
+    padding-bottom: 0px;
+    font-weight: bolder;
 }

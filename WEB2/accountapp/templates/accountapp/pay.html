@@ -1,71 +1,58 @@
-{%load static%}
-<!DOCTYPE html>
- <html lang="ko">
-    {% include 'base_head.html' %}
-    <body class="is-preload">
-        <!-- base_headerBar -->
-        {% include 'base_headerBar.html' %}
-        <!-- Wrapper -->
-	    <div id="wrapper">
-            <!-- Main -> 무엇이든 재사용 가능할 틀로 수정-->
-            {% block content %} 
-		<div id='main'>	
-			<section id="paysec" class="main special">
-				<header class="major">
-					<h2>요금제</h2>
-				</header>
-				<ul class="statistics">
-					<li>
-						<!-- <a href="{% url 'homeapp:home' %}"> -->
-						<!-- <form action="{% url 'homeapp:home' %}" method = "POST"></form>
-							<div class="buydiv">
-								<div id='buydiv3'><h2 style='display:inline;color:#0D6C6C;'>무료</h2></div>
-								<div id='buydiv2'>
-									<img src="{% static 'assets/css/images/free.png'%}" alt="image" id="payimg"/>
-									<input type="text" name="pay" value = "pay_990" hidden="True">
-								</div>
-								<button type="submit">무료사용</button>
-							</div>
-						</form> -->
-						<form action="{% url 'homeapp:home' %}" method = "POST">
-							<div class="buydiv">
-								<div id="buydiv3"><h2 style='display:inline;color:#0D6C6C;'>무료</div>
-								<div id='buydiv2'>
-									<img src="{% static 'assets/css/images/free.png'%}" alt="image" id="payimg"/>
-									<input type="text" name="pay" value = "pay_0" hidden="True">
-									
-								</div>
-								<button type="submit">무료사용</button>
-							</div>
-						</form>
-						<!-- </a>							 -->
-					</li>
-					
-					<li>
-						
-						<!-- <a href="{% url 'homeapp:home' %}"> -->
-						<form action="{% url 'homeapp:home' %}" method = "POST">
-							<div class="buydiv">
-								<div id="buydiv3"><h2 style='display:inline;color:#0D6C6C;'>990원</h2>/달</div>
-								<div id='buydiv2'>
-									<img src="{% static 'assets/css/images/990.png'%}" alt="image" id="payimg"/>
-									<input type="text" name="pay" value = "pay_990" hidden="True">
-									
-								</div>
-								<button type="submit">결제하기</button>
-							</div>
-						</form>
+{% extends "base.html" %}
+{% load static %} 
 
-						<!-- </a> -->
-					</li>
-					
-				</ul>
-			</section>
-		</div>
-            {% endblock %}
-            <!-- Footer -->
-            {% include 'base_footer.html' %}
-        </div>
-        {% include 'base_Scripts.html' %}
-    </body>
-</html>
+{% block content %}
+<div id='main'>	
+	<section id="paysec" class="main special">
+		<header class="major">
+			<h2>요금제</h2>
+		</header>
+		<ul class="statistics">
+			<li>
+				<!-- <a href="{% url 'homeapp:home' %}"> -->
+				<!-- <form action="{% url 'homeapp:home' %}" method = "POST"></form>
+					<div class="buydiv">
+						<div id='buydiv3'><h2 style='display:inline;color:#0D6C6C;'>무료</h2></div>
+						<div id='buydiv2'>
+							<img src="{% static 'assets/css/images/free.png'%}" alt="image" id="payimg"/>
+							<input type="text" name="pay" value = "pay_990" hidden="True">
+						</div>
+						<button type="submit">무료사용</button>
+					</div>
+				</form> -->
+				<form action="{% url 'homeapp:home' %}" method = "POST">
+					<div class="buydiv">
+						<div id="buydiv3"><h2 style='display:inline;color:#0D6C6C;'>무료</div>
+						<div id='buydiv2'>
+							<img src="{% static 'assets/images/free.png'%}" alt="image" id="payimg"/>
+							<input type="text" name="pay" value = "pay_0" hidden="True">
+							
+						</div>
+						<button type="submit">무료사용</button>
+					</div>
+				</form>
+				<!-- </a>							 -->
+			</li>
+			
+			<li>
+				
+				<!-- <a href="{% url 'homeapp:home' %}"> -->
+				<form action="{% url 'homeapp:home' %}" method = "POST">
+					<div class="buydiv">
+						<div id="buydiv3"><h2 style='display:inline;color:#0D6C6C;'>990원</h2>/달</div>
+						<div id='buydiv2'>
+							<img src="{% static 'assets/images/990.png'%}" alt="image" id="payimg"/>
+							<input type="text" name="pay" value = "pay_990" hidden="True">
+							
+						</div>
+						<button type="submit">결제하기</button>
+					</div>
+				</form>
+
+				<!-- </a> -->
+			</li>
+			
+		</ul>
+	</section>
+</div>
+{%endblock content%}

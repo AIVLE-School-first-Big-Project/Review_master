@@ -16,7 +16,8 @@
 }
 
 .mypage h1,
-.board h1 {
+.board h1,
+.board h2 {
     margin-bottom: 2rem;
 }
 
@@ -60,8 +61,7 @@ tr:nth-child(2n) {
 }
 
 .user-loginout {
-    margin: 5%;
-    width: 30em;
+    margin: 0;
     align-self: center;
     font-weight: bold;
 }
@@ -100,7 +100,7 @@ tr:nth-child(2n) {
 #userform_mypage>form>div:nth-child(7)>input,
 #userform_mypage>form>div>input,
 #userform_mypage>form>div>select {
-    width: 150%;
+    width: 100%;
     background-color: #1CEED11C;
     height: 3em;
     padding: 0 1rem;
@@ -116,7 +116,8 @@ tr:nth-child(2n) {
 }
 
 #check-loginout {
-    margin: 0 60%;
+    display: block;
+    margin: 0 auto;
 }
 
 #write-button {
@@ -126,4 +127,61 @@ tr:nth-child(2n) {
 
 #write-button a {
     font-weight: bold;
+}
+
+#main>div>form>div {
+    display: flex;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 6px;
+}
+
+#main>div>form>div>label {
+    width: 15%;
+    text-align: center;
+}
+
+.post-write.div {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 6px;
+}
+
+#title,
+#content,
+#answer_title,
+#answer_content {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 6px;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#content {
+    background-color: #E7FCF9C4;
+}
+
+#main>div>form>input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    height: 2rem;
+    font-size: 0.8rem;
+}
+
+.form_delete {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+#main>div>form>p {
+    text-align: center;
+}
+
+#main>div>section>table>tbody>tr {
+    vertical-align: middle;
 }
