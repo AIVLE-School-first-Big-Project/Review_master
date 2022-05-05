@@ -334,7 +334,7 @@ def result(request):
                     suvey_zip = zipfile.ZipFile(BytesIO(response.content))
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
                 association_paths = [
-                    "/WEB2/media/"+suvey_zip.filelist[i].filename for i in range(len(suvey_zip.filelist))]
+                    "/media/"+suvey_zip.filelist[i].filename for i in range(len(suvey_zip.filelist))]
 
                 # 여기는 더미값 넣는 값이다.
                 m_review_analysis = ReviewAnalysis()
