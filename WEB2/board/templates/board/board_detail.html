@@ -33,6 +33,9 @@
             {% endifequal %}
         </h2>
         <section class="qna_list">
+            {% if post.file_name %}
+            <img src="{{ post.file_name.url }}" />
+            {% endif %}
             <table class="table" style="table-layout:auto">
                     <tr class="text-center">
                         <th scope="col" width=20% style="font-weight:bold">제목</th>

@@ -11,7 +11,7 @@
 <div id="main">
     <div class="board">
         <h2>문의게시판 <span> | 영업일 기준 1일 이내 답변됩니다!</span></h2>
-            <form method="POST" action="{% url 'board:write' %}" class="post-write">
+            <form method="POST" action="{% url 'board:write' %}" class="post-write"  enctype="multipart/form-data">
                 {% csrf_token %}
                 <div>
                     <label for="title">제목</label><br>
@@ -21,8 +21,21 @@
                     <label for="content">내용</label><br>
                     <textarea name="content" id="content" cols="30" rows="10"></textarea>
                 </div>
+                {% comment %} <div>
+                    <label for="input-file" class="input-file-button">
+                        파일 선택
+                    </label>
+                    <input type="file" name="file_name" id="input-file" style="display:none">
+                    <span id="filepath" style="margin-top:0.2rem">선택된 파일 없음</span>
+                </div> {% endcomment %}
+                <div>
+                    <input type="file" name="file_name" id="input-file">
+                </div> 
                 <input type="submit" value="저장하기" />
             </form>
     </div>
 </div>
 {% endblock content %}
+{% comment %} {% block scripts %}
+    <script src="{% static 'assets/js/main2.js' %}"></script>
+{% endblock %} {% endcomment %}
