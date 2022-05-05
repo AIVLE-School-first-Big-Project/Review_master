@@ -17,13 +17,13 @@ def preprocessing(review):
     for sentence in kkma.sentences(review):
         sentence = re.sub('([a-zA-Z])','',sentence)
         sentence = re.sub('[ㄱ-ㅎㅏ-ㅣ]+','',sentence)
-        sentence = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','',sentence)
+        # sentence = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','',sentence)
         if len(sentence) == 0:
             continue
-        if len(sentence) < 198:
-            spelled_sent = spell_checker.check(sentence)
-            sentence = spelled_sent.checked
-        sentence += '. '
+        # if len(sentence) < 198:
+        #     spelled_sent = spell_checker.check(sentence)
+        #     sentence = spelled_sent.checked
+        # sentence += '. '
         total_review += sentence
     return total_review
 
@@ -55,7 +55,7 @@ def Gensim_summary(cursor,artice_code):
         # 여러 블로그 글에 대해서 모두 한개의 문서로 변환
         review = "\n".join(all_text)
         pp = preprocessing(review)  # 기본적인 텍스트 전처리(띄어쓰기 교정)
-        summary = summarize(pp, word_count = 150)
+        summary = summarize(pp, word_count = 200)
         summary = re.sub('\n', ' ',summary)
         return summary
     else:

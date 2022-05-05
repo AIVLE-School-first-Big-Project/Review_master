@@ -12,11 +12,16 @@ from django.urls import reverse
 import pandas as pd
 import requests
 import os
-import sys
+import sys , zipfile
 import json
 from datetime import date
+from io import BytesIO
+from pathlib import Path
+
 from dateutil.relativedelta import relativedelta
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+BASE_DIR1 = Path(__file__).resolve().parent.parent.parent
 
 
 con = sk.config()
@@ -24,6 +29,8 @@ Backend_filtering = "http://" + \
     con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/filtering/"
 Backend_summary = "http://" + \
     con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/summary/"
+Backend_association = "http://" + \
+    con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/association/"
 
 
 def age_group_check(birth_date):
@@ -210,7 +217,7 @@ def result(request):
 
                 # 만약 가격차이가 너무 나는 경우는 원하는 값이 아닐수도 있다.
 
-                average_price = sum(price) / len(price)
+                average_price = (sum(price) + 1) / (len(price) + 1)
 
                 for i in range(len(title)):
 
@@ -236,23 +243,30 @@ def result(request):
                 """
                 # 보낼 데이터 양식
                 item2 = {
-                    'artice_code': article_id
+                    'artice_code': article_id,
                 }
                 response = requests.post(Backend_summary, params=item2)
                 if response.status_code == 200:
                     print("요약 결과")
                     summary_data = response.json()["Decs"]
                     print(summary_data)
-
-            # if len(m_review_analysis) == 0:
-                # api로 데이터 보내기
+      
+                response = requests.post(Backend_association, params=item2)
+                print("경로 : ",BASE_DIR1)
+                if response.status_code == 200:
+                    print("연관어 결과")
+                    suvey_zip = zipfile.ZipFile(BytesIO(response.content))
+                    suvey_zip.extractall(os.path.join(BASE_DIR1,"WEB2/media"))
+                association_paths = ["/WEB2/media/"+suvey_zip.filelist[i].filename for i in range(len(suvey_zip.filelist))]
 
                 # 여기는 더미값 넣는 값이다.
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
                 m_review_analysis.summary = summary_data
                 m_review_analysis.emotion_url = "https://t1.daumcdn.net/cfile/tistory/99C9FA335DC91AB810"
-                m_review_analysis.associate_url = "https://some.co.kr/renewal_resources/images/association_guide_img.png"
+                m_review_analysis.associate_url1 = association_paths[0]
+                m_review_analysis.associate_url2 = association_paths[1]
+                m_review_analysis.associate_url3 = association_paths[2]
                 m_review_analysis.save()
 
             # reuslt값에 모든 데이터 작성해서 보내주기

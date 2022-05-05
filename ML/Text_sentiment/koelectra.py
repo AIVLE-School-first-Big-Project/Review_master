@@ -26,7 +26,7 @@ def Text_sentiment_inferense(cursor, artice_code):
     kkma = Kkma()
     sql = f'''
                 select review_id,content from ReviewData 
-                where article_id ={artice_code} 
+                where article_id ={artice_code} and advertise = 0
                 order by content_date DESC limit 5;
         
             '''
@@ -132,7 +132,7 @@ def Text_sentiment_inferense_review(cursor, artice_code, review_id):
     # file_name = f"./Data/{artice_code}_neg_pos.csv"
     # total_blog.to_csv( os.path.join(BASE_DIR, file_name), index=False,encoding='utf-8-sig')
 
-    return total_blog['pred'].values
+    return total_blog['context'].values , total_blog['pred'].values
 
 
 if __name__ == '__main__':
