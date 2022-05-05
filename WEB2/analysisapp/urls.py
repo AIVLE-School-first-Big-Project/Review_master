@@ -15,6 +15,7 @@ urlpatterns = [
     # path('home/', views.home, name='home'),
     path('result/', views.result, name='result'),
     path('choose/', views.choose, name='choose'),
+    path('detail/', views.detail, name='detail'),
 
 
 

@@ -52,10 +52,13 @@
 								{{review.title}}
 							</a>
 						</td>	
-						<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
-							<!-- <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" />  -->
+						<td>
+							긍정 : {{review.positive}}  부정 : {{review.negative}}  자세히보기
+						</td>
+						<!--<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
+							 <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 
 							<span style="color:#0A9383;">{{review.advertise_percent}}%</span>
-						</td>			
+						</td>	 -->		
 					</tr>
 					<tr style="text-align: justify;">
 						<td colspan="2" class="description_td">{{review.description}}</td>

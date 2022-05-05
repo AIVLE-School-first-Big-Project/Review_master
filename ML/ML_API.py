@@ -1,12 +1,15 @@
 from typing import List
-from fastapi import FastAPI ,Form,Body
+from fastapi import FastAPI, Form, Body
 import uvicorn
 from Text_summarization.Gensim import Gensim_summary
 from Filtering.Filtering import Adblock_filter
 import secret_key as sk
 from Text_sentiment.koelectra import Text_sentiment_inferense_review
 import urllib.request
-import time, requests, json,os
+import time
+import requests
+import json
+import os
 import pandas as pd
 from pydantic import BaseModel
 from pathlib import Path
@@ -28,17 +31,20 @@ sentiment_backbone_model = ElectraForSequenceClassification.from_pretrained(
 sentiment_backbone_model.load_state_dict(torch.load(os.path.join(BASE_DIR, 'Text_sentiment/model/huggingFace_model_82.pt')))
 #-------------------------------------------------------------------------------------------------------#
 # creating FastAPI APP
-app = FastAPI() 
+app = FastAPI()
 con = sk.config()
 
-os.makedirs(os.path.join(BASE_DIR,'Filtering/dummy/'),exist_ok=True)
+os.makedirs(os.path.join(BASE_DIR, 'Filtering/dummy/'), exist_ok=True)
 
 #-------------------------------------------------------------------------------------------------------#
 # create function
+
+
 def dowload_last_img(url):
-    save_img_path = os.path.join(BASE_DIR,'Filtering/dummy/test_img.png')
+    save_img_path = os.path.join(BASE_DIR, 'Filtering/dummy/test_img.png')
     opener = urllib.request.build_opener()
-    opener.addheaders = [('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
+    opener.addheaders = [
+        ('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
     try:
         urllib.request.install_opener(opener)
         urllib.request.urlretrieve(url, save_img_path)
@@ -52,12 +58,13 @@ def dowload_last_img(url):
         except:
             print("한글 에러2")
             url = ""
-    if len(url) !=0:
+    if len(url) != 0:
         files = {"file": open(save_img_path, "rb").read()}
-        response = requests.post('http://27.255.77.102:5000/evaluation',files=files)
+        response = requests.post(
+            'http://27.255.77.102:5000/evaluation', files=files)
         if response.status_code == 200:
             feature_text = response.json()
-            if len(feature_text) ==0:
+            if len(feature_text) == 0:
                 print("내용이 없다고? !!")
                 result = ""
             else:
@@ -66,27 +73,30 @@ def dowload_last_img(url):
             result = ""
     else:
         result = ""
-    print("OCR 결과 : ",result)
-    return result 
+
+    print("OCR 결과 : ", result)
+    return result
 
 #-------------------------------------------------------------------------------------------------------#
 # API
+
+
 @app.post('/summary/')
-async def Text_Summary(artice_code:int): 
+async def Text_Summary(artice_code: int):
     cursor = con.connect_DB()
 
-    print("상품 코드 : ",artice_code)
-    summary = Gensim_summary(cursor,artice_code=artice_code)
+    print("상품 코드 : ", artice_code)
+    summary = Gensim_summary(cursor, artice_code=artice_code)
 
     result = {
-        'Decs' : summary
+        'Decs': summary
     }
 
     return result
-    
+
 
 @app.post('/sentiment/')
-async def Blog_filter(artice_code:int, review_id:int):
+async def Blog_filter(artice_code: int, review_id: int):
     cursor = con.connect_DB()
     print("상품 코드 : ",artice_code, 'review : ',review_id)
     context_result , pos_neg_result = Text_sentiment_inferense_review(cursor, artice_code = artice_code, review_id= review_id, model = sentiment_backbone_model)
@@ -96,38 +106,38 @@ async def Blog_filter(artice_code:int, review_id:int):
 
     pos_neg_result = [int(val) for val in (pos_neg_result)]
     context_result = [str(text) for text in (context_result)]
-    blog_result = list(zip(context_result,pos_neg_result))
+    blog_result = list(zip(context_result, pos_neg_result))
     result = {
-        'positive' : positive,
-        'negative' : negative,
-        'blog_result':blog_result
+        'positive': positive,
+        'negative': negative,
+        'blog_result': blog_result
     }
     return result
 
 
 @app.post('/filtering/')
 # async def Blog_filter(Blog_Name :List[str]):
-async def Blog_filter(data: dict  = Body(...)):
+async def Blog_filter(data: dict = Body(...)):
     # print("키 정보 : ",data.keys())
     data = pd.DataFrame(data)
     data["context_img"] = dowload_last_img(data['last_img'].values[0])
     # print(data.columns)
-    y_pred, y_prod =  Adblock_filter(data_frame = data)
-    print("예측 결과 : ",int(y_pred))
+    y_pred, y_prod = Adblock_filter(data_frame=data)
+    print("예측 결과 : ", int(y_pred))
     result = {
-        'pred' : str(int(y_pred)),
-        'pro' :  str(round(float(y_prod[0][0]),2))
+        'pred': str(int(y_pred)),
+        'pro':  str(round(float(y_prod[0][0]), 2))
     }
     return result
 
 
 @app.post('/association/')
-async def association(artice_code:int):
+async def association(artice_code: int):
     cursor = con.connect_DB()
 
-    image_pathes =  Text_association_inferense(cursor, artice_code)
-    save_zip_file = os.path.join(BASE_DIR,'figImage.zip')
-    suvey_zip = zipfile.ZipFile(save_zip_file,"w")
+    image_pathes = Text_association_inferense(cursor, artice_code)
+    save_zip_file = os.path.join(BASE_DIR, 'figImage.zip')
+    suvey_zip = zipfile.ZipFile(save_zip_file, "w")
     for j in range(3):
         # print("저장 위치 : ",os.path.relpath(image_pathes[j]))
         suvey_zip.write(os.path.relpath(image_pathes[j]))

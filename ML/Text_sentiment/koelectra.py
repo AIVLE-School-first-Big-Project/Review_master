@@ -52,7 +52,7 @@ def Text_sentiment_inferense_review(cursor, artice_code, review_id, model):
     total_blog = pd.concat([total_blog, contents])
     total_blog['artice_code'] = artice_code
 
-    return total_blog['context'].values , total_blog['pred'].values
+    return total_blog['context'].values, total_blog['pred'].values
 
 
 if __name__ == '__main__':
