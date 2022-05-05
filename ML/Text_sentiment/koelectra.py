@@ -20,7 +20,11 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 # 다수의 문장을 한 문장씩 추론하는 것보다. 한번에 추론을 하는게 어떤지. 한문장씩?
 # 한문장씩 추론하는 API 부터 만들자.
 BASE_DIR = Path(__file__).resolve().parent
-
+device = torch.device('cpu')
+model = ElectraForSequenceClassification.from_pretrained(
+        "monologg/koelectra-small-v3-discriminator", num_labels=2).to(device)
+model.load_state_dict(torch.load(os.path.join(BASE_DIR, 'model/huggingFace_model_82.pt')))
+model.to(device)
 
 def Text_sentiment_inferense(cursor, artice_code):
     kkma = Kkma()
@@ -35,15 +39,9 @@ def Text_sentiment_inferense(cursor, artice_code):
     df = pd.DataFrame(rows, columns=['review_id', 'content'])
     total_blog = pd.DataFrame()
 
-    device = torch.device('cpu')
-    model = ElectraForSequenceClassification.from_pretrained(
-        "monologg/koelectra-small-v3-discriminator", num_labels=2).to(device)
-    print("경로 : ", BASE_DIR)
-    model.load_state_dict(torch.load(os.path.join(
-        BASE_DIR, 'model/huggingFace_model_82.pt')))
+    # print("경로 : ", BASE_DIR)
+    # model.load_state_dict(torch.load(os.path.join(BASE_DIR, 'model/huggingFace_model_82.pt')))
     model.eval()
-    model.to(device)
-
     for idx in range(5):
         row = df.loc[idx].values
         review_id = row[0]

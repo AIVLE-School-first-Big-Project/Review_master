@@ -45,7 +45,7 @@ def Gensim_summary(cursor,artice_code):
     cursor.execute(sql)
     rows = cursor.fetchall()
     df = pd.DataFrame(rows,columns= ['writer', 'content_date', 'content'])
-    print("DB 접근완료", df.shape[0])
+    print("DB 행의 갯수 : ", df.shape[0],"개 입니다.")
     if df.shape[0] != 0:
         # content에 널값이 없는 것에 대해서 추출
         df = df[df['content'].notnull()]
@@ -57,9 +57,12 @@ def Gensim_summary(cursor,artice_code):
         pp = preprocessing(review)  # 기본적인 텍스트 전처리(띄어쓰기 교정)
         summary = summarize(pp, word_count = 200)
         summary = re.sub('\n', ' ',summary)
-        return summary
+        if len(summary) ==0:
+            return "광고성 블로그 리뷰로 작성된 글이 대부분이라 요약이 불가능한 상태입니다. 추후 모니터닝을 실시하여 업데이트 하도록 하겠습니다."
+        else:
+            return summary
     else:
-        return "없는 상품 입니다. 웹사이트를 통해서 입력해주세요."
+        return "광고성 블로그 리뷰로 작성된 글이 대부분이라 요약이 불가능한 상태입니다. 추후 모니터닝을 실시하여 업데이트 하도록 하겠습니다."
 
 
 
