@@ -383,7 +383,7 @@ def service_start(company, word):
     df_check_ad(df)
     df = df[df["content_cnt"] != 0].reset_index(drop=True)
     print("종료되었습니다.")
-    # print(df.columns)
+    print(df.columns)
     return df
 
 

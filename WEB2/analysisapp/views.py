@@ -12,7 +12,8 @@ from django.urls import reverse
 import pandas as pd
 import requests
 import os
-import sys , zipfile
+import sys
+import zipfile
 import json
 from datetime import date
 from io import BytesIO
@@ -143,7 +144,21 @@ def result(request):
             if len(review) == 0 or crawling_check:
                 df = crawling_function.service_start(
                     search_company, search_name)
-                # df
+
+                try:
+                    df["내돈내산 키워드"]
+                except:
+                    m_article_info = ArticleInfo.objects.get(
+                        article_id=article_id)
+                    m_article_info.delete()
+
+                    m_article_code = ArticleCode.objects.get(
+                        article_id=article_id)
+                    m_article_code.delete()
+
+                    print("에러발생! 지움")
+
+                    return HttpResponseRedirect(reverse('homeapp:home'))
                 # Review Data에 데이터를 추가시켜주자. writer, content, description, content_date, first_img_url, last_img_url, url을 넣어준다.
                 url, title, post_date, description, writer, content, first_img_url, last_img_url \
                     = df["url"], df["title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]
@@ -250,14 +265,15 @@ def result(request):
                     print("요약 결과")
                     summary_data = response.json()["Decs"]
                     print(summary_data)
-      
+
                 response = requests.post(Backend_association, params=item2)
-                print("경로 : ",BASE_DIR1)
+                print("경로 : ", BASE_DIR1)
                 if response.status_code == 200:
                     print("연관어 결과")
                     suvey_zip = zipfile.ZipFile(BytesIO(response.content))
-                    suvey_zip.extractall(os.path.join(BASE_DIR1,"WEB2/media"))
-                association_paths = ["/WEB2/media/"+suvey_zip.filelist[i].filename for i in range(len(suvey_zip.filelist))]
+                    suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
+                association_paths = [
+                    "/WEB2/media/"+suvey_zip.filelist[i].filename for i in range(len(suvey_zip.filelist))]
 
                 # 여기는 더미값 넣는 값이다.
                 m_review_analysis = ReviewAnalysis()
@@ -321,7 +337,9 @@ def result(request):
 
             analysis_list["summary"] = m_review_analysis.summary
             analysis_list["emotion_url"] = m_review_analysis.emotion_url
-            analysis_list["associate_url"] = m_review_analysis.associate_url
+            analysis_list["associate_url1"] = m_review_analysis.associate_url1
+            analysis_list["associate_url2"] = m_review_analysis.associate_url2
+            analysis_list["associate_url3"] = m_review_analysis.associate_url3
 
             buy_list = []
             m_buy_list = BuyList.objects.filter(
