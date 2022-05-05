@@ -150,7 +150,9 @@ class ReviewAnalysis(models.Model):
     # 감정어 url
     emotion_url = TextField()
     # URL 주소
-    associate_url = TextField()
+    associate_url1 = TextField()
+    associate_url2 = TextField()
+    associate_url3 = TextField()
 
     class Meta:
         db_table = 'ReviewAnalysis'

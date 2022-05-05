@@ -151,9 +151,41 @@ class ReviewAnalysis(models.Model):
     # 감정어 url
     emotion_url = TextField()
     # URL 주소
-    associate_url = TextField()
+    associate_url1 = TextField()
+    associate_url2 = TextField()
+    associate_url3 = TextField()
 
     class Meta:
         db_table = 'ReviewAnalysis'
+        app_label = label_name
+        managed = False
+
+
+class ReviewSentiment(models.Model):
+
+    sentiment_id = IntegerField(primary_key=True, auto_created=True)
+    review_id = IntegerField()
+
+    article_id = IntegerField()
+
+    positive = IntegerField()
+    negative = IntegerField()
+
+    class Meta:
+        db_table = 'ReviewSentiment'
+        app_label = label_name
+        managed = False
+
+
+class ReviewSentimentDetail(models.Model):
+
+    id = IntegerField(primary_key=True, auto_created=True)
+    sentiment_id = IntegerField()
+
+    content = TextField()
+    sentiment = IntegerField()
+
+    class Meta:
+        db_table = 'ReviewSentimentDetail'
         app_label = label_name
         managed = False

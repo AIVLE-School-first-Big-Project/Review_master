@@ -26,71 +26,6 @@
 			</table>
 		</div>
 	</section>
-
-	
-	<!-- 연관어분석 시작 -->
-	<section id="associate" class="main special">
-		<header class="major">
-			<h2>연관어 분석</h2>
-		</header>
-		<div class="container">
-
-			<div class="my-slider">
-				<div>
-					<div>
-						<img class="associate_img" src="{{analysis_list.associate_url}}"/>
-					</div>
-					<div>
-						1번사진
-					</div>
-				</div>
-				<div>
-					<div>
-						<img class="associate_img" src="{{analysis_list.associate_url}}"/>
-					</div>
-					<div>
-						2번사진
-					</div>
-				</div>
-				<div>
-					<div>
-						<img class="associate_img" src="{{analysis_list.associate_url}}"/>
-					</div>
-					<div>
-							3번사진
-					</div>
-				</div>   
-			</div>	  
-		</div>
-		<div class="my-controls" aria-label="Carousel Navigation" tabindex="0">
-			<button  class="prev" data-controls="prev" tabindex="-1" aria-controls="controls" style="box-shadow: none;">
-				<img src= "{% static 'assets/images/left.svg'%}" alt="왼쪽" class="prev_img"></button>
-			<button class="next" data-controls="next" tabindex="-1" aria-controls="controls" style="box-shadow: none;">
-				<img src= "{% static 'assets/images/right.svg'%}" alt="오른쪽" class="next_img" </button>
-		</div>  
-		{% comment %} <ul class="statistics">
-			<li >
-				<img class="associate_img" src="{{analysis_list.associate_url}}">
-			</li>
-		</ul> {% endcomment %}
-		
-	</section>
-	<!-- 연관어분석끝 -->
-
-	<!-- 감성어분석 시작 -->
-	<section id="emotion" class="main special">
-		<header class="major">
-			<h2>감성어 분석</h2>
-		</header>
-		<ul class="statistics">
-			<li >
-				<img class="emotion_img" src="{{analysis_list.emotion_url}}">
-			</li>
-		</ul>
-		
-	</section>
-	<!-- 감성어분석끝 -->
-
 	<!-- 순수리뷰목록 시작 -->
 	<section id="review" class="main special" style="color:black;">
 		<header class="major">
@@ -117,10 +52,13 @@
 								{{review.title}}
 							</a>
 						</td>	
-						<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
-							<!-- <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" />  -->
+						<td>
+							긍정 : {{review.positive}}  부정 : {{review.negative}}  자세히보기
+						</td>
+						<!--<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
+							 <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 
 							<span style="color:#0A9383;">{{review.advertise_percent}}%</span>
-						</td>			
+						</td>	 -->		
 					</tr>
 					<tr style="text-align: justify;">
 						<td colspan="2" class="description_td">{{review.description}}</td>
@@ -137,12 +75,77 @@
 	</section>
 
 	<!-- 순수리뷰목록 끝 -->
+	
+	<!-- 연관어분석 시작 -->
+	<section id="associate" class="main special">
+		<header class="major">
+			<h2>연관어 분석</h2>
+		</header>
+		<div class="container">
+
+			<div class="my-slider">
+				<div>
+					<div>
+						<img class="associate_img" src="{{analysis_list.associate_url1}}"/>
+					</div>
+					<div>
+						1번사진
+					</div>
+				</div>
+				<div>
+					<div>
+						<img class="associate_img" src="{{analysis_list.associate_url2}}"/>
+					</div>
+					<div>
+						2번사진
+					</div>
+				</div>
+				<div>
+					<div>
+						<img class="associate_img" src="{{analysis_list.associate_url3}}"/>
+					</div>
+					<div>
+							3번사진
+					</div>
+				</div>   
+			</div>	  
+		</div>
+		<div class="my-controls" aria-label="Carousel Navigation" tabindex="0">
+			<button  class="prev" data-controls="prev" tabindex="-1" aria-controls="controls" style="box-shadow: none;">
+				<img src= "{% static 'assets/images/left.svg'%}" alt="왼쪽" class="prev_img"></button>
+			<button class="next" data-controls="next" tabindex="-1" aria-controls="controls" style="box-shadow: none;">
+				<img src= "{% static 'assets/images/right.svg'%}" alt="오른쪽" class="next_img" </button>
+		</div>  
+		{% comment %} <ul class="statistics">
+			<li >
+				<img class="associate_img" src="{{analysis_list.associate_url}}">
+			</li>
+		</ul> {% endcomment %}
+		
+	</section>
+	<!-- 연관어분석끝 -->
+
+	<!-- 감성어분석 시작 -->
+	<!-- <section id="emotion" class="main special">
+		<header class="major">
+			<h2>감성어 분석</h2>
+		</header>
+		<ul class="statistics">
+			<li >
+				<img class="emotion_img" src="{{analysis_list.emotion_url}}">
+			</li>
+		</ul>
+		
+	</section> -->
+	<!-- 감성어분석끝 -->
+
+
 
 	<!-- 구매링크 시작 -->
 	<section id="purchase" class="main special" style="color:black;">
 		<header class="major">
 			<h2>구매 링크 목록(네이버 쇼핑)</h2>
-			
+			네이버 쇼핑 정보를 가져왔습니다.
 		</header>
 		<ul class="statistics2">
 			<li >
