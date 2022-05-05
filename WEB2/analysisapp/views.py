@@ -18,12 +18,10 @@ import json
 from datetime import date
 from io import BytesIO
 from pathlib import Path
-
 from dateutil.relativedelta import relativedelta
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 BASE_DIR1 = Path(__file__).resolve().parent.parent.parent
-
 
 con = sk.config()
 Backend_filtering = "http://" + \
@@ -274,7 +272,7 @@ def result(request):
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
                 association_paths = [
                     "/media/"+suvey_zip.filelist[i].filename for i in range(len(suvey_zip.filelist))]
-
+                print(association_paths)
                 # 여기는 더미값 넣는 값이다.
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id

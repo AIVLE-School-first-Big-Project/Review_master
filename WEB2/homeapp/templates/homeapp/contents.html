@@ -5,7 +5,6 @@
 <section id="intro" class="main">
     <div style="align-text: center;">
         <div class="spotlight" id="spot" style="align-text: center;">
-
                 {% if check_box.first == 1 %}
                     <div class="box1">
                         <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
@@ -24,11 +23,9 @@
                             <input type="text" name="company" value = "{{recommand_list.company.5}}" hidden="True">
                             <input type="text" name="article_name" value = "{{recommand_list.name.5}}" hidden="True">
                             <button class="box3" type="submit" style="background-color:#FFE3C9; box-shadow: none;">{{recommand_list.company.5}} {{recommand_list.name.5}}</button>
-
                         </form>
                     </div>
-            {% endif %}
-
+                {% endif %}
                 {% if check_box.second == 1 %}
                 <div class="box1">
                     <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
@@ -82,7 +79,6 @@
                         <input type="text" name="company" value = "{{recommand_list.company.3}}" hidden="True">
                         <input type="text" name="article_name" value = "{{recommand_list.name.3}}" hidden="True">
                         <button class="box3" type="submit" style="background-color:#FFE3C9; box-shadow: none;">{{recommand_list.company.3}} {{recommand_list.name.3}}</button>
-
                     </form>
                 </div>
                 {% endif %}
@@ -148,7 +144,7 @@
         
                             </form>
                         </td> -->
-                        <td>{{keyword.1}} {{keyword.2}}</td>
+                        <td><a href="">{{keyword.1}} {{keyword.2}}</a></td>
                         <td>{{keyword.3}}</td>
                     </tr>
                 {% endfor %}

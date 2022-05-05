@@ -13,12 +13,19 @@ from pathlib import Path
 from Word_Association.association import Text_association_inferense
 from fastapi.responses import FileResponse
 from io import BytesIO,StringIO
-import zipfile
+import zipfile, torch
 from urllib import parse
 from urllib.parse import urlsplit, quote
+from transformers import ElectraForSequenceClassification
+
 
 BASE_DIR = Path(__file__).resolve().parent
 
+device = torch.device('cpu')
+sentiment_backbone_model = ElectraForSequenceClassification.from_pretrained(
+        "monologg/koelectra-small-v3-discriminator", num_labels=2).to(device)
+
+sentiment_backbone_model.load_state_dict(torch.load(os.path.join(BASE_DIR, 'Text_sentiment/model/huggingFace_model_82.pt')))
 #-------------------------------------------------------------------------------------------------------#
 # creating FastAPI APP
 app = FastAPI() 
@@ -82,7 +89,7 @@ async def Text_Summary(artice_code:int):
 async def Blog_filter(artice_code:int, review_id:int):
     cursor = con.connect_DB()
     print("상품 코드 : ",artice_code, 'review : ',review_id)
-    context_result , pos_neg_result = Text_sentiment_inferense_review(cursor, artice_code = artice_code, review_id= review_id)
+    context_result , pos_neg_result = Text_sentiment_inferense_review(cursor, artice_code = artice_code, review_id= review_id, model = sentiment_backbone_model)
     
     positive = int(sum(pos_neg_result))
     negative = int(len(pos_neg_result) - positive)
