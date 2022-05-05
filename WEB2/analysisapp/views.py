@@ -151,7 +151,7 @@ def result(request):
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
                 m_article_info.article_review_cnt = review_cnt
                 m_article_info.save()
-                for i in range(len(df)):
+                for idx, i in enumerate(range(len(df))):
                     m_review_data = ReviewData()
                     m_review_data.article_id = article_id
                     m_review_data.writer = writer[i]
@@ -191,7 +191,7 @@ def result(request):
                         "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
                     }
 
-                    print("필터링 시작합니다.")
+                    print(f"{idx} / {len(df)} 필터링 시작합니다.")
                     response = requests.post(Backend_filtering, json=data)
                     if response.status_code == 200:
                         filter_data = response.json()["pred"]
