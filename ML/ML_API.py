@@ -10,6 +10,10 @@ import time, requests, json,os
 import pandas as pd
 from pydantic import BaseModel
 from pathlib import Path
+from Word_Association.association import Text_association_inferense
+from fastapi.responses import FileResponse
+from io import BytesIO,StringIO
+import zipfile
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -52,7 +56,7 @@ def dowload_last_img(url):
 
 #-------------------------------------------------------------------------------------------------------#
 # API
-@app.post('/summary')
+@app.post('/summary/')
 async def Text_Summary(artice_code:int): 
     cursor = con.connect_DB()
 
@@ -66,7 +70,7 @@ async def Text_Summary(artice_code:int):
     return result
     
 
-@app.post('/sentiment')
+@app.post('/sentiment/')
 async def Blog_filter(artice_code:int, review_id:int):
     cursor = con.connect_DB()
     print("상품 코드 : ",artice_code)
@@ -102,22 +106,17 @@ async def Blog_filter(data: dict  = Body(...)):
     return result
 
 
-
 @app.post('/association/')
-# async def Blog_filter(Blog_Name :List[str]):
-async def Blog_filter(data: dict  = Body(...)):
-    # print("키 정보 : ",data.keys())
-    data = pd.DataFrame(data)
-    data["context_img"] = dowload_last_img(data['last_img'].values[0])
-    # print(data.columns)
-    y_pred, y_prod =  Adblock_filter(data_frame = data)
-    print("예측 결과 : ",int(y_pred))
-    result = {
-        'pred' : str(int(y_pred)),
-        'pro' :  str(round(float(y_prod[0][0]),2))
-    }
-    return result
+async def association(artice_code:int):
+    cursor = con.connect_DB()
 
+    image_pathes =  Text_association_inferense(cursor, artice_code)
+    save_zip_file = os.path.join(BASE_DIR,'figImage.zip')
+    suvey_zip = zipfile.ZipFile(save_zip_file,"w")
+    for j in range(3):
+        suvey_zip.write(os.path.relpath(image_pathes[j]))
+    suvey_zip.close()
+    return FileResponse(save_zip_file, media_type='application/x-zip-compressed', filename="result.zip")
 
 #-------------------------------------------------------------------------------------------------------#
 if __name__ == '__main__':

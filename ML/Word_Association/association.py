@@ -43,13 +43,11 @@ from konlpy.tag import Hannanum
 from collections import Counter
 
 
-
-
 # 한개의 블로그에서 다수의 문장이 존재할것이다.
 # 다수의 문장을 한 문장씩 추론하는 것보다. 한번에 추론을 하는게 어떤지. 한문장씩?
 # 한문장씩 추론하는 API 부터 만들자.
 BASE_DIR = Path(__file__).resolve().parent
-korean_stopwords_path = "korean_stopwords.txt"
+korean_stopwords_path = os.path.join(BASE_DIR,"korean_stopwords.txt")
 
 with open(korean_stopwords_path, encoding='utf8') as f:
     stopwords = f.readlines()
@@ -75,7 +73,6 @@ def get_nouns(x):
 #-------------------------------------------------------------------------------------------------------#
 # main function
 def Text_association_inferense(cursor, artice_code):
-    
     sql = f'''
                 select review_id,content from ReviewData 
                 where article_id ={artice_code} and advertise = 0
@@ -85,9 +82,7 @@ def Text_association_inferense(cursor, artice_code):
     rows = cursor.fetchall()
     df = pd.DataFrame(rows, columns=['review_id', 'content'])
     df['content'] = df['content'].apply(lambda x: text_cleaning(x))
-
     df['nouns'] = df['content'].apply(lambda x: get_nouns(x))
-    df.drop(columns=["created", "tweet_text", "ko_text"],inplace=True)
 
     # 동시출현 단어쌍 (말뭉치) 도출
     count = {}   #동시출현 빈도가 저장될 dict
@@ -96,7 +91,6 @@ def Text_association_inferense(cursor, artice_code):
         words = list(set(line))   
         #한줄씩 읽어와서 단어별로 분리(unique한 값으로 받아오기)
         #split은 띄어쓰기를 단어로 구분하라는 함수 
-        
         for i, a in enumerate(words):
             for b in words[i+1:]:
                 if a>b: 
@@ -125,6 +119,9 @@ def Text_association_inferense(cursor, artice_code):
         'font_size':10,
         # 'node_shape':"o",
     }
+    img_save_folder_path = os.path.join(BASE_DIR,"figImage")
+    img_pathes = []
+    os.makedirs(img_save_folder_path,exist_ok=True)
     for idx in tqdm(range(3)):
         result_df_1 = result_df[result_df['word1']==name_values[idx]].reset_index(drop=True).head(10)
         G_centrality = nx.Graph()
@@ -159,9 +156,11 @@ def Text_association_inferense(cursor, artice_code):
         nx.draw(G, node_size=sizes, pos=nx.spring_layout(G, k=30, iterations=1000), **options, font_family=font_name)  # font_family로 폰트 등록
         ax = plt.gca()
         ax.collections[0].set_edgecolor("#0B8B8B")
-
-        plt.savefig("1pi.jpg")
-        plt.show()
-    pass
+        save_img_name = f"figImage/fig_{artice_code}_{idx}.jpg"
+        save_img_path = os.path.join(BASE_DIR,save_img_name)
+        img_pathes.append(save_img_path)
+        plt.savefig(save_img_path)
+        
+    return img_pathes
 
 
