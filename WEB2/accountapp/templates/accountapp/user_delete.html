@@ -13,12 +13,13 @@
     <div class="mypage">
         <div class="delete_my">
             <h1> 마이페이지 > <strong style="color:#D64925;">회원탈퇴</strong></h1>
+            <img src="{% static '/assets/css/images/userdelete.png' %}" style="max-width:100%">
         </div>
-        <form method="POST" class="form_delete">
-            {% csrf_token %}
-            <p>정말로 탈퇴하시겠습니까?</p>
-            <input type="submit" value="탈퇴"/>
-        </form>
+            <form method="POST" class="form_delete" style="font-size:1.5rem">
+                {% csrf_token %}
+                <p>이 모든 혜택을 두고 탈퇴하시려면 <input type="submit" value="여기" style="box-shadow:none;font-size:1.3rem; border: 1px dotted darkred;"> 를 눌러주세요</p>
+                {% comment %} <input type="submit" value="탈퇴"/> {% endcomment %}
+            </form>
     </div>
 
 </div>
