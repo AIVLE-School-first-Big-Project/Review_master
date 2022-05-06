@@ -137,3 +137,11 @@ fieldset {
     border: none;
     border-radius: 6px;
 }
+
+input[type="checkbox"] {
+    display: inline !important;
+}
+
+#main>div>div>form>input[type=hidden] {
+    height: 2rem;
+}
