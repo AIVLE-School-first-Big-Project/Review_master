@@ -1,4 +1,4 @@
-# 관심상품분석은 우리가 할게! 넌 결정만 해 :speak_no_evil:
+# 관심있는 전자제품 우리가 AI로 분석할게! 넌 결정만 해 :speak_no_evil:
 > __안녕하세요 :wink: 저희는 부산아이(Ai)가의 `REVIEW_MASTER`팀 입니다.__
 > 
 > KT AIVLE SCHOOL 1기 BigProject 14조 (AI부산경남1반 2조)

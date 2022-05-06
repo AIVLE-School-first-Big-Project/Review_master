@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block content %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/detail.css' %}?after" type="text/css"/> 
+{% endblock %}
+<div id='main'>	
+    <div class="main_div">
+        <header><h2>< 순수리뷰 AI 상세분석</h2></header>
+        <div class="">
+            <div class="titlebox">긍정부정비율</div>
+            <div class="barimg">
+                <img src="{% static 'assets/images/bar.PNG'%}" alt="image"/>
+            </div>
+        </div>
+        <div class="">
+            <div class="titlebox">긍정문장</div>
+            <div>
+                <table>
+                    <tr >
+                        <td>1</td>
+                        <td class="positive_td">이곳은 문장 내용이 들어갈 곳 입니다!555555555555555555555555555555555555555555555555555555555555555555555555555</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="">
+            <div class="titlebox">부정문장</div>
+            <div>
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td class="negative_td">이곳은 문장 내용이 들어갈 곳 입니다!</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

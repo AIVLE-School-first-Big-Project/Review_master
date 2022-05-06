@@ -1,0 +1,29 @@
+.titlebox {
+    padding-top: 0.43rem;
+    text-align: center;
+    width: 7rem;
+    height: 2.2rem;
+    background-color: #17A6A6;
+    color: white;
+    font-size: 1rem;
+    border-radius: 20px;
+    align-items: center;
+}
+.head{
+    text-align: left;
+}
+
+.barimg{
+    margin-top: 12px;
+}
+
+.main_div{
+    margin-left: 5rem;
+}
+
+.positive_td{
+    color: #0E5EC6;
+}
+.negative_td{
+    color: #890C0C;
+}

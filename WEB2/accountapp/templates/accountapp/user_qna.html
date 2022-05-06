@@ -31,17 +31,17 @@
                     <tbody>
                         {% for list in postlist reversed %}
                         <tr class="text-center">
-                            <th scope="row" width=10%>
+                            <th scope="row" width=5%>
                                 <span>{{ list.id }}</span>
                             </th>
-                            <td width=20%>
+                            <td width=10%>
                                 {% if list.answer_title %}
                                     <img src="{% static 'assets/images/게시판_답변완료.png' %}" />
                                 {% else %}
                                     <img  src="{% static 'assets/images/게시판_미답변.png' %}" />
                                 {% endif %}
                             </td>
-                            <td width=60%>
+                            <td width=75%>
                                 <a href="{% url 'board:detail' id=list.id %}">
                                 <span>{{ list.title }}</span>
                                 </a>

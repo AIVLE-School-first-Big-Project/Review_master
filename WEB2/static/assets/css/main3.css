@@ -365,7 +365,8 @@ textarea {
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
+    /* 주석처리했음다  */
+    /* vertical-align: baseline; */
     font-family: 'NanumSquareBold';
 }
 
