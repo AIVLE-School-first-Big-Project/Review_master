@@ -167,7 +167,7 @@ def pay(request):
 
 def agreement(request):
     if request.method=="POST":
-        if request.POST.get('agreement1', False) and request.POST.get('agreement2', False):
+        if request.POST.get('agreement1', True) and request.POST.get('agreement2', True):
             request.session['agreement']=True
             return redirect('/app/account/signup')
         else:
