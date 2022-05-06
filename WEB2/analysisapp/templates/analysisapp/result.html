@@ -16,7 +16,7 @@
 					{% else %}
 						<td rowspan="2" class="reviewtd" style="vertical-align: middle; "><img id="reviewimg" src="{{data_info.img_url}}" alt="image" id="review_img" width = "200" height="200"/></td>
 					{% endif %}
-					<td class="content2" <span style="font-weight: bolder;">[ <span style="color:#188585;">{{data_info.company}} {{data_info.name}}</span> ]를 검색한 결과 총 {{data_info.review_cnt}}개의 리뷰에서 <span style="color:#E710C3;">{{data_info.pure_cnt}}개의 순수리뷰</span>를 분석하였습니다.</td>
+					<td class="content2" style="font-weight: bolder;">[<span style="color:#188585;">{{data_info.company}} {{data_info.name}}</span> ]를 검색한 결과 총 {{data_info.review_cnt}}개의 리뷰에서 <span style="color:#E710C3;">{{data_info.pure_cnt}}개의 순수리뷰</span>를 분석하였습니다.</td>
 				</tr>
 				<tr class=review_tr>
 					<td class="content">{{analysis_list.summary}}</td>
@@ -36,6 +36,9 @@
 
 			<div>
 				<table class='resulttable'>
+					<tr style="text-align: right;font-size:1rem">
+						<td colspan="3" class="description_td"> ※ AI분석을 통해서 광고성을 제외하고 여러분에게 추천드립니다!</td>
+					</tr>
 					{% for review in review_list %}
 					<tr>
 						<td rowspan="3" style="vertical-align: bottom; ">
@@ -64,9 +67,7 @@
 						<td colspan="2" class="description_td">{{review.description}}</td>
 					</tr>
 					{% endfor %}
-					<tr style="text-align: right;font-size:1rem">
-						<td colspan="3" class="description_td"> AI분석을 통해서 광고성을 제외하고 여러분에게 추천드립니다!</td>
-					</tr>
+					
 				</table>
 			</div>
 			</li>
@@ -145,11 +146,13 @@
 	<section id="purchase" class="main special" style="color:black;">
 		<header class="major">
 			<h2>구매 링크 목록(네이버 쇼핑)</h2>
-			네이버 쇼핑 정보를 가져왔습니다.
 		</header>
 		<ul class="statistics2">
 			<li >
-				<table class="buy_table" id="buy_table" styles="color=black">	
+				<table class="buy_table" id="buy_table" styles="color=black">
+					<tr style="text-align: right;font-size:1rem">
+						<td colspan="3" class="description_td"> ※ 네이버 쇼핑 정보를 가져왔습니다.</td>
+					</tr>	
 					{% for buy in buy_list %}
 					<tr styles="color=black">
 						<td styles="color=black">
