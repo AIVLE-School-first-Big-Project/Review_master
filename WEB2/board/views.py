@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from sqlalchemy import null
 from accountapp.models import Member
 from board.models import QABoard
 from django.db.models import Max
