@@ -10,18 +10,19 @@
 </div>
 <div id="main">
     <div class="s004">
-        <div class="user-loginout">
-
-        <h2 style="font-weight: bold;"><i class="fas fa-check" style="color:#17A6A6"></i> 개인정보 수집 및 이용</h2>
+        <div style="margin:10%;align-self:center;">
+        <br>
+        <h2 style="font-weight: bold;text-align:center;margin-bottom:2rem">개인정보 수집 및 이용 동의</h2>
+            <img src="{% static 'assets/css/images/form_bar.png' %}" class="bar" style="display: block;margin: 0 auto;margin-bottom: 4rem;" />
         <div class="z-depth-1"
             style="font-size: 13px; background-color: white; border:1px solid #ddd; height:195px;overflow:auto;padding:5px;">
             <dl>
                 <dt>
-                    시행일자: 2020년 03월 01일
+                    시행일자: 2022년 05월 01일
                 </dt>
                 <br>
                 <dd>
-                    REBORN(이하 "회사" 또는 "REBORN"이라고 함)은 통신비밀보호법, 전기통신사업법, 정보통신망 이용촉진 및 정보보호 등에 관한
+                    본 회사(이하 "회사" 라고 함)은 통신비밀보호법, 전기통신사업법, 정보통신망 이용촉진 및 정보보호 등에 관한
                     법률 등 정보통신서비스제공자가 준수하여야 할 관련
                     법령상의 개인정보보호 규정을 준수하며, 관련 법령에 의거한 개인정보취급방침을 정하여 이용자 권익 보호에 최선을 다하고
                     있습니다.<br /><br />
@@ -199,13 +200,18 @@
                 </dd>
             </dl>
         </div>
-        <div class="col-12 text-right">
-            <label style="padding-top: 10px;">
-                <input type="checkbox" name="agreement1" id="agreement1" />
-                <span style="font-weight: bold;">개인정보 수집 및 이용에 동의합니다.</span>
+        <form method="POST" action="{% url 'account:agreement' %}" style="padding-top:10px;max-width:100%" class="agreement">
+            {% csrf_token %}
+            <input type="checkbox" name="agreement" id="agreement" checked/>
+            <label for="agreement">
+                <span></span>
+                개인정보 수집 및 이용에 동의합니다.
             </label>
-            <!-- <strong><input type="checkbox" name="agreement2"> 개인정보 수집 및 이용에 동의합니다.</strong> -->
-        </div>
+            <input type="submit" value="제출하기" style="display:block;margin:2rem auto" />
+        </form>
+    </div>
+    </div>
+</form>
     </div>
     </div>
 </div>

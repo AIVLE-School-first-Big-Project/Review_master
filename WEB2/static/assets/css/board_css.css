@@ -28,9 +28,19 @@ th {
     text-align: left;
 }
 
-.board,
-.mypage {
-    padding: 3rem;
+@media screen and (min-width: 870px) {
+    .board,
+    .mypage {
+        padding: 3rem;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .board,
+    .mypage {
+        padding: 1rem;
+        font-size: 10pt;
+    }
 }
 
 .board-title {
@@ -50,6 +60,7 @@ th {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 tr:nth-child(2n) {
@@ -173,9 +184,18 @@ tr:nth-child(2n) {
     font-size: 0.8rem;
 }
 
-.form_delete {
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+@media screen and (min-width: 870px) {
+    .form_delete {
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .form_delete {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
 }
 
 #main>div>form>p {

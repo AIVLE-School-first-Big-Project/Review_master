@@ -167,11 +167,11 @@ def pay(request):
 
 def agreement(request):
     if request.method=="POST":
-        if request.POST.get('agreement1', True) and request.POST.get('agreement2', True):
+        if request.POST.get('agreement', False):
             request.session['agreement']=True
             return redirect('/app/account/signup')
         else:
-            messages.info(request, "약관에 모두 동의해주세요.")
+            messages.info(request, "약관에 동의해주세요.")
             return render(request, 'accountapp/agreement.html')
     else:
         request.session['agreement'] = False
