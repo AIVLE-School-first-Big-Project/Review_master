@@ -43,10 +43,10 @@
         </div>
         <div>
             <div class="titlebox">Chap 3. 문장감성분석</div>
-			<div class="barimgdiv">
-                <div class="guide_text" style="font-size: 1.2rem;">#Tip : 다른 긍정부정 문장을 확인하고자 한다면 새로고침을 해주세요</div>
+            <div><br>
+                <h2>#블로그 내 <span style="color: #1E88E5;font-weight: bolder;">긍정</span>문장</h2>
+                <br>
             </div>
-            <div><br><h2>#블로그 내 긍정문장</h2><br></div>
             <div class="emo_div">
                 <!-- <div class="positive_box">#긍정</div> -->
                 <div>
@@ -60,7 +60,9 @@
                     </table>
                 </div>
             </div>
-            <div><br><h2>#블로그 내 부정문장</h2><br></div>
+            <div><br>
+                <h2>#블로그 내 <span style="color: #FF0D57;font-weight: bolder;">부정</span>문장</h2>
+                <br></div>
             <div>
                 <table>
                     {% for negative in negative_list %}
@@ -71,41 +73,12 @@
                     {% endfor %}
                 </table>
             </div>
-
+            <div><br></div>
+            <div class="barimgdiv">
+                <div class="guide_text" style="font-size: 1.2rem;">#Tip : 다른 긍정부정 문장을 확인하고자 한다면 새로고침을 해주세요</div>
+            </div>
         </div>
     </div>
 	</section>
-    <div class="main_div">
-        <div class="guide_container">
-            <div class="titlebox">긍정부정문장</div>
-            <div class="guide_text">다른 긍정부정문장을 보고싶다면 새로고침을 해주세요</div>
-        </div>
-        <div class="emo_div">
-            <div class="positive_box">긍정문장</div>
-            <div>
-                <table>
-                    {% for positive in positive_list %}
-                    <tr >
-                        <td class="positive_num"><mark class="blue">{{positive.idx}}</mark></td>
-                        <td class="positive_td">{{positive.content}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-        <div class="emo_div">
-            <div class="negative_box">부정문장</div>
-            <div>
-                <table>
-                    {% for negative in negative_list %}
-                    <tr>
-                        <td class="negative_num"><mark class="red">{{negative.idx}}</mark></td>
-                        <td class="negative_td">{{negative.content}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    </div>
 </div>
 {%endblock content%}
