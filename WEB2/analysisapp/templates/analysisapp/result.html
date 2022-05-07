@@ -36,27 +36,29 @@
 
 			<div>
 				<table class='resulttable'>
-					<tr style="text-align: right;font-size:1rem">
-						<td colspan="3" class="description_td"> ※ AI분석을 통해서 광고성을 제외하고 여러분에게 추천드립니다!</td>
+					<tr style="text-align: center;font-size:1rem">
+						<td colspan="2" class="description_td"> ※ AI분석을 통해 광고성글을 제외하고 여러분에게 추천드립니다!</td>
 					</tr>
 					{% for review in review_list %}
 					<tr>
-						<td rowspan="3" style="vertical-align: bottom; ">
+						<td rowspan="4" style="vertical-align: bottom; ">
 							<a href = "{{review.url}}">
 								<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
 							</a>
-							</td>	
+						</td>	
 							
-						</tr>
+					</tr>
 					<tr class="review_url" style="text-align: justify;">
 
 						<td class="review_td" style="font-weight: bolder;">
 							<a href = "{{review.url}}">
 								{{review.title}}
 							</a>
-						</td>	
-						<td>
-							긍정 : {{review.positive}}  부정 : {{review.negative}}  자세히보기
+						</td>
+					</tr>
+					<tr class="review_detail" style="text-align: justify;">
+						<td class="review_detail_td">
+							<span id="po_text">긍정도</span> <span id="po_num_text">{{review.positive}}%</span>  <span id="ne_text">부정도</span> <span id="ne_num_text">{{review.negative}}%</span>  <span id="de_text">자세히+</span>
 						</td>
 						<!--<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
 							 <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 
@@ -150,7 +152,7 @@
 		<ul class="statistics2">
 			<li >
 				<table class="buy_table" id="buy_table" styles="color=black">
-					<tr style="text-align: right;font-size:1rem">
+					<tr style="text-align: center;font-size:1rem">
 						<td colspan="3" class="description_td"> ※ 네이버 쇼핑 정보를 가져왔습니다.</td>
 					</tr>	
 					{% for buy in buy_list %}
