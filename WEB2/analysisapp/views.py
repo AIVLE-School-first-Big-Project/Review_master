@@ -445,6 +445,70 @@ def choose(request):
     return render(request, 'analysisapp/choose.html')
 
 
-def detail(request):
+def detail(request, sentiment_id):
+    m_review_sentiment = ReviewSentimentDetail.objects.filter(
+        sentiment_id=sentiment_id)
 
-    return render(request, 'analysisapp/detail.html')
+    positive_list = []
+    negative_list = []
+    positive = 1
+    negative = 1
+
+    # for i in m_review_sentiment:
+    #     if i.sentiment == 0:
+    #         if negative == 6:
+    #             continue
+    #         negative_list.append(
+    #             {
+    #                 "idx": negative,
+    #                 "content": i.content
+    #             })
+    #         negative += 1
+    #     else:
+    #         if positive == 6:
+    #             continue
+    #         positive_list.append({
+    #             "idx": positive,
+    #             "content": i.content
+    #         })
+    #         positive += 1
+
+    # num = random.sample([i for i in range(len(m_review_sentiment))], len(m_review_sentiment))
+    positive_list = []
+    negative_list = []
+    positive_lists = []
+    negative_lists = []
+    for i in m_review_sentiment:
+        if i.sentiment == 0:
+            negative_lists.append(i.content)
+        else:
+            positive_lists.append(i.content)
+    if len(negative_lists) > 5:
+        negative_num = random.sample(
+            [i for i in range(len(negative_lists))], 5)
+    else:
+        negative_num = random.sample(
+            [i for i in range(len(negative_lists))], len(negative_lists))
+
+    if len(positive_lists) > 5:
+        positive_num = random.sample(
+            [i for i in range(len(positive_lists))], 5)
+    else:
+        positive_num = random.sample(
+            [i for i in range(len(positive_lists))], len(positive_lists))
+
+    for idx, i in enumerate(negative_num):
+        negative_list.append({
+            "idx": idx+1,
+            "content": negative_lists[i]
+        })
+    for idx, i in enumerate(positive_num):
+        positive_list.append({
+            "idx": idx+1,
+            "content": positive_lists[i]
+        })
+
+    return render(request, 'analysisapp/detail.html', {
+        "positive_list": positive_list,
+        "negative_list": negative_list
+    })
