@@ -11,7 +11,7 @@ h2.head_h2{
 .titlebox {
     padding-top: 0.1rem;
     text-align: center;
-    width: 7.5rem;
+    width: 10.5rem;
     height: 2rem;
     background-color: #17A6A6;
     color: white;
@@ -136,4 +136,8 @@ td.blog_name{
 }
 .blog_img_td{
     width: 7rem;
+}
+.de_text{
+    color: #6F7271;
+    font-size: 1.3rem;
 }

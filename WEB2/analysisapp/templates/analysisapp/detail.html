@@ -4,11 +4,18 @@
 {% block styles %}
     <link rel="stylesheet" href="{% static 'assets/css/detail.css' %}?after" type="text/css"/> 
 {% endblock %}
-<div id='main' class="maincl">	
-    <div class="main_div">
-        <header><h2 class="head_h2"><span id="headcs"><</span> 순수리뷰 AI 상세분석</h2></header>
+<div id='main' class="maincl">
+    <section id="review" class="main special" style="color:black;">
+		<header class="major">
+			<h2>블로그 리뷰 AI 상세분석</h2>
+            <table class='resulttable'>
+                <tr style="text-align: center;font-size:1rem">
+                    <td colspan="1" class="description_td de_text">#AI분석을 통해 광고성글을 제외하고 여러분에게 추천드립니다!</td>
+                </tr>
+            </table>
+        </header>
         <div>
-            <div class="titlebox">순수리뷰글</div>
+            <div class="titlebox">Chap 1. 블로그 정보</div>
 			<table class="">
 				<tr class="">
 					<td rowspan="2" class="blog_img_td" style="vertical-align: middle; "><img id="img_review" src="{% static 'assets/images/yunji.png' %}" alt="image"/></td>
@@ -18,10 +25,26 @@
 					<td class="blog_text">이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.</td>
 				</tr>
 			</table>
-		</div>
+        </div>
+        <div>
+            <br><br>
+        </div>
+        <div>
+            <div class="titlebox">Chap 2. AI 동작 원리</div>
+			<table class="">
+				<tr class="">
+					<td rowspan="2" class="blog_img_td" style="vertical-align: middle; "><img id="img_review" src="{% static 'assets/images/yunji.png' %}" alt="image"/></td>
+					<td class="blog_name" style="font-weight: bolder; ">IT의 세상 블로그</td>
+				</tr>
+				<tr class="">
+					<td class="blog_text">이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.</td>
+				</tr>
+			</table>
+        </div>
+	</section>
+    <div class="main_div">
         <div class="">
             <div class="titlebox">긍정부정비율</div>
-            
             <div class="barimgdiv">
                 <img class="barimg" src="http://iptimejong96.iptime.org:1415/explain/?review_id={{review_id}}" alt="image"/>
             </div>
