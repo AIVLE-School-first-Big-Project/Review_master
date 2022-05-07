@@ -493,6 +493,9 @@ def detail(request, sentiment_id):
     m_review_sentiment = ReviewSentimentDetail.objects.filter(
         sentiment_id=sentiment_id)
 
+    m_review = ReviewSentiment.objects.get(
+        sentiment_id=m_review_sentiment[0].sentiment_id)
+
     positive_list = []
     negative_list = []
     positive = 1
@@ -553,6 +556,7 @@ def detail(request, sentiment_id):
         })
 
     return render(request, 'analysisapp/detail.html', {
+        "review_id": m_review.review_id,
         "positive_list": positive_list,
         "negative_list": negative_list
     })
