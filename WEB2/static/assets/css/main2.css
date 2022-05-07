@@ -138,8 +138,10 @@ fieldset {
     border-radius: 6px;
 }
 
+input[type="checkbox"] {
+    display: inline !important;
+}
 
-/* 
-input.agreement {
-    appearance: checkbox !important;
-} */
+#main>div>div>form>input[type=hidden] {
+    height: 2rem;
+}
