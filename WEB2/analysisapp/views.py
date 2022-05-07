@@ -414,16 +414,18 @@ def result(request):
 
                 if len(review_list) == 10:
                     continue
-                m_review_sentiment = ReviewSentiment.objects.get(
+                m_review_sentiment = ReviewSentiment.objects.filter(
                     review_id=review.review_id, article_id=review.article_id)
-                pos = m_review_sentiment.positive
-                neg = m_review_sentiment.negative
+                if len(m_review_sentiment) != 0:
+                    pos = m_review_sentiment.positive
+                    neg = m_review_sentiment.negative
 
-                pos_per = int(pos / (neg+pos) * 100)
-                neg_per = 100 - pos_per
-                review_dict["positive"] = pos_per
-                review_dict["negative"] = neg_per
-                review_dict["sentiment_id"] = m_review_sentiment.sentiment_id
+                    pos_per = int(pos / (neg+pos) * 100)
+                    neg_per = 100 - pos_per
+                    review_dict["positive"] = pos_per
+                    review_dict["negative"] = neg_per
+                    review_dict["sentiment_id"] = \
+                        m_review_sentiment.sentiment_id
 
                 review_list.append(review_dict)
 
