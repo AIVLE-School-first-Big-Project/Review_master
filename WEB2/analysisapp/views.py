@@ -198,13 +198,11 @@ def result(request):
                     # 51 -> pro
                     # 1 -> pred
 
-                    print(data)
-
                     print(f"{idx} / {len(df)} 필터링 시작합니다.")
                     m_review_data.save()
 
                     m_review_data = ReviewData.objects.get(
-                        article_id=article_id, writer=writer[i], url=url[i])
+                        article_id=article_id, writer=writer[i], url=url[i], content_date=post_date[i])
                     data = {
                         "review_id": [str(m_review_data.review_id)],
                         "last_img": [str(last_img_url[i])],
