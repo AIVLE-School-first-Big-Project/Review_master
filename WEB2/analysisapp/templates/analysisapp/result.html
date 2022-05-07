@@ -56,7 +56,9 @@
 							</a>
 						</td>	
 						<td>
-							긍정 : {{review.positive}}  부정 : {{review.negative}}  자세히보기
+							긍정 : {{review.positive}}  부정 : {{review.negative}}  <a href = "/app/analysis/detail/{{review.sentiment_id}}">
+								자세히보기
+							</a>
 						</td>
 						<!--<td class="soonsudo_td" style="text-align: right; padding: 0;"><span style="color:#31BEAD;">순수도</span> 
 							 <img class="soonsudo_img" src="{% static 'assets/images/soonsudo10.png'%}" alt="image" /> 

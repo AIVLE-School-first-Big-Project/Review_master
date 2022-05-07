@@ -372,7 +372,8 @@ def result(request):
                     "title": [],
                     "advertise_percent": [],
                     "positive": [],
-                    "negative": []
+                    "negative": [],
+                    "sentiment_id": []
                 }
 
                 review_dict["writer"] = review.writer
@@ -396,6 +397,7 @@ def result(request):
 
                 review_dict["positive"] = m_review_sentiment.positive
                 review_dict["negative"] = m_review_sentiment.negative
+                review_dict["sentiment_id"] = m_review_sentiment.sentiment_id
                 review_list.append(review_dict)
 
             data_info["pure_cnt"] = review_cnt
