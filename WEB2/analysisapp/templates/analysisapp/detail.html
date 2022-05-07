@@ -6,38 +6,50 @@
 {% endblock %}
 <div id='main' class="maincl">	
     <div class="main_div">
-        <header><h2>< 순수리뷰 AI 상세분석</h2></header>
+        <header><h2 class="head_h2"><span id="headcs"><</span> 순수리뷰 AI 상세분석</h2></header>
+        <div>
+            <div class="titlebox">순수리뷰글</div>
+			<table class="">
+				<tr class="">
+					<td rowspan="2" class="" style="vertical-align: middle; "><img id="img_review" src="{% static 'assets/images/yunji.png' %}" alt="image" id=""/></td>
+					<td class="" style="font-weight: bolder;">IT의 세상 블로그</td>
+				</tr>
+				<tr class="">
+					<td class="">이곳은 글을 쓰는 곳입니다.</td>
+				</tr>
+			</table>
+		</div>
         <div class="">
             <div class="titlebox">긍정부정비율</div>
-            <div>
-                {% static "assets/my_force_plot.html" %}
-                <link href="{% static 'assets/my_force_plot.html' %}" type="html"/> 
-            </div>
-            <div class="barimg">
-                <img src="{% static 'assets/images/bar.PNG'%}" alt="image"/>
+            
+            <div class="barimgdiv">
+                <img class="barimg" src="{% static 'assets/images/test.png'%}" alt="image"/>
             </div>
         </div>
-        <div class="">
-            <div>아래 문장들은 랜덤하게 보여줍니다. 다른 문장을 보고싶다면 새로고침을 눌러주세요.</div>
-            <div class="titlebox">긍정문장</div>
+        <div class="guide_container">
+            <div class="titlebox">긍정부정문장</div>
+            <div class="guide_text">다른 긍정부정문장을 보고싶다면 새로고침을 해주세요</div>
+        </div>
+        <div class="emo_div">
+            <div class="positive_box">긍정문장</div>
             <div>
                 <table>
                     {% for positive in positive_list %}
                     <tr >
-                        <td>{{positive.idx}}</td>
+                        <td class="positive_num"><mark class="blue">{{positive.idx}}</mark></td>
                         <td class="positive_td">{{positive.content}}</td>
                     </tr>
                     {% endfor %}
                 </table>
             </div>
         </div>
-        <div class="">
-            <div class="titlebox">부정문장</div>
+        <div class="emo_div">
+            <div class="negative_box">부정문장</div>
             <div>
                 <table>
                     {% for negative in negative_list %}
                     <tr>
-                        <td>{{negative.idx}}</td>
+                        <td class="negative_num"><mark class="red">{{negative.idx}}</mark></td>
                         <td class="negative_td">{{negative.content}}</td>
                     </tr>
                     {% endfor %}
