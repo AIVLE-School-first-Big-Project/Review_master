@@ -1,12 +1,23 @@
-from sklearn.base import BaseEstimator
-import numpy as np
-import time
-import joblib , os
+import warnings , matplotlib, platform , shap, time,os
+import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc 
+warnings.filterwarnings('ignore')
+
+# 한글 적용하기
+path = "C:/Windows/Fonts/malgun.ttf"
+if platform.system() == "Darwin":
+    rc("font", family="Arial Unicode MS")
+elif platform.system() == "Windows":
+    font_name = font_manager.FontProperties(fname=path).get_name()
+    rc("font", family=font_name)
+else:
+    print("Unknown system. sorry")
+# 마이너스 부호 가능.
+matplotlib.rcParams['axes.unicode_minus'] = False   
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-
-loaded_model = joblib.load( os.path.join(BASE_DIR,'model/xgb_model_binary_v3.0.pkl'))
 
 # ['content_cnt', 'content_line', '내돈내산 키워드', 'img_cnt', 'ㅋㅋㅋㅋ 빈도 수', '... 빈도 수', '쿠팡키워드', 'coupan.ng 키워드', '단점 빈도 수', '광고키워드', '이미지광고키워드3', '솔직 빈도 수', '솔직키워드1', '비교 빈도 수', 'quote_cnt', 'ㅋ 빈도 수', 'ㅠㅠ 빈도 수', 'ㅋㅋㅋ 빈도 수', '이미지광고키워드1', '이미지쿠팡키워드1', '이미지순수키워드1', '이미지광고키워드2', '이미지없음', '이미지글없음']
 # ['쿠팡키워드','광고키워드','이미지광고키워드3','솔직키워드1','이미지광고키워드1','이미지쿠팡키워드1', '이미지순수키워드1', '이미지광고키워드2', '이미지없음', '이미지글없음']
@@ -64,15 +75,28 @@ def feature_create(DataFrame):
   DataFrame = DataFrame[origin_col] 
   return DataFrame
 
-def Adblock_filter(data_frame,threshold = 0.7):
-  data_frame = feature_create(data_frame)
 
+def Adblock_filter(loaded_model,data_frame,review_id,XAI_Model,threshold = 0.7):
+  os.makedirs(os.path.join(BASE_DIR,"XAI_Folder/"),exist_ok=True)
+  data_frame = feature_create(data_frame)
   yhat = loaded_model.predict_proba(data_frame.values)[:,1]
   y_pred = int(yhat>= 0.7)
-  
+  if y_pred == 0:
+    shap_value_plot(explainer = XAI_Model, X_test = data_frame, review_id = review_id)
+
   return (y_pred, yhat[0])
+
+
+
+def shap_value_plot(explainer, X_test, review_id):
+    save_file_name = os.path.join(BASE_DIR,f"XAI_Folder/{review_id}.png")
+    shap.initjs()
+    shap_values = explainer.shap_values(X_test.values)
+    shap.force_plot(explainer.expected_value,
+                    shap_values,
+                    X_test.iloc[[0]], show=False,matplotlib=True).savefig(save_file_name, bbox_inches = 'tight')
+
 
 if __name__=="__main__":
     start = time.time()
-
     print(f"\n WorkingTime : {time.time() - start} sec")

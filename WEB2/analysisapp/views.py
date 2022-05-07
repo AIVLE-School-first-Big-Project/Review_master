@@ -35,6 +35,9 @@ Backend_association = "http://" + \
 Backend_sentiment = "http://" + \
     con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/sentiment/"
 
+Backend_explainImage = "http://" + \
+    con.get_secret("HOST") + ":" + con.get_secret("API_PORT") + "/explain/"
+
 
 def age_group_check(birth_date):
 

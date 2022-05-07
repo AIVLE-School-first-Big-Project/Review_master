@@ -145,7 +145,7 @@ def Text_association_inferense(cursor, artice_code):
         sorted_pgr = sorted(
             pgr.items(), key=operator.itemgetter(1), reverse=True)
 
-        plt.figure(figsize=(7, 7))
+        plt.figure(figsize=(9, 9))
         G = nx.Graph()
         # 페이지 랭크에 따라 두 노드 사이의 연관성을 결정한다. (단어쌍의 연관성)
         # 연결 중심성으로 계산한 척도에 따라 노드의 크기가 결정된다. (단어의 등장 빈도수)
