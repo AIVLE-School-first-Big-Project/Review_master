@@ -64,12 +64,13 @@ def feature_create(DataFrame):
   DataFrame = DataFrame[origin_col] 
   return DataFrame
 
-def Adblock_filter(data_frame):
+def Adblock_filter(data_frame,threshold = 0.7):
   data_frame = feature_create(data_frame)
 
-  y_pred = loaded_model.predict(data_frame.values)
-  y_prod = loaded_model.predict_proba(data_frame.values)
-  return (y_pred, y_prod)
+  yhat = loaded_model.predict_proba(data_frame.values)[:,1]
+  y_pred = yhat>= 0.7
+  
+  return (y_pred, yhat)
 
 if __name__=="__main__":
     start = time.time()
