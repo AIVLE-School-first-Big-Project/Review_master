@@ -1,3 +1,5 @@
+import mimetypes
+from wsgiref.util import FileWrapper
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -5,7 +7,9 @@ from django.urls import reverse
 from accountapp.models import Member
 from board.models import QABoard
 from django.db.models import Max
-
+from django.http import FileResponse
+from django.core.files.storage import FileSystemStorage
+import os
 
 def board_list(request):
     postlist = QABoard.objects.all()
@@ -64,3 +68,20 @@ def board_delete(request, del_id):
     post_del.delete()
     messages.info(request, "삭제가 완료되었습니다. ")
     return redirect('/app/board/')
+
+from wsgiref.util import FileWrapper
+def file_download(request, post_id):
+    file = QABoard.objects.get(id=post_id)
+    file_path = file.file_name.path
+
+    file_mimetype = mimetypes.guess_type(file_path)
+    # fs = FileSystemStorage(file_path)
+    
+    response = FileResponse(open(file_path, 'rb'), content_type=file_mimetype)
+    # response = HttpResponse(file_wrapper, content_type=file_mimetype)
+    response['X-Sendfile'] = file_path
+    # response['Content-Length'] = os.stat(file_path).st_size
+    response['Content-Disposition'] = 'attachment;filename=%s' % str(file_path) 
+    return response
+
+

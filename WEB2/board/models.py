@@ -17,6 +17,7 @@ class QABoard(models.Model):
     answer_content = TextField()
     create_time = DateTimeField(auto_now_add=True)
     update_time = DateTimeField(auto_now=True)
+    # file_name = models.ImageField(upload_to="Board/images", blank=True, null=True)
     file_name = models.ImageField(upload_to="Board/images", blank=True, null=True)
     def __str__(self):
         return self.title

@@ -31,6 +31,12 @@
                     수정 >
                 </a>
             {% endifequal %}
+            {% comment %} 여기~39라인까지 주석처리하시면 됩니다! {% endcomment %}
+            {% if post.file_name %}
+                <a href="{% url 'board:download' post_id=post.id %}">
+                    사진 다운로드 >
+                </a>
+            {% endif %}
         </h2>
         <section class="qna_list">
             {% if post.file_name %}
