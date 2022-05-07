@@ -123,10 +123,10 @@ async def Blog_filter(data: dict = Body(...)):
     data["context_img"] = dowload_last_img(data['last_img'].values[0])
     # print(data.columns)
     y_pred, y_prod = Adblock_filter(data_frame=data)
-    print("예측 결과 : ", int(y_pred))
+    print("예측 결과 : ", int(y_pred)," 확률 : ",y_prod)
     result = {
         'pred': str(int(y_pred)),
-        'pro':  str(round(float(y_prod[0][0]), 2))
+        'pro':  str(round(float(y_prod), 2))
     }
     return result
 

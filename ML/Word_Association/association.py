@@ -110,10 +110,10 @@ def Text_association_inferense(cursor, artice_code):
     options = {
         'node_color': '#A7E4E4',
         'edge_color': '#0B8B8B',
-        'width': 1,
+        'width': 2,
         'with_labels': True,
         'font_weight': 'regular',
-        'font_size': 10,
+        'font_size': 13,
         # 'node_shape':"o",
     }
     img_save_folder_path = os.path.join(BASE_DIR, f"figImage/{artice_code}")
@@ -157,7 +157,14 @@ def Text_association_inferense(cursor, artice_code):
                 [(result_df_1['word1'][ind], result_df_1['word2'][ind], int(result_df_1['freq'][ind]))])
 
         # 노드 크기 조정
-        sizes = [G.nodes[node]['nodesize'] * 3000 for node in G]
+        for node in G:
+            if G.nodes[node]['nodesize'] ==1.0:
+                G.nodes[node]['nodesize'] = G.nodes[node]['nodesize'] * 180
+            else:
+                G.nodes[node]['nodesize'] = G.nodes[node]['nodesize'] * 400
+        sizes = [G.nodes[node]['nodesize'] * 100 for node in G]
+
+
         nx.draw(G, node_size=sizes, pos=nx.spring_layout(
             G, k=30, iterations=1000), **options, font_family=font_name)  # font_family로 폰트 등록
         ax = plt.gca()

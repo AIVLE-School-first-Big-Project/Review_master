@@ -68,9 +68,9 @@ def Adblock_filter(data_frame,threshold = 0.7):
   data_frame = feature_create(data_frame)
 
   yhat = loaded_model.predict_proba(data_frame.values)[:,1]
-  y_pred = yhat>= 0.7
+  y_pred = int(yhat>= 0.7)
   
-  return (y_pred, yhat)
+  return (y_pred, yhat[0])
 
 if __name__=="__main__":
     start = time.time()
