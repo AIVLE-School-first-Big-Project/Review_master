@@ -85,16 +85,12 @@ def result(request):
 
             # 0인 경우 : 처음 검색된 경우이다. 이 경우는 크롤링을 진행해주어야 한다.
             if len(m_article_info) == 0:
-
                 crawling_check = True
-
                 # 데이터 코드를 저장시켜준다.
                 m_article_code = ArticleCode()
                 m_article_code.search_company = search_company
                 m_article_code.search_name = search_name
-
                 m_article_code.save()
-
                 m_article_info = ArticleCode.objects.filter(
                     Q(search_company=search_company)
                     & Q(search_name=search_name))
