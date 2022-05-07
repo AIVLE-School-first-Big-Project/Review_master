@@ -1,3 +1,6 @@
+.maincl{
+    margin-top: 3rem;
+}
 .titlebox {
     padding-top: 0.43rem;
     text-align: center;
@@ -23,7 +26,25 @@
 
 .positive_td{
     color: #0E5EC6;
+    padding-left: 0;
 }
 .negative_td{
     color: #890C0C;
+    padding-left: 0;
+}
+mark.blue{
+    background-color:#ACCDE7
+}
+mark.red{
+    background-color:#EB9CA1
+}
+
+.positive_num{
+    width: 3rem;
+    padding-right: 0;
+}
+
+.negative_num{
+    width: 3rem;
+    padding-right: 0;
 }
