@@ -1,0 +1,11 @@
+bcrypt==3.2.2
+beautifulsoup4==4.11.1
+Django==3.2.11
+django-bootstrap4==22.1
+mysqlclient==2.1.0
+python==3.6.4
+pandas==1.4.2
+Pillow==9.1.0
+requests==2.27.1
+tqdm==4.64.0
+windows-curses==2.3.0
