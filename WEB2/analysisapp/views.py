@@ -557,9 +557,22 @@ def detail(request, sentiment_id):
             "idx": idx+1,
             "content": positive_lists[i]
         })
+    m_review_data = ReviewData.objects.get(review_id=m_review.review_id)
+    m_article_code = ArticleCode.objects.get(
+        article_id=m_review_data.article_id)
+    review_list = {
+        "url": m_review_data.url,
+        "title": m_review_data.title,
+        "description": m_review_data.description,
+        "first_img_url": m_review_data.first_img_url,
+        "company": m_article_code.search_company,
+        "article_name": m_article_code.search_name
+
+    }
 
     return render(request, 'analysisapp/detail.html', {
         "review_id": m_review.review_id,
         "positive_list": positive_list,
-        "negative_list": negative_list
+        "negative_list": negative_list,
+        "review_list": review_list
     })

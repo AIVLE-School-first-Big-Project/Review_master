@@ -6,16 +6,32 @@
 {% endblock %}
 <div id='main' class="maincl">	
     <div class="main_div">
-        <header><h2 class="head_h2"><span id="headcs"><</span> 순수리뷰 AI 상세분석</h2></header>
+        
+        <header>
+            <a href="/app/analysis/result/?company={{review_list.company}}&article_name={{review_list.article_name}}">
+                <h2 class="head_h2"><span id="headcs"><</span> 순수리뷰 AI 상세분석</h2>
+            </a>
+
+        </header>
         <div>
             <div class="titlebox">순수리뷰글</div>
 			<table class="">
 				<tr class="">
-					<td rowspan="2" class="blog_img_td" style="vertical-align: middle; "><img id="img_review" src="{% static 'assets/images/yunji.png' %}" alt="image"/></td>
-					<td class="blog_name" style="font-weight: bolder; ">IT의 세상 블로그</td>
+                    
+					<td rowspan="2" class="blog_img_td" style="vertical-align: middle; ">
+                        <a href="{{review_list.url}}">
+                            <img id="img_review" src="{{review_list.first_img_url}}" alt="image"/>
+                        </a>
+                    </td>
+					<td class="blog_name" style="font-weight: bolder; ">
+                        <a href="{{review_list.url}}">
+                            {{review_list.title}}
+                        </a>
+                    </td>
+
 				</tr>
 				<tr class="">
-					<td class="blog_text">이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.이곳은 글을 쓰는 곳입니다.</td>
+					<td class="blog_text">{{review_list.description}}</td>
 				</tr>
 			</table>
 		</div>
