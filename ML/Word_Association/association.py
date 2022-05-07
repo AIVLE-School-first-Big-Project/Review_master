@@ -113,7 +113,7 @@ def Text_association_inferense(cursor, artice_code):
         'width': 2,
         'with_labels': True,
         'font_weight': 'regular',
-        'font_size': 13,
+        'font_size': 14,
         # 'node_shape':"o",
     }
     img_save_folder_path = os.path.join(BASE_DIR, f"figImage/{artice_code}")
