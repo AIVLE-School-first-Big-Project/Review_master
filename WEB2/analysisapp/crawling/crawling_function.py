@@ -140,14 +140,12 @@ def item_parsing(company, search_word, start, display, repeat_num):
             blog_description.append(description)
             # 블로그 작성 시간 추가
             post_date = str(blog["postdate"])
-            post_date = post_date[0:4] + "-" + \
-                post_date[4:6] + "-" + post_date[6:8]
+            post_date = post_date[0:4] + "-" + post_date[4:6] + "-" + post_date[6:8]
             blog_date.append(post_date)
 
             # 본문 크롤링을 위한 URL주소 추가
             blog_result.append(
-                f"https://blog.naver.com/PostView.\
-                naver?blogId={writer}&logNo={code}")
+                f"https://blog.naver.com/PostView.naver?blogId={writer}&logNo={code}")
         try:
             if start + display <= blog_search["total"]:
                 cnt += 1
@@ -159,10 +157,9 @@ def item_parsing(company, search_word, start, display, repeat_num):
 
             if cnt == 10:
                 break
-        except IOError:
+        except:
             break
-    return blog_result, blog_writer, blog_code, \
-        blog_title, blog_description, blog_date
+    return blog_result, blog_writer, blog_code, blog_title, blog_description, blog_date
 
 # 네이버 블로그 크롤링
 
@@ -192,7 +189,7 @@ def blog_content_parsing(url):
                 last_img = img_craw[img_cnt-1].select_one(
                     ".se-module-image-link > img")["data-lazy-src"]
 
-            except IOError:
+            except:
 
                 first_img = img_craw[0].select_one(
                     ".se-module-image-link > img")["src"]
@@ -209,7 +206,7 @@ def blog_content_parsing(url):
                     if "coupa" in coupang_craw[i].text:
                         coupang_check = 1
 
-                except IOError:
+                except:
                     pass
 
         # 글 내용 크롤링
@@ -224,7 +221,7 @@ def blog_content_parsing(url):
         for i in blog_bs.select(".se-quote"):
             quote.append(i.text)
             quote_cnt += 1
-    except IOError:
+    except:
 
         return False, content, len(content), len(blog_text), quote, \
             quote_cnt,  first_img, last_img,  img_cnt, coupang_check
@@ -387,6 +384,7 @@ def service_start(company, word):
     df = df[df["content_cnt"] != 0].reset_index(drop=True)
     print("종료되었습니다.")
     print(df.columns)
+    print(df.shape)
     return df
 
 

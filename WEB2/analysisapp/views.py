@@ -147,7 +147,7 @@ def result(request):
 
                 try:
                     df["내돈내산 키워드"]
-                except IOError:
+                except:
                     m_article_info = ArticleInfo.objects.get(
                         article_id=article_id)
                     m_article_info.delete()
@@ -157,6 +157,7 @@ def result(request):
                     m_article_code.delete()
 
                     return HttpResponseRedirect(reverse('homeapp:home'))
+
                 url, title, post_date, description, writer, content, \
                     first_img_url, last_img_url \
                     = df["url"], df["title"], df["post_date"],\
@@ -174,11 +175,15 @@ def result(request):
                 # blog_cnt = len(df)
                 review_cnt = df.shape[0]
 
+                print("1")
+                print(review_cnt)
+
                 # 리뷰 데이터가 얼마나 있는지 확인하고 저장
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
                 m_article_info.article_review_cnt = review_cnt
                 m_article_info.save()
                 for idx, i in enumerate(range(len(df))):
+                    print("2")
                     m_review_data = ReviewData()
                     m_review_data.article_id = article_id
                     m_review_data.writer = writer[i]
@@ -275,7 +280,7 @@ def result(request):
                             positive=positive, negative=negative)
                         try:
                             sentiment_id = m_reivew_sentiment[0].sentiment_id
-                        except IOError:
+                        except:
                             pass
                         positive_len = 0
                         negative_len = 0
@@ -350,7 +355,7 @@ def result(request):
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
                 association_paths = [
                     "/media/"+suvey_zip.filelist[i].
-                    filename for i in range(len(suvey_zip.filelist))]
+                        filename for i in range(len(suvey_zip.filelist))]
                 print(association_paths)
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
@@ -370,7 +375,7 @@ def result(request):
             try:
                 requests.get(m_article_info.img_url)
                 data_info["img_url"] = m_article_info.img_url
-            except IOError:
+            except:
                 data_info["img_url"] = ""
 
             review_list = []
