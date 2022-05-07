@@ -169,7 +169,8 @@
                 {% for key in twenty_male %}
                     <tr>
                         <td>{{key.0}}</td>
-                        <td>{{key.1}} {{key.2}}</td>
+                        
+                        <td><a href="/app/analysis/result/?company={{key.1}}&article_name={{key.2}}">{{key.1}} {{key.2}}</a></td>
                         <td>{{key.3}}</td>
                     </tr>
                 {% endfor %}
@@ -190,7 +191,7 @@
                 {% for key in twenty_female %}
                     <tr>
                         <td>{{key.0}}</td>
-                        <td>{{key.1}} {{key.2}}</td>
+                        <td><a href="/app/analysis/result/?company={{key.1}}&article_name={{key.2}}">{{key.1}} {{key.2}}</a></td>
                         <td>{{key.3}}</td>
 
                     </tr>
@@ -223,7 +224,7 @@
                 {% for key in fourty_male %}
                     <tr>
                         <td>{{key.0}}</td>
-                        <td>{{key.1}} {{key.2}}</td>
+                        <td><a href="/app/analysis/result/?company={{key.1}}&article_name={{key.2}}">{{key.1}} {{key.2}}</a></td>
                         <td>{{key.3}}</td>
 
                     </tr>
@@ -243,7 +244,7 @@
                 {% for key in fourty_female %}
                     <tr>
                         <td>{{key.0}}</td>
-                        <td>{{key.1}} {{key.2}}</td>
+                        <td><a href="/app/analysis/result/?company={{key.1}}&article_name={{key.2}}">{{key.1}} {{key.2}}</a></td>
                         <td>{{key.3}}</td>
 
                     </tr>
