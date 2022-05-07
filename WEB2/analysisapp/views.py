@@ -212,8 +212,10 @@ def result(request):
                         "솔직 빈도 수": [int(sj[i])],
                         "비교 빈도 수": [int(bg[i])],
                         "ㅋ 빈도 수": [int(z[i])],
-                        "ㅠㅠ 빈도 수": [int(bb[i])],
-                        "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
+                        "ㅠ 빈도 수" : 
+                        "ㅋㅋ 빈도 수":
+                        # "ㅠㅠ 빈도 수": [int(bb[i])],
+                        # "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
                     }
 
                     print(f"{idx} / {len(df)} 필터링 시작합니다.")

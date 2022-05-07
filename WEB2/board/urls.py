@@ -10,4 +10,5 @@ urlpatterns = [
     path('detail/<int:id>/', views.board_detail, name="detail"),
     path('<int:del_id>/', views.board_delete, name="delete"),
     path('update/<int:up_id>/', views.board_update, name="update"),
+    path('<int:post_id>', views.file_download, name="download"),
 ]

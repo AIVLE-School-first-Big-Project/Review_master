@@ -24,8 +24,23 @@ resulttable{
 }
 
 .review_url{
-    color:#31BEAD
+    color:#31BEAD;
+    padding-bottom: 0em;
+    
 }
+.review_detail{
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
+.review_detail_td{
+    text-align: right;
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
+
+
 
 .review_tr{
     padding-bottom: 0;
@@ -257,7 +272,33 @@ td.description_td{
     padding-top: 0px;
 }
 td.review_td{
-    padding-top:30px;
+    padding-top:15px;
     padding-bottom: 0px;
     font-weight: bolder;
+}
+
+#po_text{
+    color: #7A98EB;
+    
+}
+
+#po_num_text{
+    color: #0A3893;
+    margin-right: 0.5rem;
+}
+#ne_text{
+    color: #E37382;
+}
+
+#ne_num_text{
+    color: #9B1427;
+    margin-right: 0.5rem;
+}
+
+
+#de_text{
+    color: #6F7271;
+}
+.buy_price{
+    color: #707070;
 }
