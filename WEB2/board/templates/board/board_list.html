@@ -45,11 +45,15 @@
                             <th scope="row" width=5%>
                                 <span>{{ list.id }}</span>
                             </th>
-                            <td width=10%>
+                            <td width=10% height="0">
                                 {% if list.answer_title %}
-                                    <img src="{% static 'assets/images/게시판_답변완료.png' %}" />
+                                <div style="height:100%">
+                                    <img src="{% static 'assets/images/게시판_답변완료.png' %}" height="100%" />
+                                </div>
                                 {% else %}
-                                    <img  src="{% static 'assets/images/게시판_미답변.png' %}" />
+                                <div style="height:100%">
+                                    <img  src="{% static 'assets/images/게시판_미답변.png' %}" height="100%" />
+                                </div>
                                 {% endif %}
                             </td>
                             <td width=75%>
