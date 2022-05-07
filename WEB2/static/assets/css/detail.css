@@ -1,69 +1,82 @@
-h2.head_h2{
+h2.head_h2 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
-#headcs{
+
+#headcs {
     color: #707070;
 }
-.maincl{
+
+.maincl {
     margin-top: 3rem;
 }
+
 .titlebox {
     padding-top: 0.1rem;
     text-align: center;
-    width: 13.5vw;
+    width: 15vw;
     height: auto;
     background-color: #17A6A6;
     color: white;
     font-size: 1.1vw;
+    padding: 0 0.5rem;
     border-radius: 20px;
     align-items: center;
 }
-.head{
+
+@media screen and (max-width: 760px) {
+    .titlebox {
+        width: 8rem;
+    }
+}
+
+.head {
     text-align: left;
 }
 
-.barimgdiv{
-    max-width:100%;
+.barimgdiv {
+    max-width: 100%;
     /* max-height: 8rem; */
     overflow: hidden;
     margin-top: 12px;
 }
 
-.barimg{
+.barimg {
     margin-top: 0;
     margin-bottom: 0;
     margin-right: 0;
     margin-left: -5rem;
-    max-width:100%;
+    max-width: 100%;
     height: 11rem;
-
 }
 
-.main_div{
+.main_div {
     margin-left: 3rem;
     margin-right: 3rem;
     padding-bottom: 3rem;
 }
 
-.positive_td{
+.positive_td {
     color: #0F0F10;
     padding-left: 0;
 }
-.negative_td{
+
+.negative_td {
     color: #0F0F10;
     padding-left: 0;
 }
-mark.blue{
-    background-color:#ACCDE7;
+
+mark.blue {
+    background-color: #ACCDE7;
     color: white;
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
     padding-left: 0.3rem;
     padding-right: 0.3rem;
 }
-mark.red{
-    background-color:#EB9CA1;
+
+mark.red {
+    background-color: #EB9CA1;
     color: white;
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
@@ -71,28 +84,29 @@ mark.red{
     padding-right: 0.3rem;
 }
 
-.positive_num{
+.positive_num {
     width: 3rem;
     padding-right: 0;
     vertical-align: text-top;
 }
 
-.negative_num{
+.negative_num {
     width: 3rem;
     padding-right: 0;
     vertical-align: text-top;
 }
 
-.guide_text{
+.guide_text {
     margin-left: 1rem;
 }
-.guide_container{
+
+.guide_container {
     display: flex;
     margin-top: 0.7rem;
     margin-bottom: 1.2rem;
 }
 
-.positive_box{
+.positive_box {
     padding-top: 0.1rem;
     text-align: center;
     width: 6rem;
@@ -104,7 +118,7 @@ mark.red{
     align-items: center;
 }
 
-.negative_box{
+.negative_box {
     padding-top: 0.1rem;
     text-align: center;
     width: 6rem;
@@ -115,33 +129,38 @@ mark.red{
     border-radius: 20px;
     align-items: center;
 }
-.emo_div{
+
+.emo_div {
     margin-left: 1.5rem;
 }
 
-#img_review{
+#img_review {
     width: 7rem;
     height: 7rem;
 }
 
-td.blog_name{
+td.blog_name {
     text-align: left;
     padding-bottom: 0;
     color: #31BEAD;
     font-weight: 900;
 }
-.blog_text{
+
+.blog_text {
     padding-top: 0;
     color: #171616;
 }
-.blog_img_td{
+
+.blog_img_td {
     width: 7rem;
 }
-.de_text{
+
+.de_text {
     color: #6F7271;
     font-size: 1.2rem;
 }
-.de_plot{
+
+.de_plot {
     width: auto;
     height: auto;
     align-items: center;
