@@ -45,7 +45,7 @@ String.prototype.toKorChars = function() {
 
 
 //타이핑할 문장
-var result = "관심있는 전자제품 우리가 AI로 분석할게 넌 결정만해!";
+var result = "관심있는 전자제품 우리가 AI로 분석할게 넌 결정만 해!";
 var typeing1 = [];
 result = result.split(''); // 한글자씩자름
 
