@@ -3,7 +3,7 @@
     <!-- <span class="logo"><img src="images/logo.svg" alt="" /></span> -->
     <h2 class="result">관심있는 전자제품 우리가 AI로 분석할게 넌 결정만해</h2>
 </header>
-<form class='search_form' method = "post" action = "{% url 'analysisapp:result' %}">
+<form class='search_form' method = "get" action = "{% url 'analysisapp:result' %}">
     <div class="search_div">
         <input class="input1" type="text" placeholder="제조사" name = "company" />
         <input class="input2" type="text" placeholder="관심상품명을 입력해주세요" name = "article_name"/>

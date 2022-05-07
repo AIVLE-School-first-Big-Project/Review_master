@@ -49,15 +49,15 @@ def age_group_check(birth_date):
 
 @csrf_exempt
 def result(request):
-    if request.method == "POST":
+    if request.method == "GET":
         crawling_check = False
         login_id = request.session.get('user_id', "nonuser")
 
         print(f"현재 로그인한 사람 {login_id}")
 
         # 사용자가 검색한 경우
-        search_company = request.POST.get("company", 0)
-        search_name = request.POST.get("article_name", 0)
+        search_company = request.GET.get("company", 0)
+        search_name = request.GET.get("article_name", 0)
 
         # 검색 결과 로그 출력
         print(search_company)
@@ -166,9 +166,10 @@ def result(request):
                 url, title, post_date, description, writer, content, first_img_url, last_img_url \
                     = df["url"], df["title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]
 
-                content_cnt, content_line, quote_cnt, img_cnt, coupang, ndns, dj, sj, bg, dot, bb, z, zzz, zzzz \
+                content_cnt, content_line, quote_cnt, img_cnt, coupang, ndns, dj, sj, bg, dot, b, bb, z, zz, zzz, zzzz \
                     = df["content_cnt"], df["content_line"], df["quote_cnt"], df["img_cnt"], df["coupa.ng 키워드"], df["내돈내산 키워드"], df["단점 빈도 수"], \
-                    df["솔직 빈도 수"],  df["비교 빈도 수"], df["... 빈도 수"], df["ㅠㅠ 빈도 수"], df["ㅋ 빈도 수"], df["ㅋㅋㅋ 빈도 수"], df["ㅋㅋㅋㅋ 빈도 수"]
+                    df["솔직 빈도 수"],  df["비교 빈도 수"], df["... 빈도 수"], df["ㅠ 빈도 수"],  df[
+                        "ㅠㅠ 빈도 수"], df["ㅋ 빈도 수"], df["ㅋㅋ 빈도 수"], df["ㅋㅋㅋ 빈도 수"], df["ㅋㅋㅋㅋ 빈도 수"]
                 # blog_cnt = len(df)
                 review_cnt = df.shape[0]
 
@@ -212,11 +213,12 @@ def result(request):
                         "솔직 빈도 수": [int(sj[i])],
                         "비교 빈도 수": [int(bg[i])],
                         "ㅋ 빈도 수": [int(z[i])],
-                        "ㅠ 빈도 수" : 
-                        "ㅋㅋ 빈도 수":
+                        "ㅠ 빈도 수": [int(b[i])],
+                        "ㅋㅋ 빈도 수": [int(zz[i])]
                         # "ㅠㅠ 빈도 수": [int(bb[i])],
                         # "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
                     }
+                    print(data)
 
                     print(f"{idx} / {len(df)} 필터링 시작합니다.")
                     response = requests.post(Backend_filtering, json=data)
@@ -229,7 +231,7 @@ def result(request):
                         filter_percent)  # 확률 처리
                     m_review_data.save()
 
-                    if float(filter_percent) >= 0.8:  # 순수다
+                    if int(filter_data) == 0:  # 순수다
                         m_article_info = ReviewData.objects.get(
                             article_id=article_id, writer=writer[i], first_img_url=first_img_url[i])
                         review_id = m_article_info.review_id
@@ -355,11 +357,16 @@ def result(request):
             data_info["company"] = search_company
             data_info["name"] = search_name
             data_info["review_cnt"] = m_article_info.article_review_cnt
-            data_info["img_url"] = m_article_info.img_url
+
+            try:
+                requests.get(m_article_info.img_url)
+                data_info["img_url"] = m_article_info.img_url
+            except:
+                data_info["img_url"] = ""
 
             review_list = []
             m_review_data = ReviewData.objects.filter(
-                article_id=article_id).order_by("-advertise_percent")
+                article_id=article_id).order_by("advertise_percent")
 
             for review in m_review_data:
                 review_dict = {
@@ -389,8 +396,9 @@ def result(request):
                 review_dict["title"] = review.title
                 review_dict["advertise_percent"] = float(
                     review.advertise_percent) * 100
+                # 현재 이 값은 광고일 확률을 알려준다.
 
-                if review.advertise_percent <= 0.8:
+                if review.advertise != 0:
                     review_cnt -= 1
                     continue
 
