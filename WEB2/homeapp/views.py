@@ -4,6 +4,7 @@ from analysisapp.models import ArticleCode, ArticleInfo, BuyList, ReviewData, Re
 import random
 from django.views.decorators.csrf import csrf_exempt
 app_name = 'homeapp'
+from django.contrib import messages
 
 
 @csrf_exempt
@@ -130,7 +131,7 @@ def home(request):
     # member = Member.objects.get(user_id=login_id)
     # age_group = age_group_check(member.user_birth)
     # sex = member.user_sex
-
+    messages.error(request, 'homeapp/view.py에 저있어요!')
     return render(request, "homeapp/contents.html",
                   {
                       "recommand_list": recommand_list,
