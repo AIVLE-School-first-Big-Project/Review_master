@@ -202,7 +202,7 @@
         </div>
         <form method="POST" action="{% url 'account:agreement' %}" style="padding-top:10px;max-width:100%" class="agreement">
             {% csrf_token %}
-            <input type="checkbox" name="agreement" id="agreement" checked/>
+            <input type="checkbox" name="agreement" id="agreement" />
             <label for="agreement">
                 <span></span>
                 개인정보 수집 및 이용에 동의합니다.
