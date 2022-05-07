@@ -14,7 +14,7 @@ urlpatterns = [
     # path('index/', views.index, name='index'),
     # path('home/', views.home, name='home'),
     path('result/', views.result, name='result'),
-    path('choose/', views.choose, name='choose'),
+    # path('choose/<str:company>', views.choose, name='choose'),
     path('detail/<int:sentiment_id>', views.detail, name='detail'),
 
 
