@@ -1,5 +1,7 @@
 from pathlib import Path
-import json,os
+import json
+import os
+
 
 class config():
     def __init__(self):
@@ -13,5 +15,4 @@ class config():
         try:
             return self.secrets[setting]
         except KeyError:
-            error_msg = "Set the {} environment variable".format(setting)
-    
+            pass

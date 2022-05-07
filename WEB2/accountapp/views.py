@@ -1,13 +1,5 @@
-from datetime import datetime
 from django.shortcuts import render
-
-# Create your views here.
-from curses import raw
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
 from board.models import QABoard
 from analysisapp.models import MemberLog
 
@@ -22,12 +14,6 @@ import bcrypt
 app_name = 'accountapp'
 
 
-def test1(request):
-    print("접속?")
-    return render(request, "accountapp/test.html")
-    # return HttpResponseRedirect(reverse('homeapp:home'))
-
-
 def board(request):
     return render(request, "accountapp/board.html")
 
@@ -39,10 +25,11 @@ def login(request):
         try:
             m = Member.objects.get(user_id=user_id)
 
-            if not bcrypt.checkpw(user_pw.encode('utf-8'), m.user_pw.encode('utf-8')):
+            if not bcrypt.checkpw(user_pw.encode('utf-8'),
+                                  m.user_pw.encode('utf-8')):
                 m = ""
 
-        except:
+        except IOError:
             m = ""
             messages.warning(request, '잘못 입력하셨거나 존재하지 않는 사용자 정보입니다.')
 
@@ -52,7 +39,9 @@ def login(request):
             request.session['user_class'] = m.user_class
             return redirect('/app/home')
         else:
-            return render(request, 'accountapp/login.html', {'error': 'username or password is incorrect'})
+            return render(request,
+                          'accountapp/login.html',
+                          {'error': 'username or password is incorrect'})
     else:
         return render(request, 'accountapp/login.html')
 
@@ -83,17 +72,23 @@ def signup(request):
             messages.info(request, '비밀번호가 일치하지 않습니다.')
             return HttpResponseRedirect(reverse('accountapp:signup'))
         try:
-            user = Member.objects.get(user_id=user_id)
+            Member.objects.get(user_id=user_id)
 
             messages.info(request, '사용중인 아이디입니다.')
             return HttpResponseRedirect(reverse('accountapp:signup'))
-        except Member.DoesNotExist as e:
+        except Member.DoesNotExist:
 
             hased_pw = bcrypt.hashpw(user_pw.encode('utf-8'), bcrypt.gensalt())
             decoded_hashed_pw = hased_pw.decode('utf-8')
 
-            m = Member(user_id=user_id, user_pw=decoded_hashed_pw, user_nickname=user_nickname, user_email=user_email,
-                       user_class=user_class, user_sex=user_sex, user_status=user_status, user_birth=user_birth)
+            m = Member(user_id=user_id,
+                       user_pw=decoded_hashed_pw,
+                       user_nickname=user_nickname,
+                       user_email=user_email,
+                       user_class=user_class,
+                       user_sex=user_sex,
+                       user_status=user_status,
+                       user_birth=user_birth)
             m.save()
             return HttpResponseRedirect(reverse('accountapp:login'))
     else:
@@ -138,14 +133,15 @@ def user_update(request):
 
 def user_delete(request):
     if request.method == 'POST':
-        b = QABoard.objects.filter(user_id=request.session['user_id'])
-        b.delete()
+        m_qaboard = QABoard.objects.filter(user_id=request.session['user_id'])
+        m_qaboard.delete()
 
-        l = MemberLog.objects.filter(user_id=request.session['user_id'])
-        l.delete()
+        m_member_log = MemberLog.objects.\
+            filter(user_id=request.session['user_id'])
+        m_member_log.delete()
 
-        m = Member.objects.get(user_id=request.session['user_id'])
-        m.delete()
+        m_member = Member.objects.get(user_id=request.session['user_id'])
+        m_member.delete()
 
         logout(request)
         return redirect('/app/home')
@@ -165,10 +161,11 @@ def user_log(request):
 def pay(request):
     return render(request, 'accountapp/pay.html')
 
+
 def agreement(request):
-    if request.method=="POST":
+    if request.method == "POST":
         if request.POST.get('agreement', False):
-            request.session['agreement']=True
+            request.session['agreement'] = True
             return redirect('/app/account/signup')
         else:
             messages.info(request, "약관에 동의해주세요.")

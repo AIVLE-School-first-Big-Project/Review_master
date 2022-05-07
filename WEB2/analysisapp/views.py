@@ -1,20 +1,18 @@
 import secret_key as sk
-from django.db import connections
 from datetime import datetime
-from urllib import response
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, HttpResponseRedirect
-from analysisapp.models import ArticleCode, ArticleInfo, BuyList, ReviewData, ReviewAnalysis, MemberLog, Member, ReviewSentiment, ReviewSentimentDetail
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from analysisapp.models import ArticleCode, ArticleInfo,\
+    BuyList, ReviewData, ReviewAnalysis, MemberLog,\
+    Member, ReviewSentiment, ReviewSentimentDetail
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from .crawling import crawling_function
 from django.urls import reverse
-import pandas as pd
 import requests
 import os
 import sys
 import zipfile
-import json
 from datetime import date
 from io import BytesIO
 from pathlib import Path
@@ -97,16 +95,12 @@ def result(request):
 
                 m_article_code.save()
 
-                # primary key를 받아올 때 회사명과 제품명이 함께 되어있는 경우를 찾는다.
                 m_article_info = ArticleCode.objects.filter(
-                    Q(search_company=search_company) & Q(search_name=search_name))
+                    Q(search_company=search_company)
+                    & Q(search_name=search_name))
 
-            # 제품명과 회사명이 같은 경우 무조건 한가지의 값이 나오므로 첫번째 값의 id를 받아오면 된다.
-            article_id = m_article_info[0].article_id   # article_id : 상품 아이디
+            article_id = m_article_info[0].article_id
 
-            # ArticleInfo에서 id와 search_cnt를 1 증가시켜주자. article reviewcnt도 가져올 수 있으니 해당 자료도 가져다 주자.
-
-            # crawling check가 True이면 이전에 없던 데이터였으므로 info안에도 추가시켜주어야한다.
             m_article_info = ArticleInfo.objects.filter(article_id=article_id)
             if len(m_article_info) == 0:
                 print("해당 코드가 아직 저장이 안되어있음")
@@ -153,7 +147,7 @@ def result(request):
 
                 try:
                     df["내돈내산 키워드"]
-                except:
+                except IOError:
                     m_article_info = ArticleInfo.objects.get(
                         article_id=article_id)
                     m_article_info.delete()
@@ -162,17 +156,21 @@ def result(request):
                         article_id=article_id)
                     m_article_code.delete()
 
-                    print("에러발생! 지움")
-
                     return HttpResponseRedirect(reverse('homeapp:home'))
-                # Review Data에 데이터를 추가시켜주자. writer, content, description, content_date, first_img_url, last_img_url, url을 넣어준다.
-                url, title, post_date, description, writer, content, first_img_url, last_img_url \
-                    = df["url"], df["title"], df["post_date"], df["description"], df["writer"], df["content"], df["first_img"], df["last_img"]
+                url, title, post_date, description, writer, content, \
+                    first_img_url, last_img_url \
+                    = df["url"], df["title"], df["post_date"],\
+                    df["description"], df["writer"], df["content"], \
+                    df["first_img"], df["last_img"]
 
-                content_cnt, content_line, quote_cnt, img_cnt, coupang, ndns, dj, sj, bg, dot, b, bb, z, zz, zzz, zzzz \
-                    = df["content_cnt"], df["content_line"], df["quote_cnt"], df["img_cnt"], df["coupa.ng 키워드"], df["내돈내산 키워드"], df["단점 빈도 수"], \
-                    df["솔직 빈도 수"],  df["비교 빈도 수"], df["... 빈도 수"], df["ㅠ 빈도 수"],  df[
-                        "ㅠㅠ 빈도 수"], df["ㅋ 빈도 수"], df["ㅋㅋ 빈도 수"], df["ㅋㅋㅋ 빈도 수"], df["ㅋㅋㅋㅋ 빈도 수"]
+                content_cnt, content_line, quote_cnt, img_cnt,\
+                    coupang, ndns, dj, sj, bg, dot, b, z, zz, zzzz\
+                    = df["content_cnt"], df["content_line"],\
+                    df["quote_cnt"], df["img_cnt"],\
+                    df["coupa.ng 키워드"], df["내돈내산 키워드"], df["단점 빈도 수"],\
+                    df["솔직 빈도 수"],  df["비교 빈도 수"], df["... 빈도 수"], \
+                    df["ㅠ 빈도 수"], df["ㅋ 빈도 수"], \
+                    df["ㅋㅋ 빈도 수"], df["ㅋㅋㅋㅋ 빈도 수"]
                 # blog_cnt = len(df)
                 review_cnt = df.shape[0]
 
@@ -205,7 +203,8 @@ def result(request):
                     m_review_data.save()
 
                     m_review_data = ReviewData.objects.get(
-                        article_id=article_id, writer=writer[i], url=url[i], content_date=post_date[i])
+                        article_id=article_id, writer=writer[i],
+                        url=url[i], content_date=post_date[i])
                     data = {
                         "review_id": [str(m_review_data.review_id)],
                         "last_img": [str(last_img_url[i])],
@@ -239,7 +238,8 @@ def result(request):
 
                     if int(filter_data) == 0:  # 순수다
                         m_article_info = ReviewData.objects.get(
-                            article_id=article_id, writer=writer[i], first_img_url=first_img_url[i])
+                            article_id=article_id,
+                            writer=writer[i], first_img_url=first_img_url[i])
                         review_id = m_article_info.review_id
 
                         m_review_sentiment = ReviewSentiment()
@@ -253,8 +253,12 @@ def result(request):
                             "artice_code": int(article_id),
                             "review_id": int(review_id)
                         }
-                        response = requests.post(Backend_sentiment, params=data, headers={
-                                                 'accept': 'application/json'})
+                        response = requests.post(Backend_sentiment,
+                                                 params=data,
+                                                 headers={
+                                                     'accept':
+                                                     'application/json'
+                                                     })
 
                         negative = response.json()["negative"]
                         positive = response.json()["positive"]
@@ -267,17 +271,19 @@ def result(request):
                         m_review_sentiment.save()
 
                         m_reivew_sentiment = ReviewSentiment.objects.filter(
-                            review_id=review_id, article_id=article_id, positive=positive, negative=negative)
+                            review_id=review_id, article_id=article_id,
+                            positive=positive, negative=negative)
                         try:
                             sentiment_id = m_reivew_sentiment[0].sentiment_id
-                        except:
+                        except IOError:
                             pass
-                        # num = random.sample([i for i in range(len(result))], 5)
                         positive_len = 0
                         negative_len = 0
                         for i in range(len(result)):
-                            m_review_sentiment_detail = ReviewSentimentDetail()
-                            m_review_sentiment_detail.sentiment_id = sentiment_id
+                            m_review_sentiment_detail = \
+                                ReviewSentimentDetail()
+                            m_review_sentiment_detail.sentiment_id = \
+                                sentiment_id
                             m_review_sentiment_detail.content = str(
                                 result[i][0])
                             m_review_sentiment_detail.sentiment = result[i][1]
@@ -297,8 +303,8 @@ def result(request):
             m_buy_list = BuyList.objects.filter(article_id=article_id)
 
             if len(m_buy_list) == 0:  # 아무것도 없는 경우
-                title, url, image_url, price, mall_name = crawling_function.service_buy(
-                    search_company, search_name)
+                title, url, image_url, price, mall_name = \
+                    crawling_function.service_buy(search_company, search_name)
 
                 # 만약 가격차이가 너무 나는 경우는 원하는 값이 아닐수도 있다.
 
@@ -343,19 +349,16 @@ def result(request):
                     suvey_zip = zipfile.ZipFile(BytesIO(response.content))
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
                 association_paths = [
-                    "/media/"+suvey_zip.filelist[i].filename for i in range(len(suvey_zip.filelist))]
+                    "/media/"+suvey_zip.filelist[i].
+                    filename for i in range(len(suvey_zip.filelist))]
                 print(association_paths)
-                # 여기는 더미값 넣는 값이다.
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
                 m_review_analysis.summary = summary_data
-                m_review_analysis.emotion_url = "https://t1.daumcdn.net/cfile/tistory/99C9FA335DC91AB810"
                 m_review_analysis.associate_url1 = association_paths[0]
                 m_review_analysis.associate_url2 = association_paths[1]
                 m_review_analysis.associate_url3 = association_paths[2]
                 m_review_analysis.save()
-
-            # reuslt값에 모든 데이터 작성해서 보내주기
 
             m_article_info = ArticleInfo.objects.get(article_id=article_id)
 
@@ -367,7 +370,7 @@ def result(request):
             try:
                 requests.get(m_article_info.img_url)
                 data_info["img_url"] = m_article_info.img_url
-            except:
+            except IOError:
                 data_info["img_url"] = ""
 
             review_list = []
@@ -431,7 +434,6 @@ def result(request):
                 article_id=article_id)
 
             analysis_list["summary"] = m_review_analysis.summary
-            analysis_list["emotion_url"] = m_review_analysis.emotion_url
             analysis_list["associate_url1"] = m_review_analysis.associate_url1
             analysis_list["associate_url2"] = m_review_analysis.associate_url2
             analysis_list["associate_url3"] = m_review_analysis.associate_url3
@@ -466,32 +468,6 @@ def result(request):
     return HttpResponseRedirect(reverse('homeapp:home'))
 
 
-# def choose(request, search_company):
-
-#     if request.method == "GET":
-
-#         # 사용자가 검색한 경우
-#         search_company = request.GET.get("company", 0)
-#         search_name = request.GET.get("article_name", 0)
-
-#         m_article_code = ArticleCode.objects.filter(
-#             search_company=search_company)
-
-#         data_list = []
-#         for i in m_article_code:
-#             data_list.append({
-#                 "company": m_article_code.search_company,
-#                 "article_name": m_article_code.article_name
-
-#             })
-
-#         return render(request, 'analysisapp/result.html', {
-#             "data_list": data_list
-#         })
-
-#     return HttpResponseRedirect(reverse('homeapp:home'))
-
-
 def detail(request, sentiment_id):
     m_review_sentiment = ReviewSentimentDetail.objects.filter(
         sentiment_id=sentiment_id)
@@ -501,29 +477,6 @@ def detail(request, sentiment_id):
 
     positive_list = []
     negative_list = []
-    positive = 1
-    negative = 1
-
-    # for i in m_review_sentiment:
-    #     if i.sentiment == 0:
-    #         if negative == 6:
-    #             continue
-    #         negative_list.append(
-    #             {
-    #                 "idx": negative,
-    #                 "content": i.content
-    #             })
-    #         negative += 1
-    #     else:
-    #         if positive == 6:
-    #             continue
-    #         positive_list.append({
-    #             "idx": positive,
-    #             "content": i.content
-    #         })
-    #         positive += 1
-
-    # num = random.sample([i for i in range(len(m_review_sentiment))], len(m_review_sentiment))
     positive_list = []
     negative_list = []
     positive_lists = []

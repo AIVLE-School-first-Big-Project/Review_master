@@ -1,7 +1,8 @@
 from django.db import models
-from django.db.models.fields import CharField, IntegerField, TextField,DateTimeField
+from django.db.models.fields import CharField, IntegerField, DateTimeField
 
 label_name = 'accountapp'
+
 
 class Member(models.Model):
     user_id = CharField(max_length = 30, primary_key=True)

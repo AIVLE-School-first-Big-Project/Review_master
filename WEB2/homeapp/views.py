@@ -1,10 +1,9 @@
-from datetime import datetime
+from django.contrib import messages
 from django.shortcuts import render
-from analysisapp.models import ArticleCode, ArticleInfo, BuyList, ReviewData, ReviewAnalysis, MemberLog, Member
+from analysisapp.models import ArticleCode, ArticleInfo, Member
 import random
 from django.views.decorators.csrf import csrf_exempt
 app_name = 'homeapp'
-from django.contrib import messages
 
 
 @csrf_exempt
@@ -82,7 +81,8 @@ def home(request):
         m_article_code = ArticleCode.objects.get(article_id=info.article_id)
 
         hot_keyword.append([idx+1, m_article_code.search_company,
-                           m_article_code.search_name, info.search_cnt])
+                           m_article_code.search_name,
+                           info.search_cnt])
 
     # # 연령대별 인기 검색어 가져오기 - 남성 2030
     m_twenty_male = ArticleInfo.objects.order_by('-twenty_male_cnt')[:10]
@@ -104,7 +104,8 @@ def home(request):
         m_article_code = ArticleCode.objects.get(article_id=info.article_id)
 
         twenty_female.append([idx+1, m_article_code.search_company,
-                              m_article_code.search_name, info.twenty_female_cnt])
+                              m_article_code.search_name,
+                              info.twenty_female_cnt])
 
     # # 연령대별 인기 검색어 가져오기 - 남성 4050
     m_fourty_male = ArticleInfo.objects.order_by('-fourty_male_cnt')[:10]
@@ -126,7 +127,8 @@ def home(request):
         m_article_code = ArticleCode.objects.get(article_id=info.article_id)
 
         fourty_female.append([idx+1, m_article_code.search_company,
-                              m_article_code.search_name, info.fourty_female_cnt])
+                              m_article_code.search_name,
+                              info.fourty_female_cnt])
 
     # member = Member.objects.get(user_id=login_id)
     # age_group = age_group_check(member.user_birth)

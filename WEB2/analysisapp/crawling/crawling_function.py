@@ -69,7 +69,7 @@ def naver_api(search_word, start, display):
     client_secret = "Yo0jOskXlZ"
     encText = urllib.parse.quote(search_word)
 
-    url = "https://openapi.naver.com/v1/search/blog?query=" + encText  # json 결과
+    url = "https://openapi.naver.com/v1/search/blog?query=" + encText
     url += f"&start={start}"
     url += f"&display={display}"
 
@@ -146,7 +146,8 @@ def item_parsing(company, search_word, start, display, repeat_num):
 
             # 본문 크롤링을 위한 URL주소 추가
             blog_result.append(
-                f"https://blog.naver.com/PostView.naver?blogId={writer}&logNo={code}")
+                f"https://blog.naver.com/PostView.\
+                naver?blogId={writer}&logNo={code}")
         try:
             if start + display <= blog_search["total"]:
                 cnt += 1
@@ -158,9 +159,10 @@ def item_parsing(company, search_word, start, display, repeat_num):
 
             if cnt == 10:
                 break
-        except:
+        except IOError:
             break
-    return blog_result, blog_writer, blog_code, blog_title, blog_description, blog_date
+    return blog_result, blog_writer, blog_code, \
+        blog_title, blog_description, blog_date
 
 # 네이버 블로그 크롤링
 
@@ -190,11 +192,12 @@ def blog_content_parsing(url):
                 last_img = img_craw[img_cnt-1].select_one(
                     ".se-module-image-link > img")["data-lazy-src"]
 
-            except:
+            except IOError:
+
                 first_img = img_craw[0].select_one(
                     ".se-module-image-link > img")["src"]
-                last_img = img_craw[img_cnt -
-                                    1].select_one(".se-module-image-link > img")["src"]
+                last_img = img_craw[img_cnt - 1].\
+                    select_one(".se-module-image-link > img")["src"]
 
         # 쿠팡 크롤링
         coupang_craw = blog_bs.select(".se-oglink-url")
@@ -206,7 +209,7 @@ def blog_content_parsing(url):
                     if "coupa" in coupang_craw[i].text:
                         coupang_check = 1
 
-                except:
+                except IOError:
                     pass
 
         # 글 내용 크롤링
@@ -221,10 +224,13 @@ def blog_content_parsing(url):
         for i in blog_bs.select(".se-quote"):
             quote.append(i.text)
             quote_cnt += 1
-    except:
-        return False, content, len(content), len(blog_text), quote, quote_cnt,  first_img, last_img,  img_cnt, coupang_check
+    except IOError:
 
-    return True, content, len(content), len(blog_text), quote, quote_cnt, first_img, last_img,  img_cnt, coupang_check
+        return False, content, len(content), len(blog_text), quote, \
+            quote_cnt,  first_img, last_img,  img_cnt, coupang_check
+
+    return True, content, len(content), len(blog_text), quote, \
+        quote_cnt, first_img, last_img,  img_cnt, coupang_check
 
 # 검색되는 데이터 확인
 
@@ -248,7 +254,8 @@ def df_keyword_contains(df):
     keyword_contains_many = [["한달", "한 달", "1달", "1개월"], [
         "두달", "두 달", "2달", "2개월"], ["세달", "세 달", "3달", "3개월"]]
     keyword_cnt = ["솔직", "비교", "ㅋ", "ㅋㅋ", "ㅋㅋㅋ", "ㅋㅋㅋㅋ", "...",
-                   "....", "ㅜ", "ㅜㅜ", "ㅜㅜㅜ", "ㅜㅜㅜㅜ", "ㅠ", "ㅠㅠ", "ㅠㅠㅠ", "ㅠㅠㅠㅠ", "장점", "단점"]
+                   "....", "ㅜ", "ㅜㅜ", "ㅜㅜㅜ", "ㅜㅜㅜㅜ",
+                   "ㅠ", "ㅠㅠ", "ㅠㅠㅠ", "ㅠㅠㅠㅠ", "장점", "단점"]
     keyword_badword = ["개좋다", "개좋음", "개멋짐", "개빠름", "개큼", "존나", "걍", "씹창"]
     keyword_coupang = ["coupa.ng", "쿠팡 파트너스"]
 
@@ -320,13 +327,6 @@ def df_check_ad(df):
                         break
 
 
-# def column_sort(df):
-
-#     df
-
-# 서비스 시작
-
-
 def service_start(company, word):
     print(f"검색어 : {company} {word}")
     print("검색을 시작합니다.")
@@ -335,8 +335,9 @@ def service_start(company, word):
     words = search_word(word)
 
     for word in words:
-        blog_result, blog_writer, blog_code, blog_title, blog_description, blog_date = item_parsing(
-            company, word, 1, 100, 3)
+        blog_result, blog_writer, blog_code, blog_title, \
+            blog_description, blog_date = \
+            item_parsing(company, word, 1, 100, 3)
         url += blog_result
         title += blog_title
         post_date += blog_date
@@ -354,11 +355,13 @@ def service_start(company, word):
     # # 중복 url삭제
     df = df.drop_duplicates(["url"]).reset_index(drop=True)
 
-    content_list, content_cnt_list, content_line_list, quote_list, quote_cnt_list, first_img_list, last_img_list, img_cnt_list, coupang_list = [
-    ], [], [], [], [], [], [], [], []
+    content_list, content_cnt_list, content_line_list, quote_list,\
+        quote_cnt_list, first_img_list, last_img_list, img_cnt_list, \
+        coupang_list = [], [], [], [], [], [], [], [], []
     for i in tqdm(range(len(df))):
-        _, content, content_cnt, content_line, quote, quote_cnt, first_img, last_img, img_cnt, coupang = blog_content_parsing(
-            df.loc[i, "url"])
+        _, content, content_cnt, content_line,\
+            quote, quote_cnt, first_img, last_img, \
+            img_cnt, coupang = blog_content_parsing(df.loc[i, "url"])
 
         content_list.append(content)
         content_cnt_list.append(content_cnt)
@@ -391,7 +394,7 @@ def service_img(company, word):
     client_id = "GvNa2sBgFDA6v7ujnaz0"
     client_secret = "Yo0jOskXlZ"
     encText = urllib.parse.quote(f"{company} {word}")
-    url = "https://openapi.naver.com/v1/search/image?query=" + encText  # json 결과
+    url = "https://openapi.naver.com/v1/search/image?query=" + encText
     request = urllib.request.Request(url)
     request.add_header("X-Naver-Client-Id", client_id)
     request.add_header("X-Naver-Client-Secret", client_secret)
@@ -412,7 +415,7 @@ def service_buy(company, word):
     client_id = "GvNa2sBgFDA6v7ujnaz0"
     client_secret = "Yo0jOskXlZ"
     encText = urllib.parse.quote(f"{company} {word}")
-    url = "https://openapi.naver.com/v1/search/shop?query=" + encText  # json 결과
+    url = "https://openapi.naver.com/v1/search/shop?query=" + encText
     request = urllib.request.Request(url)
     request.add_header("X-Naver-Client-Id", client_id)
     request.add_header("X-Naver-Client-Secret", client_secret)
