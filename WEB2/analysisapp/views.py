@@ -49,15 +49,15 @@ def age_group_check(birth_date):
 
 @csrf_exempt
 def result(request):
-    if request.method == "POST":
+    if request.method == "GET":
         crawling_check = False
         login_id = request.session.get('user_id', "nonuser")
 
         print(f"현재 로그인한 사람 {login_id}")
 
         # 사용자가 검색한 경우
-        search_company = request.POST.get("company", 0)
-        search_name = request.POST.get("article_name", 0)
+        search_company = request.GET.get("company", 0)
+        search_name = request.GET.get("article_name", 0)
 
         # 검색 결과 로그 출력
         print(search_company)
@@ -353,7 +353,12 @@ def result(request):
             data_info["company"] = search_company
             data_info["name"] = search_name
             data_info["review_cnt"] = m_article_info.article_review_cnt
-            data_info["img_url"] = m_article_info.img_url
+
+            try:
+                requests.get(m_article_info.img_url)
+                data_info["img_url"] = m_article_info.img_url
+            except:
+                data_info["img_url"] = ""
 
             review_list = []
             m_review_data = ReviewData.objects.filter(

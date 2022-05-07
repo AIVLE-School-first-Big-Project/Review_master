@@ -43,7 +43,11 @@
 					<tr>
 						<td rowspan="3" style="vertical-align: bottom; ">
 							<a href = "{{review.url}}">
-								<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
+								{% if review.first_img_url == "" %}
+									<img class="first_img" src="{% static 'assets/images/no_review_img.png' %}" alt="image"/>
+								{% else %}
+									<img class="first_img" src="{{review.first_img_url}}" alt="image"/>
+								{% endif %}
 							</a>
 							</td>	
 							
@@ -159,7 +163,11 @@
 					<tr styles="color=black">
 						<td styles="color=black">
 							<a href = "{{buy.url}}">
+								{% if buy.image_url == "" %}
+								<div><img class="buy_img" src="{% static 'assets/images/no_article_img.png' %}"></div>
+								{% else %}
 								<div><img class="buy_img" src="{{buy.image_url}}"></div>
+								{% endif %}
 							</a>
 						</td>
 						<td class="buy_title">

@@ -7,7 +7,7 @@
         <div class="spotlight" id="spot" style="align-text: center;">
                 {% if check_box.first == 1 %}
                     <div class="box1">
-                        <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                        <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                             <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                             <input type="text" name="company" value = "{{recommand_list.company.0}}" hidden="True">
                             <input type="text" name="article_name" value = "{{recommand_list.name.0}}" hidden="True">
@@ -18,7 +18,7 @@
                 {% endif %}
                 {% if check_box.sixth == 1 %}
                     <div class="box1">
-                        <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                        <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                             <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                             <input type="text" name="company" value = "{{recommand_list.company.5}}" hidden="True">
                             <input type="text" name="article_name" value = "{{recommand_list.name.5}}" hidden="True">
@@ -28,7 +28,7 @@
                 {% endif %}
                 {% if check_box.second == 1 %}
                 <div class="box1">
-                    <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                    <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                         <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                         <input type="text" name="company" value = "{{recommand_list.company.1}}" hidden="True">
                         <input type="text" name="article_name" value = "{{recommand_list.name.1}}" hidden="True">
@@ -39,7 +39,7 @@
                 {% endif %}
                 {% if check_box.seventh == 1 %}
                     <div class="box1">
-                        <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                        <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                             <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                             <input type="text" name="company" value = "{{recommand_list.company.6}}" hidden="True">
                             <input type="text" name="article_name" value = "{{recommand_list.name.6}}" hidden="True">
@@ -50,7 +50,7 @@
                 {% endif %}
                 {% if check_box.third == 1 %}
                 <div class="box1">
-                    <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                    <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                         <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                         <input type="text" name="company" value = "{{recommand_list.company.2}}" hidden="True">
                         <input type="text" name="article_name" value = "{{recommand_list.name.2}}" hidden="True">
@@ -63,7 +63,7 @@
                 {% endif %}
                 {% if check_box.eighth == 1 %}
                     <div class="box1">
-                        <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                        <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                             <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                             <input type="text" name="company" value = "{{recommand_list.company.7}}" hidden="True">
                             <input type="text" name="article_name" value = "{{recommand_list.name.7}}" hidden="True">
@@ -74,7 +74,7 @@
                 {% endif %}
                 {% if check_box.fourth == 1 %}
                 <div class="box1">
-                    <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                    <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                         <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                         <input type="text" name="company" value = "{{recommand_list.company.3}}" hidden="True">
                         <input type="text" name="article_name" value = "{{recommand_list.name.3}}" hidden="True">
@@ -84,7 +84,7 @@
                 {% endif %}
                 {% if check_box.ninth == 1 %}
                     <div class="box1">
-                        <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                        <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                             <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                             <input type="text" name="company" value = "{{recommand_list.company.8}}" hidden="True">
                             <input type="text" name="article_name" value = "{{recommand_list.name.8}}" hidden="True">
@@ -96,7 +96,7 @@
 
                 {% if check_box.fifth == 1 %}
                 <div class="box1">
-                    <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                    <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                         <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                         <input type="text" name="company" value = "{{recommand_list.company.4}}" hidden="True">
                         <input type="text" name="article_name" value = "{{recommand_list.name.4}}" hidden="True">
@@ -107,7 +107,7 @@
                 {% endif %}
                 {% if check_box.tenth == 1 %}
                     <div class="box1">
-                        <form action="{% url 'analysisapp:result' %}" method = "POST" class="today">
+                        <form action="{% url 'analysisapp:result' %}" method = "GET" class="today">
                             <!-- <div class="box2">{{recommand_list.company.0}} {{recommand_list.name.0}}</div> -->
                             <input type="text" name="company" value = "{{recommand_list.company.9}}" hidden="True">
                             <input type="text" name="article_name" value = "{{recommand_list.name.9}}" hidden="True">
@@ -144,7 +144,7 @@
         
                             </form>
                         </td> -->
-                        <td><a href="">{{keyword.1}} {{keyword.2}}</a></td>
+                        <td><a href="/app/analysis/result/?company={{keyword.1}}&article_name={{keyword.2}}">{{keyword.1}} {{keyword.2}}</a></td>
                         <td>{{keyword.3}}</td>
                     </tr>
                 {% endfor %}
