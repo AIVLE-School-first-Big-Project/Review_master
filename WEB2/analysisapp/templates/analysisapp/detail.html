@@ -14,13 +14,16 @@
             </div>
         </div>
         <div class="">
+            <div>아래 문장들은 랜덤하게 보여줍니다. 다른 문장을 보고싶다면 새로고침을 눌러주세요.</div>
             <div class="titlebox">긍정문장</div>
             <div>
                 <table>
+                    {% for positive in positive_list %}
                     <tr >
-                        <td>1</td>
-                        <td class="positive_td">이곳은 문장 내용이 들어갈 곳 입니다!555555555555555555555555555555555555555555555555555555555555555555555555555</td>
+                        <td>{{positive.idx}}</td>
+                        <td class="positive_td">{{positive.content}}</td>
                     </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>
@@ -28,10 +31,12 @@
             <div class="titlebox">부정문장</div>
             <div>
                 <table>
+                    {% for negative in negative_list %}
                     <tr>
-                        <td>1</td>
-                        <td class="negative_td">이곳은 문장 내용이 들어갈 곳 입니다!</td>
+                        <td>{{negative.idx}}</td>
+                        <td class="negative_td">{{negative.content}}</td>
                     </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>
