@@ -5,10 +5,10 @@ label_name = 'accountapp'
 
 
 class Member(models.Model):
-    user_id = CharField(max_length = 30, primary_key=True)
-    user_pw = CharField(max_length = 30)
-    user_email = CharField(max_length = 30)
-    user_nickname = CharField(max_length = 30)
+    user_id = CharField(max_length=30, primary_key=True)
+    user_pw = CharField(max_length=30)
+    user_email = CharField(max_length=30)
+    user_nickname = CharField(max_length=30)
     user_class = IntegerField()
     user_status = IntegerField()
     create_time = DateTimeField(auto_now_add=True)
