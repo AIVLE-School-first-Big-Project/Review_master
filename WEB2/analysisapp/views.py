@@ -198,7 +198,15 @@ def result(request):
                     # 51 -> pro
                     # 1 -> pred
 
+                    print(data)
+
+                    print(f"{idx} / {len(df)} 필터링 시작합니다.")
+                    m_review_data.save()
+
+                    m_review_data = ReviewData.objects.get(
+                        article_id=article_id, writer=writer[i], url=url[i])
                     data = {
+                        "review_id": [str(m_review_data.review_id)],
                         "last_img": [str(last_img_url[i])],
                         "content": [str(content[i])],
                         "content_cnt": [int(content_cnt[i])],
@@ -218,9 +226,6 @@ def result(request):
                         # "ㅠㅠ 빈도 수": [int(bb[i])],
                         # "ㅋㅋㅋ 빈도 수": [int(zzz[i])]
                     }
-                    print(data)
-
-                    print(f"{idx} / {len(df)} 필터링 시작합니다.")
                     response = requests.post(Backend_filtering, json=data)
                     if response.status_code == 200:
                         filter_data = response.json()["pred"]
