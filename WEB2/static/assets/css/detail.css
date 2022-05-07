@@ -88,6 +88,7 @@ mark.red{
 }
 .guide_container{
     display: flex;
+    margin-top: 0.7rem;
     margin-bottom: 1.2rem;
 }
 
@@ -121,4 +122,18 @@ mark.red{
 #img_review{
     width: 7rem;
     height: 7rem;
+}
+
+td.blog_name{
+    text-align: left;
+    padding-bottom: 0;
+    color: #31BEAD;
+    font-weight: 900;
+}
+.blog_text{
+    padding-top: 0;
+    color: #171616;
+}
+.blog_img_td{
+    width: 7rem;
 }
