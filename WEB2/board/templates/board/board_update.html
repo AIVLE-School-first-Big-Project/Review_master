@@ -10,9 +10,12 @@
 </div>
 <div id="main">
     <div class="board">
-        <form method="POST" action="{% url 'board:update' up_id=post_update.id %}" class="post-write">
+        <form method="POST" action="{% url 'board:update' up_id=post_update.id %}" class="post-write" enctype="multipart/form-data">
             {% csrf_token %}
-            <div>
+            {% if post_update.file_name %}
+                <img src="{{ post_update.file_name.url }}" style="width:100%" />
+            {% endif %}
+                <div>
                 <label for="title">제목</label><br>
                 <input type="text" name="title" id="title" value={{ post_update.title }} />
             </div>
@@ -20,15 +23,10 @@
                 <label for="content">내용</label><br>
                 <textarea type="text" name="content" id="content" rows="5">{{ post_update.content }}</textarea>
             </div>
-            {% comment %} {% if post_update.file_name %}
             <div>
-                <label for="file">사진</label><br>
-                <input type="text" name="file" id="file" value={{ post_update.file_name }} />
-                <div>
-                    <input type="file" name="file_name" id="input-file">
-                </div> 
+                <label for="update_file_name">사진</label><br>
+                <input type="file" name="update_file_name" id="update_file_name" />
             </div>
-            {% endif %} {% endcomment %}
 
             {% comment %} 관리자일 경우 수정 버튼 누르면 답변 수정/삭제할 수 있음  {% endcomment %}
             {% ifequal request.session.user_class 99 %}

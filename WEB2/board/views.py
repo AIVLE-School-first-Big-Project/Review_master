@@ -50,6 +50,13 @@ def board_update(request, up_id):
     if request.method == "POST":
         post_update.title = request.POST.get('title')
         post_update.content = request.POST.get('content')
+        if request.FILES.get('update_file_name'):
+            post_update.file_name = request.FILES.get('update_file_name')
+        else:
+            post_update.file_name = post_update.file_name
+        print(post_update.title)
+        print(post_update.content)
+        print(post_update.file_name)
         post_update.save()
         return redirect('/app/board/')
     else:

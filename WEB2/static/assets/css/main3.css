@@ -211,11 +211,23 @@ h2.result {
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
-        justify-content: space-evenly;
+        margin-left: 10%;
+        /* justify-content: space-evenly; */
+    }
+    .head_title {
+        width: 15%;
+        margin-right: 5%;
+    }
+    .head_content {
+        width: 60%;
+        margin-right: auto;
+    }
+    .head_user {
+        width: 30%;
     }
     #head_menu>li,
     #head_user>li {
-        padding: 0 0.8rem;
+        padding: 0 0.6rem;
     }
     .hamburger {
         display: none;
@@ -225,7 +237,7 @@ h2.result {
         display: flex;
     }
     .head_user {
-        padding-left: 5rem;
+        padding-right: 2rem;
     }
 }
 
@@ -278,7 +290,7 @@ h2.result {
     }
     #head_menu>li,
     #head_user>li {
-        padding: 0.5rem;
+        padding: 0 0.3rem;
     }
     #head_menu>li:hover,
     #head_user>li:hover {
@@ -3680,6 +3692,7 @@ body.is-preload #header.alt .logo {
 
 #main table tbody tr {
     border-color: #dddddd;
+    font-size: 1.5vw;
 }
 
 

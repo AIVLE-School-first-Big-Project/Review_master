@@ -4,74 +4,94 @@
 {% block styles %}
     <link rel="stylesheet" href="{% static 'assets/css/detail.css' %}?after" type="text/css"/> 
 {% endblock %}
-<div id='main' class="maincl">	
-    <div class="main_div">
-        
-        <header>
-            <a href="/app/analysis/result/?company={{review_list.company}}&article_name={{review_list.article_name}}">
-                <h2 class="head_h2"><span id="headcs"><</span> 순수리뷰 AI 상세분석</h2>
-            </a>
-
+<div id='main' class="maincl">
+    <section id="review" class="main special" style="color:black;">
+		<header class="major">
+			<h2>블로그 리뷰 AI 상세분석</h2>
+            <table class='resulttable'>
+                <tr style="text-align: center;font-size:1rem">
+                    <td colspan="1" class="description_td de_text">#AI기반 텍스트 분석을 통해 블로그 리뷰를 분석해드립니다!</td>
+                </tr>
+            </table>
         </header>
-        <div>
-            <div class="titlebox">순수리뷰글</div>
-			<table class="">
-				<tr class="">
-                    
-					<td rowspan="2" class="blog_img_td" style="vertical-align: middle; ">
+    <div id='main' class="maincl">	
+        <div class="main_div">
+        <!-- 내용 입력 -->
+            <div class="titlebox">Chap 1. 블로그 정보</div>
+            <table class="">
+                <tr class="">
+                    <td rowspan="2" class="blog_img_td" style="vertical-align: middle; ">
                         <a href="{{review_list.url}}">
                             <img id="img_review" src="{{review_list.first_img_url}}" alt="image"/>
                         </a>
                     </td>
-					<td class="blog_name" style="font-weight: bolder; ">
+                    <td class="blog_name" style="font-weight: bolder; ">
                         <a href="{{review_list.url}}">
                             {{review_list.title}}
                         </a>
                     </td>
+                </tr>
+                <tr class="">
+                    <td class="blog_text">{{review_list.description}}</td>
+                </tr>
+            </table>
+        <div>
+            <div class="titlebox">Chap 2. 순수 리뷰 원인</div>
+            <br>
+            <div style="font-size: 1.1vw;">
+                <h3>키워드 설명</h3>---<br>
+                #content_cnt : 글자수, #content_line : 문장 수, #img_cnt : 사진개수,
+                <br>
+                #AD_score : 광고적중률, #CP_score : 파트너스적중률, #PU_score: 순수 적중률 
+            </div>
+			<div class="barimgdiv">
+                <img class="barimg de_plot" src="http://iptimejong96.iptime.org:1415/explain/?review_id={{review_id}}" alt="image"/>
+            </div>
 
-				</tr>
-				<tr class="">
-					<td class="blog_text">{{review_list.description}}</td>
-				</tr>
-			</table>
-		</div>
-        <div class="">
-            <div class="titlebox">긍정부정비율</div>
-            
+        </div>
+        <div>
+            <div class="titlebox">Chap 3. 문장감성분석</div>
+            <div><br>
+                <h2>#블로그 내 <span style="color: #1E88E5;font-weight: bolder;">긍정</span>문장</h2>
+                <br>
+            </div>
+            <div class="emo_div">
+                <!-- <div class="positive_box">#긍정</div> -->
+                <div>
+                    <table>
+                        {% for positive in positive_list %}
+                        <tr >
+                            <td class="positive_num"><mark class="blue">{{positive.idx}}</mark></td>
+                            <td class="positive_td">{{positive.content}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div>
+                <br>
+                <h2>#블로그 내 <span style="color: #FF0D57;font-weight: bolder;">부정</span>문장</h2>
+                <br>
+            </div>
+            <div class="emo_div">
+                <div>
+                    <table>
+                        {% for negative in negative_list %}
+                        <tr>
+                            <td class="negative_num"><mark class="red">{{negative.idx}}</mark></td>
+                            <td class="negative_td">{{negative.content}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+            <div><br></div>
             <div class="barimgdiv">
-                <img class="barimg" src="http://iptimejong96.iptime.org:1415/explain/?review_id={{review_id}}" alt="image"/>
-            </div>
-        </div>
-        <div class="guide_container">
-            <div class="titlebox">긍정부정문장</div>
-            <div class="guide_text">다른 긍정부정문장을 보고싶다면 새로고침을 해주세요</div>
-        </div>
-        <div class="emo_div">
-            <div class="positive_box">긍정문장</div>
-            <div>
-                <table>
-                    {% for positive in positive_list %}
-                    <tr >
-                        <td class="positive_num"><mark class="blue">{{positive.idx}}</mark></td>
-                        <td class="positive_td">{{positive.content}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-        <div class="emo_div">
-            <div class="negative_box">부정문장</div>
-            <div>
-                <table>
-                    {% for negative in negative_list %}
-                    <tr>
-                        <td class="negative_num"><mark class="red">{{negative.idx}}</mark></td>
-                        <td class="negative_td">{{negative.content}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                <div class="guide_text" style="font-size: 1.2rem;">#Tip : 다른 긍정부정 문장을 확인하고자 한다면 새로고침을 해주세요</div>
             </div>
         </div>
     </div>
+	</section>
 </div>
 {%endblock content%}

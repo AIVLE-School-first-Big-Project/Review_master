@@ -19,7 +19,7 @@ resulttable{
 
 .first_img{
     width: 9rem;
-    height: 7rem;
+    height: 9rem;
     
 }
 
@@ -37,6 +37,7 @@ resulttable{
     text-align: right;
     padding-top: 0em;
     padding-bottom: 0em;
+    font-size: 1rem;
 }
 
 
@@ -77,8 +78,8 @@ section#description2.main{
 /* 리뷰요약 */
 
 #reviewimg{
-	width:7rem;
-	height: 12rem;
+	width:10rem;
+	height: 10rem;
 	margin:  0 0 0 0;
 
 }
@@ -269,7 +270,9 @@ td.content{
 
 }
 td.description_td{
-    padding-top: 0px;
+    padding-top:  0;
+    color: #6F7271;
+    font-size: 1.3rem;
 }
 td.review_td{
     padding-top:15px;
