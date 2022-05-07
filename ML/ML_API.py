@@ -7,7 +7,7 @@ import secret_key as sk
 from Text_sentiment.koelectra import Text_sentiment_inferense_review
 import urllib.request
 import time  
-import requests
+import requests, pymysql
 import json
 import os
 import pandas as pd
@@ -20,15 +20,26 @@ import zipfile, torch
 from urllib import parse
 from urllib.parse import urlsplit, quote
 from transformers import ElectraForSequenceClassification
-
+import joblib
+import shap
+from config import config
 
 BASE_DIR = Path(__file__).resolve().parent
+
+
+#-------------------------------------------------------------------------------------------------------#
+# ML/DL model loaded
 
 device = torch.device('cpu')
 sentiment_backbone_model = ElectraForSequenceClassification.from_pretrained(
         "monologg/koelectra-small-v3-discriminator", num_labels=2).to(device)
 
 sentiment_backbone_model.load_state_dict(torch.load(os.path.join(BASE_DIR, 'Text_sentiment/model/huggingFace_model_82.pt')))
+
+loaded_XGB_model = joblib.load(os.path.join(BASE_DIR,'Filtering/model/xgb_model_binary_v3.0.pkl')) 
+loaded_XAI_BASE_DD = joblib.load(os.path.join(BASE_DIR,'Filtering/model/XAI_SHAP_v3.0.pkl')) 
+explainer_XAI = shap.TreeExplainer(loaded_XGB_model,data=loaded_XAI_BASE_DD, model_output="probability",feature_names=config().origin_cols)
+
 #-------------------------------------------------------------------------------------------------------#
 # creating FastAPI APP
 app = FastAPI()
@@ -116,14 +127,12 @@ async def Blog_filter(artice_code: int, review_id: int):
 
 
 @app.post('/filtering/')
-# async def Blog_filter(Blog_Name :List[str]):
 async def Blog_filter(data: dict = Body(...)):
-    # print("키 정보 : ",data.keys())
     data = pd.DataFrame(data)
+    review_id = data["review_id"].values[0]
     data["context_img"] = dowload_last_img(data['last_img'].values[0])
-    # print(data.columns)
-    y_pred, y_prod = Adblock_filter(data_frame=data)
-    print("예측 결과 : ", int(y_pred)," 확률 : ",y_prod)
+    y_pred, y_prod = Adblock_filter(loaded_model= loaded_XGB_model, data_frame=data, review_id=review_id, XAI_Model = explainer_XAI)
+    print("예측 결과 : ", int(y_pred)," {",y_prod,"}")
     result = {
         'pred': str(int(y_pred)),
         'pro':  str(round(float(y_prod), 2))
@@ -139,10 +148,15 @@ async def association(artice_code: int):
     save_zip_file = os.path.join(BASE_DIR, 'figImage.zip')
     suvey_zip = zipfile.ZipFile(save_zip_file, "w")
     for j in range(3):
-        # print("저장 위치 : ",os.path.relpath(image_pathes[j]))
         suvey_zip.write(os.path.relpath(image_pathes[j]))
     suvey_zip.close()
     return FileResponse(save_zip_file, media_type='application/x-zip-compressed', filename="result.zip")
+
+
+@app.get('/explain/')
+async def explainable_AI(review_id:int):
+    load_file_name = os.path.join(BASE_DIR,f'Filtering/XAI_Folder/{review_id}.png')
+    return FileResponse(load_file_name)
 
 #-------------------------------------------------------------------------------------------------------#
 if __name__ == '__main__':
