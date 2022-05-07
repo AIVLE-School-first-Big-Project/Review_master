@@ -303,7 +303,7 @@ def result(request):
 
                 for i in range(len(title)):
 
-                    if average_price * 0.7 <= price[i] <= average_price * 1.3:
+                    if average_price * 0.5 <= price[i] <= average_price * 1.5:
                         m_buy_list = BuyList()
                         m_buy_list.article_id = article_id
                         m_buy_list.url = url[i]
@@ -318,7 +318,7 @@ def result(request):
             if len(m_review_analysis) == 0:
                 # 분석 api로 데이터 보내기
                 """"
-                    1. 요약 기능 
+                    1. 요약 기능
                     2. 연관어 분석 기능
                     3. 감성어 분석 기능
                     4. 빈도 수 분석 및 트랜드 분석
@@ -372,6 +372,7 @@ def result(request):
                 article_id=article_id).order_by("advertise_percent")
 
             for review in m_review_data:
+
                 review_dict = {
                     "writer": [],
                     "content": [],
@@ -397,20 +398,27 @@ def result(request):
                 review_dict["description"] = review.description
                 review_dict["advertise"] = review.advertise
                 review_dict["title"] = review.title
-                review_dict["advertise_percent"] = float(
-                    review.advertise_percent) * 100
+                review_dict["advertise_percent"] = int(
+                    review.advertise_percent * 100)
                 # 현재 이 값은 광고일 확률을 알려준다.
 
-                if review.advertise != 0:
+                if int(review.advertise) != 0:
                     review_cnt -= 1
                     continue
 
+                if len(review_list) == 10:
+                    continue
                 m_review_sentiment = ReviewSentiment.objects.get(
                     review_id=review.review_id, article_id=review.article_id)
+                pos = m_review_sentiment.positive
+                neg = m_review_sentiment.negative
 
-                review_dict["positive"] = m_review_sentiment.positive
-                review_dict["negative"] = m_review_sentiment.negative
+                pos_per = int(pos / (neg+pos) * 100)
+                neg_per = 100 - pos_per
+                review_dict["positive"] = pos_per
+                review_dict["negative"] = neg_per
                 review_dict["sentiment_id"] = m_review_sentiment.sentiment_id
+
                 review_list.append(review_dict)
 
             data_info["pure_cnt"] = review_cnt
@@ -455,9 +463,30 @@ def result(request):
     return HttpResponseRedirect(reverse('homeapp:home'))
 
 
-def choose(request):
+# def choose(request, search_company):
 
-    return render(request, 'analysisapp/choose.html')
+#     if request.method == "GET":
+
+#         # 사용자가 검색한 경우
+#         search_company = request.GET.get("company", 0)
+#         search_name = request.GET.get("article_name", 0)
+
+#         m_article_code = ArticleCode.objects.filter(
+#             search_company=search_company)
+
+#         data_list = []
+#         for i in m_article_code:
+#             data_list.append({
+#                 "company": m_article_code.search_company,
+#                 "article_name": m_article_code.article_name
+
+#             })
+
+#         return render(request, 'analysisapp/result.html', {
+#             "data_list": data_list
+#         })
+
+#     return HttpResponseRedirect(reverse('homeapp:home'))
 
 
 def detail(request, sentiment_id):

@@ -11,47 +11,17 @@
         <div class="container">
 
             <div class="my-slider">
-                <div>
+                {% for data in data_list %}
+                <a href = "/app/analysis/result/?company={{data.search_company}}&article_name={{data.article_name}}">
                     <div>
-                    <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
+                        제품명 : data
                     </div>
-                    <div>
-                        1번사진
-                    </div>
+                </a>
+                {% endfor %}
+                <div>
+                    현재 제품 이름 추가
                 </div>
-                <div>
-                    <div>
-                        <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
-                        </div>
-                        <div>
-                            2번사진
-                        </div>
-                </div>
-                <div>
-                    <div>
-                        <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
-                        </div>
-                        <div>
-                            3번사진
-                        </div>
-                </div>   
-                <div>
-                    <div>
-                        <img id="choimg" src="{% static 'assets/css/images/y1.png'%}" alt="image" />
-                        </div>
-                        <div>
-                            4번사진
-                        </div>
-                </div>
-                <div>
-                    <div>
-                        <img id="choimg" src="{% static 'assets/images/상품등록.png'%}" alt="image" />
-                        </div>
-                        <div>
-                            상품이 없을때 마지막
-                        </div>
-                        
-                </div>    
+ 
     
         </div>
         <div class="my-controls" aria-label="Carousel Navigation" tabindex="0">
