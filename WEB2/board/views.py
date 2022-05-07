@@ -56,6 +56,13 @@ def board_update(request, up_id):
     if request.method == "POST":
         post_update.title = request.POST.get('title')
         post_update.content = request.POST.get('content')
+        if request.FILES.get('update_file_name'):
+            post_update.file_name = request.FILES.get('update_file_name')
+        else:
+            post_update.file_name = post_update.file_name
+        print(post_update.title)
+        print(post_update.content)
+        print(post_update.file_name)
         post_update.save()
         return redirect('/app/board/')
     else:
@@ -73,15 +80,12 @@ from wsgiref.util import FileWrapper
 def file_download(request, post_id):
     file = QABoard.objects.get(id=post_id)
     file_path = file.file_name.path
-
     file_mimetype = mimetypes.guess_type(file_path)
-    # fs = FileSystemStorage(file_path)
     
     response = FileResponse(open(file_path, 'rb'), content_type=file_mimetype)
-    # response = HttpResponse(file_wrapper, content_type=file_mimetype)
+    print(response)
     response['X-Sendfile'] = file_path
-    # response['Content-Length'] = os.stat(file_path).st_size
-    response['Content-Disposition'] = 'attachment;filename=%s' % str(file_path) 
+    response['Content-Disposition'] = 'attachment;filename=%s' % str(file.file_name) 
     return response
 
 

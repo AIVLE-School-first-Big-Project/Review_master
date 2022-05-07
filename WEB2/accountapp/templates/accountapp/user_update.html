@@ -10,7 +10,7 @@
 </div>
 <div id="main">
     <div class="mypage">
-        <h1> 마이페이지 > <strong style="color: #03B59D">개인정보수정</strong> </h1>
+        <h2 class="title"> 마이페이지 > <strong style="color: #03B59D">개인정보수정</strong> </h2>
         <div class="user-loginout" id="userform_mypage">
                 <form method="POST" action="{% url 'accountapp:user_update' %}">
                     {% csrf_token %}
