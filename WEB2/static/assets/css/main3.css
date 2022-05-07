@@ -211,7 +211,19 @@ h2.result {
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
-        justify-content: space-evenly;
+        margin: 0 10%;
+        /* justify-content: space-evenly; */
+    }
+    .head_title {
+        width: 15%;
+    }
+    .head_content {
+        width: 60%;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+    .head_user {
+        width: 25%;
     }
     #head_menu>li,
     #head_user>li {

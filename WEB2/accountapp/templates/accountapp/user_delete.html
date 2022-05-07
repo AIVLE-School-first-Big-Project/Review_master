@@ -11,11 +11,12 @@
 </div>
 <div id="main">
     <div class="mypage">
-            <h1> 마이페이지 > <strong style="color:#D64925;">회원탈퇴</strong></h1>
-            <img src="{% static '/assets/css/images/userdelete.png' %}" style="width:90%">
+            <h2 class="title"> 마이페이지 > <strong style="color:#D64925;">회원탈퇴</strong></h2>
+            <br>
+            <img src="{% static '/assets/css/images/userdelete.png' %}" style="width:80%">
             <form method="POST" class="form_delete" style="font-size:1rem">
                 {% csrf_token %}
-                <p>이 모든 혜택을 두고 탈퇴하시려면<br> <input type="submit" style="box-shadow:none;font-size:1.2rem; border: 1px solid lightgray;" value="여기" /> <br> 눌러주세요</p>
+                <p>이 모든 혜택을 두고 탈퇴하시려면<br> <input type="submit" style="box-shadow:none;font-size:1.2rem; border: 1px solid lightgray;" value="눌러주세요" /></p>
             </form>
     </div>
 
