@@ -11,11 +11,11 @@ h2.head_h2{
 .titlebox {
     padding-top: 0.1rem;
     text-align: center;
-    width: 10.5rem;
-    height: 2rem;
+    width: 13.5vw;
+    height: auto;
     background-color: #17A6A6;
     color: white;
-    font-size: 1rem;
+    font-size: 1.1vw;
     border-radius: 20px;
     align-items: center;
 }
@@ -25,7 +25,7 @@ h2.head_h2{
 
 .barimgdiv{
     max-width:100%;
-    max-height: 8rem;
+    /* max-height: 8rem; */
     overflow: hidden;
     margin-top: 12px;
 }
@@ -139,5 +139,12 @@ td.blog_name{
 }
 .de_text{
     color: #6F7271;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+}
+.de_plot{
+    width: auto;
+    height: auto;
+    align-items: center;
+    text-align: center;
+    margin: auto;
 }
