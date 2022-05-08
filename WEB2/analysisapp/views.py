@@ -46,8 +46,11 @@ def age_group_check(birth_date):
         return 0
     else:
         return 1
+
+
 def rm_emoji1(Data):
-  return Data.encode('euc-kr','ignore').decode('euc-kr')
+    return Data.encode('euc-kr', 'ignore').decode('euc-kr')
+
 
 @csrf_exempt
 def result(request):
@@ -144,7 +147,7 @@ def result(request):
 
                 try:
                     df["내돈내산 키워드"]
-                except:
+                except Exception:
                     m_article_info = ArticleInfo.objects.get(
                         article_id=article_id)
                     m_article_info.delete()
@@ -172,20 +175,16 @@ def result(request):
                 # blog_cnt = len(df)
                 review_cnt = df.shape[0]
 
-                print("1")
                 print(review_cnt)
 
                 # 리뷰 데이터가 얼마나 있는지 확인하고 저장
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
                 m_article_info.article_review_cnt = review_cnt
                 m_article_info.save()
-                
                 for idx, i in enumerate(range(len(df))):
-                    print("2")
                     cot = rm_emoji1(content[i])
                     tit = rm_emoji1(title[i])
                     dsec = rm_emoji1(description[i])
-                    
                     m_review_data = ReviewData()
                     m_review_data.article_id = article_id
                     m_review_data.writer = writer[i]
@@ -281,7 +280,7 @@ def result(request):
                             positive=positive, negative=negative)
                         try:
                             sentiment_id = m_reivew_sentiment[0].sentiment_id
-                        except:
+                        except Exception:
                             pass
                         positive_len = 0
                         negative_len = 0
@@ -356,7 +355,7 @@ def result(request):
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
                 association_paths = [
                     "/media/"+suvey_zip.filelist[i].
-                        filename for i in range(len(suvey_zip.filelist))]
+                    filename for i in range(len(suvey_zip.filelist))]
                 print(association_paths)
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
@@ -376,7 +375,7 @@ def result(request):
             try:
                 requests.get(m_article_info.img_url)
                 data_info["img_url"] = m_article_info.img_url
-            except:
+            except Exception:
                 data_info["img_url"] = ""
 
             review_list = []
@@ -424,13 +423,13 @@ def result(request):
                         article_id=review.article_id)
                     pos = m_review_sentiment.positive
                     neg = m_review_sentiment.negative
-                    if pos == 0 and neg ==0:
+                    if pos == 0 and neg == 0:
                         pos_per = 0
                         neg_per = 0
-                    elif pos ==0 and neg !=0:
+                    elif pos == 0 and neg != 0:
                         pos_per = 0
                         neg_per = 100
-                    elif pos !=0 and neg ==0:
+                    elif pos != 0 and neg == 0:
                         pos_per = 100
                         neg_per = 0
                     else:
