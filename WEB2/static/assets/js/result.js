@@ -3,7 +3,7 @@ $(document).ready(function(){
         var content = $(this).children('.content');
         var content_txt = content.text();
         var content_txt_short = content_txt.substring(0,150)+"...";
-        var btn_more = $('</tr><td colspan="2" style="text-align: right;"><a href="javascript:void(0)" class="more">더보기</a></td></rs>');
+        var btn_more = $('</tr><td colspan="2" style="text-align: right; font-size: 1.1rem;;"><a href="javascript:void(0)" class="more">더보기</a></td></rs>');
 
         
         $('.review_bth').append(btn_more);
