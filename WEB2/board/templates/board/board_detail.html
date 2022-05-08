@@ -43,22 +43,22 @@
             {% endif %}
             <table class="table" style="table-layout:auto">
                     <tr class="text-center">
-                        <th scope="col" width=20% style="font-weight:bold">제목</th>
-                        <td width=80%>{{ post.title }}</td>
+                        <th scope="col" width=20% style="font-weight:bold;font-size: 1.1vw;">제목</th>
+                        <td width=80% class="board_td">{{ post.title }}</td>
                     </tr>
                     <tr class="text-center">
-                        <th scope="col">내용</th>
-                        <td>{{ post.content }}</td>
+                        <th scope="col" class="board_td">내용</th>
+                        <td class="board_td">{{ post.content }}</td>
                     </tr>
                     <hr>
                     {% if post.answer_title %}
                     <tr class="text-center">
-                        <th scope="col">답변제목</th>
-                        <td>{{ post.answer_title }}</td>
+                        <th scope="col" class="board_td">답변제목</th>
+                        <td class="board_td">{{ post.answer_title }}</td>
                     </tr>
                     <tr class="text-center">
-                        <th scope="col">답변내용</th>
-                        <td>{{ post.answer_content }}</td>
+                        <th scope="col" class="board_td">답변내용</th>
+                        <td class="board_td">{{ post.answer_content }}</td>
                     </tr>
                     {% endif %}
             </table>

@@ -42,10 +42,10 @@
                     <tbody>
                         {% for list in postlist reversed %}
                         <tr class="text-center">
-                            <th scope="row" width=5%>
+                            <th scope="row" width=5% class="board_td">
                                 <span>{{ list.id }}</span>
                             </th>
-                            <td width=10% height="0">
+                            <td width=10% height="0" class="board_td">
                                 {% if list.answer_title %}
                                 <div style="height:100%">
                                     <img src="{% static 'assets/images/게시판_답변완료.png' %}" height="100%" />
@@ -56,12 +56,12 @@
                                 </div>
                                 {% endif %}
                             </td>
-                            <td width=75%>
+                            <td width=75% class="board_td">
                                 <a href="{% url 'board:detail' id=list.id %}">
                                 <span>{{ list.title }}</span>
                                 </a>
                             </td>
-                            <td width=10%>
+                            <td width=10% class="board_td">
                                 <span>{{ list.user_id }}</span>
                             </td>
                         </tr>

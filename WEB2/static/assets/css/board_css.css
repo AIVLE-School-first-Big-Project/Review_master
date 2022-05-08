@@ -66,11 +66,16 @@ th {
 tr:nth-child(2n) {
     background-color: #E7FCF9C4;
 }
+.board_td{
+    font-size: 1.1vw;
+}
 
 .text-center:hover {
     cursor: pointer;
 }
-
+.text-center{
+    font-size: 1.1rem;
+}
 .user-loginout {
     margin: 0;
     align-self: center;
