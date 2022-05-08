@@ -424,9 +424,18 @@ def result(request):
                         article_id=review.article_id)
                     pos = m_review_sentiment.positive
                     neg = m_review_sentiment.negative
-
-                    pos_per = int(pos / (neg+pos) * 100)
-                    neg_per = 100 - pos_per
+                    if pos == 0 and neg ==0:
+                        pos_per = 0
+                        neg_per = 0
+                    elif pos ==0 and neg !=0:
+                        pos_per = 0
+                        neg_per = 100
+                    elif pos !=0 and neg ==0:
+                        pos_per = 100
+                        neg_per = 0
+                    else:
+                        pos_per = int((pos / (neg+pos)) * 100)
+                        neg_per = 100 - pos_per
                     review_dict["positive"] = pos_per
                     review_dict["negative"] = neg_per
                     review_dict["sentiment_id"] = \
