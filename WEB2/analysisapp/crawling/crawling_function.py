@@ -155,7 +155,7 @@ def item_parsing(company, search_word, start, display, repeat_num):
             else:
                 repeat = False
 
-            if cnt == 10:
+            if cnt == 1:
                 break
         except:
             break
