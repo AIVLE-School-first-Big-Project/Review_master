@@ -4019,8 +4019,9 @@ button.box3 {
 }
 
 .footimg {
-    width: 20rem;
+    width: 10rem;
     height: 4rem;
+    text-align: center;
 }
 
 .contents_th {
