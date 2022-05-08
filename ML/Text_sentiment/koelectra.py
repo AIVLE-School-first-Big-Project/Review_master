@@ -37,19 +37,28 @@ def Text_sentiment_inferense_review(cursor, artice_code, review_id, model):
     for sentence in kkma.sentences(review):
         sentence = re.sub('\s[a-zA-Z]\s', '', sentence)
         sentence = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '', sentence)
-        if len(sentence) <= 5:
+        if len(sentence) <= 10:
             continue
         if len(sentence) < 140:
-            spelled_sent = spell_checker.check(sentence)
-            sentence = spelled_sent.checked
-            contents.append(sentence)
+            try:
+                spelled_sent = spell_checker.check(sentence)
+                sentence = spelled_sent.checked
+                sentence += '. '
+                contents.append(sentence)
+            except:
+                pass
         else:
             for sentence1 in kkma.sentences(sentence):
+                if len(sentence) <= 10:
+                    continue
                 if len(sentence1) < 140:
-                    sentence1 = spell_checker.check(sentence1)
-                    sentence1 = sentence1.checked
+                    try:
+                        sentence1 = spell_checker.check(sentence1)
+                        sentence1 = sentence1.checked
+                    except:
+                        sentence1 =sentence1
                 sentence1 += '. '
-            sentence = sentence1
+                contents.append(sentence1)
     contents = pd.DataFrame(contents, columns=['context'])
     inferense_dataset = NSMCDataset(contents)
     inferense_loader = DataLoader(
