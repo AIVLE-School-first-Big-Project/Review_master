@@ -261,7 +261,6 @@ def result(request):
                                                      'accept':
                                                      'application/json'
                                                      })
-
                         negative = response.json()["negative"]
                         positive = response.json()["positive"]
 

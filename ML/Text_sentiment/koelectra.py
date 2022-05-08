@@ -55,7 +55,6 @@ def Text_sentiment_inferense_review(cursor, artice_code, review_id, model):
     inferense_loader = DataLoader(
         inferense_dataset, batch_size=16, shuffle=False)
 
-    input_ids_batch, attention_masks_batch = inferense_dataset[0]
     for input_ids_batch, attention_masks_batch in tqdm(inferense_loader):
         y_pred = model(input_ids_batch,
                        attention_mask=attention_masks_batch)[0]

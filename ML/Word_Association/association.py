@@ -1,9 +1,5 @@
-import os
-import re
-import seaborn as sns
+import os,re
 from matplotlib import font_manager, rc
-from collections import Counter
-from konlpy.tag import Hannanum
 from konlpy.tag import Okt
 from pathlib import Path
 import scipy.stats as spst
@@ -13,16 +9,12 @@ import warnings
 import operator
 import matplotlib.font_manager as fm
 from konlpy.tag import *
-import konlpy
 import networkx as nx
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-plt.rc('font', family='NanumBarunGothic')
 warnings.filterwarnings('ignore')
-
-
-warnings.filterwarnings('ignore')
+from matplotlib import font_manager, rc 
 
 path = "C:/Windows/Fonts/malgun.ttf"
 
@@ -31,6 +23,8 @@ if platform.system() == "Darwin":
 elif platform.system() == "Windows":
     font_name = font_manager.FontProperties(fname=path).get_name()
     rc("font", family=font_name)
+elif platform.system() =="Linux": 
+    rc("font", family="NanumBarunGothic")
 else:
     print("Unknown system. sorry")
 

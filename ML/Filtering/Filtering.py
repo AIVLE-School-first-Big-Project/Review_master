@@ -5,11 +5,14 @@ warnings.filterwarnings('ignore')
 
 # 한글 적용하기
 path = "C:/Windows/Fonts/malgun.ttf"
+
 if platform.system() == "Darwin":
     rc("font", family="Arial Unicode MS")
 elif platform.system() == "Windows":
     font_name = font_manager.FontProperties(fname=path).get_name()
     rc("font", family=font_name)
+elif platform.system() =="Linux": 
+    rc("font", family="NanumBarunGothic")
 else:
     print("Unknown system. sorry")
 # 마이너스 부호 가능.
