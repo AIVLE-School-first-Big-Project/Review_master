@@ -46,7 +46,8 @@ def age_group_check(birth_date):
         return 0
     else:
         return 1
-
+def rm_emoji1(Data):
+  return Data.encode('euc-kr','ignore').decode('euc-kr')
 
 @csrf_exempt
 def result(request):
@@ -181,16 +182,20 @@ def result(request):
                 
                 for idx, i in enumerate(range(len(df))):
                     print("2")
+                    cot = rm_emoji1(content[i])
+                    tit = rm_emoji1(title[i])
+                    dsec = rm_emoji1(description[i])
+                    
                     m_review_data = ReviewData()
                     m_review_data.article_id = article_id
                     m_review_data.writer = writer[i]
-                    m_review_data.content = content[i]
+                    m_review_data.content = cot
                     m_review_data.content_date = post_date[i]
                     m_review_data.first_img_url = first_img_url[i]
                     m_review_data.last_img = last_img_url[i]
-                    m_review_data.title = title[i]
+                    m_review_data.title = tit
                     m_review_data.url = url[i]
-                    m_review_data.description = description[i]
+                    m_review_data.description = dsec
 
                     # 광고 필터링 API 보내기.
                     """"
@@ -379,7 +384,6 @@ def result(request):
                 article_id=article_id).order_by("advertise_percent")
 
             for review in m_review_data:
-
                 review_dict = {
                     "writer": [],
                     "content": [],
@@ -395,7 +399,6 @@ def result(request):
                     "negative": [],
                     "sentiment_id": []
                 }
-
                 review_dict["writer"] = review.writer
                 review_dict["content"] = review.content
                 review_dict["content_date"] = review.content_date
