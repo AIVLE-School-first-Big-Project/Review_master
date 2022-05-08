@@ -59,11 +59,13 @@ h2.head_h2 {
 .positive_td {
     color: #0F0F10;
     padding-left: 0;
+    font-size: 1.3rem;
 }
 
 .negative_td {
     color: #0F0F10;
     padding-left: 0;
+    font-size: 1.3rem;
 }
 
 mark.blue {
@@ -98,6 +100,7 @@ mark.red {
 
 .guide_text {
     margin-left: 1rem;
+    font-size: 1.1rem;
 }
 
 .guide_container {
@@ -149,6 +152,7 @@ td.blog_name {
 .blog_text {
     padding-top: 0;
     color: #171616;
+    font-size: 1.1rem;
 }
 
 .blog_img_td {
