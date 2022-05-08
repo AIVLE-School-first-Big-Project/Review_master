@@ -7,8 +7,12 @@ import time, re, time, os, sys
 from Text_sentiment.custom_dataset import NSMCDataset
 from konlpy.tag import Kkma
 from pathlib import Path
+from hanspell import spell_checker
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+def rm_emoji1(Data):
+  return Data.encode('euc-kr','ignore').decode('euc-kr')
 
 def Text_sentiment_inferense_review(cursor, artice_code, review_id, model):
     kkma = Kkma()
@@ -27,15 +31,25 @@ def Text_sentiment_inferense_review(cursor, artice_code, review_id, model):
     review = row[1]
     contents = []
     result_pred = []
+
+    review= rm_emoji1(review)
     # 하나의 리뷰에서 문장 단위로 자르기
     for sentence in kkma.sentences(review):
-        sentence = re.sub('([a-zA-Z])', '', sentence)
-        sentence = re.sub(
-            '[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '', sentence)
+        sentence = re.sub('\s[a-zA-Z]\s', '', sentence)
+        sentence = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '', sentence)
         if len(sentence) <= 5:
             continue
-        else:
+        if len(sentence) < 140:
+            spelled_sent = spell_checker.check(sentence)
+            sentence = spelled_sent.checked
             contents.append(sentence)
+        else:
+            for sentence1 in kkma.sentences(sentence):
+                if len(sentence1) < 140:
+                    sentence1 = spell_checker.check(sentence1)
+                    sentence1 = sentence1.checked
+                sentence1 += '. '
+            sentence = sentence1
     contents = pd.DataFrame(contents, columns=['context'])
     inferense_dataset = NSMCDataset(contents)
     inferense_loader = DataLoader(
