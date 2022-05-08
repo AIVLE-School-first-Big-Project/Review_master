@@ -178,6 +178,7 @@ def result(request):
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
                 m_article_info.article_review_cnt = review_cnt
                 m_article_info.save()
+                
                 for idx, i in enumerate(range(len(df))):
                     print("2")
                     m_review_data = ReviewData()
@@ -247,8 +248,8 @@ def result(request):
                         m_review_sentiment.review_id = review_id
                         m_review_sentiment.article_id = article_id
 
-                        print(review_id)
-                        print(article_id)
+                        # print(review_id)
+                        # print(article_id)
 
                         data = {
                             "artice_code": int(article_id),

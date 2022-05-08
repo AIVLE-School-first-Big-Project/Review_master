@@ -1,3 +1,4 @@
+from base64 import encode
 import secret_key as sk
 from gensim.summarization.summarizer import summarize
 import pandas as pd
@@ -10,23 +11,32 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
+def rm_emoji1(Data):
+  return Data.encode('euc-kr','ignore').decode('euc-kr')
 
 def preprocessing(review):
     # 한국어 형태소 분석 라이브러리
     kkma = Kkma()
     total_review = ''
-
+    review = re.sub('[-=+,#/\?:^$.@*\"※&ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','',review)
+    review = re.sub('\s[a-zA-Z]\s', '', review)
+    review = re.sub('\s[0-9]\s', '', review)
+    review= rm_emoji1(review)
     # 하나의 리뷰에서 문장 단위로 자르기
     for sentence in kkma.sentences(review):
         sentence = re.sub('([a-zA-Z])', '', sentence)
         sentence = re.sub('[ㄱ-ㅎㅏ-ㅣ]+', '', sentence)
-        # sentence = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','',sentence)
-        if len(sentence) == 0:
+        sentence = re.sub('[-=+,#/\?:^$.@*\"※&ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','',sentence)
+        if len(sentence) <= 5:
             continue
-        # if len(sentence) < 198:
-        #     spelled_sent = spell_checker.check(sentence)
-        #     sentence = spelled_sent.checked
-        # sentence += '. '
+        if len(sentence) < 140:
+            spelled_sent = spell_checker.check(sentence)
+            sentence = spelled_sent.checked
+        else:
+            for sentence1 in kkma.sentences(sentence):
+                sentence1 += '. '
+            sentence = sentence1
+        sentence += '. '
         total_review += sentence
     return total_review
 
@@ -62,11 +72,11 @@ def Gensim_summary(cursor, artice_code):
         summary = summarize(pp, word_count=200)
         summary = re.sub('\n', ' ', summary)
         if len(summary) == 0:
-            return "광고성 블로그 리뷰로 작성된 글이 대부분이라 요약이 불가능한 상태입니다. 추후 모니터닝을 실시하여 업데이트 하도록 하겠습니다."
+            return "광고성 블로그 리뷰로 작성된 글이 대부분이라 요약이 불가능한 상태입니다. 추후 모니터링을 실시하여 업데이트 하도록 하겠습니다."
         else:
             return summary
     else:
-        return "광고성 블로그 리뷰로 작성된 글이 대부분이라 요약이 불가능한 상태입니다. 추후 모니터닝을 실시하여 업데이트 하도록 하겠습니다."
+        return "광고성 블로그 리뷰로 작성된 글이 대부분이라 요약이 불가능한 상태입니다. 추후 모니터랑을 실시하여 업데이트 하도록 하겠습니다."
 
 
 if __name__ == "__main__":
