@@ -30,8 +30,11 @@ def preprocessing(review):
         if len(sentence) <= 5:
             continue
         if len(sentence) < 140:
-            spelled_sent = spell_checker.check(sentence)
-            sentence = spelled_sent.checked
+            try:
+                spelled_sent = spell_checker.check(sentence)
+                sentence = spelled_sent.checked
+            except:
+                pass
         else:
             for sentence1 in kkma.sentences(sentence):
                 sentence1 += '. '
