@@ -1,9 +1,9 @@
 # 💰 WAT
 
-<img width="800" alt="KakaoTalk_20211203_141000313" src="https://user-images.githubusercontent.com/76805997/151272266-faafe1c6-a67a-4216-bd3c-674d529c24c5.PNG">
+<img width="800" alt="">
 
-- You are not Alone, We Are Togeter.(WAT)
-- 개발자와 서포터를 연결시켜 펀딩서비스를 지원하고, 팀원모집 기능을 제공하는 웹 플랫폼입니다.
+- 관심있는 전자제품 우리가 AI로 분석할게 넌 결정만 해!
+- 제조사와 전자제품명을 검색창에 입력하여 검색하면 네이버 블로그를 크롤링하여 분석해 AI를 기반으로 순수리뷰목록과 긍정어와 부정어, 리뷰요약, 연관어, 구매 링크를 확인 할 수 있어요. 
   <br>
 
 ## 🚗 How to run
@@ -18,6 +18,7 @@ https://github.com/AIVLE-School-first-Big-Project/Review_master.git
 
 ```
 pip install -r requirements.txt
+cd WEB2
 ```
 
 
@@ -29,19 +30,14 @@ pip install -r requirements.txt
 }
 ```
 
-4. 프로젝트 실행에 필요한 테이블을 생성해주세요.
 
-```
-python manage.py migrate
-```
-
-5. 서버를 실행시켜주세요.
+4. 서버를 실행시켜주세요.
 
 ```
 python manage.py runserver
 ```
 
-6. 웹사이트에 아래 링크를 입력해주세요.
+5 . 웹사이트에 아래 링크를 입력해주세요.
 
 ```
 http://3.137.114.239:14052/app/
