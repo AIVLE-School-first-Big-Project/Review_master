@@ -39,8 +39,10 @@
         </h2>
         <section class="qna_list">
             {% if post.file_name %}
-            <img src="{{ post.file_name.url }}" />
-            {% endif %}
+            <div>
+                <img src="{{ post.file_name.url }}" style="display: block;margin: 0 auto;"/>
+            </div>
+                {% endif %}
             <table class="table" style="table-layout:auto">
                     <tr class="text-center">
                         <th scope="col" width=20% style="font-weight:bold;font-size: 1.1vw;">제목</th>

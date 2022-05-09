@@ -13,11 +13,14 @@
         <form method="POST" action="{% url 'board:update' up_id=post_update.id %}" class="post-write" enctype="multipart/form-data">
             {% csrf_token %}
             {% if post_update.file_name %}
-                <img src="{{ post_update.file_name.url }}" style="width:100%" />
+            <div>
+                <img src="{{ post_update.file_name.url }}" style="display:block;margin: 0 auto" /><br>
+            </div>
             {% endif %}
+            <br>
                 <div>
                 <label for="title">제목</label><br>
-                <input type="text" name="title" id="title" value={{ post_update.title }} />
+                <input type="text" name="title" id="title" value="{{ post_update.title }}" />
             </div>
             <div>
                 <label for="content">내용</label><br>
@@ -31,9 +34,9 @@
             {% comment %} 관리자일 경우 수정 버튼 누르면 답변 수정/삭제할 수 있음  {% endcomment %}
             {% ifequal request.session.user_class 99 %}
             <hr>
-            <div>
+            <div>""
                 <label for="answer_title">답변제목</label><br>
-                <input type="text" name="answer_title" id="answer_title" value={{ post_update.answer_title }}>
+                <input type="text" name="answer_title" id="answer_title" value="{{ post_update.answer_title }}">
             </div>
             <div>
                 <label for="answer_content">답변내용</label><br>
