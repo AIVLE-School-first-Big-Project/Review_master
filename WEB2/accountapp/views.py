@@ -127,6 +127,9 @@ def user_update(request):
             m.user_birth = user_birth
             m.update_time = datetime.now().strftime('%Y-%m-%d')
             m.save()
+
+            request.session['user_nickname'] = user_nickname
+
             return redirect('/app/account/mypage')
     return render(request, 'accountapp/user_update.html')
 
