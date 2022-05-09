@@ -44,7 +44,7 @@ python manage.py runserver
 6. 웹사이트에 아래 링크를 입력해주세요.
 
 ```
-http://127.0.0.1:8000/app/
+http://3.137.114.239:14052/app/
 ```
 
 <br>
