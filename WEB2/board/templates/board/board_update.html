@@ -13,8 +13,9 @@
         <form method="POST" action="{% url 'board:update' up_id=post_update.id %}" class="post-write" enctype="multipart/form-data">
             {% csrf_token %}
             {% if post_update.file_name %}
-            <div>
-                <img src="{{ post_update.file_name.url }}" style="display:block;margin: 0 auto" /><br>
+            <div style="overflow: hidden;display: flex;
+            align-items: center;justify-content: center;">
+                <img src="{{ post_update.file_name.url }}" style="display:block;margin: 0 auto;max-width:100%" /><br>
             </div>
             {% endif %}
             <br>
