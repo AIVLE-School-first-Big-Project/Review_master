@@ -349,20 +349,35 @@ def result(request):
 
                 response = requests.post(Backend_association, params=item2)
                 print("경로 : ", BASE_DIR1)
+                association_paths = ""
                 if response.status_code == 200:
                     print("연관어 결과")
                     suvey_zip = zipfile.ZipFile(BytesIO(response.content))
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
-                association_paths = [
-                    "/media/"+suvey_zip.filelist[i].
-                    filename for i in range(len(suvey_zip.filelist))]
-                print(association_paths)
+                    association_paths = [
+                        "/media/"+suvey_zip.filelist[i].
+                        filename for i in range(len(suvey_zip.filelist))]
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
                 m_review_analysis.summary = summary_data
-                m_review_analysis.associate_url1 = association_paths[0]
-                m_review_analysis.associate_url2 = association_paths[1]
-                m_review_analysis.associate_url3 = association_paths[2]
+                if association_paths == "" or len(association_paths) ==0:
+                    m_review_analysis.associate_url1 = ""
+                    m_review_analysis.associate_url2 = ""
+                    m_review_analysis.associate_url3 = ""
+                if len(association_paths) ==3:
+                    m_review_analysis.associate_url1 = association_paths[0]
+                    m_review_analysis.associate_url2 = association_paths[1]
+                    m_review_analysis.associate_url3 = association_paths[2]
+                elif len(association_paths) == 2:
+                    m_review_analysis.associate_url1 = association_paths[0]
+                    m_review_analysis.associate_url2 = association_paths[1]
+                    m_review_analysis.associate_url3 = ""
+                elif len(association_paths) == 1:
+                    m_review_analysis.associate_url1 = association_paths[0]
+                    m_review_analysis.associate_url2 = ""
+                    m_review_analysis.associate_url3 = ""
+
+
                 m_review_analysis.save()
 
             m_article_info = ArticleInfo.objects.get(article_id=article_id)
