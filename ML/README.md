@@ -1,6 +1,6 @@
-# 잘샀구매 서비스 API
+# :bulb: 잘샀구매 서비스 API
 
-## HOW to RUN CODE
+## 🚗 HOW to RUN CODE
 
 ```
 conda create -n ML_API python=3.6.4
@@ -26,6 +26,6 @@ pip install tensorflow==2.3.0
 ```
 
 
-## API 실행하는 명령어
+## :pencil2: API 실행하는 명령어
 python ML_API.py
 <!-- uvicorn ML_API:app --reload -->
