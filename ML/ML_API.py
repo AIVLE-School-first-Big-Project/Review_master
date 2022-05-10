@@ -29,8 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent
 
 #-------------------------------------------------------------------------------------------------------#
 # ML/DL model loaded
-
-device = torch.device('cpu')
+device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
 sentiment_backbone_model = ElectraForSequenceClassification.from_pretrained(
         "monologg/koelectra-small-v3-discriminator", num_labels=2).to(device)
 

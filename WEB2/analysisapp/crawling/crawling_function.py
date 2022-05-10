@@ -386,8 +386,8 @@ def service_start(company, word):
     df_check_ad(df)
     df = df[df["content_cnt"] != 0].reset_index(drop=True)
     print("종료되었습니다.")
-    print(df.columns)
-    print(df.shape)
+    # print(df.columns)
+    # print(df.shape)
     return df
 
 
@@ -403,7 +403,7 @@ def service_img(company, word):
     rescode = response.getcode()
     if(rescode == 200):
         response_body = response.read()
-        print(response_body.decode('utf-8'))
+        # print(response_body.decode('utf-8'))
     else:
         print("Error Code:" + rescode)
 
@@ -424,7 +424,7 @@ def service_buy(company, word):
     rescode = response.getcode()
     if(rescode == 200):
         response_body = response.read()
-        print(response_body.decode('utf-8'))
+        # print(response_body.decode('utf-8'))
     else:
         print("Error Code:" + rescode)
 

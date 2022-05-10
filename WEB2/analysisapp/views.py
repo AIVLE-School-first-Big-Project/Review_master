@@ -65,8 +65,8 @@ def result(request):
         search_name = request.GET.get("article_name", 0)
 
         # 검색 결과 로그 출력
-        print(search_company)
-        print(search_name)
+        # print(search_company)
+        # print(search_name)
 
         # 만약 회사명과 제품명이 아무것도 안들어오고 검색된 경우
         if search_company == "" and search_name == "":
@@ -175,7 +175,7 @@ def result(request):
                 # blog_cnt = len(df)
                 review_cnt = df.shape[0]
 
-                print(review_cnt)
+                # print(review_cnt)
 
                 # 리뷰 데이터가 얼마나 있는지 확인하고 저장
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
@@ -345,10 +345,10 @@ def result(request):
                 if response.status_code == 200:
                     print("요약 결과")
                     summary_data = response.json()["Decs"]
-                    print(summary_data)
+                    # print(summary_data)
 
                 response = requests.post(Backend_association, params=item2)
-                print("경로 : ", BASE_DIR1)
+                # print("경로 : ", BASE_DIR1)
                 if response.status_code == 200:
                     print("연관어 결과")
                     suvey_zip = zipfile.ZipFile(BytesIO(response.content))
@@ -356,7 +356,7 @@ def result(request):
                 association_paths = [
                     "/media/"+suvey_zip.filelist[i].
                     filename for i in range(len(suvey_zip.filelist))]
-                print(association_paths)
+                # print(association_paths)
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
                 m_review_analysis.summary = summary_data
