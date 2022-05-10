@@ -74,9 +74,13 @@
 <br/>
 
 ## 7. :soon: Service Flow
-## 8. :couple: 팀 소개
+
+## 8. 환경설정
+![11](https://user-images.githubusercontent.com/67889714/167681065-f38c9b99-6f1f-416a-a567-dbd2e738384a.png)
+
+## 9. :couple: 팀 소개
 ![123456](https://user-images.githubusercontent.com/98193218/165661266-0a87fa96-0652-44cc-8774-44c0b2b23598.png)
 
-## 9. :movie_camera: 시연 영상
+## 10. :movie_camera: 시연 영상
 
-## 10. :bell: 라이센스
+## 11. :bell: 라이센스
