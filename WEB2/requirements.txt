@@ -4,7 +4,7 @@ Django==3.2.11
 django-bootstrap4==21.1
 requests==2.27.1
 # pandas==1.4.2
-windows-curses==2.3.0
+# windows-curses==2.3.0
 Pillow==8.4.0
 tqdm==4.64.0
 #mysqlclient==2.1.0
