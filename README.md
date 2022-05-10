@@ -63,8 +63,8 @@
 
 ## 6. :wrench: 아키텍처
 ### 6.1 ERD설계
-링크 : <https://www.erdcloud.com/d/PST66TPBzP6ChRBC9>
-![12345](https://user-images.githubusercontent.com/98193218/165660486-421a368e-07f4-4234-ab08-19313787590e.png)
+링크 : https://www.erdcloud.com/d/PST66TPBzP6ChRBC9
+![12141](https://user-images.githubusercontent.com/98193218/167568634-322bbd42-86a9-47a4-bf42-ac9525b67a49.png)
 <br/>
 <br/>
 ### 6.2 아키텍쳐 설계
