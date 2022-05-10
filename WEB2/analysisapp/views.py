@@ -407,11 +407,17 @@ def result(request):
                 review_dict["description"] = review.description
                 review_dict["advertise"] = review.advertise
                 review_dict["title"] = review.title
-                review_dict["advertise_percent"] = int(
-                    review.advertise_percent * 100)
+                try:
+                    advertise_percent = int(review.advertise_percent) * 100
+                except Exception:
+                    advertise_percent = 100
+                review_dict["advertise_percent"] = advertise_percent
                 # 현재 이 값은 광고일 확률을 알려준다.
-
-                if int(review.advertise) != 0:
+                try:
+                    if int(review.advertise) != 0:
+                        review_cnt -= 1
+                        continue
+                except Exception:
                     review_cnt -= 1
                     continue
 
