@@ -146,7 +146,7 @@ async def association(artice_code: int):
     image_pathes = Text_association_inferense(cursor, artice_code)
     save_zip_file = os.path.join(BASE_DIR, 'figImage.zip')
     suvey_zip = zipfile.ZipFile(save_zip_file, "w")
-    for j in range(3):
+    for j in range(len(image_pathes)):
         suvey_zip.write(os.path.relpath(image_pathes[j]))
     suvey_zip.close()
     return FileResponse(save_zip_file, media_type='application/x-zip-compressed', filename="result.zip")
