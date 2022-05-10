@@ -65,8 +65,8 @@ def result(request):
         search_name = request.GET.get("article_name", 0)
 
         # 검색 결과 로그 출력
-        print(search_company)
-        print(search_name)
+        # print(search_company)
+        # print(search_name)
 
         # 만약 회사명과 제품명이 아무것도 안들어오고 검색된 경우
         if search_company == "" and search_name == "":
@@ -175,7 +175,7 @@ def result(request):
                 # blog_cnt = len(df)
                 review_cnt = df.shape[0]
 
-                print(review_cnt)
+                # print(review_cnt)
 
                 # 리뷰 데이터가 얼마나 있는지 확인하고 저장
                 m_article_info = ArticleInfo.objects.get(article_id=article_id)
@@ -345,18 +345,29 @@ def result(request):
                 if response.status_code == 200:
                     print("요약 결과")
                     summary_data = response.json()["Decs"]
-                    print(summary_data)
+                    # print(summary_data)
 
                 response = requests.post(Backend_association, params=item2)
+<<<<<<< HEAD
                 print("경로 : ", BASE_DIR1)
                 association_paths = ""
+=======
+                # print("경로 : ", BASE_DIR1)
+>>>>>>> 3dc7d117412b923e447b16e1f1cf3703bddf103e
                 if response.status_code == 200:
                     print("연관어 결과")
                     suvey_zip = zipfile.ZipFile(BytesIO(response.content))
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
+<<<<<<< HEAD
                     association_paths = [
                         "/media/"+suvey_zip.filelist[i].
                         filename for i in range(len(suvey_zip.filelist))]
+=======
+                association_paths = [
+                    "/media/"+suvey_zip.filelist[i].
+                    filename for i in range(len(suvey_zip.filelist))]
+                # print(association_paths)
+>>>>>>> 3dc7d117412b923e447b16e1f1cf3703bddf103e
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
                 m_review_analysis.summary = summary_data
@@ -422,11 +433,17 @@ def result(request):
                 review_dict["description"] = review.description
                 review_dict["advertise"] = review.advertise
                 review_dict["title"] = review.title
-                review_dict["advertise_percent"] = int(
-                    review.advertise_percent * 100)
+                try:
+                    advertise_percent = int(review.advertise_percent) * 100
+                except Exception:
+                    advertise_percent = 100
+                review_dict["advertise_percent"] = advertise_percent
                 # 현재 이 값은 광고일 확률을 알려준다.
-
-                if int(review.advertise) != 0:
+                try:
+                    if int(review.advertise) != 0:
+                        review_cnt -= 1
+                        continue
+                except Exception:
                     review_cnt -= 1
                     continue
 

@@ -3,7 +3,8 @@ import mimetypes
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from board.models import QABoard
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse
+
 
 def board_list(request):
     postlist = QABoard.objects.all()
@@ -32,7 +33,7 @@ def board_write(request):
             m_QABoard.user_id = request.session["user_id"]
             m_QABoard.title = request.POST.get("title")
             m_QABoard.content = request.POST.get('content')
-            m_QABoard.file_name =request.FILES.get('file_name')
+            m_QABoard.file_name = request.FILES.get('file_name')
             m_QABoard.save()
 
             return redirect('/app/board/')
@@ -73,11 +74,13 @@ def board_delete(request, del_id):
     messages.info(request, "삭제가 완료되었습니다. ")
     return redirect('/app/board/')
 
+
 def file_download(request, post_id):
     file = QABoard.objects.get(id=post_id)
     file_path = file.file_name.path
     file_mimetype = mimetypes.guess_type(file_path)
     response = FileResponse(open(file_path, 'rb'), content_type=file_mimetype)
     response['X-Sendfile'] = file_path
-    response['Content-Disposition'] = 'attachment;filename*=UTF-8\'\'%s' %file.file_name
+    response['Content-Disposition'] = \
+        'attachment;filename*=UTF-8\'\'%s' % file.file_name
     return response
