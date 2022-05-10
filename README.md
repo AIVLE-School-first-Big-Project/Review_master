@@ -68,7 +68,7 @@
 <br/>
 <br/>
 ### 6.2 아키텍쳐 설계
-![123456798](https://user-images.githubusercontent.com/98193218/165856169-b35f5ea4-7520-467b-bc5f-538338551b09.png)
+![12345](https://user-images.githubusercontent.com/98193218/167684627-bb29ee04-e73b-471f-a9ce-3196376ef872.png)
 
 <br/>
 <br/>
