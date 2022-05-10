@@ -348,26 +348,15 @@ def result(request):
                     # print(summary_data)
 
                 response = requests.post(Backend_association, params=item2)
-<<<<<<< HEAD
                 print("경로 : ", BASE_DIR1)
                 association_paths = ""
-=======
-                # print("경로 : ", BASE_DIR1)
->>>>>>> 3dc7d117412b923e447b16e1f1cf3703bddf103e
                 if response.status_code == 200:
                     print("연관어 결과")
                     suvey_zip = zipfile.ZipFile(BytesIO(response.content))
                     suvey_zip.extractall(os.path.join(BASE_DIR1, "WEB2/media"))
-<<<<<<< HEAD
                     association_paths = [
                         "/media/"+suvey_zip.filelist[i].
                         filename for i in range(len(suvey_zip.filelist))]
-=======
-                association_paths = [
-                    "/media/"+suvey_zip.filelist[i].
-                    filename for i in range(len(suvey_zip.filelist))]
-                # print(association_paths)
->>>>>>> 3dc7d117412b923e447b16e1f1cf3703bddf103e
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
                 m_review_analysis.summary = summary_data
