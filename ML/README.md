@@ -12,10 +12,16 @@ pip install -r requirements.txt
 git clone https://github.com/ssut/py-hanspell.git
 
 cd py-hanspell
-
+pip install ipython
 python setup.py install
 
 cd ..
+
+```
+
+```
+만약 cuda가 10.x를 사용하고 있다면 tensorflow를 2.3.0을 설치하면 됩니다.
+pip install tensorflow==2.3.0
 
 ```
 
