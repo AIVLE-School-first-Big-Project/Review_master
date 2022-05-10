@@ -86,26 +86,26 @@ Database
 - [notion](https://www.notion.so/4-WAT-4cc11ebb588e4f10987c47de0a0c49ba)
 - github
 - erd cloud
-- adove xd
+- adobe xd
 
 <br>
 
 ## 🔥 발표자료
 
-- [what is wat?](https://www.miricanvas.com/v/1v0zl3)
+- 업데이트 예정
 
 <br>
 
 ## 🌞 Contributors
 
 - 김종원 👉 [JONWON2](https://github.com/JONWON2)
-- 신민진 👉 [Shinminjin](https://github.com/Shinminjin)
+- 김상희 👉 [corgiccori97](https://github.com/corgiccori97)
+- 오수현 👉 [soohyun97](https://github.com/soohyun97)
+- 이윤지 👉 [dbswl2324](https://github.com/dbswl2324)
 - 장성우 👉 [CastleRain](https://github.com/CastleRain)
-- 장영인 👉 [youngine](https://github.com/youngine)
-- 조상은 👉 [sejoe-dct](https://github.com/sejoe-dct)
 
 <br>
 
 ## 📅 Development period
 
-2022.01.23 ~ 2022.01.27
+2022.04.15 ~ 2022.05.11
