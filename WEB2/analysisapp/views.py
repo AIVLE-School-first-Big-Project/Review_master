@@ -422,7 +422,7 @@ def result(request):
                 review_dict["advertise"] = review.advertise
                 review_dict["title"] = review.title
                 try:
-                    advertise_percent = int(review.advertise_percent) * 100
+                    advertise_percent = int(review.advertise_percent * 100)
                 except Exception:
                     advertise_percent = 100
                 review_dict["advertise_percent"] = advertise_percent
