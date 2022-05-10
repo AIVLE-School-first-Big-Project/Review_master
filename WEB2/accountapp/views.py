@@ -29,7 +29,7 @@ def login(request):
                                   m.user_pw.encode('utf-8')):
                 m = ""
 
-        except IOError:
+        except Exception:
             m = ""
             messages.warning(request, '잘못 입력하셨거나 존재하지 않는 사용자 정보입니다.')
 
