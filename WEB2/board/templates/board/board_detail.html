@@ -39,8 +39,9 @@
         </h2>
         <section class="qna_list">
             {% if post.file_name %}
-            <div>
-                <img src="{{ post.file_name.url }}" style="display: block;margin: 0 auto;"/>
+            <div style="overflow: hidden;display: flex;
+align-items: center;justify-content: center;">
+                <img src="{{ post.file_name.url }}" style="display: block;margin: 0 auto;max-width:100%"/>
             </div>
                 {% endif %}
             <table class="table" style="table-layout:auto">
