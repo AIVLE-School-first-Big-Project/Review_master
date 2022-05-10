@@ -50,6 +50,7 @@ def logout(request):
     try:
         del request.session['user_id']
         del request.session['user_nickname']
+        del request.session['user_class']
     except KeyError:
         pass
     return redirect('/app/home')
