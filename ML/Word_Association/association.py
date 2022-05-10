@@ -113,7 +113,7 @@ def Text_association_inferense(cursor, artice_code):
     img_save_folder_path = os.path.join(BASE_DIR, f"figImage/{artice_code}")
     img_pathes = []
     os.makedirs(img_save_folder_path, exist_ok=True)
-    for idx in tqdm(range(3)):
+    for idx in tqdm(range(len(name_values))):
         result_df_1 = result_df[result_df['word1'] ==
                                 name_values[idx]].reset_index(drop=True).head(10)
         G_centrality = nx.Graph()

@@ -6,7 +6,7 @@ import pymysql
 class config():
     def __init__(self):
         BASE_DIR = Path(__file__).resolve().parent
-        secret_file = os.path.join(BASE_DIR, 'secrets.json')
+        secret_file = os.path.join(BASE_DIR, 'ML_secrets.json')
 
         with open(secret_file) as f:
             self.secrets = json.loads(f.read())
