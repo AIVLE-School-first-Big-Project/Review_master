@@ -360,11 +360,11 @@ def result(request):
                 m_review_analysis = ReviewAnalysis()
                 m_review_analysis.article_id = article_id
                 m_review_analysis.summary = summary_data
-                if association_paths == "" or len(association_paths) ==0:
+                if association_paths == "" or len(association_paths) == 0:
                     m_review_analysis.associate_url1 = ""
                     m_review_analysis.associate_url2 = ""
                     m_review_analysis.associate_url3 = ""
-                if len(association_paths) ==3:
+                elif len(association_paths) == 3:
                     m_review_analysis.associate_url1 = association_paths[0]
                     m_review_analysis.associate_url2 = association_paths[1]
                     m_review_analysis.associate_url3 = association_paths[2]
@@ -376,7 +376,6 @@ def result(request):
                     m_review_analysis.associate_url1 = association_paths[0]
                     m_review_analysis.associate_url2 = ""
                     m_review_analysis.associate_url3 = ""
-
 
                 m_review_analysis.save()
 
