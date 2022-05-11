@@ -82,6 +82,3 @@
 ## 9. :couple: 팀 소개
 ![123456](https://user-images.githubusercontent.com/98193218/165661266-0a87fa96-0652-44cc-8774-44c0b2b23598.png)
 
-## 10. :movie_camera: 시연 영상
-
-## 11. :bell: 라이센스
