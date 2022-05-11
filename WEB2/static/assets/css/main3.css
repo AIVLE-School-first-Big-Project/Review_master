@@ -90,6 +90,7 @@ h2.result {
     border: none;
     padding-right: 0rem;
     padding-top: 0.3rem;
+    pointer-events:none;
 }
 
 @media screen and (max-width: 580px) {
@@ -107,7 +108,7 @@ h2.result {
         border-top: none;
         border-right: thick solid black;
         color: #000000;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
     .input2 {
         background-color: white;
@@ -115,7 +116,7 @@ h2.result {
         width: 50%;
         border: none;
         color: #000000;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
     .input3 {
         height: 81%;
@@ -124,9 +125,91 @@ h2.result {
         background-color: white;
         border: none;
         padding-right: 0rem;
-        padding-top: 0.3rem;
+        pointer-events:none;
+    }
+    svg#svgsearch{
+        width: 1rem;
+        height: 1rem;
+        margin-bottom: 0.8rem;
     }
 }
+
+
+
+@media screen and (max-width: 490px) {
+    .input1 {
+        padding-left: 1.3rem;
+        width: 20%;
+        background-color: white;
+        border-radius: 30px 0px 0px 30px;
+        border-bottom: none;
+        border-left: none;
+        border-top: none;
+        border-right: thick solid black;
+        color: #000000;
+        font-size: 0.5rem;
+    }
+    .input2 {
+        background-color: white;
+        padding-left: 1.3rem;
+        width: 50%;
+        border: none;
+        color: #000000;
+        font-size: 0.5rem;
+    }
+    .input3 {
+        height: 47%;
+        border-radius: 0px 30px 30px 0px;
+        color: #000000;
+        background-color: white;
+        border: none;
+        padding-right: 0rem;
+        padding-top: 0.3rem;
+        pointer-events:none;
+    }
+
+
+}
+
+
+
+
+@media screen and (max-width: 365px) {
+    .input1 {
+        padding-left: 1.3rem;
+        width: 20%;
+        background-color: white;
+        border-radius: 30px 0px 0px 30px;
+        border-bottom: none;
+        border-left: none;
+        border-top: none;
+        border-right: thick solid black;
+        color: #000000;
+        font-size: 0.5rem;
+    }
+    .input2 {
+        background-color: white;
+        padding-left: 1.3rem;
+        width: 50%;
+        border: none;
+        color: #000000;
+        font-size: 0.5rem;
+    }
+    .input3 {
+        height: 46%;
+        border-radius: 0px 30px 30px 0px;
+        color: #000000;
+        background-color: white;
+        border: none;
+        padding-right: 0rem;
+        padding-top: 0.3rem;
+        pointer-events:none;
+    }
+
+
+}
+
+
 
 .input3:hover {
     height: 100%;

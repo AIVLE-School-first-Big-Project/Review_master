@@ -284,6 +284,26 @@ td.description_td{
     color: #6F7271;
     font-size: 1.1rem;
 }
+td.description_td2{
+    padding-top:  0;
+    color: #6F7271;
+    font-size: 1.1rem;
+}
+@media screen and (max-width: 1000px) {
+    td.description_td2{
+        padding-top:  0;
+        color: #6F7271;
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    td.description_td2{
+        padding-top:  0;
+        color: #6F7271;
+        font-size: 0.6rem;
+    }
+}
 td.review_td{
     padding-top:2.5rem;
     padding-bottom: 0px;
